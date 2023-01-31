@@ -2,7 +2,7 @@
 import sys
 import os
 from pathlib import Path
-from typing import NamedTuple, Dict
+from typing import NamedTuple, Dict, List
 import pip
 import subprocess
 
@@ -42,6 +42,7 @@ def printWelcomeMessage():
 class GitRepo(NamedTuple):
     url: str
     branch: str
+    setup_files: List[str] = ["."]
 
     def install(self, name):
         print(f"Installing {name} from {self.url}/{self.branch}")
@@ -49,7 +50,8 @@ class GitRepo(NamedTuple):
         os.chdir(f"./{name}")
         call(f"git checkout {self.branch}")
         call("git pull")
-        call("pip install -e .")
+        for setup_file in self.setup_files:
+            call(f"pip install -e {setup_file}")
         os.chdir("./..")
 
 orchestrator_git = GitRepo(
@@ -62,7 +64,8 @@ scheduler_git = GitRepo(
 )
 tools_git = GitRepo(
     "https://gitlab.com/StefanMa/lara-tools.git",
-    "main"
+    "main",
+    setup_files=["lara_simulation/.", "utility"]
 )
 database_git = GitRepo(
     "https://gitlab.com/StefanMa/platform_status_db.git",
@@ -74,10 +77,10 @@ lara_processes_git = GitRepo(
 )
 device_gits: Dict[str, GitRepo] = dict(
     cytomat=GitRepo("https://gitlab.com/opensourcelab/devices/incubators_shakers/thermo_cytomat2.git",
-                          "feature/sila2_server"),
+                          "feature/sila2_server", setup_files=["sila2_server/."]),
     barcode_reader=GitRepo("https://gitlab.com/opensourcelab/devices/barcodereader/omron-laserscanner-ms-3.git",
-                          "feature/sila2_server"),
-    silafied_human=GitRpo("https://gitlab.com/StefanMa/silafiedhuman.git",
+                          "feature/sila2_server", setup_files=["sila_server/."]),
+    silafied_human=GitRepo("https://gitlab.com/StefanMa/silafiedhuman.git",
                           "main"),
 )
 
@@ -215,7 +218,8 @@ def installOnLinux():
     #if query_yes_no("Install scheduler?"):
     scheduler_git.install('scheduler')
     #if query_yes_no("Install lara-tools (needed to run&visualize simulated devices)?"):
-    install_tools()
+    #install_tools()
+    tools_git.install("lara_server_tools")
     #if query_yes_no("Install device servers?"):
     install_devices()
 
