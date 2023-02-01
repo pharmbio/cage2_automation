@@ -94,7 +94,10 @@ device_gits: Dict[str, GitRepo] = dict(
     storage_carousel=GitRepo("https://gitlab.com/opensourcelab/devices/container_storage/thermo_whitetree_carousel.git",
                              "feature/sila2_server", setup_files=["sila2_server/."]),
     reader=GitRepo("https://gitlab.com/opensourcelab/devices/spectrometer/thermo-skanit6.git",
-                   "feature/sila2_server", setup_files=["sila2_server/."])
+                   "feature/sila2_server", setup_files=["sila2_server/."]),
+    centrifuge=GitRepo("https://gitlab.com/opensourcelab/devices/centrifuges/hettich_rotanta_460r.git",
+                       "feature/sila2_server", setup_files=["sila2_server/."])
+
 )
 
 # --------------- installation helper functions, please do not modify -----------------------------
