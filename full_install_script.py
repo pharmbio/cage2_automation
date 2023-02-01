@@ -3,8 +3,8 @@ import sys
 import os
 from pathlib import Path
 from typing import NamedTuple, Dict, List
-import pip
 import subprocess
+from argparse import ArgumentParser
 
 from distutils.util import strtobool
 
@@ -40,65 +40,72 @@ def printWelcomeMessage():
 
 
 class GitRepo(NamedTuple):
+    name: str
     url: str
     branch: str
     setup_files: List[str] = ["."]
 
-    def install(self, name):
-        print(f"Installing {name} from {self.url}/{self.branch}")
-        call(f"git clone {self.url} {name}")
-        os.chdir(f"{name}")
-        call(f"git checkout {self.branch}")
-        call("git pull")
-        for setup_file in self.setup_files:
-            call(f"pip install -e {setup_file}")
+    def install(self, update=False, test=False):
+        print(f"Installing {self.name} from {self.url}/{self.branch}")
+        if self.name in os.listdir() or update:
+            os.chdir(f"{self.name}")
+            call("git pull")
+        else:
+            call(f"git clone {self.url} {self.name}")
+            os.chdir(f"{self.name}")
+            call(f"git checkout {self.branch}")
+            call("git pull")
+            for setup_file in self.setup_files:
+                call(f"pip install -e {setup_file}")
+        if test:
+            call('pytest')
         os.chdir("..")
 
 orchestrator_git = GitRepo(
-    "https://gitlab.com/opensourcelab/laborchestrator.git",
+    "orchestrator", "https://gitlab.com/opensourcelab/laborchestrator.git",
     "feature/release_V0_1_draft"
 )
 scheduler_git = GitRepo(
-    "https://gitlab.com/opensourcelab/pythonlabscheduler.git",
+    "scheduler", "https://gitlab.com/opensourcelab/pythonlabscheduler.git",
     "feature/release_V0_1_draft",
     setup_files=['.', 'sila_server/.']
 )
 tools_git = GitRepo(
-    "https://gitlab.com/StefanMa/lara-tools.git",
+    "lara_server_tools", "https://gitlab.com/StefanMa/lara-tools.git",
     "main",
     setup_files=["lara_simulation/.", "utility"]
 )
 database_git = GitRepo(
-    "https://gitlab.com/StefanMa/platform_status_db.git",
+    "platform_status_database", "https://gitlab.com/StefanMa/platform_status_db.git",
     "main"
 )
 lara_processes_git = GitRepo(
-    "https://gitlab.com/lara-uni-greifswald/lara-processes.git",
+    "lara_implementation", "https://gitlab.com/lara-uni-greifswald/lara-processes.git",
     "feature/worker_implementation"
 )
 pythonlab_git = GitRepo(
-    "https://gitlab.com/opensourcelab/pythonLab.git",
+    "pythonlab", "https://gitlab.com/opensourcelab/pythonLab.git",
     "feature/reader_develop_integration"
 )
-device_gits: Dict[str, GitRepo] = dict(
-    cytomat=GitRepo("https://gitlab.com/opensourcelab/devices/incubators_shakers/thermo_cytomat2.git",
+device_gits: List[GitRepo] = [
+    GitRepo('cytomat', "https://gitlab.com/opensourcelab/devices/incubators_shakers/thermo_cytomat2.git",
                           "feature/sila2_server", setup_files=["sila2_server/."]),
-    barcode_reader=GitRepo("https://gitlab.com/opensourcelab/devices/barcodereader/omron-laserscanner-ms-3.git",
+    GitRepo("barcode_reader", "https://gitlab.com/opensourcelab/devices/barcodereader/omron-laserscanner-ms-3.git",
                           "feature/sila2_server", setup_files=["sila_server/."]),
-    silafied_human=GitRepo("https://gitlab.com/StefanMa/silafiedhuman.git",
+    GitRepo("silafied_human", "https://gitlab.com/StefanMa/silafiedhuman.git",
                           "main"),
-    robotic_arm=GitRepo("https://gitlab.com/opensourcelab/devices/labrobots/thermo_f5.git",
+    GitRepo('robotic_arm', "https://gitlab.com/opensourcelab/devices/labrobots/thermo_f5.git",
                         "feature/sila_redo_impl", setup_files=["sila_server/."]),
-    agilent_bravo=GitRepo("https://gitlab.com/opensourcelab/devices/liquidhandler/agilent-vworks.git",
+    GitRepo('agilent_bravo', "https://gitlab.com/opensourcelab/devices/liquidhandler/agilent-vworks.git",
                           "feature/sila2_server", setup_files=["sila_server/."]),
-    storage_carousel=GitRepo("https://gitlab.com/opensourcelab/devices/container_storage/thermo_whitetree_carousel.git",
+    GitRepo('storage_carousel', "https://gitlab.com/opensourcelab/devices/container_storage/thermo_whitetree_carousel.git",
                              "feature/sila2_server", setup_files=["sila2_server/."]),
-    reader=GitRepo("https://gitlab.com/opensourcelab/devices/spectrometer/thermo-skanit6.git",
+    GitRepo('reader', "https://gitlab.com/opensourcelab/devices/spectrometer/thermo-skanit6.git",
                    "feature/sila2_server", setup_files=["sila2_server/."]),
-    centrifuge=GitRepo("https://gitlab.com/opensourcelab/devices/centrifuges/hettich_rotanta_460r.git",
-                       "feature/sila2_server", setup_files=["sila2_server/."])
+    GitRepo('centrifuge', "https://gitlab.com/opensourcelab/devices/centrifuges/hettich_rotanta_460r.git",
+                       "feature/sila2_server", setup_files=["sila2_server/."]),
 
-)
+]
 
 # --------------- installation helper functions, please do not modify -----------------------------
 def query_yes_no(question, default_answer="yes", help=""):
@@ -190,83 +197,79 @@ def runSetup(src_dir="", lib_dir=""):
     os.environ["PYTHONPATH"] = os.path.join(lib_dir, 'lib', 'python3.8', 'site-packages')
     sys.path.append(lib_dir)
     os.chdir(src_dir)
-    setup_file = os.path.join(src_dir, 'setup.py')
-    # this no longer works:
-    #~ run_setup(setup_file,  script_args=['install', '--prefix', lib_dir ])
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', '.'])
 
 
 def make_dir_structure():
-    print("Creating directory structure")
-    #call("mkdir devices")
-    os.mkdir("devices")
+    if not "devices" in os.listdir():
+        print("Creating directory structure")
+        os.mkdir("devices")
 
 
-def install_orchestrator():
-    print("Installing laborchestrator...")
-    orchestrator_git.install('orchestrator')
-
-def install_devices():
+def install_devices(test=False, update=False):
     print("Installing sila2 servers for devices")
     os.chdir("devices")
-    for name, repo in device_gits.items():
-        if query_yes_no(f"Install {name}?"):
-            repo.install(name)
+    for repo in device_gits:
+        if update or query_yes_no(f"Install {repo.name}?"):
+            repo.install(test=test, update=update)
     os.chdir("..")
 
 
-def install_tools():
-    print("Installing lara-tools...")
-    name= "lara_server_tools"
-    call(f"git clone {tools_git.url} {name}")
-    os.chdir(f"{name}")
-    os.chdir("lara_simulation")
-    call("pip install -e .")
-    os.chdir("..")
-    os.chdir("utility")
-    call("pip install -e .")
-    os.chdir("..")
-    os.chdir("..")
-
-
-def run_tests():
+def initialize():
     print("Testing installation")
     try:
-        os.chdir('platform_status_database/platform_status_db')
-        call("python manage.py makemigrations")
+        print(os.listdir())
+        os.chdir(database_git.name)
+        sys.path.append(os.path.abspath(os.curdir))
+        os.chdir('platform_status_db')
+        print("Migrating database")
         call("python manage.py migrate")
-        #todo: need importlib for this
-        from platform_status_db.larastatus.status_db_implementation import StatusDBImplementation
-        db_client = StatusDBImplementation()
-        db_client.create_lara()
+        if query_yes_no("Create the lara example in the database?"):
+            from platform_status_db.larastatus.status_db_implementation import StatusDBImplementation
+            db_client = StatusDBImplementation()
+            db_client.create_lara()
+        print("Please follow the dialog to create admin-credentials for the database.(It can then be accessed on"
+              "http://127.0.0.1:8000/)")
+        call("python manage.py createsuperuser")
     finally:
         os.chdir("..")
         os.chdir("..")
 
 
-def installOnLinux():
-    orchestrator_git.install('orchestrator')
+def installOnLinux(test=False, update=False):
+    orchestrator_git.install(test=test, update=update)
     make_dir_structure()
     #if query_yes_no("Install scheduler?"):
-    scheduler_git.install('scheduler')
+    scheduler_git.install(test=test, update=update)
     #if query_yes_no("Install lara-tools (needed to run&visualize simulated devices)?"):
-    tools_git.install("lara_server_tools")
+    tools_git.install(test=test, update=update)
     #if query_yes_no("Also install the lara-greifswald specialization?"):
-    lara_processes_git.install('lara_processes')
+    lara_processes_git.install(test=test, update=update)
     #if query_yes_no("Install device servers?"):
-    install_devices()
+    install_devices(test=test, update=update)
     #if query_yes_no("Install supporting database for orchestrator?"):
-    database_git.install("platform_status_database")
+    database_git.install(test=test, update=update)
     #if query_yes_no("Install PythonLab process description language? ( It is cool;-) )"):
-    pythonlab_git.install('pythonlab')
+    pythonlab_git.install(test=test, update=update)
 
-    #if query_yes_no("Run pytest on every installed package? This might take about 1 or 2 minutes."):
-    run_tests()
+
+def parse_args():
+    parser = ArgumentParser(prog="install_script", description="Guides through the installation of the laborchestrator and its utils")
+    parser.add_argument("--init", action="store_true", help="initializes the database", default=False)
+    parser.add_argument("--test", action="store_true", help="tests the installation", default=False)
+    parser.add_argument("--update", action="store_true", help="updates all installed git repositories", default=False)
+
+    return parser.parse_args()
+
 
 
 if __name__ == '__main__':
     printWelcomeMessage()
-    installOnLinux()
+    args = parse_args()
+    if args.init:
+        initialize()
+    else:
+        installOnLinux(test=args.test, update=args.update)
 
     print("Enjoy!")
 
