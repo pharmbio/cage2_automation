@@ -82,6 +82,10 @@ device_gits: Dict[str, GitRepo] = dict(
                           "feature/sila2_server", setup_files=["sila_server/."]),
     silafied_human=GitRepo("https://gitlab.com/StefanMa/silafiedhuman.git",
                           "main"),
+    robotic_arm=GitRepo("https://gitlab.com/opensourcelab/devices/labrobots/thermo_f5.git",
+                        "feature/sila_redo_impl", setup_files=["sila_server/."]),
+    agilent_bravo=GitRepo("https://gitlab.com/opensourcelab/devices/liquidhandler/agilent-vworks.git",
+                          "feature/sila2_server", setup_files=["sila_server/."]),
 )
 
 # --------------- installation helper functions, please do not modify -----------------------------
@@ -211,6 +215,15 @@ def install_tools():
 
 def run_tests():
     print("Testing installation")
+    try:
+        os.chdir('platform_status_database/platform_status_db')
+        call("python manage.py makemigrations")
+        call("python manage.py migrate")
+        from platform_status_db.larastatus.status_db_implementation import StatusDBImplementation
+        db_client = StatusDBImplementation()
+        db_client.create_lara()
+    finally:
+        os.chdir("../..")
 
 def installOnLinux():
     orchestrator_git.install('orchestrator')
@@ -223,7 +236,7 @@ def installOnLinux():
     #if query_yes_no("Install device servers?"):
     install_devices()
 
-    #database_git.install("platform_status_database")
+    database_git.install("platform_status_database")
 
     #if query_yes_no("Run pytest on every installed package? This might take about 1 or 2 minutes."):
     run_tests()
