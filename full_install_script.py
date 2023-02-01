@@ -47,12 +47,12 @@ class GitRepo(NamedTuple):
     def install(self, name):
         print(f"Installing {name} from {self.url}/{self.branch}")
         call(f"git clone {self.url} {name}")
-        os.chdir(f"./{name}")
+        os.chdir(f"{name}")
         call(f"git checkout {self.branch}")
         call("git pull")
         for setup_file in self.setup_files:
             call(f"pip install -e {setup_file}")
-        os.chdir("./..")
+        os.chdir("..")
 
 orchestrator_git = GitRepo(
     "https://gitlab.com/opensourcelab/laborchestrator.git",
@@ -60,7 +60,8 @@ orchestrator_git = GitRepo(
 )
 scheduler_git = GitRepo(
     "https://gitlab.com/opensourcelab/pythonlabscheduler.git",
-    "feature/release_V0_1_draft"
+    "feature/release_V0_1_draft",
+    setup_files=['.', 'sila_server/.']
 )
 tools_git = GitRepo(
     "https://gitlab.com/StefanMa/lara-tools.git",
@@ -75,6 +76,10 @@ lara_processes_git = GitRepo(
     "https://gitlab.com/lara-uni-greifswald/lara-processes.git",
     "feature/worker_implementation"
 )
+pythonlab_git = GitRepo(
+    "https://gitlab.com/opensourcelab/pythonLab.git",
+    "feature/reader_develop_integration"
+)
 device_gits: Dict[str, GitRepo] = dict(
     cytomat=GitRepo("https://gitlab.com/opensourcelab/devices/incubators_shakers/thermo_cytomat2.git",
                           "feature/sila2_server", setup_files=["sila2_server/."]),
@@ -86,6 +91,10 @@ device_gits: Dict[str, GitRepo] = dict(
                         "feature/sila_redo_impl", setup_files=["sila_server/."]),
     agilent_bravo=GitRepo("https://gitlab.com/opensourcelab/devices/liquidhandler/agilent-vworks.git",
                           "feature/sila2_server", setup_files=["sila_server/."]),
+    storage_carousel=GitRepo("https://gitlab.com/opensourcelab/devices/container_storage/thermo_whitetree_carousel.git",
+                             "feature/sila2_server", setup_files=["sila2_server/."]),
+    reader=GitRepo("https://gitlab.com/opensourcelab/devices/spectrometer/thermo-skanit6.git",
+                   "feature/sila2_server", setup_files=["sila2_server/."])
 )
 
 # --------------- installation helper functions, please do not modify -----------------------------
@@ -186,7 +195,8 @@ def runSetup(src_dir="", lib_dir=""):
 
 def make_dir_structure():
     print("Creating directory structure")
-    call("mkdir devices")
+    #call("mkdir devices")
+    os.mkdir("devices")
 
 
 def install_orchestrator():
@@ -195,22 +205,25 @@ def install_orchestrator():
 
 def install_devices():
     print("Installing sila2 servers for devices")
-    os.chdir("./devices")
+    os.chdir("devices")
     for name, repo in device_gits.items():
         if query_yes_no(f"Install {name}?"):
             repo.install(name)
-    os.chdir("./..")
+    os.chdir("..")
 
 
 def install_tools():
     print("Installing lara-tools...")
     name= "lara_server_tools"
     call(f"git clone {tools_git.url} {name}")
-    os.chdir(f"./{name}/lara_simulation")
+    os.chdir(f"{name}")
+    os.chdir("lara_simulation")
     call("pip install -e .")
-    os.chdir(f"../utility")
+    os.chdir("..")
+    os.chdir("utility")
     call("pip install -e .")
-    os.chdir("./../..")
+    os.chdir("..")
+    os.chdir("..")
 
 
 def run_tests():
@@ -219,11 +232,14 @@ def run_tests():
         os.chdir('platform_status_database/platform_status_db')
         call("python manage.py makemigrations")
         call("python manage.py migrate")
+        #todo: need importlib for this
         from platform_status_db.larastatus.status_db_implementation import StatusDBImplementation
         db_client = StatusDBImplementation()
         db_client.create_lara()
     finally:
-        os.chdir("../..")
+        os.chdir("..")
+        os.chdir("..")
+
 
 def installOnLinux():
     orchestrator_git.install('orchestrator')
@@ -231,12 +247,15 @@ def installOnLinux():
     #if query_yes_no("Install scheduler?"):
     scheduler_git.install('scheduler')
     #if query_yes_no("Install lara-tools (needed to run&visualize simulated devices)?"):
-    #install_tools()
     tools_git.install("lara_server_tools")
+    #if query_yes_no("Also install the lara-greifswald specialization?"):
+    lara_processes_git.install('lara_processes')
     #if query_yes_no("Install device servers?"):
     install_devices()
-
+    #if query_yes_no("Install supporting database for orchestrator?"):
     database_git.install("platform_status_database")
+    #if query_yes_no("Install PythonLab process description language? ( It is cool;-) )"):
+    pythonlab_git.install('pythonlab')
 
     #if query_yes_no("Run pytest on every installed package? This might take about 1 or 2 minutes."):
     run_tests()
