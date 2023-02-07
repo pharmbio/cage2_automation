@@ -46,11 +46,11 @@ class GitRepo(NamedTuple):
     setup_files: List[str] = ["."]
 
     def install(self, update=False, test=False):
-        print(f"Installing {self.name} from {self.url}/{self.branch}")
-        if self.name in os.listdir() or update:
+        if self.name in os.listdir():
             os.chdir(f"{self.name}")
             call("git pull")
         else:
+            print(f"Installing {self.name} from {self.url}/{self.branch}")
             call(f"git clone {self.url} {self.name}")
             os.chdir(f"{self.name}")
             call(f"git checkout {self.branch}")
@@ -207,10 +207,11 @@ def make_dir_structure():
 
 
 def install_devices(test=False, update=False):
+    test=False  # not good, yet
     print("Installing sila2 servers for devices")
     os.chdir("devices")
     for repo in device_gits:
-        if update or query_yes_no(f"Install {repo.name}?"):
+        #if update or test or query_yes_no(f"Install {repo.name}?"):
             repo.install(test=test, update=update)
     os.chdir("..")
 
@@ -222,6 +223,7 @@ def initialize():
         os.chdir(database_git.name)
         sys.path.append(os.path.abspath(os.curdir))
         os.chdir('platform_status_db')
+        print(os.listdir())
         print("Migrating database")
         call("python manage.py migrate")
         if query_yes_no("Create the lara example in the database?"):

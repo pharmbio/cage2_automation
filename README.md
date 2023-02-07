@@ -2,10 +2,13 @@
 
 
 
-## Name
-Choose a self-explaining name for your project.
+## LabOrchestrator environment guide
 
 ## Description
+This package only consist of an installation script for several packages
+in [opensoucelab](https://gitlab.com/opensourcelab/) which are intended to work
+together with the [laborchestrator](https://gitlab.com/opensourcelab/laborchestrator) and documentation for how to use them. 
+
 Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
 ## Badges
