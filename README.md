@@ -62,7 +62,7 @@ You should be able to find some options in the first dropdown menu. These are al
 `orchestrator/tests/test_data/`. Choose any process and add it to the orchestrator by clicking "Add Process". In the free area below,
 there should appear a graph representing the workflow of the chosen process.
 
-![Screenshot of loaded workflow](/images/workflow.png "Image Title")
+![Screenshot of loaded workflow](/images/workflow.png "Workflow")
 
 
 3. Start the scheduler
@@ -77,6 +77,7 @@ The choice of port is not important.
 
 By chosing the added process in the second dropdown menu in the orchestrator GUI and clicking "Schedule Process", you mark the process as to be scheduled. The orchestrator will automatically discover the scheduler and use it to get a schedule. This will be visible as gantt chart in the upper part of the GUI.
 
+![Screenshot of scheduled workflow](/images/schedule.png "Schedule")
 
 
 5. install the scheduler
