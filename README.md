@@ -23,14 +23,42 @@ Depending on what you are making, it can be a good idea to include screenshots o
 
 ## Installation
 To install all packages, simply run 
-<python3.8 full_install_script.py>
-This will
 
+`python3.8 full_install_script.py`
 
-## Usage
-1. install and start the orchestrator
-2. install the processes
-3. install pythonLab
+This will guide you through the packages and ask which one to install.
+
+Afterwards (in case, you installed the platform_status_db), you should run 
+
+`python3.8 full_install_script.py --init` 
+
+to initialize the django database and create admin credentials.
+
+With 
+
+`python3.8 full_install_script.py --test`
+
+you can run the automatic pytest tests for most packages (Do not worry, when the mip_solver test of the scheduler fails).
+
+At any point in time, you can update your installation with 
+
+`python3.8 full_install_script.py --update`
+
+## usage
+
+The orchestrator can work without PythonLab and the databse,
+but to understand the software, it's recommended to use the greifswald-specialization, which uses both.
+
+1. Starting the orchestrator GUI:
+go into `lara_implementation/lara_processes` and type
+
+`python3.8 start_script.py`
+
+This will start a dash-app running on [http://127.0.0.1:8050/](http://127.0.0.1:8050/)
+
+You should be able to find some options in the first dropdown menu. These are all suitable process files found in
+`orchestrator/tests/test_data/`. Choose any process and add it to the orchestrator by clicking "Add Process"
+
 4. load a process
 5. install the scheduler
 6. start the scheduler
