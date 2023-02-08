@@ -62,6 +62,9 @@ You should be able to find some options in the first dropdown menu. These are al
 `orchestrator/tests/test_data/`. Choose any process and add it to the orchestrator by clicking "Add Process". In the free area below,
 there should appear a graph representing the workflow of the chosen process.
 
+![Screenshot of loaded workflow](/images/workflow.png "Image Title")
+
+
 3. Start the scheduler
 
 (If installed) the scheduler can be started as a SiLA-Server by running
