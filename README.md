@@ -56,10 +56,26 @@ go into `lara_implementation/lara_processes` and type
 
 This will start a dash-app running on [http://127.0.0.1:8050/](http://127.0.0.1:8050/)
 
-You should be able to find some options in the first dropdown menu. These are all suitable process files found in
-`orchestrator/tests/test_data/`. Choose any process and add it to the orchestrator by clicking "Add Process"
+2. Load a process
 
-4. load a process
+You should be able to find some options in the first dropdown menu. These are all suitable process files found in
+`orchestrator/tests/test_data/`. Choose any process and add it to the orchestrator by clicking "Add Process". In the free area below,
+there should appear a graph representing the workflow of the chosen process.
+
+3. Start the scheduler
+
+(If installed) the scheduler can be started as a SiLA-Server by running
+
+`python3.8 -m scheduler_server --insecure -p 50068` 
+
+The choice of port is not important. 
+
+4. Schedule your process
+
+By chosing the added process in the second dropdown menu in the orchestrator GUI and clicking "Schedule Process", you mark the process as to be scheduled. The orchestrator will automatically discover the scheduler and use it to get a schedule. This will be visible as gantt chart in the upper part of the GUI.
+
+
+
 5. install the scheduler
 6. start the scheduler
 7. simulate the process
