@@ -1,1 +1,6 @@
 wheel
+zeep
+pytest
+pysimplesoap
+aenum
+Pillow
