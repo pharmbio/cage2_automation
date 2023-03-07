@@ -43,17 +43,22 @@ class GitRepo(NamedTuple):
     name: str
     url: str
     branch: str
+    develop_branch: str
     setup_files: List[str] = ["."]
 
-    def install(self, update=False, test=False):
+    def install(self, update=False, test=False, develop=False):
+        if develop:
+            branch = self.develop_branch
+        else:
+            branch = self.branch
         if self.name in os.listdir():
             os.chdir(f"{self.name}")
             call("git pull")
         else:
-            print(f"Installing {self.name} from {self.url}/{self.branch}")
+            print(f"Installing {self.name} from {self.url}/{branch}")
             call(f"git clone {self.url} {self.name}")
             os.chdir(f"{self.name}")
-            call(f"git checkout {self.branch}")
+            call(f"git checkout {branch}")
             call("git pull")
             for setup_file in self.setup_files:
                 call(f"pip install -e {setup_file}")
@@ -63,48 +68,47 @@ class GitRepo(NamedTuple):
 
 orchestrator_git = GitRepo(
     "orchestrator", "https://gitlab.com/opensourcelab/laborchestrator.git",
-    "feature/release_V0_1_draft"
+    "feature/release_V0_1_draft", "feature/release_V0_2_develop"
 )
 scheduler_git = GitRepo(
     "scheduler", "https://gitlab.com/opensourcelab/pythonlabscheduler.git",
-    "feature/release_V0_1_draft",
+    "feature/release_V0_1_draft", "feature/release_V0_2_develop",
     setup_files=['.', 'sila_server/.']
 )
 tools_git = GitRepo(
     "lara_server_tools", "https://gitlab.com/StefanMa/lara-tools.git",
-    "main",
+    "main", "develop",
     setup_files=["lara_simulation/.", "utility"]
 )
 database_git = GitRepo(
     "platform_status_database", "https://gitlab.com/StefanMa/platform_status_db.git",
-    "main"
+    "main", "develop"
 )
 lara_processes_git = GitRepo(
     "lara_implementation", "https://gitlab.com/lara-uni-greifswald/lara-processes.git",
-    "feature/worker_implementation"
+    "feature/release_V0_1_draft", "feature/worker_implementation"
 )
 pythonlab_git = GitRepo(
     "pythonlab", "https://gitlab.com/opensourcelab/pythonLab.git",
-    "feature/reader_develop_integration"
+    "feature/release_V0_1_draft", "feature/reader_develop_integration"
 )
 device_gits: List[GitRepo] = [
     GitRepo('cytomat', "https://gitlab.com/opensourcelab/devices/incubators_shakers/thermo_cytomat2.git",
-                          "feature/sila2_server", setup_files=["sila2_server/."]),
+                          "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
     GitRepo("barcode_reader", "https://gitlab.com/opensourcelab/devices/barcodereader/omron-laserscanner-ms-3.git",
-                          "feature/sila2_server", setup_files=["sila_server/."]),
+                          "develop", "feature/release_V0_2_develop", setup_files=["sila_server/."]),
     GitRepo("silafied_human", "https://gitlab.com/StefanMa/silafiedhuman.git",
-                          "main"),
+                          "main", 'develop'),
     GitRepo('robotic_arm', "https://gitlab.com/opensourcelab/devices/labrobots/thermo_f5.git",
-                        "feature/sila_redo_impl", setup_files=["sila_server/."]),
+                        "develop", "feature/release_V0_2_develop", setup_files=["sila_server/."]),
     GitRepo('agilent_bravo', "https://gitlab.com/opensourcelab/devices/liquidhandler/agilent-vworks.git",
-                          "feature/sila2_server", setup_files=["sila_server/."]),
+                          "develop", "feature/release_V0_2_develop", setup_files=["sila_server/."]),
     GitRepo('storage_carousel', "https://gitlab.com/opensourcelab/devices/container_storage/thermo_whitetree_carousel.git",
-                             "feature/sila2_server", setup_files=["sila2_server/."]),
+                             "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
     GitRepo('reader', "https://gitlab.com/opensourcelab/devices/spectrometer/thermo-skanit6.git",
-                   "feature/sila2_server", setup_files=["sila2_server/."]),
+                   "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
     GitRepo('centrifuge', "https://gitlab.com/opensourcelab/devices/centrifuges/hettich_rotanta_460r.git",
-                       "feature/sila2_server", setup_files=["sila2_server/."]),
-
+                       "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
 ]
 
 # --------------- installation helper functions, please do not modify -----------------------------
@@ -206,13 +210,13 @@ def make_dir_structure():
         os.mkdir("devices")
 
 
-def install_devices(test=False, update=False):
+def install_devices(test=False, update=False, develop=False):
     test=False  # not good, yet
     print("Installing sila2 servers for devices")
     os.chdir("devices")
     for repo in device_gits:
         #if update or test or query_yes_no(f"Install {repo.name}?"):
-            repo.install(test=test, update=update)
+            repo.install(test=test, update=update, develop=develop)
     os.chdir("..")
 
 
@@ -238,21 +242,21 @@ def initialize():
         os.chdir("..")
 
 
-def installOnLinux(test=False, update=False):
-    orchestrator_git.install(test=test, update=update)
+def installOnLinux(test=False, update=False, develop=False):
+    orchestrator_git.install(test=test, update=update, develop=develop)
     make_dir_structure()
     #if query_yes_no("Install scheduler?"):
-    scheduler_git.install(test=test, update=update)
+    scheduler_git.install(test=test, update=update, develop=develop)
     #if query_yes_no("Install lara-tools (needed to run&visualize simulated devices)?"):
-    tools_git.install(test=test, update=update)
+    tools_git.install(test=test, update=update, develop=develop)
     #if query_yes_no("Also install the lara-greifswald specialization?"):
-    lara_processes_git.install(test=test, update=update)
+    lara_processes_git.install(test=test, update=update, develop=develop)
     #if query_yes_no("Install device servers?"):
-    install_devices(test=test, update=update)
+    install_devices(test=test, update=update, develop=develop)
     #if query_yes_no("Install supporting database for orchestrator?"):
-    database_git.install(test=test, update=update)
+    database_git.install(test=test, update=update, develop=develop)
     #if query_yes_no("Install PythonLab process description language? ( It is cool;-) )"):
-    pythonlab_git.install(test=test, update=update)
+    pythonlab_git.install(test=test, update=update, develop=develop)
 
 
 def parse_args():
@@ -260,6 +264,7 @@ def parse_args():
     parser.add_argument("--init", action="store_true", help="initializes the database", default=False)
     parser.add_argument("--test", action="store_true", help="tests the installation", default=False)
     parser.add_argument("--update", action="store_true", help="updates all installed git repositories", default=False)
+    parser.add_argument("--develop", action="store_true", help="uses the latest development version (probably unstable)", default=False)
 
     return parser.parse_args()
 
@@ -271,7 +276,7 @@ if __name__ == '__main__':
     if args.init:
         initialize()
     else:
-        installOnLinux(test=args.test, update=args.update)
+        installOnLinux(test=args.test, update=args.update, develop=args.develop)
 
     print("Enjoy!")
 

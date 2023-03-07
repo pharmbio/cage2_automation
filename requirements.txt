@@ -4,3 +4,4 @@ pytest
 pysimplesoap
 aenum
 Pillow
+dash-extensions>=0.1.11
