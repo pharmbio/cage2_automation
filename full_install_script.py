@@ -57,7 +57,7 @@ class GitRepo(NamedTuple):
         else:
             print(f"Installing {self.name} from {self.url}/{branch}")
             call(f"git clone {self.url} {self.name}")
-            os.chdir(f"{self.name}")
+            os.chdir(self.name)
             call(f"git checkout {branch}")
             call("git pull")
             for setup_file in self.setup_files:
@@ -86,11 +86,11 @@ database_git = GitRepo(
 )
 lara_processes_git = GitRepo(
     "lara_implementation", "https://gitlab.com/lara-uni-greifswald/lara-processes.git",
-    "feature/release_V0_1_draft", "feature/worker_implementation"
+    "feature/release_V0_1_draft", "feature/release_V0_2_develop"
 )
 pythonlab_git = GitRepo(
     "pythonlab", "https://gitlab.com/opensourcelab/pythonLab.git",
-    "feature/release_V0_1_draft", "feature/reader_develop_integration"
+    "feature/release_V0_1_draft", "feature/release_V0_2_develop"
 )
 device_gits: List[GitRepo] = [
     GitRepo('cytomat', "https://gitlab.com/opensourcelab/devices/incubators_shakers/thermo_cytomat2.git",
