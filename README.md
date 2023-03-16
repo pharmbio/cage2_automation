@@ -113,6 +113,7 @@ but to understand the software, it's recommended to use the greifswald-specializ
     - Plate Storage Carousel
     - Thermo Cytomat2 (C1)
     - Thermo VarioskanLUX (lower)
+    - Thermo VarioskanLUX (upper)
     - Omron MS3 BarcodeReade
 
 8. #### Start the Visualization (optional)
