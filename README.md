@@ -136,6 +136,7 @@ but to understand the software, it's recommended to use the greifswald-specializ
     If everything went according to plan, you should see the current time bar moving through
     the gantt chart, the workflow-bubbles turning green after step completions and the visualization change.
     The simulated devices are much faster than the real ones, so the schedule will change accordingly.
+    ![Screenshot partially run process](/images/running.png "Running Process")
 
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
