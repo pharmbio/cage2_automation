@@ -2,75 +2,146 @@
 
 
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/opensourcelab/openlab-site/lab-automation/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
+## LabOrchestrator environment guide
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+This package only consist of an installation script for several packages
+in [opensoucelab](https://gitlab.com/opensourcelab/) which are intended to work
+together with the [laborchestrator](https://gitlab.com/opensourcelab/laborchestrator) and documentation for how to use them. 
+These packages contain a [scheduler](https://gitlab.com/opensourcelab/pythonlabscheduler),
+a supporting [database](https://gitlab.com/StefanMa/platform_status_db),
+some (LARA-specialized) [utility tools](https://gitlab.com/StefanMa/lara-tools) for starting sila servers, creating simulations and visualization,
+a process description language named [PythonLab](https://gitlab.com/opensourcelab/pythonLab),
+a collection of [SiLA-servers](https://gitlab.com/opensourcelab/devices) for certain lab devices (including simulations)
+and finally a [specialization](https://gitlab.com/lara-uni-greifswald/lara-processes) of the laborchestrator for the Greifswald robot platform LARA
 
 ## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+On some READMEs, you may see small images that convey metadata, such as whether all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
 ## Visuals
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+To install all packages, simply run 
 
-## Usage
+`python3.8 full_install_script.py`
+
+This will guide you through the packages and ask which one to install.
+
+Afterwards (in case, you installed the platform_status_db), you should run 
+
+`python3.8 full_install_script.py --init` 
+
+to initialize the django database and create admin credentials.
+
+With 
+
+`python3.8 full_install_script.py --test`
+
+you can run the automatic pytest tests for most packages (Do not worry, when the mip_solver test of the scheduler fails).
+
+At any point in time, you can update your installation with 
+
+`python3.8 full_install_script.py --update`
+
+# Quickstart Guide
+
+The orchestrator can work without PythonLab and the database,
+but to understand the software, it's recommended to use the greifswald-specialization, which uses both.
+
+### Remark:
+    The steps 1, 3, 5, 6 and 8 can done by simply executing the
+    `open_tabs.sh` or `open_tabs.bat` script depending on your OS.
+    We still recommend to do them step by step the first time to understand,
+    whats happening.
+
+1. #### Starting the orchestrator GUI:
+
+    Go into `lara_implementation/lara_processes` and type
+    
+    `python3.8 start_script.py`
+    
+    This will start a dash-app running on [http://127.0.0.1:8050/](http://127.0.0.1:8050/)
+
+2. #### Load a process
+    
+    You should be able to find some options in the first dropdown menu. These are all suitable process files found in
+    `orchestrator/tests/test_data/`. Choose any process and add it to the orchestrator by clicking "Add Process". In the free area below,
+    there should appear a graph representing the workflow of the chosen process.
+    For a first test, we recommend the IncReadProcess.
+    ![Screenshot of loaded GreetingExampleProcess-workflow](/images/workflow.png "Workflow")
+
+3. #### Start the scheduler
+    
+    (If installed) the scheduler can be started as a SiLA-Server by running
+    
+    `python3.8 -m scheduler_server --insecure -p 50068` 
+    
+    The choice of port is not important as long as is does not block the device servers (currently 50051 - 50061) 
+
+4. #### Schedule your process
+    
+    By chosing the added process in the second dropdown menu in the orchestrator GUI and clicking "Schedule Process", you mark the process as to be scheduled. The orchestrator will automatically discover the scheduler and use it to get a schedule. This will be visible as gantt chart in the upper part of the GUI.
+    
+    ![Screenshot of scheduled workflow](/images/schedule.png "Schedule")
+
+5. #### Start the database web interface
+    Go into `platform_status_database/platform_status_db` and type
+    
+    `python3.8 manage.py runserver`
+
+    This starts the django webinterface for your database. You can visit the admin interface
+    at [http://127.0.0.1:8000/admin/job_logs/](http://127.0.0.1:8000/admin/job_logs/) (use the credentials you set up during installation)
+    and the user interface at [http://127.0.0.1:8000/job_logs/](http://127.0.0.1:8000/job_logs/)
+    The user interface is not yet developed a lot. The admin-view comes with django.
+    You can see its documentation at [https://docs.djangoproject.com/en/4.1/intro/tutorial02/](https://docs.djangoproject.com/en/4.1/intro/tutorial02/)
+
+6. #### Start the ServerManager
+    
+    Go into `lara_server_tools/lara_simulation/lara_simulation` and type
+    `python3.8 dash_app.py` 
+
+    That starts a dash webinterface where you can start and stop your device SiLA2 servers.
+
+7. #### Start some Servers
+    You can visit the ServerManager webinterface at [http://127.0.0.1:8051/](http://127.0.0.1:8051/).
+    Tick the boxes of all devices, you want to start/stop servers for and press start/stop.
+    Do not tick `secure`.
+    To simulate for example running the IncReadProcess, you will need 
+
+    - Fanuc F5 Robotic Arm
+    - Plate Storage Carousel
+    - Thermo Cytomat2 (C1)
+    - Thermo VarioskanLUX (lower)
+    - Thermo VarioskanLUX (upper)
+    - Omron MS3 BarcodeReade
+
+8. #### Start the Visualization (optional)
+    
+    Go into `lara_server_tools/lara_simulation/lara_simulation` and type
+    `python3.8 visualize_from_json.py`.
+    
+    The ServerManager produces text files showing the devices in ASCII art.
+    These get updated frequently and are monitored using the curses python module.
+    If you started some servers with the ServerManager, you should see some devices.
+    You can stop the script any time with Ctrl+C.
+
+9. ### Start the Process
+
+    Go back to the orchestrator GUI at [http://127.0.0.1:8050/](http://127.0.0.1:8050/)
+    , choose the process in the second Dropdown menu and press _Start Process_.
+
+10. ### Enjoy the simulation
+    
+    If everything went according to plan, you should see the current time bar moving through
+    the gantt chart, the workflow-bubbles turning green after step completions and the visualization change.
+    The simulated devices are much faster than the real ones, so the schedule will change accordingly.
+    ![Screenshot partially run process](/images/running.png "Running Process")
+
 Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
 ## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+For support, feel free to contact maaks@uni-greifswald.de. 
 
 ## Roadmap
 If you have ideas for releases in the future, it is a good idea to list them in the README.
@@ -83,10 +154,12 @@ For people who want to make changes to your project, it's helpful to have some d
 You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Maintained by Stefan Maak and Mark Dörr of the workinggroup of Prof. Bornscheuer in Uni Greifswald.
 
 ## License
-For open source projects, say how it is licensed.
+MIT Licence.
 
 ## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+The project is still in an experimental state, but improves continuously.
+We have unit tests and use the software is used to run experiments, 
+but there are still lots of changes happening and bugs being discovered. 
