@@ -38,6 +38,84 @@ def printWelcomeMessage():
     )
     print(installer_welcome_txt)
 
+def installAndImport(package):
+    """ This imports a package and
+        if not available, installs it first
+
+        :return: The sucessfully imported package
+    """
+    import importlib
+    try:
+        importlib.import_module(package)
+    except ImportError:
+        import pip
+        #~ pip.main(['install', package])
+        print(f"Module {package} not installed! I'm going to install it now...")
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+    finally:
+        globals()[package] = importlib.import_module(package)
+        return globals()[package]
+
+def installSiLAVenv(venv_module_name="venv"):
+    """ :param venv_module_name: The module to use for creating the virtual environment
+                            Possible values: 'venv' for the venv module that ships with python (default, works on Linux)
+                                             'virtualenv' (works on Windows)
+    """
+    if query_yes_no("Install a virtual Python environment (highly recommended) ?",
+                     help="HELP: This is the recommended installation mode for testing SiLA2-Python"):
+
+        venv_dir = query("Please specify a directory for your virtual python3 environment",
+                         default_answer=os.path.join(os.path.abspath(os.curdir), "venv", "lab_automation"),
+                         help="HELP: specify the target directory for the virtual python3 environment")
+
+        create_venv_anyway = True
+
+        if os.path.exists(venv_dir):
+            create_venv_anyway = query_yes_no("\nWARNING !! Virtual environment exists: [{}], shall I create it anyway ?".
+                                              format(venv_dir), default_answer='no',
+                                              help="HELP: create the python 3 virtual environment anyway ?")
+
+        if create_venv_anyway:
+            venv_module = installAndImport(venv_module_name)
+
+            print("\t...creating virtual environment using '{module}' in dir [{dir}]".format(
+                module=venv_module_name,
+                dir=venv_dir
+            ))
+            if venv_module is not None:
+                if venv_module_name == 'venv':
+                    venv_module.create(venv_dir, system_site_packages=False, clear=False, symlinks=False, with_pip=True)
+                elif venv_module_name == 'virtualenv':
+                    venv_module.create_environment(venv_dir, site_packages=False, clear=False, symlink=False)
+
+        print("* Activating virtual environment [{}]".format(
+            venv_dir))  # this is done by prepending python3 path to system path
+        os.environ['PATH'] = os.pathsep.join([os.path.join(venv_dir, 'bin'), os.environ['PATH']])
+
+        activate_cmd = f"source {venv_dir}/bin/activate"
+
+        if os.name == 'nt':
+            print("* Activating virtual environment on windows [{}]".format(
+                venv_dir))  # this is done by prepending python3 path to sytem path
+
+            activate_this = os.path.join(venv_dir, "Scripts", "activate_this.py")
+            exec(open(activate_this).read(), {'__file__': activate_this})
+
+            # on Windows you need to use quotes when there are spaces in the path
+            activate_cmd = f"\"{os.path.join(venv_dir, 'Scripts', 'activate.bat')}\""
+            activate_cmd_ps = os.path.join(venv_dir, 'Scripts', 'Activate.ps1')
+            activate_cmd += f"\n Powershell users, please use: \"{activate_cmd_ps}\" \n"
+
+        print(" ")
+        print("--------------------------------------------------------------------")
+        print( "ATTENTION: Please do not forget to activate the virtual environment by calling: \n"
+              f"{activate_cmd} \n"
+               "- to deactivate the venv, simply type:\n"
+               "deactivate \n")
+        print("--------------------------------------------------------------------")
+        print(" ")
+
+        return venv_dir
 
 class GitRepo(NamedTuple):
     name: str
@@ -96,13 +174,13 @@ device_gits: List[GitRepo] = [
     GitRepo('cytomat', "https://gitlab.com/opensourcelab/devices/incubators_shakers/thermo_cytomat2.git",
                           "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
     GitRepo("barcode_reader", "https://gitlab.com/opensourcelab/devices/barcodereader/omron-laserscanner-ms-3.git",
-                          "develop", "feature/release_V0_2_develop", setup_files=["sila_server/."]),
+                          "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
     GitRepo("silafied_human", "https://gitlab.com/StefanMa/silafiedhuman.git",
                           "main", 'develop'),
     GitRepo('robotic_arm', "https://gitlab.com/opensourcelab/devices/labrobots/thermo_f5.git",
-                        "develop", "feature/release_V0_2_develop", setup_files=["sila_server/."]),
+                        "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
     GitRepo('agilent_bravo', "https://gitlab.com/opensourcelab/devices/liquidhandler/agilent-vworks.git",
-                          "develop", "feature/release_V0_2_develop", setup_files=["sila_server/."]),
+                          "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
     GitRepo('storage_carousel', "https://gitlab.com/opensourcelab/devices/container_storage/thermo_whitetree_carousel.git",
                              "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
     GitRepo('reader', "https://gitlab.com/opensourcelab/devices/spectrometer/thermo-skanit6.git",
@@ -269,13 +347,13 @@ def parse_args():
     return parser.parse_args()
 
 
-
 if __name__ == '__main__':
     printWelcomeMessage()
     args = parse_args()
     if args.init:
         initialize()
     else:
+        installSiLAVenv()
         installOnLinux(test=args.test, update=args.update, develop=args.develop)
 
     print("Enjoy!")
