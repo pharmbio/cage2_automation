@@ -4,4 +4,5 @@ pytest
 pysimplesoap
 aenum
 Pillow
+PyYAML
 dash-extensions>=0.1.11

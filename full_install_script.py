@@ -353,7 +353,10 @@ if __name__ == '__main__':
     if args.init:
         initialize()
     else:
-        installSiLAVenv()
+        if not (args.update or args.test):
+            installSiLAVenv()
+        # for some reason pyyaml does not get installed via requirements.txt
+        installAndImport('yaml')
         installOnLinux(test=args.test, update=args.update, develop=args.develop)
 
     print("Enjoy!")
