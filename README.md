@@ -70,10 +70,14 @@ you can run the automatic pytest tests for most packages.
     python3.8 full_install_script.py --update
 ```
 
-# Quickstart Guide
+## Usage
 
 The orchestrator can work without PythonLab and the database,
 but to understand the software, it's recommended to use the greifswald-specialization, which uses both.
+
+For a quickstart guide go [here](/docs/quickstart.md).
+
+For a more detailed documentation of the _laborchestrator_ GUI go [here](/docs/usage.rst)
 
 ### Remark:
     The steps 1, 3, 5, 6 and 8 can done by simply executing the

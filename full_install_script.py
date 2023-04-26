@@ -172,7 +172,7 @@ pythonlab_git = GitRepo(
 )
 device_gits: List[GitRepo] = [
     GitRepo('cytomat', "https://gitlab.com/opensourcelab/devices/incubators_shakers/thermo_cytomat2.git",
-                          "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
+                          "develop", "feature/sila2_server", setup_files=["sila2_server/."]),
     GitRepo("barcode_reader", "https://gitlab.com/opensourcelab/devices/barcodereader/omron-laserscanner-ms-3.git",
                           "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
     GitRepo("silafied_human", "https://gitlab.com/StefanMa/silafiedhuman.git",
