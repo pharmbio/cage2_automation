@@ -83,7 +83,6 @@ Just follow the manual steps, then.
     - Fanuc F5 Robotic Arm
     - Plate Storage Carousel
     - Thermo Cytomat2 (C1)
-    - Thermo VarioskanLUX (lower)
     - Thermo VarioskanLUX (upper)
     - Omron MS3 BarcodeReade
     
