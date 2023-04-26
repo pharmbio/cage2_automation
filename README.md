@@ -22,27 +22,53 @@ On some READMEs, you may see small images that convey metadata, such as whether 
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
 ## Installation
-To install all packages, simply run 
+0.  You need to have at least **python3.8** and **git** installed on your computer
 
-`python3.8 full_install_script.py`
+1. Clone this repository, navigate into the folder and change to the develop branch. For example via Console/Powershell with
+```bash
+    git clone https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
+```
+```bash
+    cd lab-automation
+```
+```bash
+    git checkout develop
+```
 
-This will guide you through the packages and ask which one to install.
+2.  To install all packages, simply run the following command. You could add      `--develop` to install the (possibly unstable) development version
 
-Afterwards (in case, you installed the platform_status_db), you should run 
+    ```bash
+        python3.8 full_install_script.py
+    ```
 
-`python3.8 full_install_script.py --init` 
+    This will guide you through the installation process. We strongly recommend to pick the virtual-environment option. 
 
-to initialize the django database and create admin credentials.
+3. Activate the newly created environment by executing
 
-With 
+    ```bash
+        source venv/lab_automation/bin/activate
+    ``` 
 
-`python3.8 full_install_script.py --test`
+4. Now (in case, you installed the platform_status_db), you should run 
 
-you can run the automatic pytest tests for most packages (Do not worry, when the mip_solver test of the scheduler fails).
+    ```bash
+        python full_install_script.py --init
+    ``` 
 
-At any point in time, you can update your installation with 
+    to initialize the django database and create admin  credentials. You will be asked a few options.
+5. With 
 
-`python3.8 full_install_script.py --update`
+    ```bash
+        python3.8 full_install_script.py --test
+    ```
+
+you can run the automatic pytest tests for most packages.
+
+5. At any point in time, you can update your installation with 
+
+```bash
+    python3.8 full_install_script.py --update
+```
 
 # Quickstart Guide
 
