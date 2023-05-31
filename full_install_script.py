@@ -117,6 +117,7 @@ def installSiLAVenv(venv_module_name="venv"):
 
         return venv_dir
 
+
 class GitRepo(NamedTuple):
     name: str
     url: str
@@ -143,6 +144,7 @@ class GitRepo(NamedTuple):
         if test:
             call('pytest')
         os.chdir("..")
+
 
 orchestrator_git = GitRepo(
     "orchestrator", "https://gitlab.com/opensourcelab/laborchestrator.git",
@@ -189,6 +191,7 @@ device_gits: List[GitRepo] = [
                        "develop", "feature/release_V0_2_develop", setup_files=["sila2_server/."]),
 ]
 
+
 # --------------- installation helper functions, please do not modify -----------------------------
 def query_yes_no(question, default_answer="yes", help=""):
     """Ask user at stdin a yes or no question
@@ -223,6 +226,7 @@ def query_yes_no(question, default_answer="yes", help=""):
             sys.stderr.write("Query interrupted by user, exiting now ...")
             exit(0)
 
+
 def query(question, default_answer="", help=""):
     """Ask user a question
 
@@ -244,6 +248,7 @@ def query(question, default_answer="", help=""):
                 return answer
         else:
             return default_answer
+
 
 def call(command=""):
     ''' Convenient command call: it splits the command string into tokens (default separator: space)
@@ -283,7 +288,7 @@ def runSetup(src_dir="", lib_dir=""):
 
 
 def make_dir_structure():
-    if not "devices" in os.listdir():
+    if "devices" not in os.listdir():
         print("Creating directory structure")
         os.mkdir("devices")
 
@@ -307,14 +312,14 @@ def initialize():
         os.chdir('platform_status_db')
         print(os.listdir())
         print("Migrating database")
-        call("python manage.py migrate")
+        call(f"{sys.executable} manage.py migrate")
         if query_yes_no("Create the lara example in the database?"):
             from platform_status_db.larastatus.status_db_implementation import StatusDBImplementation
             db_client = StatusDBImplementation()
             db_client.create_lara()
         print("Please follow the dialog to create admin-credentials for the database.(It can then be accessed on"
               "http://127.0.0.1:8000/)")
-        call("python manage.py createsuperuser")
+        call(f"{sys.executable} manage.py createsuperuser")
     finally:
         os.chdir("..")
         os.chdir("..")
@@ -356,7 +361,9 @@ if __name__ == '__main__':
         if not (args.update or args.test):
             installSiLAVenv()
         # for some reason pyyaml does not get installed via requirements.txt
-        installAndImport('yaml')
+        call(f"{sys.executable} -m pip install Pyyaml")
+        call(f"{sys.executable} -m pip install Django")
+        #installAndImport('Pyyaml')
         installOnLinux(test=args.test, update=args.update, develop=args.develop)
 
     print("Enjoy!")

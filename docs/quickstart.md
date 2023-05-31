@@ -84,7 +84,7 @@ Just follow the manual steps, then.
     - Plate Storage Carousel
     - Thermo Cytomat2 (C1)
     - Thermo VarioskanLUX (upper)
-    - Omron MS3 BarcodeReade
+    - Omron MS3 BarcodeReader
     
     After a server is marked running, you should be able to see its ASCII-visualization in your visualization
 
