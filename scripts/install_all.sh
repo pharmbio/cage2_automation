@@ -1,11 +1,11 @@
 #! bin/bash
 # create directory if necessary
-dir = "source"
-if [ ! -d "$dir" ]; then
-  echo "Directory '$dir' does not exist. Creating it..."
-  mkdir -p "$dir"
+source_dir="source"
+if [ ! -d "$source_dir" ]; then
+  echo "Directory '$source_dir' does not exist. Creating it..."
+  mkdir "$source_dir"
 fi
-cd $dir
+cd "$source_dir"
 
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
@@ -16,7 +16,7 @@ cd laborchestrator
 git checkout develop
 uv pip install -e .
 cd ..
-if [! -d "pythonlabscheduler"]; then
+if [ ! -d "pythonlabscheduler" ]; then
   git clone git@gitlab.com:opensourcelab/pythonlabscheduler.git  # develop
 fi
 cd pythonlabscheduler
@@ -24,14 +24,14 @@ git checkout develop
 uv pip install -e .
 uv pip install --upgrade protobuf  # needed for scheduler
 cd ..
-if [! -d "pythonLab"]; then
+if [ ! -d "pythonLab" ]; then
   git clone git@gitlab.com:opensourcelab/pythonLab.git  # feature/labels
 fi
 cd pythonLab
 git checkout feature/labels
 uv pip install -e .
 cd ..
-if [! -d "platform_status_db"]; then
+if [ ! -d "platform_status_db" ]; then
   git clone https://gitlab.com/StefanMa/platform_status_db.git  # develop
 fi
 cd platform_status_db
@@ -39,10 +39,10 @@ git checkout develop
 uv pip install -e .
 cd ..
 
-cd
+
 # install device connectors
 if [ ! -d "devices" ]; then
-  mkdir -p "devices"
+  mkdir "devices"
 fi
 cd devices
 
