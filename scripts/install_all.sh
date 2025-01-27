@@ -50,8 +50,8 @@ pairs=(
   "washer git@gitlab.com:uppsala_automation/sila-servers/cell-washer.git"
   "squid git@gitlab.com:uppsala_automation/sila-servers/squid.git"
   "sealer git@gitlab.com:uppsala_automation/sila-servers/cealer.git"
-  #"cytomat https://github.com/user/repo3.git"
   "robo_arm" "git@gitlab.com:StefanMa/genericroboticarm.git"
+  "cytomat2C" "git@gitlab.com:uppsala_automation/sila-servers/cytomat2C.git"
 )
 
 # Iterate over each pair (device, repo)
