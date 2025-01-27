@@ -1,4 +1,4 @@
-#! bin/bash
+#! /bin/bash
 # create directory if necessary
 source_dir="source"
 if [ ! -d "$source_dir" ]; then
@@ -10,14 +10,14 @@ cd "$source_dir"
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 if [ ! -d "laborchestrator" ]; then
-  git clone git@gitlab.com:opensourcelab/laborchestrator.git  # develop
+  git clone https://gitlab.com/opensourcelab/laborchestrator.git  # develop
 fi
 cd laborchestrator
 git checkout develop
 uv pip install -e .
 cd ..
 if [ ! -d "pythonlabscheduler" ]; then
-  git clone git@gitlab.com:opensourcelab/pythonlabscheduler.git  # develop
+  git clone https://gitlab.com/opensourcelab/pythonlabscheduler.git  # develop
 fi
 cd pythonlabscheduler
 git checkout develop
@@ -25,7 +25,7 @@ uv pip install -e .
 uv pip install --upgrade protobuf  # needed for scheduler
 cd ..
 if [ ! -d "pythonLab" ]; then
-  git clone git@gitlab.com:opensourcelab/pythonLab.git  # feature/labels
+  git clone https://gitlab.com/opensourcelab/pythonLab.git  # feature/labels
 fi
 cd pythonLab
 git checkout feature/labels
@@ -47,11 +47,11 @@ fi
 cd devices
 
 pairs=(
-  "washer git@gitlab.com:uppsala_automation/sila-servers/cell-washer.git"
-  "squid git@gitlab.com:uppsala_automation/sila-servers/squid.git"
-  "sealer git@gitlab.com:uppsala_automation/sila-servers/cealer.git"
-  "robo_arm" "git@gitlab.com:StefanMa/genericroboticarm.git"
-  "cytomat2C" "git@gitlab.com:uppsala_automation/sila-servers/cytomat2C.git"
+  "washer https://gitlab.com/uppsala_automation/sila-servers/cell-washer.git"
+  "squid https://gitlab.com/uppsala_automation/sila-servers/squid.git"
+  "sealer https://gitlab.com/uppsala_automation/sila-servers/cealer.git"
+  "robo_arm" "https://gitlab.com/StefanMa/genericroboticarm.git"
+  "cytomat2C" "https://gitlab.com/uppsala_automation/sila-servers/cytomat2C.git"
 )
 
 # Iterate over each pair (device, repo)
