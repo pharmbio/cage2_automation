@@ -3,38 +3,24 @@ description:
 sila_servers:
     storage:
         Hotel1:
-            capacity: 3
+            capacity: 20
         Hotel2:
-            capacity: 1
-        #Hotel3:
-        #    capacity: 7
-    incubators:
-        Cytomat2C:
-            capacity: 42
-    washer_dispensers:
-        Washer:
-            capacity: 1
-    sealers:
-        Sealer:
-            capacity: 1
+            capacity: 20
+        Hotel3:
+            capacity: 20
     movers:
-        XArm:
+        GenericArm:
             capacity: 1
-    microscopes:
-        Squid1:
-            capacity: 1
-        #Squid2:
-        #    capacity: 1
     humans:
         Human:
             capacity: 99
+    greeters:
+        Greeter:
+            capacity: 0
 
 # ------ Translation to used resources in the process description ------
 pythonlab_translation:
     storage: LabwareStorageResource
     movers: MoverServiceResource
-    incubators: IncubatorServiceResource
     humans: HumanServiceResource
-    microscopes: MicroscopeServiceResource
-    washer_dispensers: WasherDispenserServiceResource
-    sealers: PlateSealerServiceResource
+    greeters: GreeterServiceResource
