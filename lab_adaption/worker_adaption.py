@@ -1,10 +1,13 @@
 """
 
 """
-
+import logging
 from typing import Optional, NamedTuple, Dict, Any, Tuple
+
+from laborchestrator.database_integration import StatusDBInterface
+from laborchestrator.engine import ScheduleManager
 from laborchestrator.engine.worker_interface import WorkerInterface, Observable, DummyHandler
-from laborchestrator.structures import SMProcess, MoveStep
+from laborchestrator.structures import SMProcess, MoveStep, SchedulingInstance
 from sila2.client import SilaClient
 from .device_wrappers import(
     DeviceInterface,
@@ -21,57 +24,69 @@ USE_REAL_SERVERS = [
     "Greeter",
 ]
 
-# maps the device names to the correct wrappers
+# maps the device names (from the lab_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
     GenericArm=GenericRobotArmWrapper,
     Human=HumanWrapper,
     Greeter=GreetingWrapper,
 )
 
+# maps the device names (from the lab_config and process description) to the correct sila server names
+# those without a sila server can be left out
+sila_server_name: dict[str, str] = dict(
+    GenericArm="Dummy",
+    Human="Human",
+    Greeter="Greeter",
+)
+
 
 class Worker(WorkerInterface):
+    # save the clients for repeated use
+    clients: dict[str, SilaClient]
+
+    def __init__(self, jssp: SchedulingInstance, schedule_manager: ScheduleManager, db_client: StatusDBInterface):
+        super().__init__(jssp, schedule_manager, db_client)
+        self.clients = {}
+
     def execute_process_step(self, step_id: str, device: str, device_kwargs: Dict[str, Any]) -> Observable:
         print(f"Execute {step_id} on device {device}")
         # get all information about the process step
         step = self.jssp.step_by_id[step_id]
         cont = self.jssp.container_info_by_name[step.cont_names[0]]
         if device in USE_REAL_SERVERS:
-            if isinstance(step, MoveStep):
-                # create the client
-                arm_client = self.get_client(device_name=device)
-
-                origin_device = step.origin_device.name
-                target_device = step.target_device.name
-                origin_position = cont.current_pos  # the index of the position on the device
-                target_position = step.destination_pos
-                print(f"Will pick at {origin_device}{origin_position} and place at {target_device}{target_position}")
-                # calls the sila server
-                cmd_info = arm_client.RobotController.MovePlate(
-                    OriginSite = (origin_device, origin_position),  # for example ("Hotel1", 3)
-                    DestinationSite = (target_device, target_position),
-                )
-                # returns the ClientObservableCommandInstance for the move command
-                return cmd_info
-            if "Teleshake" in device:
-                shaker_client = self.get_client(device_name=device)
-                shaking_handler = ShakingHandler()
-                # starts the execution
-                shaking_handler.run_protocol(shaker_client, **device_kwargs, duration=step.duration)
-                # return the handler for observation
-                return shaking_handler
+            client = self.get_client(device_name=device)
+            if client:
+                wrapper = device_wrappers[device]
+                # starts the command on the device and returns an Observable
+                observable = wrapper.get_SiLA_handler(step, cont, client, **device_kwargs)
+                return observable
+        # for all simulated devices, this simply wraps a sleep command into an Observable
+        #TODO you can change the time to for example step.duration/2
         handler = DummyHandler(4)
         handler.run_protocol(None)
         return handler
 
-    def get_client(self, device_name) -> SilaClient | None:
-        # use the device names of the lab_config.yaml
-        # the ports might be different: adapt!
-        if device_name == "XArm":
-            return SilaClient(address="127.0.0.1", port=50052, insecure=True)
-        #elif device_name == "Teleshake_1":
-        #    return SilaClient(address="127.0.0.1", port=50053, insecure=True)
-        #elif device_name == "Teleshake_2":
-        #    return SilaClient(address="127.0.0.1", port=50054, insecure=True)
+    def get_client(self, device_name, timeout: float = 5) -> SilaClient | None:
+        server_name = sila_server_name.get(device_name, None)
+        if server_name:
+            client = self.clients.get(device_name, None)
+            if client:
+                # check if the server still responds
+                try:
+                    name = client.SiLAService.ServerName.get()
+                    assert name == server_name
+                except AssertionError:
+                    logging.error(f"The server on {client.address}:{client.port} has changed its name")
+                except ConnectionError:
+                    # the server seems to be offline
+                    self.clients.pop(device_name)
+            # try to discover the matching server by its server name
+            try:
+                client = SilaClient.discover(server_name=server_name, insecure=True, timeout=timeout)
+                self.clients[device_name] = client
+                return client
+            except TimeoutError as error:
+                logging.exception(f"Could not connect to {server_name}:\n{error}")
         return None
 
     def process_step_finished(self, step_id: str, result: Optional[NamedTuple]):
