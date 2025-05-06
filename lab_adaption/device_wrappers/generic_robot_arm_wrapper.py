@@ -3,7 +3,7 @@ import logging
 from laborchestrator.engine.worker_interface import Observable, ObservableProtocolHandler
 from laborchestrator.structures import ContainerInfo, MoveStep
 
-from .device_interface import DeviceInterface, finish
+from . import DeviceInterface, finish_observable_command
 try:
     from genericroboticarm.sila_server import Client as ArmClient
 except ModuleNotFoundError:
@@ -12,7 +12,8 @@ except ModuleNotFoundError:
 
 
 class GenericRobotArmWrapper(DeviceInterface):
-    def get_SiLA_handler(self, step: MoveStep, cont: ContainerInfo,
+    @staticmethod
+    def get_SiLA_handler(step: MoveStep, cont: ContainerInfo,
                          sila_client: ArmClient,
                          intermediate_actions: list[str] | None = None,
                          ) -> Observable:
@@ -30,8 +31,8 @@ class GenericRobotArmWrapper(DeviceInterface):
                     HandoverPosition=(cont.current_device, cont.current_pos + 1),  # counting start at 1 there
                     IntermediateActions=intermediate_actions,
                 )
-                finish(pick_cmd)
-                # this is thread blocking and not observable
+                finish_observable_command(pick_cmd)
+                # PlacePlate is blocking and not observable
                 client.RobotController.PlacePlate(target_site)
 
         observable = TransferHandler()

@@ -6,8 +6,9 @@ from sila2.client import SilaClient
 import time
 
 class DeviceInterface(ABC):
+    @staticmethod
     @abstractmethod
-    def get_SiLA_handler(self, step: ProcessStep, cont: ContainerInfo, sila_client: SilaClient, **kwargs) -> Observable:
+    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: SilaClient, **kwargs) -> Observable:
         """
         Provides an Observable(, i.e., ClientObservableCommandInstance or ObservableProtocolHandler which emulates
         a ClientObservableCommandInstance),
@@ -20,7 +21,7 @@ class DeviceInterface(ABC):
         """
 
 
-def finish(cmd: Observable):
+def finish_observable_command(cmd: Observable):
     """
     Utility function that waits until the command finishes
     :param cmd:

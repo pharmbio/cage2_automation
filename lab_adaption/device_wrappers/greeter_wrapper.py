@@ -3,11 +3,12 @@ from laborchestrator.structures import ProcessStep, ContainerInfo
 from sila2.client import SilaClient
 import time
 
-from .device_interface import DeviceInterface
+from . import DeviceInterface
 
 
 class GreetingWrapper(DeviceInterface):
-    def get_SiLA_handler(self, step: ProcessStep, cont: ContainerInfo, sila_client: SilaClient, **kwargs) -> ObservableProtocolHandler:
+    @staticmethod
+    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: SilaClient, **kwargs) -> ObservableProtocolHandler:
         class GreetingHandler(ObservableProtocolHandler):
             def _protocol(self, client, **kwargs):
                 print("Hello world!")
