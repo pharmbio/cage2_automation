@@ -3,6 +3,7 @@
 """
 import logging
 from typing import Optional, NamedTuple, Dict, Any, Tuple
+from random import randint
 
 from laborchestrator.database_integration import StatusDBInterface
 from laborchestrator.engine import ScheduleManager
@@ -61,8 +62,9 @@ class Worker(WorkerInterface):
                 observable = wrapper.get_SiLA_handler(step, cont, client, **device_kwargs)
                 return observable
         # for all simulated devices, this simply wraps a sleep command into an Observable
-        #TODO you can change the time to for example step.duration/2
-        handler = DummyHandler(4)
+        # TODO you can change the time to for example step.duration/2
+        handler = DummyHandler(randint(2, 12))
+        # the protocol will take between 2 and 12 seconds
         handler.run_protocol(None)
         return handler
 
@@ -93,11 +95,12 @@ class Worker(WorkerInterface):
         super().process_step_finished(step_id, result)
 
     def check_prerequisites(self, process: SMProcess) -> Tuple[bool, str]:
-        #TODO implement your custom steps here
+        # TODO implement your custom checks here.
+        # For example whether need protocols exists or all devices are online
         return True, "Nothing to report."
 
     def determine_destination_position(self, step: MoveStep) -> Optional[int]:
-        #TODO change this to predefined positions if necessary
+        # TODO change this to  customized positioning if necessary
 
         # checks the database for the free position with the lowest index
         return super().determine_destination_position(step)

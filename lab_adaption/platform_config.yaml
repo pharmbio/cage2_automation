@@ -1,5 +1,5 @@
 description:
-    - "DSetup of a student lab in uppsala university cellar"
+    - "An exemplary robotic lab description. Add devices at will"
 sila_servers:
     storage:
         Hotel1:
@@ -19,6 +19,7 @@ sila_servers:
             capacity: 0
 
 # ------ Translation to used resources in the process description ------
+# the key must match the categories above and the values must match the required resources in the workflow description
 pythonlab_translation:
     storage: LabwareStorageResource
     movers: MoverServiceResource
