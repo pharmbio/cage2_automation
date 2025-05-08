@@ -1,6 +1,62 @@
-# Lab Automation
+# New Guide
 
+## Target Audience
+People who have a robotic arm with several devices they can access via SiLA (or at least python) and look for a
+framework do describe, orchestrate and schedule workflows on these devices. Some programming skills are necessary.
 
+## Content
+- Install scripts to install necessary software packages (database, scheduler, pythonLab, orchestrator)
+- Template for custom robotic lab setup and interface for customizable funtionalities
+
+## Installation
+1. Download this package:
+```bash
+    git clone https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
+```
+2. Install all necessary packages:
+   - without example servers: 
+```bash
+    pip install -r requirements.txt -e lab-automation/.
+```
+   - with example servers: 
+```bash
+    pip install -r requirements.txt -r requirements_servers.txt -e lab-automation/.
+```
+3. Install and set up the database
+
+## Startup
+Call from different console tabs
+- to start the scheduler:
+```bash
+    labscheduler --insecure -p 50066
+```
+- to start the django database view (optional):
+```bash
+    python path/to/latform_status_db/platform_status_db/manage.py runserver
+```
+- to start the orchestrator:
+```bash
+    laborchestrator
+```
+- to start demo servers:
+```bash
+    start_sila_servers
+```
+
+## Usage
+You can access the GUI for different components:
+- database of present labware at [http://127.0.0.1:8000/job_logs/present_labware/](http://127.0.0.1:8000/job_logs/present_labware/)
+- orchestrator at [http://127.0.0.1:8050/](http://127.0.0.1:8050/)
+- the human interaction sila server: [http://127.0.0.1:8054/](http://127.0.0.1:8054/)
+- view and manual control of the robotic arm: [http://127.0.0.1:8055/](http://127.0.0.1:8055/)
+
+To see how the example servers are controlled from the orchestrator to the the orchestrator GUI and load and start the
+example processes
+- GreeterTest
+- MoverTest
+- HumanTest (you will have to finish the tasks in the human interaction GUI)
+
+# Lab Automation (Old Guide)
 
 ## LabOrchestrator environment guide
 
