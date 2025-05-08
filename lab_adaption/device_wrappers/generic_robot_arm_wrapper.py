@@ -16,6 +16,7 @@ class GenericRobotArmWrapper(DeviceInterface):
     def get_SiLA_handler(step: MoveStep, cont: ContainerInfo,
                          sila_client: ArmClient,
                          intermediate_actions: list[str] | None = None,
+                         **kwargs,
                          ) -> Observable:
         if intermediate_actions is None:
             intermediate_actions = []
@@ -23,8 +24,11 @@ class GenericRobotArmWrapper(DeviceInterface):
         origin_site = (cont.current_device, cont.current_pos)
         target_site = (step.target_device.name, step.destination_pos)
         print(f"moving from {origin_site} to {target_site}")
-        print(f"intermediate actions: {intermediate_actions}")
+        if not intermediate_actions:
+            return sila_client.RobotController.MovePlate(origin_site, target_site)
 
+        # with intermediate actions we need to use the standard sila labware transfer feature
+        print(f"intermediate actions: {intermediate_actions}")
         class TransferHandler(ObservableProtocolHandler):
             def _protocol(self, client: ArmClient, **kwargs):
                 pick_cmd = client.LabwareTransferManipulatorController.GetLabware(

@@ -25,19 +25,19 @@ USE_REAL_SERVERS = [
     "Greeter",
 ]
 
-# maps the device names (from the lab_config and process description) to the correct wrappers
+# maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
     GenericArm=GenericRobotArmWrapper,
     Human=HumanWrapper,
     Greeter=GreetingWrapper,
 )
 
-# maps the device names (from the lab_config and process description) to the correct sila server names
+# maps the device names (from the platform_config and process description) to the correct sila server names
 # those without a sila server can be left out
 sila_server_name: dict[str, str] = dict(
     GenericArm="Dummy",
     Human="Human",
-    Greeter="Greeter",
+    Greeter="ExampleServer",
 )
 
 
@@ -92,6 +92,16 @@ class Worker(WorkerInterface):
         return None
 
     def process_step_finished(self, step_id: str, result: Optional[NamedTuple]):
+        # get all information about the process step
+        step = self.jssp.step_by_id[step_id]
+        container = self.jssp.container_info_by_name[step.cont]
+        # TODO: Insert custom thing to do after finishing a step.
+        # custom kwargs given to steps (see mover_test for example) are also available in step.data
+        if "read_barcode" in step.data:
+            # TODO: Insert you own way to retrieve a barcode from a barcode reader
+            container.barcode = f"Nice_Barcode{randint(1,9999)}"
+            # saves the barcode to the database.
+            self.db_client.set_barcode(container)
         super().process_step_finished(step_id, result)
 
     def check_prerequisites(self, process: SMProcess) -> Tuple[bool, str]:

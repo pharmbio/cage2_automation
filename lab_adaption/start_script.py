@@ -6,7 +6,10 @@ from . import config
 
 
 def main():
-    orchestrator = Orchestrator(reader='PythonLab', worker_type=config.worker)
+    if config.worker:
+        orchestrator = Orchestrator(reader='PythonLab', worker_type=config.worker)
+    else:
+        orchestrator = Orchestrator(reader='PythonLab')
     orchestrator.schedule_manager.time_limit_short = config.default_scheduling_time
 
     # create and run dash app until eternity
