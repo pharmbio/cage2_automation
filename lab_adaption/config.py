@@ -8,9 +8,9 @@ from pathlib import Path
 
 # Change db_client to None to not use any database or
 # change it to your own implementation of laborchestrator.database_integration.status_db_interface.StatusDBInterface
-#from platform_status_db.larastatus.status_db_implementation import StatusDBImplementation
-#db_client = StatusDBImplementation()
-db_client = None
+from platform_status_db.larastatus.status_db_implementation import StatusDBImplementation
+db_client = StatusDBImplementation()
+#db_client = None
 
 #worker = None  # uncomment to use the default worker (i.e., just simulation)
 worker = Worker  # uncomment to use your customized worker
