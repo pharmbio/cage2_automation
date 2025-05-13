@@ -9,7 +9,7 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 - Template for custom robotic lab setup and interface for customizable funtionalities
 
 ## Installation
-0. Use your favourite tool to create and activate a new python environment with python 3.10 or higher
+0. Use your favourite tool to create and activate a new python environment with python 3.11 or higher
 1. Download this package:
 ```bash
     git clone https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
@@ -32,7 +32,7 @@ Installation: Run
     git clone https://gitlab.com/StefanMa/platform_status_db.git
     pip install -e platform_status_db/. 
 ```
-Setup: Run and follow the instructions to create an admin login to django
+Setup: Run and follow the instructions to create an admin login to django. On windows you will have execute the steps manually.
 
 ```bash
     bash scripts/init_db.sh
@@ -51,9 +51,9 @@ Call from different console tabs
 ```bash
     labscheduler --insecure -p 50066
 ```
-- to start the django database view (optional):
+- to start the django database view (optional). If you changed directory, adapt the path:
 ```bash
-    python path/to/latform_status_db/platform_status_db/manage.py runserver
+    python platform_status_db/platform_status_db/manage.py runserver
 ```
 - to start the orchestrator:
 ```bash
