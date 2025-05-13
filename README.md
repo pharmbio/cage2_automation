@@ -9,20 +9,41 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 - Template for custom robotic lab setup and interface for customizable funtionalities
 
 ## Installation
+0. Use your favourite tool to create and activate a new python environment with python 3.10 or higher
 1. Download this package:
 ```bash
     git clone https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
+    cd lab-automation
+    git checkout feature/redo
 ```
 2. Install all necessary packages:
-   - without example servers: 
+   - without example sila servers: 
 ```bash
-    pip install -r requirements.txt -e lab-automation/.
+    pip install -r requirements.txt -e .
 ```
-   - with example servers: 
+   - to also install the example sila servers (necessary for the demo examples to run): 
 ```bash
-    pip install -r requirements.txt -r requirements_servers.txt -e lab-automation/.
+    pip install -r requirements_servers.txt 
 ```
 3. Install and set up the database
+
+Installation: Run
+```bash
+    git clone https://gitlab.com/StefanMa/platform_status_db.git
+    pip install -e platform_status_db/. 
+```
+Setup: Run and follow the instructions to create an admin login to django
+
+```bash
+    bash scripts/init_db.sh
+```
+
+Fill the database: Run
+```bash
+    python scripts/add_lab_setup_to_db.py
+```
+This adds the lab setup as described in platform_config.yml to the database.
+Rerun this script after you customized the config file. 
 
 ## Startup
 Call from different console tabs
