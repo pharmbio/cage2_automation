@@ -26,7 +26,7 @@ class HumanTest(BasicProcess):
         self.human.ask_for_ok(cont)
         # ask the human to assign some integer to the container.
         # This number can further be used for runtime decision making
-        number = self.human.request_number(cont, message="Enter some demo number.")
+        number = self.human.request_number(cont, message="Enter some demo number.")  # noqa: F841
         # tells the human to do a custom task
         self.human.do_task(cont, message="Put it in the freezer for 10 minutes")
 

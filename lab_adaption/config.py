@@ -27,5 +27,5 @@ default_scheduling_time = 1  # seconds
 scheduling_algorithm: str | None = "BottleneckPD"
 
 # change this to the module where you save your pythonLab processes
-from . import processes
+from . import processes  # noqa: E402
 process_module = processes

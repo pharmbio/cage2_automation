@@ -3,7 +3,7 @@ Duplicate this file and add/modify the missing parts to create new processes
 """
 
 
-from pythonlab.resource import DynamicLabwareResource as ReagentResource
+from pythonlab.resource import DynamicLabwareResource as ReagentResource  # noqa: F401
 from lab_adaption.processes.basic_process import BasicProcess
 
 

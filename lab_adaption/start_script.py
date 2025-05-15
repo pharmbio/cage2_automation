@@ -38,7 +38,7 @@ def main():
     except ModuleNotFoundError as mnfe:
         Logger.warning(f"Scheduler seems to be not installed:\n{mnfe}")
     except TimeoutError:
-        Logger.warning(f"Could not find a running scheduler server. You will have to configure the lab manually.")
+        Logger.warning("Could not find a running scheduler server. You will have to configure the lab manually.")
 
     while True:
         time.sleep(1)
