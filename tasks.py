@@ -10,7 +10,6 @@ import shutil
 import webbrowser
 from pathlib import Path
 from distutils.util import strtobool
-import venv 
 
 import pytest
 from invoke import task, exceptions  # type: ignore
