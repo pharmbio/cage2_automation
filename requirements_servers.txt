@@ -1,0 +1,7 @@
+--index-url https://gitlab.com/api/v4/projects/59230771/packages/pypi/simple
+--extra-index-url https://gitlab.com/api/v4/projects/40752852/packages/pypi/simple
+
+git+https://gitlab.com/SiLA2/sila_python.git@master#subdirectory=example_server
+
+human_server
+genericroboticarm

@@ -1,6 +1,83 @@
-# Lab Automation
+# New Guide
 
+## Target Audience
+People who have a robotic arm with several devices they can access via SiLA (or at least python) and look for a
+framework do describe, orchestrate and schedule workflows on these devices. Some programming skills are necessary.
 
+## Content
+- Install scripts to install necessary software packages (database, scheduler, pythonLab, orchestrator)
+- Template for custom robotic lab setup and interface for customizable funtionalities
+
+## Installation
+0. Use your favourite tool to create and activate a new python environment with python 3.11 or higher
+1. Download this package:
+```bash
+    git clone https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
+    cd lab-automation
+    git checkout feature/redo
+```
+2. Install all necessary packages:
+   - without example sila servers: 
+```bash
+    pip install -r requirements.txt -e .
+```
+   - to also install the example sila servers (necessary for the demo examples to run): 
+```bash
+    pip install -r requirements_servers.txt 
+```
+3. Install and set up the database
+
+Installation: Run
+```bash
+    git clone https://gitlab.com/StefanMa/platform_status_db.git
+    pip install -e platform_status_db/. 
+```
+Setup: Run and follow the instructions to create an admin login to django. On windows you will have execute the steps manually.
+
+```bash
+    bash scripts/init_db.sh
+```
+
+Fill the database: Run
+```bash
+    python scripts/add_lab_setup_to_db.py
+```
+This adds the lab setup as described in platform_config.yml to the database.
+Rerun this script after you customized the config file. 
+
+## Startup
+Call from different console tabs
+- to start the scheduler:
+```bash
+    labscheduler --insecure -p 50066
+```
+- to start the django database view (optional). If you changed directory, adapt the path:
+```bash
+    python platform_status_db/platform_status_db/manage.py runserver
+```
+- to start the orchestrator:
+```bash
+    laborchestrator
+```
+- to start demo servers:
+```bash
+    start_sila_servers
+```
+
+## Usage
+You can access the GUI for different components:
+- database of present labware at [http://127.0.0.1:8000/job_logs/present_labware/](http://127.0.0.1:8000/job_logs/present_labware/)
+- orchestrator at [http://127.0.0.1:8050/](http://127.0.0.1:8050/)
+- the human interaction sila server: [http://127.0.0.1:8054/](http://127.0.0.1:8054/)
+- view and manual control of the robotic arm: [http://127.0.0.1:8055/](http://127.0.0.1:8055/)
+
+To see how the example servers are controlled from the orchestrator to the the orchestrator GUI and load and start the
+example processes
+- GreeterTest
+- MoverTest
+- HumanTest (you will have to finish the tasks in the human interaction GUI)
+
+# Lab Automation (Old Guide)
 
 ## LabOrchestrator environment guide
 
