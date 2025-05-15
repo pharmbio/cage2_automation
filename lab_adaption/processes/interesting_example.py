@@ -2,24 +2,18 @@
 Duplicate this file and add/modify the missing parts to create new processes
 """
 
-
 from lab_adaption.processes.basic_process import BasicProcess
 
 
 class InterestingExample(BasicProcess):
     def __init__(self):
-        super().__init__(
-            priority=3,
-            num_plates=3,
-            process_name="InterestingExample"
-        )
+        super().__init__(priority=3, num_plates=3, process_name="InterestingExample")
 
     def init_service_resources(self):
         # setting start position of containers
         super().init_service_resources()
         for i, cont in enumerate(self.containers):
-            cont.set_start_position(
-                self.hotel1, i)
+            cont.set_start_position(self.hotel1, i)
 
     def judge_answer(self, answer) -> bool:
         # extract the number from the response
@@ -35,7 +29,9 @@ class InterestingExample(BasicProcess):
             # move all containers to the human for inspection (it can hold up to two)
             self.robot_arm.move(cont, self.human)
             # have the human assign a number to each container
-            answer = self.human.request_number(cont, message=f"assign number to {cont.name}!")
+            answer = self.human.request_number(
+                cont, message=f"assign number to {cont.name}!"
+            )
             # do some computation on the result
             judgement = self.judge_answer(answer)
             # depending on the result, put the labware in hotel1 or hotel 3
@@ -43,6 +39,3 @@ class InterestingExample(BasicProcess):
                 self.robot_arm.move(cont, self.hotel3)
             else:
                 self.robot_arm.move(cont, self.hotel1)
-
-
-

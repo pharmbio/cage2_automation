@@ -5,10 +5,13 @@ from laborchestrator.engine.worker_interface import Observable
 from sila2.client import SilaClient
 import time
 
+
 class DeviceInterface(ABC):
     @staticmethod
     @abstractmethod
-    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: SilaClient, **kwargs) -> Observable:
+    def get_SiLA_handler(
+        step: ProcessStep, cont: ContainerInfo, sila_client: SilaClient, **kwargs
+    ) -> Observable:
         """
         Provides an Observable(, i.e., ClientObservableCommandInstance or ObservableProtocolHandler which emulates
         a ClientObservableCommandInstance),
@@ -28,4 +31,4 @@ def finish_observable_command(cmd: Observable):
     :return:
     """
     while not cmd.done:
-        time.sleep(.1)
+        time.sleep(0.1)

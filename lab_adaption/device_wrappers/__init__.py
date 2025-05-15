@@ -11,4 +11,3 @@ __all__ = [
     "GenericRobotArmWrapper",
     "finish_observable_command",
 ]
-

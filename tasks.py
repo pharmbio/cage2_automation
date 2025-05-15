@@ -3,6 +3,7 @@ Tasks for maintaining the project.
 
 Execute 'invoke --list' for guidance on using Invoke
 """
+
 import os
 import sys
 import platform
@@ -14,7 +15,7 @@ from distutils.util import strtobool
 import pytest
 from invoke import task, exceptions  # type: ignore
 
-OS_PLATFORM = platform.system() 
+OS_PLATFORM = platform.system()
 HOME_DIR = str(Path.home())
 ROOT_DIR = Path(__file__).parent
 BIN_DIR = ROOT_DIR.joinpath("bin")
@@ -35,11 +36,12 @@ SAFETY_REQUIREMENTS_FILE = BIN_DIR.joinpath("safety_requirements.txt")
 PYPI_URL = "https://pypi.python.org/api/pypi/pypi/simple"
 PYTHON_VERSION = 3.9
 CI_PROJECT_NAME = "lab-automation"
-CI_REGISTRY_IMAGE = "registry.gitlab.com/https://gitlab.com/opensourcelab/openlab-site/lab-automation"
+CI_REGISTRY_IMAGE = (
+    "registry.gitlab.com/https://gitlab.com/opensourcelab/openlab-site/lab-automation"
+)
 DOCKERFILE = "Dockerfile"
 DOCKER_BUILD_PLATFORM = "--platform linux/amd64"
 VENV_MODULE_NAME = "venv"
-
 
 
 def _delete_file(file):
@@ -65,7 +67,7 @@ def _run(_c, command):
     :param _c: The context object that is passed to invoke tasks
     :param command: The command to run
     """
-    return _c.run(command, pty=platform.system() != 'Windows')
+    return _c.run(command, pty=platform.system() != "Windows")
 
 
 def _get_registry_path_str(python_version):
@@ -82,7 +84,7 @@ def _get_registry_path_str(python_version):
     return registry_path
 
 
-@task(help={'check': "Checks if source is formatted without applying changes"})
+@task(help={"check": "Checks if source is formatted without applying changes"})
 def format(_c, check=False):
     """
     It runs the `black` and `isort` tools on the Python code in the `PYTHON_DIRS` directories
@@ -134,7 +136,10 @@ def security_safety(_c):
     :param _c: The context object that is passed to the task
     """
     Path(BIN_DIR).mkdir(parents=True, exist_ok=True)
-    _run(_c, f"poetry export --dev --format=requirements.txt --without-hashes --output={SAFETY_REQUIREMENTS_FILE}")
+    _run(
+        _c,
+        f"poetry export --dev --format=requirements.txt --without-hashes --output={SAFETY_REQUIREMENTS_FILE}",
+    )
     _run(_c, f"safety check --file={SAFETY_REQUIREMENTS_FILE} --full-report")
 
 
@@ -276,7 +281,9 @@ def docker_build(_c, python_version=PYTHON_VERSION, target="test"):
     :param python_version: The base python version to use
     :param target: The target to build ("test", "regression"), defaults to "test" (optional)
     """
-    build_args = f"--build-arg PYTHON_BASE={python_version} --build-arg PYPI_URL={PYPI_URL}"
+    build_args = (
+        f"--build-arg PYTHON_BASE={python_version} --build-arg PYPI_URL={PYPI_URL}"
+    )
     registry_path = _get_registry_path_str(python_version)
     cache = f"--cache-from {registry_path}"
     target_tag = f"--target {target}"
@@ -319,13 +326,16 @@ def docker_test(_c, python_version=PYTHON_VERSION):
     :param python_version: The base python version to use
     :param target: The target to test ("test", "regression"), defaults to "test" (optional)
     """
-    volume_mount = (
-        f"--volume {BIN_DIR}:/lab_automation/bin/ --volume {ROOT_DIR}:/lab_automation:rw"
-    )
+    volume_mount = f"--volume {BIN_DIR}:/lab_automation/bin/ --volume {ROOT_DIR}:/lab_automation:rw"
     registry_path = _get_registry_path_str(python_version)
-    pytest_arg = f"pytest -v --cov-report xml:/lab_automation/bin/coverage.xml {TEST_DIR}"
+    pytest_arg = (
+        f"pytest -v --cov-report xml:/lab_automation/bin/coverage.xml {TEST_DIR}"
+    )
     Path(BIN_DIR).mkdir(parents=True, exist_ok=True)
-    _run(_c, f"docker run {DOCKER_BUILD_PLATFORM} {volume_mount} {registry_path} {pytest_arg}")
+    _run(
+        _c,
+        f"docker run {DOCKER_BUILD_PLATFORM} {volume_mount} {registry_path} {pytest_arg}",
+    )
 
 
 @task
@@ -336,12 +346,13 @@ def docker_shell(_c, python_version=PYTHON_VERSION):
     :param _c: The context object that is passed to invoke tasks
     :param python_version: The base python version to use
     """
-    volume_mount = (
-        f"--volume {BIN_DIR}:/lab_automation/bin/ --volume {ROOT_DIR}:/lab_automation:rw"
-    )
+    volume_mount = f"--volume {BIN_DIR}:/lab_automation/bin/ --volume {ROOT_DIR}:/lab_automation:rw"
     registry_path = _get_registry_path_str(python_version)
     bash_path = "/bin/bash"
-    _run(_c, f"docker run -it {DOCKER_BUILD_PLATFORM} {volume_mount} {registry_path} {bash_path}")
+    _run(
+        _c,
+        f"docker run -it {DOCKER_BUILD_PLATFORM} {volume_mount} {registry_path} {bash_path}",
+    )
 
 
 @task
@@ -355,6 +366,7 @@ def init_repo(_c):
     # otherwise run git init
     _run(_c, "git-lfs install")
     _run(_c, "git flow init")
+
 
 @task(pre=[clean])
 def release_twine(
@@ -389,8 +401,14 @@ def release_twine(
     )
     _run(_c, f'printf "{pypirc_str}" > ~/.pypirc')
     _run(_c, f"pip install -i {pip_repository_index} twine")
-    _run(_c, 'mkdir -p dist && rm -rf dist/* || echo "Nothing found in dist/"; python setup.py sdist;')
-    _run(_c, f'twine upload --repository-url {pypi_publish_repository} -u "{pypi_user}" -p "{pypi_pass}" dist/*')
+    _run(
+        _c,
+        'mkdir -p dist && rm -rf dist/* || echo "Nothing found in dist/"; python setup.py sdist;',
+    )
+    _run(
+        _c,
+        f'twine upload --repository-url {pypi_publish_repository} -u "{pypi_user}" -p "{pypi_pass}" dist/*',
+    )
 
 
 @task
@@ -400,9 +418,18 @@ def generate_reqs(_c):
 
     :param _c: The context object that is passed to invoke tasks
     """
-    _run(_c, f"poetry export --without dev --without-hashes -f requirements.txt -o {ROOT_DIR}/requirements.txt")
-    _run(_c, f"poetry export --only dev --without-hashes -f requirements.txt -o {ROOT_DIR}/requirements_dev.txt")
+    _run(
+        _c,
+        f"poetry export --without dev --without-hashes -f requirements.txt -o {ROOT_DIR}/requirements.txt",
+    )
+    _run(
+        _c,
+        f"poetry export --only dev --without-hashes -f requirements.txt -o {ROOT_DIR}/requirements_dev.txt",
+    )
+
+
 # --------------- installation helper functions, please do not modify -----------------------------
+
 
 def query_yes_no(question, default_answer="yes", help=""):
     """Ask user at stdin a yes or no question
@@ -431,8 +458,7 @@ def query_yes_no(question, default_answer="yes", help=""):
             else:
                 return strtobool(default_answer)
         except ValueError:
-            sys.stderr.write("Please respond with 'yes' or 'no' "
-                             "(or 'y' or 'n').\n")
+            sys.stderr.write("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
         except KeyboardInterrupt:
             sys.stderr.write("Query interrupted by user, exiting now ...")
             exit(0)
@@ -446,7 +472,9 @@ def query(question, default_answer="", help=""):
     :param help:  help text string
     :return: stripped answer string
     """
-    prompt_txt = "{question} [{default_answer}] ".format(question=question, default_answer=default_answer)
+    prompt_txt = "{question} [{default_answer}] ".format(
+        question=question, default_answer=default_answer
+    )
 
     while True:
         answer = input(prompt_txt).strip()
