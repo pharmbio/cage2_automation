@@ -1,16 +1,19 @@
-"""
+""" """
 
-"""
 import logging
 from typing import Optional, NamedTuple, Dict, Any, Tuple
 from random import randint
 
 from laborchestrator.database_integration import StatusDBInterface
 from laborchestrator.engine import ScheduleManager
-from laborchestrator.engine.worker_interface import WorkerInterface, Observable, DummyHandler
+from laborchestrator.engine.worker_interface import (
+    WorkerInterface,
+    Observable,
+    DummyHandler,
+)
 from laborchestrator.structures import SMProcess, MoveStep, SchedulingInstance
 from sila2.client import SilaClient
-from .device_wrappers import(
+from .device_wrappers import (
     DeviceInterface,
     HumanWrapper,
     GreetingWrapper,
@@ -45,11 +48,18 @@ class Worker(WorkerInterface):
     # save the clients for repeated use
     clients: dict[str, SilaClient]
 
-    def __init__(self, jssp: SchedulingInstance, schedule_manager: ScheduleManager, db_client: StatusDBInterface):
+    def __init__(
+        self,
+        jssp: SchedulingInstance,
+        schedule_manager: ScheduleManager,
+        db_client: StatusDBInterface,
+    ):
         super().__init__(jssp, schedule_manager, db_client)
         self.clients = {}
 
-    def execute_process_step(self, step_id: str, device: str, device_kwargs: Dict[str, Any]) -> Observable:
+    def execute_process_step(
+        self, step_id: str, device: str, device_kwargs: Dict[str, Any]
+    ) -> Observable:
         print(f"Execute {step_id} on device {device}")
         # get all information about the process step
         step = self.jssp.step_by_id[step_id]
@@ -59,7 +69,9 @@ class Worker(WorkerInterface):
             if client:
                 wrapper = device_wrappers[device]
                 # starts the command on the device and returns an Observable
-                observable = wrapper.get_SiLA_handler(step, cont, client, **device_kwargs)
+                observable = wrapper.get_SiLA_handler(
+                    step, cont, client, **device_kwargs
+                )
                 return observable
         # for all simulated devices, this simply wraps a sleep command into an Observable
         # TODO you can change the time to for example step.duration/2
@@ -78,13 +90,17 @@ class Worker(WorkerInterface):
                     name = client.SiLAService.ServerName.get()
                     assert name == server_name
                 except AssertionError:
-                    logging.error(f"The server on {client.address}:{client.port} has changed its name")
+                    logging.error(
+                        f"The server on {client.address}:{client.port} has changed its name"
+                    )
                 except ConnectionError:
                     # the server seems to be offline
                     self.clients.pop(device_name)
             # try to discover the matching server by its server name
             try:
-                client = SilaClient.discover(server_name=server_name, insecure=True, timeout=timeout)
+                client = SilaClient.discover(
+                    server_name=server_name, insecure=True, timeout=timeout
+                )
                 self.clients[device_name] = client
                 return client
             except TimeoutError as error:
@@ -99,7 +115,7 @@ class Worker(WorkerInterface):
         # custom kwargs given to steps (see mover_test for example) are also available in step.data
         if "read_barcode" in step.data:
             # TODO: Insert you own way to retrieve a barcode from a barcode reader
-            container.barcode = f"Nice_Barcode{randint(1,9999)}"
+            container.barcode = f"Nice_Barcode{randint(1, 9999)}"
             # saves the barcode to the database.
             self.db_client.set_barcode(container)
         super().process_step_finished(step_id, result)

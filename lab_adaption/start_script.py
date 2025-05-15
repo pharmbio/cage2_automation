@@ -7,9 +7,9 @@ from . import config
 
 def main():
     if config.worker:
-        orchestrator = Orchestrator(reader='PythonLab', worker_type=config.worker)
+        orchestrator = Orchestrator(reader="PythonLab", worker_type=config.worker)
     else:
-        orchestrator = Orchestrator(reader='PythonLab')
+        orchestrator = Orchestrator(reader="PythonLab")
     orchestrator.schedule_manager.time_limit_short = config.default_scheduling_time
 
     # create and run dash app until eternity
@@ -24,21 +24,28 @@ def main():
     # try to find a running scheduler server and set its lab configuration:
     try:
         from pythonlabscheduler.sila_server import Client as SchedulerClient
+
         scheduler = SchedulerClient.discover(insecure=True, timeout=5)
         if config.scheduling_algorithm:
             available_algorithms = scheduler.SchedulingService.AvailableAlgorithms.get()
-            if config.scheduling_algorithm in [algo.Name for algo in available_algorithms]:
+            if config.scheduling_algorithm in [
+                algo.Name for algo in available_algorithms
+            ]:
                 scheduler.SchedulingService.SelectAlgorithm(config.scheduling_algorithm)
             else:
-                Logger.warning(f"Algorithm {config.scheduling_algorithm} is not available in scheduler.")
+                Logger.warning(
+                    f"Algorithm {config.scheduling_algorithm} is not available in scheduler."
+                )
         # get the absolute filepath
-        with open(config.lab_config_file, 'r') as reader:
+        with open(config.lab_config_file, "r") as reader:
             scheduler.LabConfigurationController.LoadJobShopFromFile(reader.read())
         Logger.info("Configured the lab of the scheduling service")
     except ModuleNotFoundError as mnfe:
         Logger.warning(f"Scheduler seems to be not installed:\n{mnfe}")
     except TimeoutError:
-        Logger.warning("Could not find a running scheduler server. You will have to configure the lab manually.")
+        Logger.warning(
+            "Could not find a running scheduler server. You will have to configure the lab manually."
+        )
 
     while True:
         time.sleep(1)
