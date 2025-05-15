@@ -1,6 +1,10 @@
 # Lab Automation Framework Template and Demo
 This package serves as an installable template to adapt the automation framework consisting of
-[LabScheduler](), [Laborchestrator](), [PythonLab](), [PlatformStatusBD]() and some SiLA-Servers to a new robotic lab.
+[LabScheduler](https://gitlab.com/opensourcelab/pythonlabscheduler),
+[Laborchestrator](https://gitlab.com/opensourcelab/laborchestrator),
+[PythonLab](https://gitlab.com/opensourcelab/pythonLab),
+[PlatformStatusBD](https://gitlab.com/StefanMa/platform_status_db)
+and some SiLA-Servers to a new robotic lab.
 It also contains out of the box running demo examples.
 
 ## Target Audience
@@ -20,24 +24,24 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
     git checkout feature/redo
 ```
 2. Install all necessary packages:
-   - to install all mandatory dependencies run: 
+   - to install all mandatory dependencies run:
 ```bash
     pip install -r requirements.txt -e .
 ```
-   - to also install the example sila servers (necessary for the demo examples to run) add: 
+   - to also install the example sila servers (necessary for the demo examples to run) add:
 ```bash
-    pip install -r requirements_servers.txt 
+    pip install -r requirements_servers.txt
 ```
-   - to also install requirements for stronger scheduling algorithms add: 
+   - to also install requirements for stronger scheduling algorithms add:
 ```bash
-    pip install -r requirements_mip_cp.txt 
+    pip install -r requirements_mip_cp.txt
 ```
 3. Install and set up the database
 
 Installation: Run
 ```bash
     git clone https://gitlab.com/StefanMa/platform_status_db.git
-    pip install -e platform_status_db/. 
+    pip install -e platform_status_db/.
 ```
 Setup: Run and follow the instructions to create an admin login to django. On windows you will have execute the steps manually.
 
@@ -50,7 +54,7 @@ Fill the database: Run
     python scripts/add_lab_setup_to_db.py
 ```
 This adds the lab setup as described in platform_config.yml to the database.
-Rerun this script after you customized the config file. 
+Rerun this script after you customized the config file.
 
 ## Startup
 Call from different console tabs
