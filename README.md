@@ -3,7 +3,7 @@ This package serves as an installable template to adapt the automation framework
 [LabScheduler](https://gitlab.com/opensourcelab/pythonlabscheduler),
 [Laborchestrator](https://gitlab.com/opensourcelab/laborchestrator),
 [PythonLab](https://gitlab.com/opensourcelab/pythonLab),
-[PlatformStatusBD](https://gitlab.com/StefanMa/platform_status_db)
+[PlatformStatusDataBase](https://gitlab.com/StefanMa/platform_status_db)
 and some SiLA-Servers to a new robotic lab.
 It also contains out of the box running demo examples.
 
