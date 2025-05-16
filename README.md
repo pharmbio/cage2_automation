@@ -16,12 +16,16 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 - Template for custom robotic lab setup and interface for customizable funtionalities
 
 ## Installation
-0. Use your favourite tool to create and activate a new python environment with python 3.11 or higher
+0. Use your favourite tool to create and activate a new python environment with python 3.11 or higher. For example with pyvenv on linux:
+```bash
+   python -m venv labautomation
+   source labautomation/bin/activate
+```
 1. Download this package:
 ```bash
     git clone https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
     cd lab-automation
-    git checkout feature/redo
+    git checkout release/0.1.0
 ```
 2. Install all necessary packages:
    - to install all mandatory dependencies run:
@@ -89,6 +93,7 @@ example processes
 - HumanTest: you will have to finish the tasks in the human interaction GUI
 - InterestingExample: A more complex workflow with runtime decisions based on human interaction
 
+To
 ## Support
 For support, feel free to contact stefanmaak@freenet.de
 
