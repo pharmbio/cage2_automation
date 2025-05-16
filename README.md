@@ -16,18 +16,18 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 - Template for custom robotic lab setup and interface for customizable funtionalities
 
 ## Installation
-0. Use your favourite tool to create and activate a new python environment with python 3.11 or higher. For example with pyvenv on linux:
-```bash
-   python -m venv labautomation
-   source labautomation/bin/activate
-```
 1. Download this package:
 ```bash
     git clone https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
     cd lab-automation
     git checkout release/0.1.0
 ```
-2. Install all necessary packages:
+2. Use your favourite tool to create and activate a new python environment with python 3.11 or higher. For example with pyvenv on linux:
+```bash
+   python -m venv labautomation
+   source labautomation/bin/activate
+```
+3. Install all necessary packages:
    - to install all mandatory dependencies run:
 ```bash
     pip install -r requirements.txt -e .
@@ -40,7 +40,7 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 ```bash
     pip install -r requirements_mip_cp.txt
 ```
-3. Install and set up the database
+4. Install and set up the database
 
 Installation: Run
 ```bash
