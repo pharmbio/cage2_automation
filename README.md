@@ -86,12 +86,14 @@ You can access the GUI for different components:
 - the human interaction sila server: [http://127.0.0.1:8054/](http://127.0.0.1:8054/)
 - view and manual control of the robotic arm: [http://127.0.0.1:8055/](http://127.0.0.1:8055/)
 
-To see how the example servers are controlled from the orchestrator, go to the the orchestrator GUI and load and start the
-example processes
+To see how the example servers are controlled from the orchestrator, go to the the orchestrator GUI and load and start one of the
+example processes. For a detailed explanation on the GUI usage see our [Demo Guide](docs/quickstart.md)
 - GreeterTest: Sends a Hello-World to the sila2-example-server
 - MoverTest: You can view the robots movements in the roboter GUI
 - HumanTest: you will have to finish the tasks in the human interaction GUI
 - InterestingExample: A more complex workflow with runtime decisions based on human interaction
+
+
 
 ## Support
 For support, feel free to contact stefanmaak@freenet.de
