@@ -1,0 +1,104 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lab_adaption"
+version = "0.1.0"
+readme = "README.md"
+authors = [
+    { name = "Mark Doerr", email = "mark.doerr@uni-greifswald.de" },
+    { name = "Stefan Maak", email = "stefan.maak@uni-greifswald.de" },
+    { name = "Walter Baccinelli", email = "w.baccinelli@esciencecenter.nl" },
+    { name = "Dani Bodor", email = "d.bodor@esciencecenter.nl" },
+]
+description = """TODO"""
+license = { text = "MIT" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+dependencies = ["pyyaml>=6.0.1",
+                "networkx>=3.1",
+                "pytz>=2023.3",
+                "grpcio==1.71.0",
+                "grpcio-tools==1.71.0",
+                "protobuf==5.29.4",
+                "sila2>=0.12"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>6.0",
+    "pytest-xdist>=3.6",
+    "coverage>=7.7",
+    "anyio>=4.4",
+    "pytest-asyncio>=0.24",
+    "tox>=4.5",
+    "safety>=1.0",
+    "bandit>=1.0",
+    "ruff==0.9.*",
+    "mypy",
+    "invoke>=2.1",
+    "bump-my-version>=0.28",
+    "pre_commit>=4.0",
+    "typer",
+    "pandas",
+]
+docs = ["sphinx>=7.0", "python-docs-theme>=2023.3", "myst-parser>=1.0"]
+[project.urls]
+"Homepage" = "https://gitlab.com/opensourcelab/openlab-site/lab-automation/"
+
+[project.scripts]
+laborchestrator = "lab_adaption.start_script:main"
+start_sila_servers = "lab_adaption.start_servers:start_servers"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = ["-v"]
+filterwarnings = ["ignore:.*pkg_resources.*:DeprecationWarning"]
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "if __name__ == .__main__.:",
+    "@abstractmethod",
+    "@abc.abstractmethod",
+    "def __repr__(self):",
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING",
+]
+skip_empty = true
+omit = ["setup.py", "*_pb2.py"]
+precision = 2
+
+[tool.setuptools]
+packages = ["lab_adaption"]
+
+[tool.setuptools.package-data]
+lab_adaption = [
+    "LICENSE",
+    "README.md",
+    "CITATION.cff",
+    "*.txt",
+]
+
+[tool.setuptools.exclude-package-data]
+lab_adaption = ["*experiment.py", "*process_*.py", "*old*.py"]
