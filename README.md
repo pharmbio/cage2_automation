@@ -20,7 +20,6 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 ```bash
     git clone https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
     cd lab-automation
-    git checkout release/0.1.0
 ```
 2. Use your favourite tool to create and activate a new python environment with python 3.11 or higher. For example with pyvenv on linux:
 ```bash
