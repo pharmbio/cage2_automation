@@ -16,7 +16,7 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 - Template for custom robotic lab setup and interface for customizable funtionalities
 
 ## Installation
-1. Download this package:
+1. Download this package (alternatively fork the repository):
 ```bash
     git clone https://gitlab.com/OpenLabAutomation/adaption-template.git
     cd lab-automation
