@@ -1,7 +1,7 @@
---index-url https://gitlab.com/api/v4/projects/17484832/packages/pypi/simple
---extra-index-url https://gitlab.com/api/v4/projects/25166382/packages/pypi/simple
---extra-index-url https://gitlab.com/api/v4/projects/39006834/packages/pypi/simple
+--index-url https://gitlab.com/api/v4/projects/46687364/packages/pypi/simple
+--extra-index-url https://gitlab.com/api/v4/projects/40555321/packages/pypi/simple
+--extra-index-url https://gitlab.com/api/v4/projects/40553506/packages/pypi/simple
 
-pythonlab==0.2.0
-pythonlabscheduler==0.2.9
-laborchestrator>=0.2.2
+pythonlab==0.2.1
+pythonlabscheduler==0.2.47
+laborchestrator>=0.2.3

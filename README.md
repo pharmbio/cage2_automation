@@ -1,9 +1,9 @@
 # Lab Automation Framework Template and Demo
 This package serves as an installable template to adapt the automation framework consisting of
-[LabScheduler](https://gitlab.com/opensourcelab/pythonlabscheduler),
-[Laborchestrator](https://gitlab.com/opensourcelab/laborchestrator),
-[PythonLab](https://gitlab.com/opensourcelab/pythonLab),
-[PlatformStatusDataBase](https://gitlab.com/StefanMa/platform_status_db)
+[LabScheduler](https://gitlab.com/OpenLabAutomation/lab-automation-packages/lab-scheduler),
+[Laborchestrator](https://gitlab.com/OpenLabAutomation/lab-automation-packages/laborchestrator),
+[PythonLab](https://gitlab.com/OpenLabAutomation/lab-automation-packages/pythonLab),
+[PlatformStatusDataBase](https://gitlab.com/OpenLabAutomation/lab-automation-packages/platform_status_db)
 and some SiLA-Servers to a new robotic lab.
 It also contains out of the box running demo examples.
 
@@ -18,9 +18,8 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 ## Installation
 1. Download this package:
 ```bash
-    git clone https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
+    git clone https://gitlab.com/OpenLabAutomation/adaption-template.git
     cd lab-automation
-    git checkout release/0.1.0
 ```
 2. Use your favourite tool to create and activate a new python environment with python 3.11 or higher. For example with pyvenv on linux:
 ```bash
@@ -44,7 +43,7 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 
 Installation: Run
 ```bash
-    git clone https://gitlab.com/StefanMa/platform_status_db.git
+    git clone https://gitlab.com/OpenLabAutomation/lab-automation-packages/platform_status_db.git
     pip install -e platform_status_db/.
 ```
 Setup: Run and follow the instructions to create an admin login to django. On windows you will have execute the steps manually.
@@ -64,7 +63,7 @@ Rerun this script after you customized the config file.
 Call from different console tabs
 - to start the scheduler:
 ```bash
-    labscheduler --insecure -p 50066
+    labscheduler
 ```
 - to start the django database view (optional). If you changed directory, adapt the path:
 ```bash
