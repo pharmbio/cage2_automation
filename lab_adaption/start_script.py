@@ -23,7 +23,7 @@ def main():
     # configure scheduler
     # try to find a running scheduler server and set its lab configuration:
     try:
-        from pythonlabscheduler.sila_server import Client as SchedulerClient
+        from labscheduler.sila_server import Client as SchedulerClient
 
         scheduler = SchedulerClient.discover(insecure=True, timeout=5)
         if config.scheduling_algorithm:
