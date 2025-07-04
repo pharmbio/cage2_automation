@@ -4,4 +4,4 @@
 
 pythonlab==0.2.1
 labscheduler==0.2.47
-laborchestrator>=0.2.4
+laborchestrator>=0.2.5
