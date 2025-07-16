@@ -1,29 +1,53 @@
 description:
-    - "An exemplary robotic lab description. Add devices at will"
+    - "Cage 2 in Uppsala lab"
 sila_servers:
     storage:
         Hotel1:
-            capacity: 20
+            capacity: 4
         Hotel2:
-            capacity: 20
-        Hotel3:
-            capacity: 20
+            capacity: 8
     movers:
-        GenericArm:
+        PFonRail:
             capacity: 1
     humans:
         Human:
             process_capacity: 99 # can do multitasking?
             capacity: 2  # has two hands
-    greeters:
-        Greeter:
+    washers:
+        BlueWasher:
             capacity: 1
+    dispensers:
+        Multiflow:
+            capacity: 1
+    incubators:
+        Cytomat1:
+            capacity: 42
+        Cytomat4:
+            capacity: 42
+    fridges:
+        Fridge:
+            capacity: 42
+    microscopes:
+        Squid1:
+            capacity: 1
+    acoustic_dispensers:
+        Echo:
+            capacity: 2
             process_capacity: 1
-
+            allows_overlap: False
+    sealers:
+        Sealer:
+            capacity: 1
 # ------ Translation to used resources in the process description ------
 # the key must match the categories above and the values must match the required resources in the workflow description
 pythonlab_translation:
     storage: LabwareStorageResource
     movers: MoverServiceResource
+    incubators: IncubatorServiceResource
+    fridges: LabwareStorageResource
     humans: HumanServiceResource
-    greeters: GreeterServiceResource
+    microscopes: MicroscopeServiceResource
+    washers: WasherDispenserServiceResource
+    dispensers: WasherDispenserServiceResource
+    acoustic_dispensers: AcousticDispensingServiceResource
+    sealers: PlateSealerServiceResource
