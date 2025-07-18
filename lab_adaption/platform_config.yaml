@@ -22,7 +22,7 @@ sila_servers:
     incubators:
         Cytomat1:
             capacity: 42
-        Cytomat4:
+        Cytomat2:
             capacity: 42
     fridges:
         Fridge:

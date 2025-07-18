@@ -2,11 +2,14 @@ from abc import ABC
 
 from pythonlab.resources.services.moving import MoverServiceResource
 from pythonlab.resources.services.human import HumanServiceResource
-from pythonlab.resources.services.hello_world import GreeterServiceResource
 from pythonlab.resources.services.labware_storage import LabwareStorageResource
+from pythonlab.resources.services.washer_dispenser import WasherDispenserServiceResource
+from pythonlab.resources.services.incubation import IncubatorServiceResource
+from pythonlab.resources.services.microscope import MicroscopeServiceResource
+from pythonlab.resources.services.sealer import PlateSealerServiceResource
+
 from pythonlab.resource import LabwareResource
 
-# TODO: add whatever resources you need
 from pythonlab.process import PLProcess
 
 
@@ -23,11 +26,15 @@ class BasicProcess(PLProcess, ABC):
         # the device names should match the ones in the platform_config
         self.hotel1 = LabwareStorageResource(proc=self, name="Hotel1")
         self.hotel2 = LabwareStorageResource(proc=self, name="Hotel2")
-        self.hotel3 = LabwareStorageResource(proc=self, name="Hotel3")
-        self.robot_arm = MoverServiceResource(proc=self, name="GenericArm")
+        self.fridge = LabwareStorageResource(proc=self, name="Fridge")
+        self.robot_arm = MoverServiceResource(proc=self, name="PFonRails")
+        self.washer = WasherDispenserServiceResource(proc=self, name="BlueWasher")
+        self.dispenser = WasherDispenserServiceResource(proc=self, name="MultiFlow")
+        self.incubator1 = IncubatorServiceResource(proc=self, name="Cytomat1")
+        self.incubator2 = IncubatorServiceResource(proc=self, name="Cytomat2")
+        self.squid1 = MicroscopeServiceResource(proc=self, name="Squid1")
+        self.sealer = PlateSealerServiceResource(proc=self, name="Sealer")
         self.human = HumanServiceResource(proc=self, name="Human")
-        self.greeter = GreeterServiceResource(proc=self, name="Greeter")
-        # TODO: add your resources here with names matching the platform_config
 
         # the continers are automatically named/enumerated. You can change the naming without causing problems
         self.containers = [
