@@ -36,6 +36,6 @@ class InterestingExample(BasicProcess):
             judgement = self.judge_answer(answer)
             # depending on the result, put the labware in hotel1 or hotel 3
             if judgement:
-                self.robot_arm.move(cont, self.hotel3)
+                self.robot_arm.move(cont, self.hotel2)
             else:
                 self.robot_arm.move(cont, self.hotel1)

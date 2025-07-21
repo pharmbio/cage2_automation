@@ -23,24 +23,23 @@ from .device_wrappers import (
 
 # Out comment those you want to simulate the steps instead of calling an actual sila server
 USE_REAL_SERVERS = [
-    "GenericArm",
+    "PFonRail",
+    "Echo",
     "Human",
-    "Greeter",
 ]
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
-    GenericArm=GenericRobotArmWrapper,
+    PFonRail=GenericRobotArmWrapper,
     Human=HumanWrapper,
-    Greeter=GreetingWrapper,
 )
 
 # maps the device names (from the platform_config and process description) to the correct sila server names
 # those without a sila server can be left out
 sila_server_name: dict[str, str] = dict(
-    GenericArm="Dummy",
+    PFonRail="PFonRail",
+    Echo="Echo",
     Human="Human",
-    Greeter="ExampleServer",
 )
 
 

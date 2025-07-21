@@ -7,11 +7,9 @@ from pythonlab.resources.services.washer_dispenser import WasherDispenserService
 from pythonlab.resources.services.incubation import IncubatorServiceResource
 from pythonlab.resources.services.microscope import MicroscopeServiceResource
 from pythonlab.resources.services.sealer import PlateSealerServiceResource
-
 from pythonlab.resource import LabwareResource
-
 from pythonlab.process import PLProcess
-
+from .pythonlab_extensions.echo_service_resource import EchoServiceResource
 
 class BasicProcess(PLProcess, ABC):
     def __init__(
@@ -34,6 +32,7 @@ class BasicProcess(PLProcess, ABC):
         self.incubator2 = IncubatorServiceResource(proc=self, name="Cytomat2")
         self.squid1 = MicroscopeServiceResource(proc=self, name="Squid1")
         self.sealer = PlateSealerServiceResource(proc=self, name="Sealer")
+        self.echo = EchoServiceResource(proc=self, name="Echo")
         self.human = HumanServiceResource(proc=self, name="Human")
 
         # the continers are automatically named/enumerated. You can change the naming without causing problems
