@@ -1,6 +1,7 @@
 """ """
 
 import logging
+import traceback
 from typing import Optional, NamedTuple, Dict, Any, Tuple
 from random import randint
 
@@ -19,6 +20,11 @@ from .device_wrappers import (
     GenericRobotArmWrapper,
     EchoWrapper,
 )
+try:
+    from genericroboticarm.sila_server import Client as ArmClient
+except ModuleNotFoundError:
+    ArmClient = SilaClient
+    logging.warning("Generic robotic arm seems to be not installed")
 
 
 # Out comment those you want to simulate the steps instead of calling an actual sila server
@@ -27,6 +33,7 @@ USE_REAL_SERVERS = [
     "Echo",
     "Human",
 ]
+interactive = ["Echo", "Washer", "Sealer"]
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
@@ -121,9 +128,58 @@ class Worker(WorkerInterface):
         super().process_step_finished(step_id, result)
 
     def check_prerequisites(self, process: SMProcess) -> Tuple[bool, str]:
-        # TODO implement your custom checks here.
-        # For example whether need protocols exists or all devices are online
-        return True, "Nothing to report."
+        message = ""
+        # message = f"  Problems with starting {process.name}: \n"
+        try:
+            # try to create sila clients in advance
+            needed_clients = set()
+            for step in process.steps:
+                # collect all devices that will be needed (including source and target)
+                for needed in step.used_devices:
+                    preference = needed.preferred
+                    if preference:
+                        needed_clients.add(preference)
+                # check if the barcodereader is needed
+                if isinstance(step, MoveStep):
+                    if step.data.get("read_barcode", False):
+                        needed_clients.add("BCReader")
+            # these might not be explicitly marked as source in the first movement
+            for cont in process.containers:
+                needed_clients.add(cont.current_device)
+            # try client creation
+            for device_name in needed_clients:
+                if device_name in USE_REAL_SERVERS:
+                    if not self.get_client(sila_server_name[device_name], timeout=5):
+                        message += f"Client creation for {device_name} failed.\n"
+                    else:
+                        print(f"created client for {device_name}")
+
+            # connect the arm to all interacting devices
+            if "PFonRail" in self.clients:
+                arm_client: ArmClient = self.get_client("PFonRail")
+                set_for_interaction = arm_client.ImplicitInteractionService.CurrentDeviceSet.get()
+                # check if all interacting devices are set for implicit interaction
+                interacting = needed_clients & interactive
+                for device in interacting:
+                    if device not in set_for_interaction:
+                        message += f"{device} should be set for implicit interaction.\n"
+                    else:
+                        success = arm_client.ImplicitInteractionService.ConnectToDevice(
+                            sila_server_name[device], Timeout=5).Success
+                        if not success:
+                            message += f"Failed to connect arm to {device}.\n"
+
+            if message:
+                message = f"Problems with starting {process.name}:\n {message}"
+            else:
+                message = "No Problems detected :-)\n"
+
+            # TODO check all protocols exist
+            # check whether robot interaction believes all used containers to the present?
+        except Exception:
+            logging.warning(f"proces prerequisite check for {process.name} failed\n{traceback.print_exc()}")
+            message += f"proces prerequisite check for {process.name} failed\n{traceback.print_exc()}"
+        return True, message
 
     def determine_destination_position(self, step: MoveStep) -> Optional[int]:
         # TODO change this to  customized positioning if necessary
