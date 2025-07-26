@@ -11,4 +11,4 @@ class EchoServiceResource(ServiceResource):
             kwargs["duration"] = 120
         kwargs["fct"] = "execute_protocol"
         kwargs["protocol"] = protocol
-        self.proc.add_process_step(labware=[source_plate, target_plate], **kwargs)
+        self.proc.add_process_step(self, [source_plate, target_plate], **kwargs)

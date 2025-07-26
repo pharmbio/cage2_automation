@@ -16,7 +16,6 @@ from sila2.client import SilaClient
 from .device_wrappers import (
     DeviceInterface,
     HumanWrapper,
-    GreetingWrapper,
     GenericRobotArmWrapper,
 )
 
