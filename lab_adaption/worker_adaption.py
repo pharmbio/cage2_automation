@@ -17,6 +17,7 @@ from .device_wrappers import (
     DeviceInterface,
     HumanWrapper,
     GenericRobotArmWrapper,
+    EchoWrapper,
 )
 
 
@@ -31,6 +32,7 @@ USE_REAL_SERVERS = [
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
     PFonRail=GenericRobotArmWrapper,
     Human=HumanWrapper,
+    Echo=EchoWrapper,
 )
 
 # maps the device names (from the platform_config and process description) to the correct sila server names
