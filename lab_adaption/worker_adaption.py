@@ -33,7 +33,7 @@ USE_REAL_SERVERS = [
     "Echo",
     "Human",
 ]
-interactive = ["Echo", "Washer", "Sealer"]
+interactive = {"Echo", "Washer", "Sealer"}
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
@@ -45,7 +45,7 @@ device_wrappers: dict[str, type[DeviceInterface]] = dict(
 # maps the device names (from the platform_config and process description) to the correct sila server names
 # those without a sila server can be left out
 sila_server_name: dict[str, str] = dict(
-    PFonRail="PFonRail",
+    PFonRail="PFonRail_sim",
     Echo="Echo",
     Human="Human",
 )
@@ -146,10 +146,11 @@ class Worker(WorkerInterface):
             # these might not be explicitly marked as source in the first movement
             for cont in process.containers:
                 needed_clients.add(cont.current_device)
+            print("needed clients: ", needed_clients)
             # try client creation
             for device_name in needed_clients:
                 if device_name in USE_REAL_SERVERS:
-                    if not self.get_client(sila_server_name[device_name], timeout=5):
+                    if not self.get_client(device_name, timeout=5):
                         message += f"Client creation for {device_name} failed.\n"
                     else:
                         print(f"created client for {device_name}")
