@@ -27,6 +27,6 @@ class EchoWrapper(DeviceInterface):
             if not protocol:
                 logging.warning(f"Protocol for step {step.name} not specified")
             logging.debug(f"Executing {protocol} on Echo")
-            return sila_client.EchoProtocolController.EcesuteProtocol(
+            return sila_client.EchoProtocolController.ExecuteProtocol(
                 ProtocolName = protocol,
             )
