@@ -1,6 +1,8 @@
 """
 Script to start the example servers for human, greeter and generic robotic arm
 """
+import signal
+import sys
 
 from sila2.server import SilaServer
 
@@ -36,9 +38,16 @@ def start_servers():
         port = 50053 + i
         server.start_insecure("127.0.0.1", port)
 
-    print("\nPress 'q' -> enter to exit.")
-    while not input() == "q":
-        pass
+    if sys.stdin.isatty():
+        print("\nPress 'q' -> enter to exit.")
+        while not input() == "q":
+            pass
+    else:
+        try:
+            signal.pause()
+        except KeyboardInterrupt:
+            print("Received KeyboardInterrupt, stopping servers...")
+
 
     for server in to_start:
         server.stop(grace_period=0.5)

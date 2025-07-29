@@ -3,29 +3,80 @@
 # to build start everything: docker-compose up --build
 # to build start everything after code change: docker-compose up --build
 
-version: '3.9'
-
 #networks:
   #container_network
 
 services:
-    my-service:
-    build:
-      context: . 
-    #image: registry.gitlab.com/
-    #volumes:
-    #  - :
-    #ports:
-    #  - 8000:8000
-    #expose:
-    #  - 8000
-    #networks:
-    #  - container_network
-    env_file:
-      - ./.env.dev
-    command: 
-      #sh -c ""
+  platform_status_db:
+    image: platform_status_db
+    volumes:
+      - platform_status:/opt/platform_status_db
+    ports:
+      - "8000:8000"
+    network_mode: host
 
-#volumes:
- 
+  wipe_db:
+    image: continuumio/miniconda3
+    depends_on:
+      - platform_status_db
+    volumes:
+        - .:/opt/adaptation_template/
+        - platform_status:/opt/platform_status_db
+    command: > 
+      bash -c "conda install python=3.11 &&
+      pip install -e /opt/platform_status_db && 
+      pip install -r /opt/adaptation_template/requirements.txt &&
+      cd /opt/adaptation_template/ &&
+      echo 'Wiping the database and adding lab setup...' &&
+      python scripts/add_lab_setup_to_db.py"
+    network_mode: host
+    environment:
+      - "LAB_STATUS_DB_PATH=/opt/platform_status_db/platform_status_db/db.sqlite3"
 
+  labscheduler:
+    image: labscheduler
+    network_mode: host
+    volumes:
+      - ./:/opt/adaptation_template/
+    command: >
+      labscheduler --lab-config-path /opt/adaptation_template/lab_adaption 
+                   --lab-config-file platform_config.yaml 
+    
+    
+  laborchestrator:
+    image: laborchestrator
+    network_mode: host
+    volumes:
+      - ./lab_adaption:/opt/adaptation_template/lab_adaption
+      - platform_status:/opt/platform_status_db
+    working_dir: /opt/adaptation_template/
+    command: >
+      bash -c "pip install -e  /opt/platform_status_db &&
+      python -m lab_adaption.start_script"
+    environment:
+      - "LAB_STATUS_DB_PATH=/opt/platform_status_db/platform_status_db/db.sqlite3"
+    depends_on:
+      wipe_db:
+        condition: service_completed_successfully
+
+  sila_servers:
+    image: continuumio/miniconda3
+    depends_on:
+      - labscheduler
+    volumes:
+      - .:/opt/adaptation_template/
+    command: >
+      bash -c "conda install python=3.11 &&
+      pip install -e /opt/adaptation_template/ &&
+      cd /opt/adaptation_template/lab_adaption/ &&
+      echo 'Starting Sila servers...' &&
+      start_sila_servers"
+    network_mode: host
+
+volumes:
+  platform_status:
+    driver: local
+    driver_opts:
+      type: bind
+      o: bind
+      device: /home/dsmits/projects/osla/platform_status_db/
