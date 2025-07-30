@@ -66,8 +66,9 @@ services:
     volumes:
       - .:/opt/adaptation_template/
     command: >
-      bash -c "conda install python=3.11 &&
-      pip install -e /opt/adaptation_template/ &&
+      bash -c "conda install -y python=3.11 &&
+      pip install --no-input -e /opt/adaptation_template/ &&
+      pip install --no-input -r /opt/adaptation_template/requirements_servers.txt &&
       cd /opt/adaptation_template/lab_adaption/ &&
       echo 'Starting Sila servers...' &&
       start_sila_servers"
