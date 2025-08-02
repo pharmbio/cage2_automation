@@ -4,14 +4,14 @@ from laborchestrator.engine.worker_interface import (
     Observable,
     ObservableProtocolHandler,
 )
-from laborchestrator.structures import ContainerInfo, MoveStep
+from laborchestrator.structures import ContainerInfo, MoveStep, ProcessStep
 
 from . import DeviceInterface, finish_observable_command
 
 try:
     from genericroboticarm.sila_server import Client as ArmClient
 except ModuleNotFoundError:
-    from sila2.client import SilaClient as ArmClient
+    from sila2.client import SilaClient as ArmClient, SilaClient
 
     logging.warning("Generic robotic arm seems to be not installed")
 
@@ -54,3 +54,9 @@ class GenericRobotArmWrapper(DeviceInterface):
         # starts _protocol and handles the status
         observable.run_protocol(sila_client)
         return observable
+
+
+class LabwareTransferHandler(DeviceInterface):
+    @staticmethod
+    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: SilaClient, **kwargs) -> Observable:
+        pass

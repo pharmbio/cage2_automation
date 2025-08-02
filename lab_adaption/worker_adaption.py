@@ -45,7 +45,7 @@ device_wrappers: dict[str, type[DeviceInterface]] = dict(
 # maps the device names (from the platform_config and process description) to the correct sila server names
 # those without a sila server can be left out
 sila_server_name: dict[str, str] = dict(
-    PFonRail="PFonRail_sim",
+    PFonRail="PFonRail",
     Echo="Echo",
     Human="Human",
 )
@@ -183,7 +183,14 @@ class Worker(WorkerInterface):
         return True, message
 
     def determine_destination_position(self, step: MoveStep) -> Optional[int]:
-        # TODO change this to  customized positioning if necessary
-
+        if step.target_device == "Echo":
+            labware_role = step.data.get("role", "")
+            if not labware_role:
+                logging.warning(f"Role of plate going into Echo not specified in step {step.name}."
+                                f" Assuming next free position")
+            if labware_role == "source":
+                return 0
+            elif labware_role == "destination":
+                return 1
         # checks the database for the free position with the lowest index
         return super().determine_destination_position(step)
