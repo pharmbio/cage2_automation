@@ -1,6 +1,7 @@
 """
 Script to start the example servers for human, greeter and generic robotic arm
 """
+
 import signal
 import sys
 
@@ -47,7 +48,6 @@ def start_servers():
             signal.pause()
         except KeyboardInterrupt:
             print("Received KeyboardInterrupt, stopping servers...")
-
 
     for server in to_start:
         server.stop(grace_period=0.5)

@@ -3,6 +3,7 @@ Use this script to populate the database with devices and positions according to
 It does not check whether devices already exists. So, running this multiple times results in duplicate database entries.
 You can remove all present devices and positions running the wipe_lab command.
 """
+
 import os
 
 from platform_status_db.larastatus.status_db_implementation import (

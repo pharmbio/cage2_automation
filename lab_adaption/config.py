@@ -1,4 +1,5 @@
 """ """
+
 import os
 
 from .worker_adaption import Worker
@@ -10,6 +11,7 @@ from pathlib import Path
 from platform_status_db.larastatus.status_db_implementation import (
     StatusDBImplementation,
 )
+
 db_path = os.environ.get("LAB_STATUS_DB_PATH", None)
 db_client = StatusDBImplementation(db_path)
 # db_client = None
