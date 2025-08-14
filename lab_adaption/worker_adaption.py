@@ -2,6 +2,7 @@
 
 import logging
 import traceback
+from datetime import datetime
 from typing import Optional, NamedTuple, Dict, Any, Tuple
 from random import randint
 
@@ -19,6 +20,7 @@ from .device_wrappers import (
     HumanWrapper,
     GenericRobotArmWrapper,
     EchoWrapper,
+    LabwareTransferHandler,
 )
 try:
     from genericroboticarm.sila_server import Client as ArmClient
@@ -32,12 +34,14 @@ USE_REAL_SERVERS = [
     "PFonRail",
     "Echo",
     "Human",
+    "BCReader",
 ]
 interactive = {"Echo", "Washer", "Sealer"}
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
-    PFonRail=GenericRobotArmWrapper,
+    #PFonRail=GenericRobotArmWrapper,
+    PFonRail=LabwareTransferHandler,
     Human=HumanWrapper,
     Echo=EchoWrapper,
 )
@@ -48,6 +52,7 @@ sila_server_name: dict[str, str] = dict(
     PFonRail="PFonRail",
     Echo="Echo",
     Human="Human",
+    BCReader="BCReader",
 )
 
 
@@ -63,6 +68,7 @@ class Worker(WorkerInterface):
     ):
         super().__init__(jssp, schedule_manager, db_client)
         self.clients = {}
+        self.barcode_list = []
 
     def execute_process_step(
         self, step_id: str, device: str, device_kwargs: Dict[str, Any]
@@ -75,6 +81,22 @@ class Worker(WorkerInterface):
             client = self.get_client(device_name=device)
             if client:
                 wrapper = device_wrappers[device]
+                # for labware transfer add arguments
+                if isinstance(step, MoveStep):
+                    if cont.current_device in interactive:
+                        device_kwargs["interactive_source"] =\
+                            self.get_client(cont.current_device).LabwareTransferSiteController
+                    if step.target_device.name in interactive:
+                        device_kwargs["interactive_target"] =\
+                            self.get_client(step.target_device.name).LabwareTransferSiteController
+                    # TODO care intermediate actions
+                    if "intermediate_actions" not in device_kwargs:
+                        device_kwargs["intermediate_actions"] = []
+                    if step.data.get("read_barcode", False):
+                        print("The arm is supposed to read the barcode now.")
+                        device_kwargs["intermediate_actions"].append("read_barcode")
+                        bc_client = self.get_client("BCReader")
+                        self.barcode_list = bc_client.BarcodeReaderService.AllBarcodes.get()
                 # starts the command on the device and returns an Observable
                 observable = wrapper.get_SiLA_handler(
                     step, cont, client, **device_kwargs
@@ -106,7 +128,7 @@ class Worker(WorkerInterface):
             # try to discover the matching server by its server name
             try:
                 client = SilaClient.discover(
-                    server_name=server_name, insecure=True, timeout=timeout
+                    server_name=server_name, timeout=timeout, insecure=True,
                 )
                 self.clients[device_name] = client
                 return client
@@ -117,14 +139,21 @@ class Worker(WorkerInterface):
     def process_step_finished(self, step_id: str, result: Optional[NamedTuple]):
         # get all information about the process step
         step = self.jssp.step_by_id[step_id]
-        container = self.jssp.container_info_by_name[step.cont]
-        # TODO: Insert custom thing to do after finishing a step.
-        # custom kwargs given to steps (see mover_test for example) are also available in step.data
-        if "read_barcode" in step.data:
-            # TODO: Insert you own way to retrieve a barcode from a barcode reader
-            container.barcode = f"Nice_Barcode{randint(1, 9999)}"
-            # saves the barcode to the database.
-            self.db_client.set_barcode(container)
+        labware = self.jssp.container_info_by_name[step.cont]
+        if step.data.get("read_barcode", False):
+            print("We did read a barcode during the move")
+            bc_reader_client = self.get_client("BCReader")
+            if bc_reader_client:
+                current_bc_list = bc_reader_client.BarcodeReaderService.AllBarcodes.get()
+                if len(self.barcode_list) == len(current_bc_list):
+                    barcode = f"Grumpycat_{randint(0, 99999)}"
+                    logging.warning(
+                        f"{datetime.now()}: Seems like barcode reading failed. Generated random barcode {barcode}")
+                else:
+                    barcode = bc_reader_client.BarcodeReaderService.LastBarcode.get()
+                    print(f"barcode is {barcode}")
+                labware.barcode = barcode
+                self.db_client.set_barcode(labware)
         super().process_step_finished(step_id, result)
 
     def check_prerequisites(self, process: SMProcess) -> Tuple[bool, str]:
@@ -139,7 +168,7 @@ class Worker(WorkerInterface):
                     preference = needed.preferred
                     if preference:
                         needed_clients.add(preference)
-                # check if the barcodereader is needed
+                # check if the barcode reader is needed
                 if isinstance(step, MoveStep):
                     if step.data.get("read_barcode", False):
                         needed_clients.add("BCReader")
@@ -183,8 +212,9 @@ class Worker(WorkerInterface):
         return True, message
 
     def determine_destination_position(self, step: MoveStep) -> Optional[int]:
-        if step.target_device == "Echo":
+        if step.target_device.name == "Echo":
             labware_role = step.data.get("role", "")
+            print(f"labware role is {labware_role}")
             if not labware_role:
                 logging.warning(f"Role of plate going into Echo not specified in step {step.name}."
                                 f" Assuming next free position")

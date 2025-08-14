@@ -85,8 +85,8 @@ class GenericRobotArmWrapper(DeviceInterface):
                 commands = [labware_manipulator.PrepareForInput(
                     HandoverPosition=site,
                     InternalPosition=1,
-                    LabwareType="",
-                    LabwareUniqueID="",
+                    LabwareType=cont.labware_type,
+                    LabwareUniqueID=cont.name,
                 )]
                 if interactive_source:
                     commands.append(interactive_source.PrepareForOutput(
@@ -106,8 +106,8 @@ class GenericRobotArmWrapper(DeviceInterface):
                     commands.append(interactive_target.PrepareForInput(
                         HandoverPosition=Site(site.device, 1),
                         InternalPosition=site.position_index,
-                        LabwareType="",
-                        LabwareUniqueID="",
+                        LabwareType=cont.labware_type,
+                        LabwareUniqueID=cont.name,
                     ))
                 await gather(*[finish(cmd) for cmd in commands])
                 return all(cmd.status == CommandExecutionStatus.finishedSuccessfully for cmd in commands)

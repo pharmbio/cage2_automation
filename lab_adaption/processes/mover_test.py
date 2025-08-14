@@ -20,5 +20,5 @@ class MoverTest(BasicProcess):
         self.robot_arm.move(self.containers[0], target_loc=self.hotel2)
         # we can give custom kwargs which will appear in WorkerInterface.execute_process_step in device_kwargs
         self.robot_arm.move(
-            self.containers[0], target_loc=self.hotel3, read_barcode=True
+            self.containers[0], target_loc=self.hotel1, read_barcode=True
         )
