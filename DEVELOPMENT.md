@@ -47,7 +47,7 @@ Merge Request Guidelines
 Before you submit a merge request, check that it meets these guidelines:
 
 1. The merge request should only include changes relating to one ticket.
-2. The merge request should include tests to cover any added changes and 
+2. The merge request should include tests to cover any added changes and
    check that all existing and new tests pass.
 3. If the merge request adds functionality, the docs should be updated.
    Put your new functionality into a function with a docstring, and add
@@ -57,7 +57,7 @@ Before you submit a merge request, check that it meets these guidelines:
 Documentation
 --------------
 
-The Sphinx Documentation Sytem is used, 
+The Sphinx Documentation Sytem is used,
 
 markdown is supported via the mystparser ( https://cerodell.github.io/sphinx-quickstart-guide/build/html/markdown.html )
 
