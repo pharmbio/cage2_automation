@@ -9,7 +9,7 @@ from lab_adaption.processes.basic_process import BasicProcess
 class Echo5Plates(BasicProcess):
     def __init__(self):
         super().__init__(
-            num_plates=3,
+            num_plates=2,
             process_name="Echo5Plates",
         )
 
@@ -32,9 +32,10 @@ class Echo5Plates(BasicProcess):
 
     def process(self):
         protocol = r"C:\users\pharmbio\Desktop\Malin\CP_Echo_files\0000_test.csv"
-        self.robot_arm.move(self.source_plate, self.echo, role="source", read_barcode=True)
-        #for plate in self.target_plates:
-        #    self.robot_arm.move(plate, self.echo, role="destination", read_barcode=True)
-        #    self.echo.execute_transfer_protocol(protocol, self.source_plate, plate)
-        #    self.robot_arm.move(plate, self.hotel2)
+        self.robot_arm.move(self.source_plate, self.echo, role="source", read_barcode=False)
+        self.echo.survey_for_protocol(protocol=protocol, source_plate=self.source_plate)
+        for plate in self.target_plates:
+            self.robot_arm.move(plate, self.echo, role="destination", read_barcode=False)
+            self.echo.execute_transfer_protocol(protocol, self.source_plate, plate)
+            self.robot_arm.move(plate, self.hotel2)
         self.robot_arm.move(self.source_plate, self.hotel1)

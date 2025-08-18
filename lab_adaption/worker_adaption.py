@@ -44,6 +44,7 @@ device_wrappers: dict[str, type[DeviceInterface]] = dict(
     PFonRail=LabwareTransferHandler,
     Human=HumanWrapper,
     Echo=EchoWrapper,
+    Echo_sim=EchoWrapper,
 )
 
 # maps the device names (from the platform_config and process description) to the correct sila server names
@@ -53,6 +54,7 @@ sila_server_name: dict[str, str] = dict(
     Echo="Echo",
     Human="Human",
     BCReader="BCReader",
+    Echo_sim="EchoSim",
 )
 
 
@@ -78,6 +80,9 @@ class Worker(WorkerInterface):
         step = self.jssp.step_by_id[step_id]
         cont = self.jssp.container_info_by_name[step.cont_names[0]]
         if device in USE_REAL_SERVERS:
+            # switch to simulation for protocol execution
+            if device == "Echo":
+                device += "_sim"
             client = self.get_client(device_name=device)
             if client:
                 wrapper = device_wrappers[device]
@@ -89,7 +94,6 @@ class Worker(WorkerInterface):
                     if step.target_device.name in interactive:
                         device_kwargs["interactive_target"] =\
                             self.get_client(step.target_device.name).LabwareTransferSiteController
-                    # TODO care intermediate actions
                     if "intermediate_actions" not in device_kwargs:
                         device_kwargs["intermediate_actions"] = []
                     if step.data.get("read_barcode", False):

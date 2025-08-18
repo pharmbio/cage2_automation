@@ -1,4 +1,5 @@
 import logging
+from threading import Thread
 
 from laborchestrator.engine.worker_interface import (
     Observable,
@@ -75,7 +76,7 @@ class LabwareTransferHandler(DeviceInterface):
                 # prepare source and mover
                 handover = Site(cont.current_device, cont.current_pos + 1)  # the feature starts counting at 1
                 mover_prepare = sila_client.LabwareTransferManipulatorController.PrepareForInput(
-                    handover, 1, cont.labware_type, "uuid",
+                    handover, 1, cont.labware_type, str(cont.barcode),
                 )
                 if interactive_source:
                     source_prepare = interactive_source.PrepareForOutput(
@@ -94,7 +95,8 @@ class LabwareTransferHandler(DeviceInterface):
                 finish_observable_command(pick_cmd)
                 # notify source
                 if interactive_source:
-                    interactive_source.LabwareRemoved(handover)
+                    # this should not be blocking
+                    Thread(target=interactive_source.LabwareRemoved, daemon=True, args=[handover]).start()
                 # prepare mover and target
                 handover = Site(step.target_device.name, step.destination_pos + 1)
                 mover_prepare = sila_client.LabwareTransferManipulatorController.PrepareForOutput(
@@ -104,7 +106,7 @@ class LabwareTransferHandler(DeviceInterface):
                 if interactive_target:
                     target_prepare = interactive_target.PrepareForInput(
                         handover, step.destination_pos + 1, # the feature starts counting at 1
-                        cont.labware_type, "uuid",
+                        cont.labware_type, str(cont.barcode),
                     )
                     finish_observable_command(target_prepare)
                 finish_observable_command(mover_prepare)
@@ -115,7 +117,8 @@ class LabwareTransferHandler(DeviceInterface):
                 finish_observable_command(place_cmd)
                 # notify target
                 if interactive_target:
-                    interactive_target.LabwareDelivered(handover)
+                    # this should not be blocking
+                    Thread(target=interactive_target.LabwareDelivered, daemon=True, args=[handover]).start()
 
         observable = TransferHandler()
         # starts _protocol and handles the status

@@ -30,3 +30,11 @@ class EchoWrapper(DeviceInterface):
             return sila_client.EchoProtocolController.ExecuteProtocol(
                 ProtocolName = protocol,
             )
+        elif step.function == "survey":
+            protocol = step.data.get("protocol", "")
+            if not protocol:
+                logging.warning(f"Protocol for survey {step.name} not specified")
+            logging.debug(f"Executing survey for {protocol} on Echo")
+            return sila_client.EchoProtocolController.DoSurveyForProtocol(
+                ProtocolName = protocol,
+            )

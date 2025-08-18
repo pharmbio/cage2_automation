@@ -12,3 +12,10 @@ class EchoServiceResource(ServiceResource):
         kwargs["fct"] = "execute_protocol"
         kwargs["protocol"] = protocol
         self.proc.add_process_step(self, [source_plate, target_plate], **kwargs)
+
+    def survey_for_protocol(self, protocol: str, source_plate: LabwareResource, **kwargs):
+        if "duration" not in kwargs:
+            kwargs["duration"] = 70
+        kwargs["fct"] = "survey"
+        kwargs["protocol"] = protocol
+        self.proc.add_process_step(self, [source_plate], **kwargs)
