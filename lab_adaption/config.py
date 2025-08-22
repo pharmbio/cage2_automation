@@ -27,7 +27,7 @@ default_scheduling_time = 1  # seconds
 
 # change to a solver name like CP-Solver or BottleneckPD which will be chosen on the scheduler.
 # None keeps the schedulers default
-scheduling_algorithm: str | None = "BottleneckPD"
+scheduling_algorithm: str | None = "CP-Solver"
 
 # change this to the module where you save your pythonLab processes
 from . import processes  # noqa: E402
