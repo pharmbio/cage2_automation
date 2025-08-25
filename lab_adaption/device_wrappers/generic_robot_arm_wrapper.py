@@ -5,10 +5,11 @@ from laborchestrator.engine.worker_interface import (
     Observable,
     ObservableProtocolHandler,
 )
-from laborchestrator.structures import ContainerInfo, MoveStep, ProcessStep
+from laborchestrator.structures import ContainerInfo, MoveStep
+from sila2.framework import CommandExecutionStatus
 
 from . import DeviceInterface, finish_observable_command
-from .labware_site import LabwareSite, LabwareManipulator, Site
+from .labware_site import LabwareSite, Site
 
 try:
     from genericroboticarm.sila_server import Client as ArmClient
@@ -67,9 +68,10 @@ class LabwareTransferHandler(DeviceInterface):
                          **kwargs) -> Observable:
         if intermediate_actions is None:
             intermediate_actions = []
-        print(interactive_source)
-        print(interactive_target)
-        print(intermediate_actions)
+        logging.debug(f"Creating LabwareTransferHandler for step {step.name}")
+        logging.debug("interactive source: ", interactive_source)
+        logging.debug("interactive target: ", interactive_target)
+        logging.debug("intermediate actions: ", intermediate_actions)
 
         class TransferHandler(ObservableProtocolHandler):
             def _protocol(self, client: ArmClient, **_kwargs):
@@ -83,6 +85,8 @@ class LabwareTransferHandler(DeviceInterface):
                         Site(cont.current_device, 1), cont.current_pos + 1,
                     )
                     finish_observable_command(source_prepare)
+                    if not source_prepare.status == CommandExecutionStatus.finishedSuccessfully:
+                        raise Exception(f"target device failed to prepare {handover} for output: {source_prepare.get_responses()}")
                 finish_observable_command(mover_prepare)
                 """# check it the robot is able to perform the intermediate actions
                 for intermediate in intermediate_actions:
@@ -102,13 +106,15 @@ class LabwareTransferHandler(DeviceInterface):
                 mover_prepare = sila_client.LabwareTransferManipulatorController.PrepareForOutput(
                     handover, 1,
                 )
-                print(f"delivering {cont} to {step.destination_pos + 1}")
+                logging.info(f"delivering {cont} to {step.destination_pos + 1} (already added +1 for the feature)")
                 if interactive_target:
                     target_prepare = interactive_target.PrepareForInput(
                         handover, step.destination_pos + 1, # the feature starts counting at 1
                         cont.labware_type, str(cont.barcode),
                     )
                     finish_observable_command(target_prepare)
+                    if not target_prepare.status == CommandExecutionStatus.finishedSuccessfully:
+                        raise Exception(f"target device failed to prepare {handover} for input: {target_prepare.get_responses()}")
                 finish_observable_command(mover_prepare)
                 # place
                 place_cmd = sila_client.LabwareTransferManipulatorController.PutLabware(

@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Tuple, List, NamedTuple
+from sila2.client import ClientObservableCommandInstance
 
 
 class Site(NamedTuple):
@@ -11,11 +12,12 @@ class Site(NamedTuple):
 
 class LabwareSite(ABC):
     @abstractmethod
-    def PrepareForInput(self, HandoverPosition: Site, InternalPosition: int, LabwareType: str, LabwareUniqueID: str):
+    def PrepareForInput(self, HandoverPosition: Site, InternalPosition: int, LabwareType: str, LabwareUniqueID: str)\
+            -> ClientObservableCommandInstance:
         """"""
 
     @abstractmethod
-    def PrepareForOutput(self, HandoverPosition: Site, InternalPosition: int):
+    def PrepareForOutput(self, HandoverPosition: Site, InternalPosition: int) -> ClientObservableCommandInstance:
         """"""
 
     @abstractmethod
