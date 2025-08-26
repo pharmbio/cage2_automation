@@ -61,7 +61,8 @@ sila_server_name: dict[str, str] = dict(
     Human="Human",
     BCReader="BCReader",
     Echo_sim="EchoSim",
-    Cytomat="Cytomat"
+    Cytomat="Cytomat",
+    Washer="Washer",
 )
 
 
