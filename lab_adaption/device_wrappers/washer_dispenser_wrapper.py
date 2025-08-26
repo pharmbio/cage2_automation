@@ -31,9 +31,8 @@ class WasherDispenserWrapper(DeviceInterface):
                 assert isinstance(protocol_steps, list)
                 assert len(protocol_steps) > 0
                 assert all(isinstance(elem, Step) for elem in protocol_steps)
-                step_definitions = [(
-                    step_definition.to_string(),
-                    step_definition.step_type)
+                step_definitions = [
+                    step_definition.to_string()
                     for step_definition in protocol_steps
                 ]
                 return sila_client.WasherProtocolController.RunCustomSteps(step_definitions)
