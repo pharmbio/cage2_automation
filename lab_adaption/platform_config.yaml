@@ -14,7 +14,7 @@ sila_servers:
             process_capacity: 99 # can do multitasking?
             capacity: 2  # has two hands
     washers:
-        BlueWasher:
+        Washer:
             capacity: 1
     dispensers:
         Multiflow:

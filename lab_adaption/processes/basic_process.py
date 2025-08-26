@@ -26,7 +26,7 @@ class BasicProcess(PLProcess, ABC):
         self.hotel2 = LabwareStorageResource(proc=self, name="Hotel2")
         self.fridge = LabwareStorageResource(proc=self, name="Fridge")
         self.robot_arm = MoverServiceResource(proc=self, name="PFonRail")
-        self.washer = WasherDispenserServiceResource(proc=self, name="BlueWasher")
+        self.washer = WasherDispenserServiceResource(proc=self, name="Washer")
         self.dispenser = WasherDispenserServiceResource(proc=self, name="MultiFlow")
         self.incubator1 = IncubatorServiceResource(proc=self, name="Cytomat1")
         self.incubator2 = IncubatorServiceResource(proc=self, name="Cytomat2")
