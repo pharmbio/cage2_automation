@@ -10,7 +10,8 @@ except ModuleNotFoundError:
 
 
 class PlateSealerWrapper(DeviceInterface):
-    def get_SiLA_handler(self, step: ProcessStep, cont: ContainerInfo, sila_client: SealerClient, **kwargs)\
+    @staticmethod
+    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: SealerClient, **kwargs)\
         -> Observable:
         if step.function == "seal":
             return sila_client.ProtocolController.RunProtocol(ProtocolName="dummy_name")

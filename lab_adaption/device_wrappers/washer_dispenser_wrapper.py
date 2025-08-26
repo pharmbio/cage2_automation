@@ -15,7 +15,8 @@ except ModuleNotFoundError:
 
 
 class WasherDispenserWrapper(DeviceInterface):
-    def get_SiLA_handler(self, step: ProcessStep, cont: ContainerInfo, sila_client: WasherDispenserClient, **kwargs)\
+    @staticmethod
+    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: WasherDispenserClient, **kwargs)\
         -> Observable:
         if step.function == "fix_cells":
             protocol = step.data['protocol']
