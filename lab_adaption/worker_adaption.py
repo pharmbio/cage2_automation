@@ -15,12 +15,16 @@ from laborchestrator.engine.worker_interface import (
 )
 from laborchestrator.structures import SMProcess, MoveStep, SchedulingInstance
 from sila2.client import SilaClient
+
 from .device_wrappers import (
     DeviceInterface,
     HumanWrapper,
     GenericRobotArmWrapper,
     EchoWrapper,
     LabwareTransferHandler,
+    WasherDispenserWrapper,
+    SquidWrapper,
+    PlateSealerWrapper,
 )
 try:
     from genericroboticarm.sila_server import Client as ArmClient
@@ -35,6 +39,7 @@ USE_REAL_SERVERS = [
     "Echo",
     "Human",
     "BCReader",
+    "Washer",
 ]
 interactive = {"Echo", "Washer", "Sealer"}
 
@@ -45,6 +50,7 @@ device_wrappers: dict[str, type[DeviceInterface]] = dict(
     Human=HumanWrapper,
     Echo=EchoWrapper,
     Echo_sim=EchoWrapper,
+    Washer=WasherDispenserWrapper
 )
 
 # maps the device names (from the platform_config and process description) to the correct sila server names
@@ -55,6 +61,7 @@ sila_server_name: dict[str, str] = dict(
     Human="Human",
     BCReader="BCReader",
     Echo_sim="EchoSim",
+    Cytomat="Cytomat"
 )
 
 

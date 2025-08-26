@@ -5,7 +5,7 @@ try:
     from lhc_python.steps.step_parts import CWFlowRate, WashInstructions
     from lhc_python.steps.ewash_step import EMWashStep
 except ModuleNotFoundError:
-    logging.warning("Test will fail without lhc_python being installed")
+    logging.warning("WasherTest will fail without lhc_python being installed")
 
 
 class WasherTest(BasicProcess):
