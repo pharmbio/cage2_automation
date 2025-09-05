@@ -61,22 +61,31 @@ Rerun this script after you customized the config file.
 
 ## Startup
 Call from different console tabs
-- to start the scheduler:
-```bash
-    labscheduler
-```
-- to start the django database view (optional). If you changed directory, adapt the path:
-```bash
-    run_db_server
-```
-- to start the orchestrator:
-```bash
-    laborchestrator
-```
-- to start demo servers:
-```bash
-    start_sila_servers
-```
+
+**Option 1:** In gnome terminal you could start all four o the following services in different tabs by running
+
+   ```bash
+       bash scripts/run_services.sh
+   ```
+
+**Option 2:** Otherwise use individual commands (remember activating the virtual environment):
+
+   - to start the scheduler:
+   ```bash
+       labscheduler
+   ```
+   - to start the django database view (optional). If you changed directory, adapt the path:
+   ```bash
+       run_db_server
+   ```
+   - to start the orchestrator:
+   ```bash
+       laborchestrator
+   ```
+   - to start demo servers:
+   ```bash
+       start_sila_servers
+   ```
 
 ## Usage
 You can access the GUI for different components:
