@@ -4,8 +4,6 @@ It does not check whether devices already exists. So, running this multiple time
 You can remove all present devices and positions running the wipe_lab command.
 """
 
-import os
-
 from platform_status_db.larastatus.status_db_implementation import (
     StatusDBImplementation,
 )
@@ -16,7 +14,7 @@ lab_config_file = (
     Path(__file__).resolve().parent.parent / "lab_adaption" / "platform_config.yaml"
 )
 
-db_path = os.environ["LAB_STATUS_DB_PATH"]
+# db_path = os.environ["LAB_STATUS_DB_PATH"]
 
 # creates a client got the database
 db_client = StatusDBImplementation()
