@@ -8,16 +8,17 @@ from platform_status_db.larastatus.status_db_implementation import (
     StatusDBImplementation,
 )
 from pathlib import Path
+import os
 
 # change this if necessary
 lab_config_file = (
     Path(__file__).resolve().parent.parent / "lab_adaption" / "platform_config.yaml"
 )
 
-# db_path = os.environ["LAB_STATUS_DB_PATH"]
+db_path = os.environ.get("LAB_STATUS_DB_PATH", None)
 
 # creates a client got the database
-db_client = StatusDBImplementation()
+db_client = StatusDBImplementation(db_path)
 # clear the database, if necessary
 db_client.wipe_lab()
 # populates the database
