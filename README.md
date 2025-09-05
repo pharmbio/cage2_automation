@@ -67,7 +67,7 @@ Call from different console tabs
 ```
 - to start the django database view (optional). If you changed directory, adapt the path:
 ```bash
-    python platform_status_db/platform_status_db/manage.py runserver
+    python run_db_server
 ```
 - to start the orchestrator:
 ```bash
