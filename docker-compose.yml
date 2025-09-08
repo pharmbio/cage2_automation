@@ -7,13 +7,26 @@
   #container_network
 
 services:
-  platform_status_db:
-    image: platform_status_db
-    volumes:
-      - platform_status:/opt/platform_status_db
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: platform_status
+      POSTGRES_PASSWORD: platform_status
+      POSTGRES_DB: platform_status_db
     ports:
-      - "8000:8000"
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
     network_mode: host
+
+  platform_status_db:
+    image: registry.gitlab.com/openlabautomation/lab-automation-packages/platform_status_db
+    environment:
+      DJANGO_SETTINGS_MODULE: settings
+    volumes:
+        - ./status_db/settings.py:/opt/platform_status_db/settings.py
+    depends_on:
+      - database
 
   wipe_db:
     image: continuumio/miniconda3
@@ -34,16 +47,15 @@ services:
       - "LAB_STATUS_DB_PATH=/opt/platform_status_db/platform_status_db/db.sqlite3"
 
   labscheduler:
-    image: labscheduler
+    image: registry.gitlab.com/openlabautomation/lab-automation-packages/lab-scheduler/labscheduler
     network_mode: host
     volumes:
       - ./:/opt/adaptation_template/
     command: >
-      labscheduler --lab-config-path /opt/adaptation_template/lab_adaption
-                   --lab-config-file platform_config.yaml
+      labscheduler --lab-config-path /opt/adaptation_template/lab_adaption/platform_config.yaml
 
   laborchestrator:
-    image: laborchestrator
+    image: registry.gitlab.com/openlabautomation/lab-automation-packages/laborchestrator
     network_mode: host
     volumes:
       - ./lab_adaption:/opt/adaptation_template/lab_adaption
@@ -54,9 +66,9 @@ services:
       python -m lab_adaption.start_script"
     environment:
       - "LAB_STATUS_DB_PATH=/opt/platform_status_db/platform_status_db/db.sqlite3"
-    depends_on:
-      wipe_db:
-        condition: service_completed_successfully
+#    depends_on:
+#      wipe_db:
+#        condition: service_completed_successfully
 
   sila_servers:
     image: continuumio/miniconda3
