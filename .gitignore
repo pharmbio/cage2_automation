@@ -115,3 +115,5 @@ bin/
 
 # On the fly tests
 _test.*
+
+pgdata/
