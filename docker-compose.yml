@@ -27,6 +27,7 @@ services:
         - ./status_db/settings.py:/opt/platform_status_db/settings.py
     depends_on:
       - database
+    network_mode: host
 
   wipe_db:
     image: continuumio/miniconda3
