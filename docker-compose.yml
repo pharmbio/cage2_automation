@@ -7,6 +7,40 @@
   #container_network
 
 services:
+  wipe_db:
+    image: registry.gitlab.com/openlabautomation/lab-automation-packages/platform_status_db
+    depends_on:
+      - platform_status_db
+    volumes:
+        - .:/opt/adaption_template/
+    command: >
+      bash -c "pip install -r /opt/adaption_template/requirements.txt &&
+      export PYTHONPATH=/opt/adaption_template/:$PYTHONPATH &&
+      echo 'Wiping the database and adding lab setup...' &&
+      python /opt/adaption_template/scripts/add_lab_setup_to_db.py"
+    network_mode: host
+    environment:
+      - DJANGO_SETTINGS_MODULE=settings
+
+  labscheduler:
+    image: registry.gitlab.com/openlabautomation/lab-automation-packages/lab-scheduler/labscheduler
+    network_mode: host
+    volumes:
+      - ./:/opt/adaptation_template/
+    command: >
+      labscheduler --lab-config-path /opt/adaptation_template/lab_adaption/platform_config.yaml
+
+
+  laborchestrator:
+    image: registry.gitlab.com/openlabautomation/lab-automation-packages/laborchestrator
+    network_mode: host
+    volumes:
+      - ./:/opt/adaptation_template/
+    working_dir: /opt/adaptation_template/
+    command: lab_adaption/start_orchestrator.sh
+    environment:
+      - "DJANGO_SETTINGS_MODULE=settings"
+#    depends_on:
   database:
     image: postgres:latest
     environment:
@@ -24,50 +58,10 @@ services:
     environment:
       DJANGO_SETTINGS_MODULE: settings
     volumes:
-        - ./status_db/settings.py:/opt/platform_status_db/settings.py
+        - ./settings.py:/opt/platform_status_db/settings.py
     depends_on:
       - database
     network_mode: host
-
-  wipe_db:
-    image: continuumio/miniconda3
-    depends_on:
-      - platform_status_db
-    volumes:
-        - .:/opt/adaptation_template/
-        - platform_status:/opt/platform_status_db
-    command: >
-      bash -c "conda install python=3.11 &&
-      pip install -e /opt/platform_status_db &&
-      pip install -r /opt/adaptation_template/requirements.txt &&
-      cd /opt/adaptation_template/ &&
-      echo 'Wiping the database and adding lab setup...' &&
-      python scripts/add_lab_setup_to_db.py"
-    network_mode: host
-    environment:
-      - "LAB_STATUS_DB_PATH=/opt/platform_status_db/platform_status_db/db.sqlite3"
-
-  labscheduler:
-    image: registry.gitlab.com/openlabautomation/lab-automation-packages/lab-scheduler/labscheduler
-    network_mode: host
-    volumes:
-      - ./:/opt/adaptation_template/
-    command: >
-      labscheduler --lab-config-path /opt/adaptation_template/lab_adaption/platform_config.yaml
-
-  laborchestrator:
-    image: registry.gitlab.com/openlabautomation/lab-automation-packages/laborchestrator
-    network_mode: host
-    volumes:
-      - ./lab_adaption:/opt/adaptation_template/lab_adaption
-      - platform_status:/opt/platform_status_db
-    working_dir: /opt/adaptation_template/
-    command: >
-      bash -c "pip install -e  /opt/platform_status_db &&
-      python -m lab_adaption.start_script"
-    environment:
-      - "LAB_STATUS_DB_PATH=/opt/platform_status_db/platform_status_db/db.sqlite3"
-#    depends_on:
 #      wipe_db:
 #        condition: service_completed_successfully
 
@@ -78,18 +72,9 @@ services:
     volumes:
       - .:/opt/adaptation_template/
     command: >
-      bash -c "conda install -y python=3.11 &&
-      pip install --no-input -e /opt/adaptation_template/ &&
+      bash -c "pip install --no-input -e /opt/adaptation_template/ &&
       pip install --no-input -r /opt/adaptation_template/requirements_servers.txt &&
       cd /opt/adaptation_template/lab_adaption/ &&
       echo 'Starting Sila servers...' &&
       start_sila_servers"
     network_mode: host
-
-volumes:
-  platform_status:
-    driver: local
-    driver_opts:
-      type: bind
-      o: bind
-      device: /home/dsmits/projects/osla/platform_status_db/
