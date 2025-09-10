@@ -3,7 +3,7 @@ try:
     from pandas import DataFrame
 except ModuleNotFoundError:
     from typing import Any as DataFrame
-from echo_server.parsing_utilities import rectangle_to_survey
+from echo_server.communication.parsing_utilities import rectangle_to_survey
 
 
 class EchoServiceResource(ServiceResource):

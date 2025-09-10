@@ -30,6 +30,8 @@ sila_servers:
     microscopes:
         Squid1:
             capacity: 1
+        Squid2:
+            capacity: 1
     acoustic_dispensers:
         Echo:
             capacity: 2
@@ -38,6 +40,7 @@ sila_servers:
     sealers:
         Sealer:
             capacity: 1
+
 # ------ Translation to used resources in the process description ------
 # the key must match the categories above and the values must match the required resources in the workflow description
 pythonlab_translation:

@@ -53,9 +53,11 @@ class BigEchoProtocol(BasicProcess):
             source_plate = self.source_plates[i]
             source_bc = source_barcodes[i]
             self.robot_arm.move(source_plate, self.echo, role="source")
+            source_plate.wait_cost(20)
             # only survey the necessary part of this source plate
             source_dataframe = dataframe[(dataframe["Source plate"] == source_bc)]
             self.echo.survey_for_protocol(source_plate=source_plate, protocol=source_dataframe)
+            source_plate.wait_cost(20)
             for j in range(num_dest):
                 dest_plate = self.dest_plates[j]
                 dest_bc = dest_barcodes[j]
@@ -68,6 +70,7 @@ class BigEchoProtocol(BasicProcess):
                     self.robot_arm.move(dest_plate, self.echo, role="destination")
                     self.echo.execute_transfer_protocol(source_plate, dest_plate, partial_df)
                     self.robot_arm.move(dest_plate, self.hotel2)
+                source_plate.wait_cost(20)
             self.robot_arm.move(source_plate, self.hotel1)
 
 

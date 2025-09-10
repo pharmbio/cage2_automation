@@ -36,6 +36,6 @@ class Echo5Plates(BasicProcess):
         self.echo.survey_for_protocol(protocol=protocol, source_plate=self.source_plate)
         for plate in self.target_plates:
             self.robot_arm.move(plate, self.echo, role="destination", read_barcode=False)
-            self.echo.execute_transfer_protocol(self.source_plate, protocol, plate)
+            self.echo.execute_transfer_protocol(self.source_plate, plate, protocol)
             self.robot_arm.move(plate, self.hotel2)
         self.robot_arm.move(self.source_plate, self.hotel1)
