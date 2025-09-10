@@ -47,11 +47,15 @@ services:
       POSTGRES_USER: platform_status
       POSTGRES_PASSWORD: platform_status
       POSTGRES_DB: platform_status_db
-    ports:
-      - "5432:5432"
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     network_mode: host
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U platform_status -d platform_status_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 
   platform_status_db:
     image: registry.gitlab.com/openlabautomation/lab-automation-packages/platform_status_db
@@ -60,7 +64,9 @@ services:
     volumes:
         - ./settings.py:/opt/platform_status_db/settings.py
     depends_on:
-      - database
+      database:
+        condition: service_healthy
+
     network_mode: host
 #      wipe_db:
 #        condition: service_completed_successfully
