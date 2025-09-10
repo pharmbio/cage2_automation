@@ -4,12 +4,11 @@ It does not check whether devices already exists. So, running this multiple time
 You can remove all present devices and positions running the wipe_lab command.
 """
 
-import os
-
 from platform_status_db.larastatus.status_db_implementation import (
     StatusDBImplementation,
 )
 from pathlib import Path
+import os
 
 # change this if necessary
 lab_config_file = (
