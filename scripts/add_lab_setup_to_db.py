@@ -8,7 +8,6 @@ from platform_status_db.larastatus.status_db_implementation import (
     StatusDBImplementation,
 )
 from pathlib import Path
-import os
 
 # change this if necessary
 lab_config_file = (
