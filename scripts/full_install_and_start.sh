@@ -4,7 +4,6 @@ set -e
 # --- Variables ---
 REPO_URL="https://gitlab.com/OpenLabAutomation/adaption-template.git"
 DB_REPO_URL="https://gitlab.com/OpenLabAutomation/lab-automation-packages/platform_status_db.git"
-DB_BRANCH="feature/cli_start_and_readme"
 VENV_NAME="test_venv"
 SUPERUSER_NAME="admin"
 SUPERUSER_PASS="password"
@@ -37,15 +36,6 @@ echo "✅ Dependencies installed."
 echo "🔹 Step 4: Setting up database package..."
 if [ ! -d "platform_status_db" ]; then
     git clone "$DB_REPO_URL"
-    cd platform_status_db
-    git checkout "$DB_BRANCH"
-    cd ..
-else
-    cd platform_status_db
-    git fetch origin
-    git checkout "$DB_BRANCH"
-    git pull origin "$DB_BRANCH"
-    cd ..
 fi
 uv pip install -e platform_status_db/.
 echo "✅ Database package installed (branch $DB_BRANCH)."
