@@ -104,8 +104,8 @@ example processes. For a detailed explanation on the GUI usage see our [Demo Gui
 ## Trouble shooting
 Future versions of used packages might contain breaking changes. This is the output of `pip list` in a freshly installed working virtual environment:
 
-
-<div style="max-height:200px; overflow:auto;">
+<details>
+<summary>Show full output of pip list</summary>
 
 ```text
 Package                   Version     Editable project location
@@ -189,7 +189,7 @@ zipp                      3.23.0
 
 ```
 
-</div>
+</details>
 
 
 ## Support
