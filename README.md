@@ -101,6 +101,95 @@ example processes. For a detailed explanation on the GUI usage see our [Demo Gui
 - HumanTest: you will have to finish the tasks in the human interaction GUI
 - InterestingExample: A more complex workflow with runtime decisions based on human interaction
 
+## Trouble shooting
+Future versions of used packages might contain breaking changes. This is the output of `pip list` in a freshly installed working virtual environment:
+
+
+<div style="max-height:200px; overflow:auto;">
+
+```text
+Package                   Version     Editable project location
+------------------------- ----------- -----------------------------------------------------
+absl-py                   2.3.1
+annotated-types           0.7.0
+asgiref                   3.9.1
+blinker                   1.9.0
+cachelib                  0.13.0
+certifi                   2025.8.3
+charset-normalizer        3.4.3
+click                     8.2.1
+dash                      3.0.4
+dash-bootstrap-components 2.0.4
+dash-extensions           2.0.4
+dash_interactive_graphviz 0.3.0
+dataclass-wizard          0.35.1
+Django                    5.2.6
+EditorConfig              0.17.1
+Flask                     3.0.3
+Flask-Caching             2.3.1
+genericroboticarm         1.3.3
+graphviz                  0.21
+grpcio                    1.71.0
+grpcio-tools              1.71.0
+human_server              1.1.6
+idna                      3.10
+ifaddr                    0.2.0
+immutabledict             4.2.1
+importlib_metadata        8.7.0
+itsdangerous              2.2.0
+Jinja2                    3.1.6
+jsbeautifier              1.15.4
+lab_adaption              0.1.0       /home/stefan/tmp/adaption-template
+laborchestrator           0.2.7
+labscheduler              0.2.47
+lxml                      6.0.1
+markdown-it-py            4.0.0
+MarkupSafe                3.0.2
+mdurl                     0.1.2
+more-itertools            10.8.0
+narwhals                  2.3.0
+nest-asyncio              1.6.0
+networkx                  3.5
+numpy                     2.3.2
+ortools                   9.9.3963
+packaging                 25.0
+pandas                    2.3.2
+pillow                    11.3.0
+pip                       24.0
+platform_status_db        0.2.0       /home/stefan/tmp/adaption-template/platform_status_db
+plotly                    6.3.0
+protobuf                  5.29.4
+pydantic                  2.11.7
+pydantic_core             2.33.2
+Pygments                  2.19.2
+PySCIPOpt                 5.6.0
+pyserial                  3.5
+python-dateutil           2.9.0.post0
+pythonlab                 0.2.2
+pytz                      2025.2
+PyYAML                    6.0.2
+requests                  2.32.5
+retrying                  1.4.2
+rich                      14.1.0
+setuptools                80.9.0
+shellingham               1.5.4
+sila2                     0.12.2
+sila2_example_server      0.0.0
+simplejson                3.20.1
+six                       1.17.0
+sqlparse                  0.5.3
+typer                     0.17.3
+typing_extensions         4.15.0
+typing-inspection         0.4.1
+tzdata                    2025.2
+urllib3                   2.5.0
+Werkzeug                  3.0.6
+zeroconf                  0.147.0
+zipp                      3.23.0
+
+```
+
+</div>
 
 
 ## Support
