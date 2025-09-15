@@ -38,7 +38,9 @@ def main():
                 )
         # get the absolute filepath
         with open(config.lab_config_file, "r") as reader:
-            scheduler.LabConfigurationController.LoadJobShopFromFile(reader.read())
+            content = reader.read()
+            scheduler.LabConfigurationController.LoadJobShopFromFile(content)
+            orchestrator.schedule_manager.lab_config_file = content
         Logger.info("Configured the lab of the scheduling service")
     except ModuleNotFoundError as mnfe:
         Logger.warning(f"Scheduler seems to be not installed:\n{mnfe}")
