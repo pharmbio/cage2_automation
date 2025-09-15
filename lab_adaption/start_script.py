@@ -25,6 +25,10 @@ def main():
     try:
         from labscheduler.sila_server import Client as SchedulerClient
 
+        with open(config.lab_config_file, "r") as reader:
+            content = reader.read()
+        orchestrator.schedule_manager.lab_config_file = content
+
         scheduler = SchedulerClient.discover(insecure=True, timeout=5)
         if config.scheduling_algorithm:
             available_algorithms = scheduler.SchedulingService.AvailableAlgorithms.get()
@@ -37,10 +41,7 @@ def main():
                     f"Algorithm {config.scheduling_algorithm} is not available in scheduler."
                 )
         # get the absolute filepath
-        with open(config.lab_config_file, "r") as reader:
-            content = reader.read()
-            scheduler.LabConfigurationController.LoadJobShopFromFile(content)
-            orchestrator.schedule_manager.lab_config_file = content
+        scheduler.LabConfigurationController.LoadJobShopFromFile(content)
         Logger.info("Configured the lab of the scheduling service")
     except ModuleNotFoundError as mnfe:
         Logger.warning(f"Scheduler seems to be not installed:\n{mnfe}")
