@@ -1,5 +1,5 @@
-# this file is used by git large file support (git-lfs) to move 
-# large / binary files to a special location / database 
+# this file is used by git large file support (git-lfs) to move
+# large / binary files to a special location / database
 *.jar filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.ZIP filter=lfs diff=lfs merge=lfs -text

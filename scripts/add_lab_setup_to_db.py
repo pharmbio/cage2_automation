@@ -13,10 +13,11 @@ from pathlib import Path
 lab_config_file = (
     Path(__file__).resolve().parent.parent / "lab_adaption" / "platform_config.yaml"
 )
-
 # creates a client got the database
 db_client = StatusDBImplementation()
 # clear the database, if necessary
 db_client.wipe_lab()
+
+print("Populating the database with config from:", lab_config_file)
 # populates the database
 db_client.create_lab_from_config(lab_config_file.as_posix())
