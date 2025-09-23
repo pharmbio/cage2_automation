@@ -196,7 +196,12 @@ zipp                      3.23.0
 For support, feel free to contact stefanmaak@freenet.de
 
 ## Authors and acknowledgment
-Maintained by Stefan Maak(Uppsala University) and Mark Dörr of the working group of Prof. Bornscheuer in Uni Greifswald.
+Maintained by Stefan Maak(Uppsala University).
+
+Contributors:
+
+- Mark Dörr of the working group of Prof. Bornscheuer in Uni Greifswald
+- Djura Smith of durch escience center
 
 ## License
 MIT Licence.
