@@ -118,7 +118,7 @@ class LabwareTransferHandler(DeviceInterface):
                 finish_observable_command(mover_prepare)
                 # place
                 place_cmd = sila_client.LabwareTransferManipulatorController.PutLabware(
-                    handover, [],
+                    handover, intermediate_actions,
                 )
                 finish_observable_command(place_cmd)
                 # notify target
