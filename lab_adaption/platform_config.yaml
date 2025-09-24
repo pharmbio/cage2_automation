@@ -16,6 +16,8 @@ sila_servers:
     washers:
         Washer:
             capacity: 1
+        BlueWasher:
+            capacity: 1
     dispensers:
         Multiflow:
             capacity: 1
