@@ -3,9 +3,9 @@ description:
 sila_servers:
     storage:
         Hotel1:
-            capacity: 4
+            capacity: 6
         Hotel2:
-            capacity: 8
+            capacity: 13
     movers:
         PFonRail:
             capacity: 1
