@@ -10,7 +10,7 @@ class CytomatTest(BasicProcess):
     def __init__(self):
         super().__init__(
             # priority=5,  # change as needed
-            num_plates=1,
+            num_plates=2,
             process_name="CytomatTest",
         )
 
