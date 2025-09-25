@@ -15,6 +15,7 @@ class CytomatTest(BasicProcess):
         )
 
     def init_service_resources(self):
+        super().init_service_resources()
         self.containers[1].start_position("Cytomat", 0)
         self.containers[0].start_position("Hotel2", 1)
 
