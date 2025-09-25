@@ -9,15 +9,14 @@ from lab_adaption.processes.basic_process import BasicProcess
 class CytomatTest(BasicProcess):
     def __init__(self):
         super().__init__(
-            # priority=5,  # change as needed
             num_plates=2,
             process_name="CytomatTest",
         )
 
     def init_service_resources(self):
         super().init_service_resources()
-        self.containers[1].start_position("Cytomat", 0)
-        self.containers[0].start_position("Hotel2", 1)
+        self.containers[1].start_position(self.incubator1, 0)
+        self.containers[0].start_position(self.hotel2, 1)
 
     def process(self):
         self.containers[1].wait_cost(100)
