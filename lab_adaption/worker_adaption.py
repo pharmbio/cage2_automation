@@ -13,7 +13,7 @@ from laborchestrator.engine.worker_interface import (
     Observable,
     DummyHandler,
 )
-from laborchestrator.structures import SMProcess, MoveStep, SchedulingInstance
+from laborchestrator.structures import SMProcess, MoveStep, SchedulingInstance, ProcessStep
 from sila2.client import SilaClient
 
 from .device_wrappers import (
@@ -64,7 +64,7 @@ sila_server_name: dict[str, str] = dict(
     Cytomat="Cytomat",
     Washer="Washer",
 )
-
+LID_STORAGE ="Hotel2"
 
 class Worker(WorkerInterface):
     # save the clients for repeated use
@@ -80,6 +80,28 @@ class Worker(WorkerInterface):
         self.clients = {}
         self.barcode_list = []
 
+    def update_information_from_db(self, step: ProcessStep):
+        # try to update the runtime container info from the database
+        for cont_name in reversed(step.cont_names):
+            try:
+                cont = self.jssp.container_info_by_name[cont_name]
+                # first try to find the info by barcode
+                cont_info = self.db_client.get_cont_info_by_barcode(cont.barcode)
+                if not cont_info:
+                    # if the barcode failed, try to find the information by location
+                    cont_info = self.db_client.get_container_at_position(cont.current_device, cont.current_pos)
+                    if not cont_info:
+                        cont_info = cont
+                # copy information to the runtime environment. The database is considered more reliable
+                cont.barcode = cont_info.barcode
+                cont.current_pos = cont_info.current_pos
+                cont.current_device = cont_info.current_device
+                cont.lidded = cont_info.lidded
+                cont.lid_site = cont_info.lid_site
+                cont.filled = cont_info.filled
+            except Exception as ex:
+                logging.error(f"Failed to retrieve container information from db: {ex}")
+
     def execute_process_step(
         self, step_id: str, device: str, device_kwargs: Dict[str, Any]
     ) -> Observable:
@@ -87,28 +109,53 @@ class Worker(WorkerInterface):
         # get all information about the process step
         step = self.jssp.step_by_id[step_id]
         cont = self.jssp.container_info_by_name[step.cont_names[0]]
+        self.update_information_from_db(step)
         if device in USE_REAL_SERVERS:
+            # TODO remove
             # switch to simulation for protocol execution
             if device == "Echo":
                 device += "_sim"
             client = self.get_client(device_name=device)
             if client:
                 wrapper = device_wrappers[device]
-                # for labware transfer add arguments
                 if isinstance(step, MoveStep):
+                    # provide the sila clients if current and/or target device implement interactive transfer
                     if cont.current_device in interactive:
                         device_kwargs["interactive_source"] =\
                             self.get_client(cont.current_device).LabwareTransferSiteController
                     if step.target_device.name in interactive:
                         device_kwargs["interactive_target"] =\
                             self.get_client(step.target_device.name).LabwareTransferSiteController
+                    # just add it, so the following lines can add actions without KeyError
                     if "intermediate_actions" not in device_kwargs:
                         device_kwargs["intermediate_actions"] = []
                     if step.data.get("read_barcode", False):
                         print("The arm is supposed to read the barcode now.")
                         device_kwargs["intermediate_actions"].append("read_barcode")
                         bc_client = self.get_client("BCReader")
-                        self.barcode_list = bc_client.BarcodeReaderService.AllBarcodes.get()
+                        # just to be sure not to produce an exception
+                        if bc_client:
+                            self.barcode_list = bc_client.BarcodeReaderService.AllBarcodes.get()
+                    # check whether its specified whether the lid must be on in the target position
+                    desired_lidding_state = step.data.get("lidded", None)
+                    if desired_lidding_state is not None:
+                        # check whether the desired state is already there
+                        if not desired_lidding_state == cont.lidded:
+                            if not desired_lidding_state:
+                                next_free_slot = next(
+                                    (slot for slot in self.db_client.get_all_positions(LID_STORAGE)
+                                    if self.db_client.position_empty(LID_STORAGE, slot)),
+                                    None)
+                                if next_free_slot is None:
+                                    logging.error("There is no free slot in the lid storage")
+                                lidding_cmd = f"unlid_{LID_STORAGE}_{next_free_slot}"
+                            else:
+                                # put on the lid
+                                lid_position = cont.lid_site
+                                if lid_position is None:
+                                    logging.error(f"position of lid of {cont} is undefined")
+                                lidding_cmd = f"lid_{lid_position[0]}_{lid_position[1]}"
+                            device_kwargs["intermediate_actions"].append(lidding_cmd)
                 # starts the command on the device and returns an Observable
                 observable = wrapper.get_SiLA_handler(
                     step, cont, client, **device_kwargs
