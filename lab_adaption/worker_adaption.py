@@ -149,6 +149,8 @@ class Worker(WorkerInterface):
                                 if next_free_slot is None:
                                     logging.error("There is no free slot in the lid storage")
                                 lidding_cmd = f"unlid_{LID_STORAGE}_{next_free_slot}"
+                                # store the information for later
+                                step.data["lid_target"] = [LID_STORAGE, next_free_slot]
                             else:
                                 # put on the lid
                                 lid_position = cont.lid_site
@@ -213,6 +215,10 @@ class Worker(WorkerInterface):
                     print(f"barcode is {barcode}")
                 labware.barcode = barcode
                 self.db_client.set_barcode(labware)
+        if step.data.get("lidded", False):
+            self.db_client.lidded_container(labware, None, None)
+        if step.data.get("lid_target", None):
+            self.db_client.unlidded_container(labware, *step.data["lid_target"])
         super().process_step_finished(step_id, result)
 
     def check_prerequisites(self, process: SMProcess) -> Tuple[bool, str]:
