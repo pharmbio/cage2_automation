@@ -22,7 +22,7 @@ sila_servers:
         Multiflow:
             capacity: 1
     incubators:
-        Cytomat:
+        Cytomat1:
             capacity: 42
         Cytomat2:
             capacity: 42
