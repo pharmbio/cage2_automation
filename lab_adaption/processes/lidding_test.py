@@ -2,14 +2,12 @@
 Duplicate this file and add/modify the missing parts to create new processes
 """
 
-from pythonlab.resource import DynamicLabwareResource as ReagentResource  # noqa: F401
 from lab_adaption.processes.basic_process import BasicProcess
 
 
 class LiddingTest(BasicProcess):
     def __init__(self):
         super().__init__(
-            # priority=5,  # change as needed
             num_plates=1,
             process_name="LiddingTest",
         )
