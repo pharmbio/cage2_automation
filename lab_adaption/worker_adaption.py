@@ -40,8 +40,9 @@ USE_REAL_SERVERS = [
     "Human",
     "BCReader",
     "Washer",
+    "Cytomat1",
 ]
-interactive = {"Echo", "Washer", "Sealer"}
+interactive = {"Echo", "Washer", "Sealer", "Cytomat1"}
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
@@ -61,7 +62,7 @@ sila_server_name: dict[str, str] = dict(
     Human="Human",
     BCReader="BCReader",
     Echo_sim="EchoSim",
-    Cytomat="Cytomat",
+    Cytomat1="Cytomat1",
     Washer="Washer",
 )
 LID_STORAGE ="Hotel2"
