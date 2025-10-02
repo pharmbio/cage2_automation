@@ -1,3 +1,7 @@
+"""
+Example for wrapping a single observable sila command
+"""
+
 import logging
 
 from sila2.client import ClientObservableCommandInstance
