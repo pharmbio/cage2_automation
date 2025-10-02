@@ -6,6 +6,7 @@ In _protocol() also non-sila API can be used. So, this also allows integration o
 import logging
 import time
 
+# import the emulator template
 from laborchestrator.engine.worker_interface import ObservableProtocolHandler
 from laborchestrator.structures import ProcessStep, ContainerInfo
 
@@ -37,6 +38,7 @@ class CustomWrapper(DeviceInterface):
                 # Optionally: provide some response
                 self.response = sila_client.OtherSilaFeature.SayHello(cont.name)
 
+            # can be left out if no response is provided
             def get_responses(self):
                 return self.response
 

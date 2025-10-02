@@ -4,6 +4,7 @@ Example for wrapping a single observable sila command
 
 import logging
 
+# import from the sila framework
 from sila2.client import ClientObservableCommandInstance
 from laborchestrator.structures import ProcessStep, ContainerInfo
 
