@@ -20,7 +20,7 @@ class CytomatTest(BasicProcess):
 
     def process(self):
         self.containers[1].wait_cost(100)
-        self.robot_arm.move(self.containers[0], self.incubator1, label="A")
+        self.robot_arm.move(self.containers[0], self.incubator1, label="A", position=3)
         self.robot_arm.move(self.containers[1], self.hotel2,
                             relations=[("direct_after", "A", [])],
                             )

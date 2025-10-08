@@ -32,10 +32,10 @@ class Echo5Plates(BasicProcess):
 
     def process(self):
         protocol = r"C:\users\pharmbio\Desktop\Malin\CP_Echo_files\0000_test.csv"
-        self.robot_arm.move(self.source_plate, self.echo, role="source", read_barcode=False)
+        self.robot_arm.move(self.source_plate, self.echo, role="source", read_barcode=True, lidded=False)
         self.echo.survey_for_protocol(protocol=protocol, source_plate=self.source_plate)
         for plate in self.target_plates:
-            self.robot_arm.move(plate, self.echo, role="destination", read_barcode=False)
+            self.robot_arm.move(plate, self.echo, role="destination", read_barcode=True, lidded=False)
             self.echo.execute_transfer_protocol(self.source_plate, plate, protocol)
-            self.robot_arm.move(plate, self.hotel2)
-        self.robot_arm.move(self.source_plate, self.hotel1)
+            self.robot_arm.move(plate, self.hotel2, lidded=True)
+        self.robot_arm.move(self.source_plate, self.hotel1, lidded=True)
