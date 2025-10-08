@@ -114,8 +114,8 @@ class Worker(WorkerInterface):
         if device in USE_REAL_SERVERS:
             # TODO remove
             # switch to simulation for protocol execution
-            if device == "Echo":
-                device += "_sim"
+            #if device == "Echo":
+            #    device += "_sim"
             client = self.get_client(device_name=device)
             if client:
                 wrapper = device_wrappers[device]
