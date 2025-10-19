@@ -87,6 +87,13 @@ Call from different console tabs
        start_sila_servers
    ```
 
+## Docker compose
+Alternatively you can use docker compose to start all services. Make sure you have docker and docker-compose installed.
+Then run
+```bash
+   docker-compose up --build
+```
+
 ## Usage
 You can access the GUI for different components:
 - database of present labware at [http://127.0.0.1:8000/job_logs/present_labware/](http://127.0.0.1:8000/job_logs/present_labware/)

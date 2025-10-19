@@ -48,7 +48,9 @@ services:
       POSTGRES_PASSWORD: platform_status
       POSTGRES_DB: platform_status_db
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      # Systems with SELinux need the :Z flag
+      # - ./pgdata:/var/lib/postgresql/18/docker:Z
+      - ./pgdata:/var/lib/postgresql/18/docker
     network_mode: host
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U platform_status -d platform_status_db" ]
@@ -84,3 +86,4 @@ services:
       echo 'Starting Sila servers...' &&
       start_sila_servers"
     network_mode: host
+
