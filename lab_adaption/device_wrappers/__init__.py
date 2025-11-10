@@ -5,6 +5,7 @@ from .echo_wrapper import EchoWrapper
 from .washer_dispenser_wrapper import WasherDispenserWrapper
 from .squid_wrapper import SquidWrapper
 from .plate_sealer_wrapper import PlateSealerWrapper
+from .bluewasher_wrapper import BlueWasherWrapper
 
 
 __all__ = [
@@ -13,8 +14,9 @@ __all__ = [
     "GenericRobotArmWrapper",
     "EchoWrapper",
     "finish_observable_command",
-    LabwareTransferHandler,
-    WasherDispenserWrapper,
-    SquidWrapper,
-    PlateSealerWrapper,
+    "LabwareTransferHandler",
+    "WasherDispenserWrapper",
+    "SquidWrapper",
+    "PlateSealerWrapper",
+    "BlueWasherWrapper",
 ]

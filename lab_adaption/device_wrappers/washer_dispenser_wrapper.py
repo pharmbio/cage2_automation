@@ -6,7 +6,7 @@ from . import DeviceInterface
 try:
     from lhc_python.steps.step_interface import Step
 except ModuleNotFoundError:
-    logging.warning("The washer wraper can not be used without lhc_python being installed.")
+    logging.warning("The washer wrapper can not be used without lhc_python being installed.")
 try:
     from cell_washer import Client as WasherDispenserClient
 except ModuleNotFoundError:

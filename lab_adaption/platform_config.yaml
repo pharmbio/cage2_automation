@@ -19,7 +19,7 @@ sila_servers:
         BlueWasher:
             capacity: 1
     dispensers:
-        Multiflow:
+        MultiFlow:
             capacity: 1
     incubators:
         Cytomat1:

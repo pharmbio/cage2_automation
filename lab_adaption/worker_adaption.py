@@ -25,6 +25,7 @@ from .device_wrappers import (
     WasherDispenserWrapper,
     SquidWrapper,
     PlateSealerWrapper,
+    BlueWasherWrapper,
 )
 try:
     from genericroboticarm.sila_server import Client as ArmClient
@@ -41,8 +42,10 @@ USE_REAL_SERVERS = [
     "BCReader",
     "Washer",
     "Cytomat1",
+    "Cytomat2",
+    "BlueWasher",
 ]
-interactive = {"Echo", "Washer", "Sealer", "Cytomat1"}
+interactive = {"Echo", "Washer", "Sealer", "Cytomat1", "BlueWasher"}
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
@@ -51,7 +54,9 @@ device_wrappers: dict[str, type[DeviceInterface]] = dict(
     Human=HumanWrapper,
     Echo=EchoWrapper,
     Echo_sim=EchoWrapper,
-    Washer=WasherDispenserWrapper
+    Washer=WasherDispenserWrapper,
+    MultiFlow=WasherDispenserWrapper,
+    BlueWasher=BlueWasherWrapper,
 )
 
 # maps the device names (from the platform_config and process description) to the correct sila server names
@@ -63,7 +68,10 @@ sila_server_name: dict[str, str] = dict(
     BCReader="BCReader",
     Echo_sim="EchoSim",
     Cytomat1="Cytomat1",
+    Cytomat2="Cytomat2",
     Washer="Washer",
+    BlueWasher="BlueWasher",
+    MultiFlow="MultiFlow",
 )
 LID_STORAGE ="Hotel2"
 
