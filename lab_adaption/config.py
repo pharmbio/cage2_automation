@@ -1,6 +1,6 @@
 """ """
 
-from .worker_adaption import Worker
+from lab_adaption.worker_adaption import Worker
 from pathlib import Path
 
 
@@ -11,10 +11,9 @@ from platform_status_db.larastatus.status_db_implementation import (
 )
 
 db_client = StatusDBImplementation()
-# db_client = None
 
 # worker = None  # uncomment to use the default worker (i.e., just simulation)
-worker = Worker  # uncomment to use your customized worker
+worker_type = Worker  # uncomment to use your customized worker
 
 # lab_config to be sent to the scheduler
 lab_config_file = (
@@ -26,10 +25,9 @@ lab_config_file = (
 default_scheduling_time = 1  # seconds
 
 # change to a solver name like CP-Solver or BottleneckPD which will be chosen on the scheduler.
-# None keeps the schedulers default
-scheduling_algorithm: str | None = "CP-Solver"
+scheduling_algorithm = "CP-Solver"
 
 # change this to the module where you save your pythonLab processes
-from . import processes  # noqa: E402
+from lab_adaption import processes  # noqa: E402
 
 process_module = processes
