@@ -24,7 +24,7 @@ class MultiflowTest(BasicProcess):
             DispenseStep()
         ]
         cont = self.containers[0]
-        self.robot_arm.move(cont, self.dispenser)
+        self.robot_arm.move(cont, self.dispenser, lidded=False)
         self.dispenser.execute_custom_steps(labware=cont, steps=steps)
         self.robot_arm.move(cont, self.hotel2)
 

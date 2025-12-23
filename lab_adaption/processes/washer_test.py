@@ -18,7 +18,7 @@ class WasherTest(BasicProcess):
     def init_service_resources(self):
         # setting start position of containers
         super().init_service_resources()
-        self.containers[0].set_start_position(self.washer, 0)
+        self.containers[0].set_start_position(self.hotel2, 0)
 
     def process(self):
         step = EMWashStep()
@@ -27,4 +27,7 @@ class WasherTest(BasicProcess):
             wells_to_wash=[False, True, False, False],
             buffer_choice='A',
         ))
-        self.washer.execute_custom_steps(steps=[step], labware=self.containers[0])
+        cont = self.containers[0]
+        self.robot_arm.move(cont, self.washer, lidded=False)
+        self.washer.execute_custom_steps(steps=[step], labware=cont)
+        self.robot_arm.move(cont, self.hotel2)

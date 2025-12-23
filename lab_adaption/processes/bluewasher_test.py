@@ -2,16 +2,15 @@
 Duplicate this file and add/modify the missing parts to create new processes
 """
 
-from pythonlab.resource import DynamicLabwareResource as ReagentResource  # noqa: F401
 from lab_adaption.processes.basic_process import BasicProcess
 from bluewasher_sila.hardware_comm.commands import Prime, Dispense, Centrifugation
 
 
-class MultiflowTest(BasicProcess):
+class BlueWasherTest(BasicProcess):
     def __init__(self):
         super().__init__(
             num_plates=1,
-            process_name="MultiflowTest",
+            process_name="BlueWasherTest",
         )
 
     def init_service_resources(self):
@@ -26,7 +25,7 @@ class MultiflowTest(BasicProcess):
             Centrifugation(duration_in_ms=5000, rpm=300)
         ]
         cont = self.containers[0]
-        self.robot_arm.move(cont, self.bluewasher)
+        self.robot_arm.move(cont, self.bluewasher, lidded=False)
         self.bluewasher.execute_custom_steps(labware=cont, steps=protocol)
         self.robot_arm.move(cont, self.hotel2)
 
