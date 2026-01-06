@@ -9,7 +9,7 @@ from lab_adaption.processes.basic_process import BasicProcess
 class Echo5Plates(BasicProcess):
     def __init__(self):
         super().__init__(
-            num_plates=2,
+            num_plates=3,
             process_name="Echo5Plates",
         )
 
