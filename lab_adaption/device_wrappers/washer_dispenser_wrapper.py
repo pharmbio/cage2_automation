@@ -35,7 +35,12 @@ class WasherDispenserWrapper(DeviceInterface):
                     step_definition.to_string()
                     for step_definition in protocol_steps
                 ]
-                return sila_client.WasherProtocolController.RunCustomSteps(step_definitions)
+                #TODO: bring washer and dispenser to a common interface
+                if hasattr(sila_client, "WasherProtocolController"):
+                    cmd = sila_client.WasherProtocolController.RunCustomSteps(step_definitions)
+                else:
+                    cmd = sila_client.CommandController.RunCustomSteps(step_definitions)
+                return cmd
             except Exception:
                 raise Exception(traceback.print_exc())
         else:
