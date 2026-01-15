@@ -17,7 +17,7 @@ worker_type = Worker  # uncomment to use your customized worker
 
 # lab_config to be sent to the scheduler
 lab_config_file = str(
-    Path(__file__).resolve().parent.parent / "lab_adaption" / "platform_config.yaml"
+    Path(__file__).resolve().parent / "platform_config.yaml"
 )
 
 # controls the default time limit the orchestrator gives the scheduler for computing new schedules
