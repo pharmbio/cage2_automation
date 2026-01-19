@@ -7,6 +7,7 @@ from typing import Optional, NamedTuple, Dict, Any, Tuple
 from random import randint
 
 from laborchestrator.database_integration import StatusDBInterface
+from laborchestrator.logging_manager import StandardLogger as logger
 from laborchestrator.engine import ScheduleManager
 from laborchestrator.engine.worker_interface import (
     WorkerInterface,
@@ -19,7 +20,6 @@ from sila2.client import SilaClient
 from .device_wrappers import (
     DeviceInterface,
     HumanWrapper,
-    GenericRobotArmWrapper,
     EchoWrapper,
     LabwareTransferHandler,
     WasherDispenserWrapper,
@@ -100,9 +100,9 @@ class Worker(WorkerInterface):
                 if not cont_info:
                     # if the barcode failed, try to find the information by location
                     cont_info = self.db_client.get_container_at_position(cont.current_device, cont.current_pos)
-                    logging.info("found container by its position")
+                    logger.info("found container by its position")
                     if cont_info.barcode not in [None, "None"]:
-                        logging.info(f"Taking barcode {cont_info.barcode} from database replacing {cont.barcode}")
+                        logger.info(f"Taking barcode {cont_info.barcode} from database replacing {cont.barcode}")
                     if not cont_info:
                         cont_info = cont
                 # copy information to the runtime environment. The database is considered more reliable
@@ -113,12 +113,12 @@ class Worker(WorkerInterface):
                 cont.lid_site = cont_info.lid_site
                 cont.filled = cont_info.filled
             except Exception as ex:
-                logging.error(f"Failed to retrieve container information from db: {ex}")
+                logger.error(f"Failed to retrieve container information from db: {ex}")
 
     def execute_process_step(
         self, step_id: str, device: str, device_kwargs: Dict[str, Any]
     ) -> Observable:
-        print(f"Execute {step_id} on device {device}")
+        logger.info(f"Execute {step_id} on device {device}")
         # get all information about the process step
         step = self.jssp.step_by_id[step_id]
         cont = self.jssp.container_info_by_name[step.cont_names[0]]
@@ -143,7 +143,7 @@ class Worker(WorkerInterface):
                     if "intermediate_actions" not in device_kwargs:
                         device_kwargs["intermediate_actions"] = []
                     if step.data.get("read_barcode", False):
-                        print("The arm is supposed to read the barcode now.")
+                        logger.info("The arm is supposed to read the barcode now.")
                         device_kwargs["intermediate_actions"].append("read_barcode")
                         bc_client = self.get_client("BCReader")
                         # just to be sure not to produce an exception
