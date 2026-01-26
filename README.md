@@ -33,8 +33,6 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
       <b>Uppsala – Imaging Room</b>
       </a></sub>
     </td>
-  </tr>
-  <tr>
     <td align="center">
       <img src="https://gitlab.com/OpenLabAutomation/data/-/raw/main/adaptions/demo_lab.jpg" width="250"><br>
       <sub>
