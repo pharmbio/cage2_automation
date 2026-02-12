@@ -88,7 +88,6 @@ class Worker(WorkerInterface):
     ):
         super().__init__(jssp, schedule_manager, db_client)
         self.clients = {}
-        self.barcode_list = []
 
     def update_information_from_db(self, step: ProcessStep):
         # try to update the runtime container info from the database
@@ -145,10 +144,6 @@ class Worker(WorkerInterface):
                     if step.data.get("read_barcode", False):
                         logger.info("The arm is supposed to read the barcode now.")
                         device_kwargs["intermediate_actions"].append("read_barcode")
-                        bc_client = self.get_client("BCReader")
-                        # just to be sure not to produce an exception
-                        if bc_client:
-                            self.barcode_list = bc_client.BarcodeReaderService.AllBarcodes.get()
                     # check whether its specified whether the lid must be on in the target position
                     desired_lidding_state = step.data.get("lidded", None)
                     if desired_lidding_state is not None:
@@ -218,8 +213,10 @@ class Worker(WorkerInterface):
             print("We did read a barcode during the move")
             bc_reader_client = self.get_client("BCReader")
             if bc_reader_client:
-                current_bc_list = bc_reader_client.BarcodeReaderService.AllBarcodes.get()
-                if len(self.barcode_list) == len(current_bc_list):
+                last_read_barcode = bc_reader_client.BarcodeReaderService.LastBarcode.get()
+                reading_time = bc_reader_client.BarcodeReaderService.LastReadingTime.get()
+                # check if some barcode was read since the step started
+                if not last_read_barcode or reading_time < step.start:
                     barcode = f"Grumpycat_{randint(0, 99999)}"
                     logging.warning(
                         f"{datetime.now()}: Seems like barcode reading failed. Generated random barcode {barcode}")
@@ -264,7 +261,7 @@ class Worker(WorkerInterface):
 
             # connect the arm to all interacting devices
             if "PFonRail" in self.clients:
-                arm_client: ArmClient = self.get_client("PFonRail")
+                arm_client = self.get_client("PFonRail")
                 set_for_interaction = arm_client.ImplicitInteractionService.CurrentDeviceSet.get()
                 # check if all interacting devices are set for implicit interaction
                 interacting = needed_clients & interactive
