@@ -1,6 +1,6 @@
 """ """
 
-from .worker_adaption import Worker
+from lab_adaption.worker_adaption import Worker
 from pathlib import Path
 
 
@@ -11,7 +11,7 @@ from platform_status_db.larastatus.status_db_implementation import (
 )
 
 # change this to the module where you save your pythonLab processes
-from . import processes
+from lab_adaption import processes
 
 # Comment out db_client to None to not use any database
 db_client = StatusDBImplementation()
