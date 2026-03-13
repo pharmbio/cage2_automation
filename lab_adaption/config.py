@@ -29,6 +29,6 @@ lab_config_file = str(
 default_scheduling_time = 1  # seconds
 
 # change to a solver name like CP-Solver or BottleneckPD which will be chosen on the scheduler.
-scheduling_algorithm = "BottleneckPD"
+scheduling_algorithm = "CP-Solver"
 
 process_module = processes

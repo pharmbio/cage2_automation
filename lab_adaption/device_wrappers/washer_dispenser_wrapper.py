@@ -18,12 +18,10 @@ class WasherDispenserWrapper(DeviceInterface):
     @staticmethod
     def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: WasherDispenserClient, **kwargs)\
         -> Observable:
-        if step.function == "fix_cells":
+        # TODO find better naming in pythonlab
+        if step.function in ["fix_cells", "wash_cells"]:
             protocol = step.data['protocol']
-            return sila_client.WasherProtocolController.RunProtocol(ProtocolName=protocol)
-        elif step.function == "wash_cells":
-            protocol = step.data['protocol']
-            return sila_client.WasherProtocolController.RunProtocol(ProtocolName=protocol)
+            return sila_client.ProtocolExecutionService.ExecuteProtocol(ProtocolName=protocol)
         elif step.function == "custom_steps":
             try:
                 # this should work and if not the exception should tell the problem
@@ -31,15 +29,15 @@ class WasherDispenserWrapper(DeviceInterface):
                 assert isinstance(protocol_steps, list)
                 assert len(protocol_steps) > 0
                 assert all(isinstance(elem, Step) for elem in protocol_steps)
+                # compress step definitions to strings
                 step_definitions = [
                     step_definition.to_string()
                     for step_definition in protocol_steps
                 ]
-                #TODO: bring washer and dispenser to a common interface
-                if hasattr(sila_client, "WasherProtocolController"):
-                    cmd = sila_client.WasherProtocolController.RunCustomSteps(step_definitions)
-                else:
-                    cmd = sila_client.CommandController.RunCustomSteps(step_definitions)
+                # check if the expected function is available in the sever
+                assert hasattr(sila_client, "ProtocolExecutionService")
+                cmd = sila_client.ProtocolExecutionService.ExecuteCustomProtocol(step_definitions)
+
                 return cmd
             except Exception:
                 raise Exception(traceback.print_exc())
