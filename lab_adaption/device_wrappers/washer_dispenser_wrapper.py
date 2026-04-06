@@ -19,7 +19,7 @@ class WasherDispenserWrapper(DeviceInterface):
     def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: WasherDispenserClient, **kwargs)\
         -> Observable:
         # TODO find better naming in pythonlab
-        if step.function in ["fix_cells", "wash_cells"]:
+        if step.function in ["fix_cells", "wash_cells", "run_protocol"]:
             protocol = step.data['protocol']
             return sila_client.ProtocolExecutionService.ExecuteProtocol(ProtocolName=protocol)
         elif step.function == "custom_steps":

@@ -21,12 +21,12 @@ class CleoCellProcess(BasicProcess):
             cont.wait_cost(40)
             self.robot_arm.move(cont, self.washer, lidded=False, read_barcode=True)
             cont.wait_cost(40)
-            self.washer.fix_cells(labware=cont, protocol="fix_cells", label=f"fix_{cont.name}")
+            self.washer.run_protocol(labware=cont, protocol="fix_cells", label=f"fix_{cont.name}")
             cont.wait_cost(40)
             self.robot_arm.move(cont, self.hotel1, lidded=True)
             self.robot_arm.move(cont, self.washer, lidded=False)
             cont.wait_cost(40)
-            self.washer.wash_cells(labware=cont, protocol="wash_cells", duration=180, relations=[
+            self.washer.run_protocol(labware=cont, protocol="wash_cells", duration=180, relations=[
                 ("min_wait", f"fix_{cont.name}", [min_wait_time]),
                 ("max_wait", f"fix_{cont.name}", [max_wait_time]),
             ])
@@ -38,4 +38,3 @@ class CleoCellProcess(BasicProcess):
             self.robot_arm.move(cont, self.squid_pool)
             self.squid_pool.run_protocol(labware=cont, protocol="look_at_it", duration=60*60)
             self.robot_arm.move(cont, self.hotel1)
-
