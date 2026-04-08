@@ -235,44 +235,16 @@ class Worker(WorkerInterface):
         message = ""
         # message = f"  Problems with starting {process.name}: \n"
         try:
-            # try to create sila clients in advance
-            needed_clients = set()
-            for step in process.steps:
-                # collect all devices that will be needed (including source and target)
-                for needed in step.used_devices:
-                    preference = needed.preferred
-                    if preference:
-                        needed_clients.add(preference)
-                # check if the barcode reader is needed
-                if isinstance(step, MoveStep):
-                    if step.data.get("read_barcode", False):
-                        needed_clients.add("BCReader")
-            # these might not be explicitly marked as source in the first movement
-            for cont in process.containers:
-                needed_clients.add(cont.current_device)
+            # collect all devices we need to control in this process
+            needed_clients = self._collect_required_clients(process)
             print("needed clients: ", needed_clients)
-            # try client creation
-            for device_name in needed_clients:
-                if device_name in USE_REAL_SERVERS:
-                    if not self.get_client(device_name, timeout=5):
-                        message += f"Client creation for {device_name} failed.\n"
-                    else:
-                        print(f"created client for {device_name}")
-
+            # try to create and connect all required clients
+            message += self._try_client_creation(needed_clients)
             # connect the arm to all interacting devices
-            if "PFonRail" in self.clients:
-                arm_client = self.get_client("PFonRail")
-                set_for_interaction = arm_client.ImplicitInteractionService.CurrentDeviceSet.get()
-                # check if all interacting devices are set for implicit interaction
-                interacting = needed_clients & interactive
-                for device in interacting:
-                    if device not in set_for_interaction:
-                        message += f"{device} should be set for implicit interaction.\n"
-                    else:
-                        success = arm_client.ImplicitInteractionService.ConnectToDevice(
-                            sila_server_name[device], Timeout=5).Success
-                        if not success:
-                            message += f"Failed to connect arm to {device}.\n"
+            message += self._check_implicit_interaction_connections(needed_clients)
+            # check whether the BlueWasher is initialized (if its needed)
+            if "BlueWasher" in self.clients:
+                message += self._check_bluewsher_status()
 
             if message:
                 message = f"Problems with starting {process.name}:\n {message}"
@@ -299,3 +271,60 @@ class Worker(WorkerInterface):
                 return 1
         # checks the database for the free position with the lowest index
         return super().determine_destination_position(step)
+    
+    def _collect_required_clients(self, process: SMProcess) -> set[str]:
+        needed_clients = set()
+        for step in process.steps:
+            # collect all devices that will be needed (including source and target)
+            for needed in step.used_devices:
+                preference = needed.preferred
+                if preference:
+                    needed_clients.add(preference)
+            # check if the barcode reader is needed
+            if isinstance(step, MoveStep):
+                if step.data.get("read_barcode", False):
+                    needed_clients.add("BCReader")
+        # these might not be explicitly marked as source in the first movement
+        for cont in process.containers:
+            needed_clients.add(cont.current_device)
+        return needed_clients
+    
+    def _try_client_creation(self, device_names: set[str]) -> str:
+        message = ""
+        for device_name in device_names:
+            if device_name in USE_REAL_SERVERS:
+                if not self.get_client(device_name, timeout=5):
+                    message += f"Client creation for {device_name} failed.\n"
+                else:
+                    print(f"created client for {device_name}")
+        return message
+
+    def _check_implicit_interaction_connections(self, device_names: set[str]) -> str:
+        message = ""
+        if "PFonRail" in self.clients:
+            arm_client = self.get_client("PFonRail")
+            set_for_interaction = arm_client.ImplicitInteractionService.CurrentDeviceSet.get()
+            # check if all interacting devices are set for implicit interaction
+            interacting = device_names & interactive
+            for device in interacting:
+                if device not in set_for_interaction:
+                    message += f"{device} should be set for implicit interaction.\n"
+                else:
+                    success = arm_client.ImplicitInteractionService.ConnectToDevice(
+                        sila_server_name[device], Timeout=5).Success
+                    if not success:
+                        message += f"Failed to connect arm to {device}.\n"
+        return message
+
+    def _check_bluewsher_status(self) -> str:
+        bluewasher_client = self.get_client("BlueWasher")
+        controller = bluewasher_client.InitializationController
+        try:
+            if not controller.IsConnected.get():
+                return "BlueWasher is not connected.\n"
+            if not controller.IsInitialized.get():
+                return "BlueWasher is connected but not initialized.\n"
+        except Exception as ex:
+            logging.exception("Failed to check BlueWasher status")
+            return f"BlueWasher prerequisite check failed: {ex}\n"
+        return ""

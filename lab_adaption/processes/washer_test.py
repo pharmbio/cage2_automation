@@ -4,6 +4,7 @@ from lab_adaption.processes.basic_process import BasicProcess
 try:
     from lhc_python.steps.step_parts import CWFlowRate, WashInstructions
     from lhc_python.steps.ewash_step import EMWashStep
+    from lhc_python.steps.prime_step import PrimeStep
 except ModuleNotFoundError:
     logging.warning("WasherTest will fail without lhc_python being installed")
 
@@ -21,13 +22,19 @@ class WasherTest(BasicProcess):
         self.containers[0].set_start_position(self.hotel2, 0)
 
     def process(self):
-        step = EMWashStep()
-        step.create(settings = WashInstructions(
+        prime_step = PrimeStep()
+        prime_step.create(settings=CWFlowRate(
+            channel=1,
+            volume=10,
+            high_flow=True,
+            ))
+        wash_step = EMWashStep()
+        wash_step.create(settings = WashInstructions(
             num_cycles=1,
             wells_to_wash=[False, True, False, False],
             buffer_choice='A',
         ))
         cont = self.containers[0]
         self.robot_arm.move(cont, self.washer, lidded=False)
-        self.washer.execute_custom_steps(steps=[step], labware=cont)
+        self.washer.execute_custom_steps(steps=[prime_step, wash_step], labware=cont)
         self.robot_arm.move(cont, self.hotel2)
