@@ -3,6 +3,7 @@
 import logging
 import traceback
 from datetime import datetime
+from pathlib import Path
 from typing import Optional, NamedTuple, Dict, Any, Tuple
 from random import randint
 
@@ -338,7 +339,23 @@ class Worker(WorkerInterface):
             device_name = step.used_devices[0].preferred
             if protocol_name and device_name in USE_REAL_SERVERS and device_name in ["BlueWasher", "Washer", "MultiFlow"]:
                 client = self.get_client(device_name)
-                avaiable_protocols = client.ProtocolExecutionService.AvailableProtocols.get()
-                if protocol_name not in avaiable_protocols:
+                # normalize by getting rid of path, suffix (and index in the bluewasher case)
+                normalized_protocol = self._normalize_protocol_identifier(protocol_name, device_name)
+                avaiable_protocols = {
+                    self._normalize_protocol_identifier(protocol, device_name)
+                    for protocol in client.ProtocolExecutionService.AvailableProtocols.get()
+                }
+                if normalized_protocol not in avaiable_protocols:
                     message += f"Protocol {protocol_name} for device {device_name} not found.\n"
         return message
+
+    @staticmethod
+    def _normalize_protocol_identifier(protocol_name: str, device_name: str) -> str:
+        normalized_name = protocol_name.replace("\\", "/")
+
+        if device_name == "BlueWasher":
+            possible_index, separator, possible_name = normalized_name.partition(" ")
+            if separator and possible_index.isdigit():
+                normalized_name = possible_name
+
+        return Path(normalized_name).stem
