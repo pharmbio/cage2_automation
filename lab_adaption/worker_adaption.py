@@ -245,6 +245,8 @@ class Worker(WorkerInterface):
             # check whether the BlueWasher is initialized (if its needed)
             if "BlueWasher" in self.clients:
                 message += self._check_bluewsher_status()
+            # check whether all protocols that will be used in the process actually exist on the servers
+            message += self._check_protocol_existence(process)
 
             if message:
                 message = f"Problems with starting {process.name}:\n {message}"
@@ -328,3 +330,15 @@ class Worker(WorkerInterface):
             logging.exception("Failed to check BlueWasher status")
             return f"BlueWasher prerequisite check failed: {ex}\n"
         return ""
+
+    def _check_protocol_existence(self, process: SMProcess) -> str:
+        message = ""
+        for step in process.steps:
+            protocol_name = step.data.get("protocol", None)
+            device_name = step.used_devices[0].preferred
+            if protocol_name and device_name in USE_REAL_SERVERS and device_name in ["BlueWasher", "Washer", "MultiFlow"]:
+                client = self.get_client(device_name)
+                avaiable_protocols = client.ProtocolExecutionService.AvailableProtocols.get()
+                if protocol_name not in avaiable_protocols:
+                    message += f"Protocol {protocol_name} for device {device_name} not found.\n"
+        return message
