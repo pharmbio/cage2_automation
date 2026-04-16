@@ -31,7 +31,8 @@ class BlueWasherWrapper(DeviceInterface):
                 assert all(isinstance(elem, (SimpleCommand, ComplexCommand)) for elem in protocol_steps)
                 content = program_to_str_list(protocol_steps)
                 return sila_client.ProtocolExecutionService.ExecuteCustomProtocol(content)
-            except Exception:
-                raise Exception(traceback.print_exc())
+            except Exception as ex:
+                traceback.print_exc()
+                raise
         else:
             raise Exception(f"Unknown function {step.function}")

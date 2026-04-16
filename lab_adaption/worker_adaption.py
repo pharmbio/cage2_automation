@@ -47,7 +47,7 @@ USE_REAL_SERVERS = [
     "BlueWasher",
     "MultiFlow",
 ]
-interactive = {"Echo", "Washer", "Sealer", "Cytomat1", "BlueWasher", "MultiFlow"}
+interactive = {"Echo", "Washer", "Sealer", "Cytomat1", "Cytomat2", "BlueWasher", "MultiFlow"}
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
