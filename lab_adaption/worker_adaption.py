@@ -214,8 +214,12 @@ class Worker(WorkerInterface):
             print("We did read a barcode during the move")
             bc_reader_client = self.get_client("BCReader")
             if bc_reader_client:
-                last_read_barcode = bc_reader_client.BarcodeReaderService.LastBarcode.get()
-                reading_time = bc_reader_client.BarcodeReaderService.LastReadingTime.get()
+                try:
+                    last_read_barcode = bc_reader_client.BarcodeReaderService.LastBarcode.get()
+                    reading_time = bc_reader_client.BarcodeReaderService.LastReadingTime.get()
+                except Exception as e:
+                    logging.error(f"Error occurred while fetching barcode information: {e}")
+                    last_read_barcode = None
                 # check if some barcode was read since the step started
                 if not last_read_barcode or reading_time < step.start:
                     barcode = f"Grumpycat_{randint(0, 99999)}"
