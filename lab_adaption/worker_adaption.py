@@ -3,7 +3,6 @@
 import logging
 import traceback
 from datetime import datetime
-from pathlib import Path
 from typing import Optional, NamedTuple, Dict, Any, Tuple
 from random import randint
 
@@ -28,6 +27,7 @@ from .device_wrappers import (
     PlateSealerWrapper,
     BlueWasherWrapper,
 )
+from .server_memory import ServerMemory
 try:
     from genericroboticarm.sila_server import Client as ArmClient
 except ModuleNotFoundError:
@@ -89,6 +89,7 @@ class Worker(WorkerInterface):
     ):
         super().__init__(jssp, schedule_manager, db_client)
         self.clients = {}
+        self.server_memory = ServerMemory()
 
     def update_information_from_db(self, step: ProcessStep):
         # try to update the runtime container info from the database
@@ -188,19 +189,24 @@ class Worker(WorkerInterface):
                 try:
                     name = client.SiLAService.ServerName.get()
                     assert name == server_name
+                    return client
                 except AssertionError:
-                    logging.error(
-                        f"The server on {client.address}:{client.port} has changed its name"
-                    )
+                    logging.error(f"The server on {client.address}:{client.port} has changed its name")
+                    self.clients.pop(device_name)
                 except ConnectionError:
                     # the server seems to be offline
                     self.clients.pop(device_name)
+            client = self.server_memory.load_from_memory(server_name)
+            if client:
+                self.clients[device_name] = client
+                return client
             # try to discover the matching server by its server name
             try:
                 client = SilaClient.discover(
                     server_name=server_name, timeout=timeout, insecure=True,
                 )
                 self.clients[device_name] = client
+                self.server_memory.memorize(client)
                 return client
             except TimeoutError as error:
                 logging.exception(f"Could not connect to {server_name}:\n{error}")
