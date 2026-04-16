@@ -217,6 +217,7 @@ class Worker(WorkerInterface):
                 try:
                     last_read_barcode = bc_reader_client.BarcodeReaderService.LastBarcode.get()
                     reading_time = bc_reader_client.BarcodeReaderService.LastReadingTime.get()
+                    reading_time = reading_time.replace(tzinfo=None)
                 except Exception as e:
                     logging.error(f"Error occurred while fetching barcode information: {e}")
                     last_read_barcode = None
