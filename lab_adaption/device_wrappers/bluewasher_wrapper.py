@@ -21,7 +21,7 @@ class BlueWasherWrapper(DeviceInterface):
         -> Observable:
         if step.function == "run_protocol":
             protocol = step.data["protocol"]
-            return sila_client.ProtocolExecutionService.ExecuteProtocol(ProtocolName=protocol)
+            return sila_client.BlueProtocolExecutionService.ExecuteProtocol(ProtocolName=protocol)
         elif step.function == "custom_steps":
             try:
                 # this should work and if not the exception should tell the problem
@@ -30,7 +30,7 @@ class BlueWasherWrapper(DeviceInterface):
                 assert len(protocol_steps) > 0
                 assert all(isinstance(elem, (SimpleCommand, ComplexCommand)) for elem in protocol_steps)
                 content = program_to_str_list(protocol_steps)
-                return sila_client.ProtocolExecutionService.ExecuteCustomProtocol(content)
+                return sila_client.BlueProtocolExecutionService.ExecuteCustomProtocol(content)
             except Exception as ex:
                 traceback.print_exc()
                 raise

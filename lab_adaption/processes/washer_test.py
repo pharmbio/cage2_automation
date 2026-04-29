@@ -2,7 +2,7 @@ import logging
 
 from lab_adaption.processes.basic_process import BasicProcess
 try:
-    from lhc_python.steps.step_parts import CWFlowRate, WashInstructions
+    from lhc_python.steps.step_parts import PrimeInstructions, WashInstructions
     from lhc_python.steps.ewash_step import EMWashStep
     from lhc_python.steps.prime_step import PrimeStep
 except ModuleNotFoundError:
@@ -22,14 +22,12 @@ class WasherTest(BasicProcess):
         self.containers[0].set_start_position(self.hotel2, 0)
 
     def process(self):
-        prime_step = PrimeStep()
-        prime_step.create(settings=CWFlowRate(
-            channel=1,
+        prime_step = PrimeStep(instructions=PrimeInstructions(
+            buffer_choice='B',
             volume=10,
-            high_flow=True,
+            flow_rate=5,
             ))
-        wash_step = EMWashStep()
-        wash_step.create(settings = WashInstructions(
+        wash_step = EMWashStep(settings = WashInstructions(
             num_cycles=1,
             wells_to_wash=[False, True, False, False],
             buffer_choice='A',

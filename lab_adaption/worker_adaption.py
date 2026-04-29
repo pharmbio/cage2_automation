@@ -5,6 +5,7 @@ import traceback
 from datetime import datetime
 from typing import Optional, NamedTuple, Dict, Any, Tuple
 from random import randint
+from pathlib import Path
 
 from laborchestrator.database_integration import StatusDBInterface
 from laborchestrator.logging_manager import StandardLogger as logger
@@ -354,7 +355,7 @@ class Worker(WorkerInterface):
                 normalized_protocol = self._normalize_protocol_identifier(protocol_name, device_name)
                 avaiable_protocols = {
                     self._normalize_protocol_identifier(protocol, device_name)
-                    for protocol in client.ProtocolExecutionService.AvailableProtocols.get()
+                    for protocol in client.BlueProtocolExecutionService.AvailableProtocols.get()
                 }
                 if normalized_protocol not in avaiable_protocols:
                     message += f"Protocol {protocol_name} for device {device_name} not found.\n"
