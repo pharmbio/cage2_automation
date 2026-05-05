@@ -21,9 +21,10 @@ from . import DeviceInterface
 class CustomWrapper(DeviceInterface):
     @staticmethod
     def get_SiLA_handler(
-        step: ProcessStep, cont: ContainerInfo, sila_client: CustomClient, **kwargs
+        step: ProcessStep, labware: list[ContainerInfo], sila_client: CustomClient, **kwargs
     ) -> ObservableProtocolHandler:
         my_custom_argument = step.data.get("my_key", None)
+        labware_names = ", ".join(container.name for container in labware)
 
         # create an emulator for sila observable commands
         class GreetingHandler(ObservableProtocolHandler):
@@ -36,7 +37,7 @@ class CustomWrapper(DeviceInterface):
                 time.sleep(12)
                 sila_client.MySilaFeature.OtherNonObservableCommand()
                 # Optionally: provide some response
-                self.response = sila_client.OtherSilaFeature.SayHello(cont.name)
+                self.response = sila_client.OtherSilaFeature.SayHello(labware_names)
 
             # can be left out if no response is provided
             def get_responses(self):

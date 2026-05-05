@@ -23,14 +23,16 @@ class GenericRobotArmWrapper(DeviceInterface):
     @staticmethod
     def get_SiLA_handler(
         step: MoveStep,
-        cont: ContainerInfo,
+        labware: list[ContainerInfo],
         sila_client: ArmClient,
         intermediate_actions: list[str] | None = None,
         **kwargs,
     ) -> Observable:
         if intermediate_actions is None:
             intermediate_actions = []
-
+        if len(labware) != 1:
+            logging.warning(f"GenericRobotArmWrapper can only handle one container at a time. Given labware: {labware}")
+        cont = labware[0]
         origin_site = (cont.current_device, cont.current_pos)
         target_site = (step.target_device.name, step.destination_pos)
         print(f"moving from {origin_site} to {target_site}")
@@ -61,13 +63,14 @@ class GenericRobotArmWrapper(DeviceInterface):
 
 class LabwareTransferHandler(DeviceInterface):
     @staticmethod
-    def get_SiLA_handler(step: MoveStep, cont: ContainerInfo, sila_client: ArmClient,
+    def get_SiLA_handler(step: MoveStep, labware: list[ContainerInfo], sila_client: ArmClient,
                          interactive_source: LabwareSite | None = None,
                          interactive_target: LabwareSite | None = None,
                          intermediate_actions: list[str] | None = None,
                          **kwargs) -> Observable:
         if intermediate_actions is None:
             intermediate_actions = []
+        main_labware = labware[0]
         logging.debug(f"Creating LabwareTransferHandler for step {step.name}")
         logging.debug("interactive source: ", interactive_source)
         logging.debug("interactive target: ", interactive_target)
@@ -76,13 +79,13 @@ class LabwareTransferHandler(DeviceInterface):
         class TransferHandler(ObservableProtocolHandler):
             def _protocol(self, client: ArmClient, **_kwargs):
                 # prepare source and mover
-                handover = Site(cont.current_device, cont.current_pos + 1)  # the feature starts counting at 1
+                handover = Site(main_labware.current_device, main_labware.current_pos + 1)  # the feature starts counting at 1
                 mover_prepare = sila_client.LabwareTransferManipulatorController.PrepareForInput(
-                    handover, 1, cont.labware_type, str(cont.barcode),
+                    handover, 1, main_labware.labware_type, str(main_labware.barcode),
                 )
                 if interactive_source:
                     source_prepare = interactive_source.PrepareForOutput(
-                        Site(cont.current_device, 1), cont.current_pos + 1,
+                        Site(main_labware.current_device, 1), main_labware.current_pos + 1,
                     )
                     finish_observable_command(source_prepare)
                     if not source_prepare.status == CommandExecutionStatus.finishedSuccessfully:
@@ -106,11 +109,11 @@ class LabwareTransferHandler(DeviceInterface):
                 mover_prepare = sila_client.LabwareTransferManipulatorController.PrepareForOutput(
                     handover, 1,
                 )
-                logging.info(f"delivering {cont} to {step.destination_pos + 1} (already added +1 for the feature)")
+                logging.info(f"delivering {main_labware} to {step.destination_pos + 1} (already added +1 for the feature)")
                 if interactive_target:
                     target_prepare = interactive_target.PrepareForInput(
                         handover, step.destination_pos + 1, # the feature starts counting at 1
-                        cont.labware_type, str(cont.barcode),
+                        main_labware.labware_type, str(main_labware.barcode),
                     )
                     finish_observable_command(target_prepare)
                     if not target_prepare.status == CommandExecutionStatus.finishedSuccessfully:
@@ -130,5 +133,3 @@ class LabwareTransferHandler(DeviceInterface):
         # starts _protocol and handles the status
         observable.run_protocol(sila_client)
         return observable
-
-

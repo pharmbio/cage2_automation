@@ -11,7 +11,7 @@ class DeviceInterface(ABC):
     @abstractmethod
     def get_SiLA_handler(
         step: ProcessStep,
-        cont: ContainerInfo | list[ContainerInfo],
+        labware: ContainerInfo | list[ContainerInfo],
         sila_client: SilaClient,
         **kwargs,
     ) -> Observable:
@@ -22,7 +22,7 @@ class DeviceInterface(ABC):
         provides functions to enquiry the status and remaining time of this protocol
         :param sila_client:
         :param step:
-        :param cont:
+        :param labware:
         :return: An ObservableProtocolHandler or ClientObservableCommandInstance
         """
 

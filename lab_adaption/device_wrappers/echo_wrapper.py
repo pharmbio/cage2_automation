@@ -19,7 +19,7 @@ class EchoWrapper(DeviceInterface):
     @staticmethod
     def get_SiLA_handler(
         step: ProcessStep,
-        cont: ContainerInfo,
+        labware: list[ContainerInfo],
         sila_client: EchoClient,
         **kwargs,
     ) -> Observable:

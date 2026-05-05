@@ -11,7 +11,7 @@ except ModuleNotFoundError:
 
 class PlateSealerWrapper(DeviceInterface):
     @staticmethod
-    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: SealerClient, **kwargs)\
+    def get_SiLA_handler(step: ProcessStep, labware: list[ContainerInfo], sila_client: SealerClient, **kwargs)\
         -> Observable:
         if step.function == "seal":
             return sila_client.ProtocolController.RunProtocol(ProtocolName="dummy_name")

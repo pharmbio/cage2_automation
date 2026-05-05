@@ -12,7 +12,7 @@ from sila2.framework import SilaAnyType
 class HumanWrapper(DeviceInterface):
     @staticmethod
     def get_SiLA_handler(
-        step: ProcessStep, cont: ContainerInfo, human_client: HumanClient, **kwargs
+        step: ProcessStep, labware: list[ContainerInfo], human_client: HumanClient, **kwargs
     ) -> ClientObservableCommandInstance:
         if step.function == "ask_for_ok":
             return human_client.HumanController.CustomCommand(

@@ -27,7 +27,7 @@ def finish_sync(cmds: List[ClientObservableCommandInstance]):
         time.sleep(.01)
 
 class GenericRobotArmWrapper(DeviceInterface):
-    def get_SiLA_handler(self, step: MoveStep, cont: ContainerInfo,
+    def get_SiLA_handler(self, step: MoveStep, labware: list[ContainerInfo],
                          labware_manipulator: LabwareManipulator,
                          interactive_source: Optional[LabwareSite] = None,
                          interactive_target: Optional[LabwareSite] = None,
@@ -38,8 +38,9 @@ class GenericRobotArmWrapper(DeviceInterface):
             intermediate_actions_get = []
         if intermediate_actions_put is None:
             intermediate_actions_put = []
+        main_labware = labware[0]
         # because stupid people decided to start counting at 1.....:
-        origin_site = Site(cont.current_device, cont.current_pos + 1)
+        origin_site = Site(main_labware.current_device, main_labware.current_pos + 1)
         target_site = Site(step.target_device.name, step.destination_pos + 1)
         print(f"moving from {origin_site} to {target_site} (already added 1 to indices)")
         print(f"intermediate actions: in get: {intermediate_actions_get} in put: {intermediate_actions_put}")
@@ -85,8 +86,8 @@ class GenericRobotArmWrapper(DeviceInterface):
                 commands = [labware_manipulator.PrepareForInput(
                     HandoverPosition=site,
                     InternalPosition=1,
-                    LabwareType=cont.labware_type,
-                    LabwareUniqueID=cont.name,
+                    LabwareType=main_labware.labware_type,
+                    LabwareUniqueID=main_labware.name,
                 )]
                 if interactive_source:
                     commands.append(interactive_source.PrepareForOutput(
@@ -106,8 +107,8 @@ class GenericRobotArmWrapper(DeviceInterface):
                     commands.append(interactive_target.PrepareForInput(
                         HandoverPosition=Site(site.device, 1),
                         InternalPosition=site.position_index,
-                        LabwareType=cont.labware_type,
-                        LabwareUniqueID=cont.name,
+                        LabwareType=main_labware.labware_type,
+                        LabwareUniqueID=main_labware.name,
                     ))
                 await gather(*[finish(cmd) for cmd in commands])
                 return all(cmd.status == CommandExecutionStatus.finishedSuccessfully for cmd in commands)

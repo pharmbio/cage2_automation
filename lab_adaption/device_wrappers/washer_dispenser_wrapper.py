@@ -16,7 +16,7 @@ except ModuleNotFoundError:
 
 class WasherDispenserWrapper(DeviceInterface):
     @staticmethod
-    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: WasherDispenserClient, **kwargs)\
+    def get_SiLA_handler(step: ProcessStep, labware: list[ContainerInfo], sila_client: WasherDispenserClient, **kwargs)\
         -> Observable:
         # TODO find better naming in pythonlab
         if step.function in ["fix_cells", "wash_cells", "run_protocol"]:

@@ -17,7 +17,7 @@ except ModuleNotFoundError:
 
 class BlueWasherWrapper(DeviceInterface):
     @staticmethod
-    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: BlueWasherClient, **kwargs)\
+    def get_SiLA_handler(step: ProcessStep, labware: list[ContainerInfo], sila_client: BlueWasherClient, **kwargs)\
         -> Observable:
         if step.function == "run_protocol":
             protocol = step.data["protocol"]

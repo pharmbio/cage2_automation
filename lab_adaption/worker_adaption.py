@@ -123,17 +123,19 @@ class Worker(WorkerInterface):
         logger.info(f"Execute {step_id} on device {device}")
         # get all information about the process step
         step = self.jssp.step_by_id[step_id]
-        cont = self.jssp.container_info_by_name[step.cont_names[0]]
+        labware = [
+            self.jssp.container_info_by_name[cont_name]
+            for cont_name in step.cont_names
+        ]
         self.update_information_from_db(step)
         if device in USE_REAL_SERVERS:
-            # TODO remove when working with real echo
-            # switch to simulation for protocol execution
-            #if device == "Echo":
-            #    device += "_sim"
             client = self.get_client(device_name=device)
             if client:
                 wrapper = device_wrappers[device]
                 if isinstance(step, MoveStep):
+                    if not labware:
+                        raise ValueError(f"Move step {step.name} does not reference any containers")
+                    cont = labware[0]
                     # provide the sila clients if current and/or target device implement interactive transfer
                     if cont.current_device in interactive:
                         device_kwargs["interactive_source"] =\
@@ -171,7 +173,7 @@ class Worker(WorkerInterface):
                             device_kwargs["intermediate_actions"].append(lidding_cmd)
                 # starts the command on the device and returns an Observable
                 observable = wrapper.get_SiLA_handler(
-                    step, cont, client, **device_kwargs
+                    step, labware, client, **device_kwargs
                 )
                 return observable
         # for all simulated devices, this simply wraps a sleep command into an Observable

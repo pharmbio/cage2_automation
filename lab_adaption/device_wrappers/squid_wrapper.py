@@ -12,6 +12,6 @@ except ModuleNotFoundError:
 
 class SquidWrapper(DeviceInterface):
     @staticmethod
-    def get_SiLA_handler(step: ProcessStep, cont: ContainerInfo, sila_client: SquidClient, **kwargs) -> Observable:
+    def get_SiLA_handler(step: ProcessStep, labware: list[ContainerInfo], sila_client: SquidClient, **kwargs) -> Observable:
         protocol = step.data["protocol"]
         return sila_client.ProtocolController.RunProtocol(protocol)

@@ -19,7 +19,7 @@ from . import DeviceInterface
 class CustomWrapper(DeviceInterface):
     @staticmethod
     def get_SiLA_handler(
-        step: ProcessStep, cont: ContainerInfo, sila_client: CustomClient, **kwargs
+        step: ProcessStep, labware: list[ContainerInfo], sila_client: CustomClient, **kwargs
     ) -> ClientObservableCommandInstance:
         my_custom_argument = step.data.get("my_key", None)
         if not my_custom_argument:
