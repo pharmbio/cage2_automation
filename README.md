@@ -12,6 +12,7 @@ People who have a robotic arm with several devices they can access via SiLA (or 
 framework do describe, orchestrate and schedule workflows on these devices. Some programming skills are necessary.
 ### Some examples for adaption of the template:
 <table>
+  <tr>
     <td align="center">
       <img src="https://gitlab.com/OpenLabAutomation/data/-/raw/main/adaptions/lara_robot_platform_full_view.JPG" width="250"><br>
       <sub>
@@ -39,6 +40,17 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
         <a href="https://gitlab.com/OpenLabAutomation/demo-lab">
           <b>Demo Lab</b>
         </a></sub>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="https://gitlab.com/OpenLabAutomation/data/-/raw/main/adaptions/amsterdam_platform.png" width="250"><br>
+      <sub>
+        <a href="https://github.com/OSLA-project/VU-lab/tree/main/laborchestrator">
+          <b>Amsterdam – VU Lab</b>
+        </a>
+      </sub>
     </td>
   </tr>
 </table>
