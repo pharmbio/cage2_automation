@@ -32,3 +32,8 @@ default_scheduling_time = 1  # seconds
 scheduling_algorithm = "CP-Solver"
 
 process_module = processes
+
+# configures the initial view of the GUI.
+arm_open = True  # View for genericroboticarm
+db_open = True  # View for present labware in database
+browser_open = True  # Sila-browser
