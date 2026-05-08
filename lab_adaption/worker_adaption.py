@@ -1,4 +1,6 @@
-""" """
+"""
+Adaption of WorkerInterface to uppsala cage 2.
+"""
 
 import logging
 import traceback
