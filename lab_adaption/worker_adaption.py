@@ -32,6 +32,14 @@ from .device_wrappers import (
 )
 from .server_memory import ServerMemory
 try:
+    from lab_adaption.slack_bot import send_slack_message
+except ImportError as error:
+    print(f"Warning: {error}")
+
+    def send_slack_message(message: str):
+        print(f"Slack unavailable since no token is configured. Message not sent: {message}")
+
+try:
     from genericroboticarm.sila_server import Client as ArmClient
 except ModuleNotFoundError:
     ArmClient = SilaClient
@@ -290,6 +298,10 @@ class Worker(WorkerInterface):
                 return 1
         # checks the database for the free position with the lowest index
         return super().determine_destination_position(step)
+
+    def report_error(self, error_message: str, step_id: str | None = None, process_name: str | None = None):
+        report = f"reporting error {error_message} from step {step_id} from process {process_name}"
+        send_slack_message(report)
     
     def _collect_required_clients(self, process: SMProcess) -> set[str]:
         needed_clients = set()
