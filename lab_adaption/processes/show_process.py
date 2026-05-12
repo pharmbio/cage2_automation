@@ -5,6 +5,7 @@ Has no practical use ur biochemical background
 
 from lab_adaption.processes.basic_process import BasicProcess
 from bluewasher_sila.hardware_comm.commands import Prime, Dispense, Centrifugation
+from lhc_python.steps.step_interface import DemoStep
 import logging
 from pathlib import Path
 import pandas as pd
@@ -46,6 +47,7 @@ class ShowProcess(BasicProcess):
         dest_barcodes = [f"PB000{i}" for i in range(146, 150)]
         source_plates = self.containers[8:10]
         source_barcodes = ["PB000164", "Copia Test"]
+        incubation_duration = 15*60  # in seconds
         # define the 405 washing steps
         wash_steps = [
             PrimeStep(instructions=PrimeInstructions(
@@ -59,24 +61,27 @@ class ShowProcess(BasicProcess):
                 buffer_choice='A',
             ))
         ]
-        multiflow_protocol = "dispensing.LHC"
         # create the bluewasher steps
         bluewash_steps = [
             Prime(channel=3, volume=10),
             Dispense(channel=3, volume=30),
-            Centrifugation(duration_in_ms=5000, rpm=300)
+            Centrifugation(duration_in_ms=5000, rpm=300),
         ]
-        echo_protocol = Path(__file__).with_name("two_source_four_dest_echo_protocol.csv")
+        multiflow_steps = [
+            DemoStep(name="prime_demo", step_def="DV103|2|True|300|3|High|True|0|2", body=""),
+            #DemoStep(name="peri_dispense_demo", step_def="DV103|1|10|High|0|333|0|0|True|10|2|111111111111111111111111111111111111111111111111|1111|1", body=""),
+        ]
+        echo_protocol = Path(__file__).with_name("protocol") / "two_source_four_dest_echo_protocol.csv"
         dataframe = pd.read_csv(echo_protocol)
         for cont in paint_plates:
             self.robot_arm.move(cont, self.incubator1, read_barcode=True)
-            self.incubator1.incubate(cont, temperature=37, duration=20*60)
+            self.incubator1.incubate(cont, temperature=37, duration=incubation_duration)
             self.robot_arm.move(cont, self.washer, lidded=False)
             self.washer.execute_custom_steps(labware=cont, steps=wash_steps)
             self.robot_arm.move(cont, self.hotel2, lidded=True)
             cont.min_wait(20*60)
             self.robot_arm.move(cont, self.dispenser, lidded=False)
-            self.dispenser.run_protocol(protocol=multiflow_protocol, labware=cont)
+            self.dispenser.execute_custom_steps(labware=cont, steps=multiflow_steps)
             self.robot_arm.move(cont, self.bluewasher, lidded=False)
             self.bluewasher.execute_custom_steps(labware=cont, steps=bluewash_steps)
             self.robot_arm.move(cont, self.incubator2, lidded=True)

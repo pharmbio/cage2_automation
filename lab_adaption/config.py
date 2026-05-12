@@ -17,7 +17,7 @@ from lab_adaption import processes
 db_client = StatusDBImplementation()
 
 # comment out to use the default worker (i.e., just simulation)
-worker_type = Worker
+#worker_type = Worker
 
 # lab_config to be sent to the scheduler
 lab_config_file = str(
@@ -26,7 +26,7 @@ lab_config_file = str(
 
 # controls the default time limit the orchestrator gives the scheduler for computing new schedules
 # It can be changed via GUI at runtime
-default_scheduling_time = 1  # seconds
+default_scheduling_time = 3  # seconds
 
 # change to a solver name like CP-Solver or BottleneckPD which will be chosen on the scheduler.
 scheduling_algorithm = "CP-Solver"
