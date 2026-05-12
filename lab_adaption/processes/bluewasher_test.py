@@ -25,7 +25,7 @@ class BlueWasherTest(BasicProcess):
             Centrifugation(duration_in_ms=5000, rpm=300)
         ]
         cont = self.containers[0]
-        self.robot_arm.move(cont, self.bluewasher, lidded=False)
+        self.robot_arm.move(cont, self.bluewasher, lidded=False, read_barcode=True)
         self.bluewasher.execute_custom_steps(labware=cont, steps=protocol)
-        self.robot_arm.move(cont, self.hotel2)
+        self.robot_arm.move(cont, self.hotel2, lidded=True)
 
