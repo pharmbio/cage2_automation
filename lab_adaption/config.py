@@ -17,7 +17,7 @@ from lab_adaption import processes
 db_client = StatusDBImplementation()
 
 # comment out to use the default worker (i.e., just simulation)
-#worker_type = Worker
+worker_type = Worker
 
 # lab_config to be sent to the scheduler
 lab_config_file = str(
