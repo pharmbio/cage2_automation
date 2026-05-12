@@ -71,7 +71,7 @@ class ShowProcess(BasicProcess):
             DemoStep(name="prime_demo", step_def="DV103|2|True|300|3|High|True|0|2", body=""),
             #DemoStep(name="peri_dispense_demo", step_def="DV103|1|10|High|0|333|0|0|True|10|2|111111111111111111111111111111111111111111111111|1111|1", body=""),
         ]
-        echo_protocol = Path(__file__).with_name("protocol") / "two_source_four_dest_echo_protocol.csv"
+        echo_protocol = Path(__file__).with_name("protocols") / "two_source_four_dest_echo_protocol.csv"
         dataframe = pd.read_csv(echo_protocol)
         for cont in paint_plates:
             self.robot_arm.move(cont, self.incubator1, read_barcode=True)
