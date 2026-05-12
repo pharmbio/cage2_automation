@@ -26,7 +26,7 @@ lab_config_file = str(
 
 # controls the default time limit the orchestrator gives the scheduler for computing new schedules
 # It can be changed via GUI at runtime
-default_scheduling_time = 1  # seconds
+default_scheduling_time = 3  # seconds
 
 # change to a solver name like CP-Solver or BottleneckPD which will be chosen on the scheduler.
 scheduling_algorithm = "CP-Solver"

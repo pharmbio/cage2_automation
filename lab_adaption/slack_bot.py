@@ -5,7 +5,7 @@ token = os.environ.get("SLACK_BOT_TOKEN", "").strip()
 user_id = "U08PHN5K0P3"  # my user ID
 
 if not token:
-    raise SystemExit("Missing SLACK_BOT_TOKEN environment variable.")
+    raise ImportError("Slack is unavailable since no SLACK_BOT_TOKEN is set.")
 
 def slack_post(url: str, payload: dict):
     resp = requests.post(
@@ -19,17 +19,23 @@ def slack_post(url: str, payload: dict):
         raise RuntimeError(f"Slack API error: {data}")
     return data
 
-# open (or get) the DM channel
-data = slack_post(
-    "https://slack.com/api/conversations.open",
-    {"users": user_id},
-)
-dm_channel = data["channel"]["id"]
 
-# send message
-data = slack_post(
-    "https://slack.com/api/chat.postMessage",
-    {"channel": dm_channel, "text": "Hello from Python!"},
-)
+def send_slack_message(message: str):
+    # open (or get) the DM channel
+    data = slack_post(
+        "https://slack.com/api/conversations.open",
+        {"users": user_id},
+    )
+    dm_channel = data["channel"]["id"]
 
-print(data)
+    # send message
+    data = slack_post(
+        "https://slack.com/api/chat.postMessage",
+        {"channel": dm_channel, "text": message},
+    )
+    return data
+
+
+if __name__ == "__main__":
+    data = send_slack_message("Hello from Python!")
+    print(data)
