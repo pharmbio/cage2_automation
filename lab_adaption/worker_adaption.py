@@ -349,11 +349,11 @@ class Worker(WorkerInterface):
 
     def _check_bluewsher_status(self) -> str:
         bluewasher_client = self.get_client("BlueWasher")
-        controller = bluewasher_client.InitializationController
+        controller = bluewasher_client.BlueInitializationController
         try:
             if not controller.IsConnected.get():
                 return "BlueWasher is not connected.\n"
-            if not controller.IsInitialized.get():
+            if not controller.Initialized.get():
                 return "BlueWasher is connected but not initialized.\n"
         except Exception as ex:
             logging.exception("Failed to check BlueWasher status")
