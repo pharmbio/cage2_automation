@@ -3,7 +3,10 @@ try:
     from pandas import DataFrame
 except ModuleNotFoundError:
     from typing import Any as DataFrame
-from echo_server.communication.parsing_utilities import rectangle_to_survey
+try:
+    from echo_server.communication.parsing_utilities import rectangle_to_survey
+except Exception:
+    rectangle_to_survey = float
 
 
 class EchoServiceResource(ServiceResource):
