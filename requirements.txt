@@ -4,4 +4,5 @@
 
 pythonlab>=0.2
 labscheduler>=0.3
-laborchestrator>=0.3
+laborchestrator>=0.3, <0.4
+echo_server @ git+https://gitlab.com/OpenLabAutomation/device-integration/echo.git@main
