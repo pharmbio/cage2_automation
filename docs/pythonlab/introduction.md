@@ -1,24 +1,193 @@
 # pythonLab
 
-**pythonLab** is a universal, extendable and safe language for laboratory processes.
+This is the specification and development repository of
+**pythonLab**, a universal, extendable and safe language for laboratory processes.
+Since this process language needs many characteristics of a programming language, like conditions (if ...), loops (for/while), variables, etc. we do not want to re-invent the wheel twice but rather use the **python syntax**, which is very popular in science.
 
-Reproducibility and reliability is in the core of science.
-Describing lab operations in a precise, easy and standardized form will help to transfer knowledge to every lab around the world.
-A *laboratory process description language* is a long desired goal in laboratory process standardization and lab automation.
-It will enable automated execution of steps and better machine learning and AI predictions, since these process descriptions
-can be packed as metadata to the data resulting form this process.   
+Also processes are defined in python, they are not **excecuted** but **parsed into directed graphs** 
 
-Since this process language needs many characteristics of a programming language, like conditions (if ...), loops 
-(for/while), variables, etc. we do not want to re-invent the wheel twice but rather use the **python syntax**, which is
-very popular in science. 
+## Examples
+
+### Simple linear workflow
+
+<details>
+<summary>Show code</summary>
+
+``` python
+protocol_path = "protocols/evacuation_speroids.lhc"
+self.robot_arm.move(cont, self.dispenser)
+self.dispenser.run_protocol(labware=cont, protocol=protocol_path)
+```
+
+</details>
+
+This process is parsed into the following workflow graph:
+
+<details>
+<summary>Show graph</summary>
+
+![Simple linear workflow](docs/images/workflows/simple_linear_workflow.svg)
+
+</details>
+
+### Implicit movements for reagents and multi labware steps
+
+<details>
+<summary>Show code</summary>
+
+``` python        
+bravo_positions = [4, 6, 7, 8]
+for i in range(len(growth_plates)):
+    self.robot_arm.move(cont, target_loc=self.pipetter, lidded=False, position=bravo_positions[i])
+self.pipetter.executeProtocol(growth_plates[0], protocol=sup_rem_protocol, duration=200,
+                              reagents=growth_plates[1:],
+self.pipetter.executeProtocol(growth_plates, protocol=lysis_protocol, duration=240,
+                            reagents=[self.lysis_buffer],
+                            reagent_pos=[3])          
+for cont in growth_plates:
+    self.robot_arm.move(cont, self.incubator2, lidded=True)                           
+```
+
+</details>
+
+The reagent plates in `reagents=[...]` are moved to and from the liquid handler implicitly:
+
+<details>
+<summary>Show graph</summary>
+
+![Implicit reagent movement workflow](docs/images/workflows/implicit_reagent_movement_workflow.svg)
+
+</details>
+
+### Simple for-loop
+
+<details>
+<summary>Show code</summary>
+
+``` python
+for plate in self.target_plates:
+    self.robot_arm.move(plate, self.echo, role="destination", read_barcode=True, lidded=False)
+    self.echo.execute_transfer_protocol(self.source_plate, plate, protocol)
+    self.robot_arm.move(plate, self.hotel2, lidded=True)
+```
+
+</details>
+
+This process is parsed into the following workflow graph:
+
+<details>
+<summary>Show graph</summary>
+
+![Simple for-loop workflow](docs/images/workflows/simple_for_loop_workflow.svg)
+
+</details>
+
+### Single conditional
+
+<details>
+<summary>Show code</summary>
+
+``` python
+def is_acceptable(answer) -> bool:
+    return answer.Response.value >= 5
+
+cont = self.containers[0]
+self.robot_arm.move(cont, self.human)
+answer = self.human.request_number(cont, message="assign quality score")
+acceptable = self.is_acceptable(answer)
+if acceptable:
+    self.robot_arm.move(cont, self.incubator1)
+else:
+    self.robot_arm.move(cont, self.hotel1)
+```
+
+</details>
+
+This process is parsed into the following workflow graph:
+
+<details>
+<summary>Show graph</summary>
+
+![Single conditional workflow](docs/images/workflows/single_conditional_workflow.svg)
+
+</details>
+
+### Nested for-loop and timing comstraints
+
+<details>
+<summary>Show code</summary>
+
+``` python
+meas_time = 65
+meas_points = [0, 5, 15, 30]
+for cont in self.containers:
+    self.robot_arm.move(cont, self.reader)
+    self.reader.single_read(cont, method="protocol", label=f"read_{cont.name}_{0}")
+    for i in range(1, len(meas_points)):
+        self.robot_arm.move(cont, self.incubator1)
+        self.incubator1.incubate(cont, duration=10, temperature=295, shaking_frequency=400)
+        self.robot_arm.move(cont, self.reader)
+        wait = 60*(meas_points[i] - meas_points[i-1]) - meas_time
+        self.reader.single_read(cont, method="protocol", label=f"read_{cont.name}_{i}",
+                                relations=[("min_wait", f"read_{cont.name}_{i-1}", [wait]),
+                                            ("max_wait", f"read_{cont.name}_{i-1}", [wait+20])
+                                            ]
+        )
+    self.robot_arm.move(cont, self.hotel)
+```
+
+</details>
+
+This process is parsed into the following workflow graph:
+
+<details>
+<summary>Show graph</summary>
+
+![Nested for-loop workflow](docs/images/workflows/nested_for_loop_workflow.svg)
+
+</details>
+
+### Nested for-loop with conditional and break
+
+<details>
+<summary>Show code</summary>
+
+``` python
+# cultured plates in incubator 37°, 200rpm, 45-90 min until aver_OD is >= 0.4.
+for cont in cultured_plates:
+    for j in range(3):
+        self.robot_arm.move(cont, target_loc=self.reader2, lidded=False)
+        od = self.reader2.single_read(cont, method=od_600)
+        if j < max_cult_intervals - 1:
+            aver_od = self.compute_average(od)
+            if aver_od > 0.4:
+                break
+            else:
+                # incubate for another interval
+                self.robot_arm.move(cont, target_loc=self.incubator2, lidded=True)
+                self.incubator2.incubate(cont, duration=cult_time_interval, temperature=cult_temp,
+                                         shaking_frequency=cult_shaking_freq)    
+    self.robot_arm.move(cont, target_loc=self.pipetter, lidded=False, position=3)   
+```
+
+</details>
+
+This process is parsed into the following workflow graph:
+
+<details>
+<summary>Show graph</summary>
+
+![Nested for-loop with conditional and break workflow](docs/images/workflows/nested_conditional_break_workflow.svg)
+
+</details>
 
 ## Key (desired) Features 
 
   * easy and simple to learn and write (close to simple English)
   * clear, human readable syntax
+  * machine readable and writeable syntax
   * universal - applicable for most laboratory operations
   * transferable from one lab to another
-  * easy mapping between abstract resource representation and actual lab resource
   * [*Turing-complete*](https://en.wikipedia.org/wiki/Turing_completeness), including conditions and loops
   * easy extendible - prepared for the constant development of science
   * close to real laboratory work
@@ -38,13 +207,11 @@ very popular in science.
 pythonLab processes are denoted in a python like syntax, but they are **not** directly executed by a *python interpreter*. They are rather parsed into a *workflow graph*, which can be used by a *Scheduler* to calculate 
 an optimal schedule (=order of execution). This order of execution might be different from the initial notation. An *Orchestrator* executes then the schedule and supervises the device communication, e.g. to SiLA servers/devices.
 
-<figure markdown="span">
-![pythonLab Architecture](assets/pythonLab_architecture.svg)
-<figcaption>Architecture of pythonLab</figcaption>
-</figure>
+![pythonLab Architecture](docs/images/pythonLab_architecture_overview.svg)
 
+## [Specification](https://opensourcelab.gitlab.io/pythonLab/specification/0_specification_base.html)
 
-[PythonLab specification](https://opensourcelab.gitlab.io/pythonLab/specification/0_specification_core.html)
+Please find a draft of the pythonLab specification in [docs/specification](https://pythonlabor.gitlab.io/pythonLab/specification/specification.html) (very early stage !).
 
 Very briefly, the generic lab description language should have many features a common programming language has and following the desired *Turning-completeness*, like:  
 
@@ -62,96 +229,6 @@ Very briefly, the generic lab description language should have many features a c
 
 The pythonLab Documentation can be found in [docs](https://pythonlabor.gitlab.io/pythonLab/)
 
-## Language Core extensions
-
-extensible Modules for e.g.
-- liquid handling
-- cultivation
-- (bio-chemical) assays
-- molecular biology
-- chemical synthesis
-- data evaluation
-
-are in preparation
-
-
-## Examples
-
-A simple description of liquid transfer step
-
-```python
-
-# using settings: volume unit: uL, liquid class: water
-# these are set in a settings module
-# specifying resources
-from pythonlab.resource import LabwareResource, DeviceResource
-from pythonlab.liquid_handling import aspirate, dispense
-
-cont1 = LabwareResource()
-cont2 = LabwareResource()          
-liquid_handler = DeviceResource()
-
-# process steps
-liquid_handler.aspirate(cont1, row=1, col=3, vol=4.0)
-liquid_handler.dispense(cont2, row=2, col=3 , vol=7.2)
-...
-
-```
-
-A bit more complex example
-
-```python
-# default units (SI) are specified in the standard unit module
-# additional unit definitions can be added in the code  
-# specifying resources
-
-from pythonlab.resource.labware import LabwareResource
-from pythonlab.resource.services import MoverServiceResource, IncubationServiceResource
-
-cont1 = LabwareResource()
-mover = MoverServiceResource()
-incubator = IncubationServiceResource()
-start_pos = cont1.set_start_position(pos=1)
-incubation_duration = 6 # hours
-
-# initialise the process 
-incubator.init()
-# process steps
-mover.move(cont1,  start_pos, incubator.nest1)
-incubator.incubate(cont1, incubation_duration, unit="h")
-mover.move(cont1, incubator.nest1, start_pos)
-
-
-...
-
-```
-
-And finally a higher level example
-
-```python
-# default units (SI) are specified in the standard unit module
-# additional unit definitions can be added in the code  
-# specifying resources
-
-from pythonlab.resource.labware import LabwareResource
-from pythonlab.resource.services import MoverServiceResource, DispensionServiceResource, IncubationServiceResource
-
-from pythonlab.processes.base import incubate, centrifugate
-from pythonlab.bioprocess import inoculate
-
-Labware_set = [LabwareResource(name=f"growth_plate_{cont}")
-                           for cont in range(8)]
-
-dispenser = DispensionServiceResource()
-incubator = IncubationServiceResource()
-
-inoculate([dispenser, Labware_set], source="starting_culture")
-incubate([incubator, Labware_set], temp=310.0, shaking=(700,2) )  # temp in K
-centrifugate([incubator, Labware_set], duration=600, force=4500)
-
-...
-
-```
 ## Why python ?
 
 Python is a programming language that is very common in modern scientific laboratories and covers all the desired characteristics we expect of a user-friendly lab process programming language.
@@ -161,14 +238,7 @@ Syntax validation comes for free: the python interpreter already does it.
 
 Standardisation of a minimal set of functionally will be achieved by standardised packages provided by this site (or any publicly available site).
 Defined namespaces and versioning allow unique addressing of a process step. 
-
-
-## [Implementation](./implementation)
-
-As a proof-of-concept we are planning to provide a [pypy-sandbox](https://www.pypy.org) implementation in the future.
-[pypy-sandbox](https://www.pypy.org) offerers a safe execution environment to execute insecure code. 
-A new version is currently developed to by the pypy community.
-Alternatively WASM will be a possible safe execution environment.
+e safe execution environment.
 
 ## Related projects
 
@@ -195,16 +265,4 @@ Here is an incomplete list of related OpenSource projects - please let us know, 
 
 ## Repository Maintainer:
 
-* mark doerr (mark.doerr@uni-greifswald.de)
-
-## Documentation
-
-The Documentation can be found here: [opensourcelab.gitlab.io/pythonLab](opensourcelab.gitlab.io/pythonLab) or [pythonLab.gitlab.io](pythonlab.gitlab.io/)
-
-
-## Credits
-
-This package was created with Cookiecutter* and the `opensource/templates/cookiecutter-pypackage`* project template.
-
-[Cookiecutter](https://github.com/audreyr/cookiecutter )
-[opensource/templates/cookiecutter-pypackage](https://gitlab.com/opensourcelab/software-dev/cookiecutter-pypackage) 
+* Stefan Maak (stefan.maak@uu.se)
