@@ -52,4 +52,34 @@ graph TD
     class SW,NET network
 ```
 
-Subnet: `10.10.0.0/24`
+## Echo Automation
+
+The Echo is driven through a chain of software components spread across three
+hosts. The 32-bit micro-service bridges the modern SiLA stack to the legacy
+Echo software.
+
+```mermaid
+graph TD
+    subgraph CTRLH["Control Computer"]
+        SILA["SiLA Server"]
+    end
+
+    subgraph ECHOH["Echo Computer"]
+        MS["32-bit Micro-service"]
+        ECHOSW["Echo-Software"]
+    end
+
+    subgraph ECHOD["Echo"]
+        ESRV["Echo-Server"]
+    end
+
+    SILA <-->|socket| MS
+    MS <-->|ActiveX| ECHOSW
+    ECHOSW <-->|http| ESRV
+
+    classDef computer fill:#8fb8e0,stroke:#3f6fa0,color:#000
+    classDef device fill:#9ed48a,stroke:#4f9040,color:#000
+
+    class SILA,MS,ECHOSW computer
+    class ESRV device
+```
