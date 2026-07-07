@@ -37,3 +37,19 @@ process_module = processes
 arm_open = True  # View for genericroboticarm
 db_open = True  # View for present labware in database
 browser_open = True  # Sila-browser
+
+# Gantt chart bar colors per device (device name -> color).
+# Robot arm: red. Microscopes: shades of green (the two squids are close to
+# each other). Liquid handlers: shades of blue.
+device_colors = {
+    "PFonRail": "#d62728",  # robot arm
+    "Squid1": "#43a047",  # squid microscope (mid green)
+    "Squid2": "#9ccc65",  # squid microscope (lime green, close-ish to Squid1)
+    "MultiFlow": "#4fc3f7",  # liquid handler (dispenser) - light blue
+    "Washer": "#1e88e5",  # 405TS washer (liquid handler) - mid blue
+    "BlueWasher": "#002171",  # BlueWasher (liquid handler) - navy
+    "Echo": "#e91e63",  # acoustic dispenser - pink
+    "Cytomat1": "#ffb300",  # incubator - orange-yellow
+    "Cytomat2": "#ffe082",  # incubator - light yellow
+    "Sealer": "#9e9e9e",  # plate sealer - grey
+}
