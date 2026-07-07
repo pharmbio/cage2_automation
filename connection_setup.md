@@ -20,14 +20,14 @@ graph TD
     SW --- SQUID
 
     ECHODEV["Echo<br/>192.168.0.25"]
-    SC1["squid_control 1"]
-    SC2["squid_control 2"]
-    SC3["squid_control 3"]
-    SC4["squid_control 4"]
-    SQ1["squid 1"]
-    SQ2["squid 2"]
-    SQ3["squid 3"]
-    SQ4["squid 4"]
+    SC1["Squid Control 1"]
+    SC2["Squid Control 2"]
+    SC3["Squid Control 3"]
+    SC4["Squid Control 4"]
+    SQ1["Squid 1"]
+    SQ2["Squid 2"]
+    SQ3["Squid 3"]
+    SQ4["Squid 4"]
     OTHER["Other Devices"]
     NET["Internet / Internal Network"]
 
@@ -83,3 +83,15 @@ graph TD
     class SILA,MS,ECHOSW computer
     class ESRV device
 ```
+
+## Power Supply
+
+The platform is powered through five separate power supplies. Each supply feeds a
+distinct group of devices:
+
+| Power Supply 1   | Power Supply 2 | Power Supply 3 | Power Supply 4 | Power Supply 5 |
+| ---------------- | -------------- | -------------- | -------------- | -------------- |
+| Control Computer | Squid Hub      | 405 TS         | Sealer         | Echo           |
+| Switch           | Squid Controls | BlueWasher     | Cytomats       | Echo-Computer  |
+| Screen           | Squids         | MultiFlowFX    | Fridge         |                |
+| Robot            |                |                |                |                |
