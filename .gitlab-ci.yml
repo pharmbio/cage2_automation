@@ -125,7 +125,7 @@ pages:
   stage: build_and_publish_docs
   pages: true
   script:
-    - pip install -e .
+    - pip install -e ".[docs]"
     - pip install uupythonlab
     - pip install jinja2
     - make publish-gitlab
