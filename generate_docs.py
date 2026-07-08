@@ -1,5 +1,5 @@
 # Wildcard import to load all available services no matter their names:Q:q
-from pythonlab.resources.services import * # noqa: F403
+from pythonlab.resources.services import *  # noqa: F403
 from pythonlab.resources import LabwareResource
 from pythonlab.resource import ServiceResource
 import jinja2
@@ -26,12 +26,11 @@ def main():
 
     # Set up Jinja2 environment
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir))
-    template = env.get_template('api_reference.md.jinja2')
+    template = env.get_template("api_reference.md.jinja2")
 
     # Render template
     output = template.render(
-        service_subclasses=service_subclasses,
-        labware_subclasses=labware_subclasses
+        service_subclasses=service_subclasses, labware_subclasses=labware_subclasses
     )
 
     # Write output file
