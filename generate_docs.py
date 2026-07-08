@@ -1,4 +1,5 @@
-from pythonlab.resources.services import *
+# Wildcard import to load all available services no matter their names:Q:q
+from pythonlab.resources.services import * # noqa: F403
 from pythonlab.resources import LabwareResource
 from pythonlab.resource import ServiceResource
 import jinja2
