@@ -145,13 +145,13 @@ graph [
   node [
     id 13
     label "Hotel2_nest0"
-    x -419.7
-    y -1239.8
-    z 566.2
-    dir -349.2
-    rail -999.1
-    joint2 -85.2
-    joint3 253.6
+    x -420.312
+    y -1239.654
+    z 566.192
+    dir -349.182
+    rail -999.082
+    joint2 -85.298
+    joint3 253.685
   ]
   node [
     id 14
@@ -167,13 +167,13 @@ graph [
   node [
     id 15
     label "Hotel2_nest12"
-    x -419.0
-    y -1241.9
-    z 87.7
-    dir -349.5
-    rail -999.1
-    joint2 -85.0
-    joint3 253.8
+    x -418.159
+    y -1241.835
+    z 87.677
+    dir -349.509
+    rail -999.082
+    joint2 -84.805
+    joint3 253.623
   ]
   node [
     id 16
@@ -365,35 +365,35 @@ graph [
   node [
     id 33
     label "Hotel2_transit4_0"
-    x -277.0
-    y -1238.0
-    z 574.3
-    dir -360.1
-    rail -999.1
-    joint2 -54.8
-    joint3 233.8
+    x -272.875
+    y -1238.876
+    z 574.308
+    dir -360.554
+    rail -999.08
+    joint2 -53.861
+    joint3 233.54
   ]
   node [
     id 34
     label "Hotel2_transit2_0"
-    x -372.1
-    y -1239.1
-    z 574.3
-    dir -352.8
-    rail -999.1
-    joint2 -75.1
-    joint3 247.0
+    x -370.796
+    y -1239.592
+    z 574.308
+    dir -350.925
+    rail -999.081
+    joint2 -75.444
+    joint3 245.571
   ]
   node [
     id 35
     label "Hotel2_transit3_0"
-    x -324.6
-    y -1238.6
-    z 574.3
-    dir -356.4
-    rail -999.1
-    joint2 -64.9
-    joint3 240.4
+    x -321.781
+    y -1239.615
+    z 574.308
+    dir -354.606
+    rail -999.081
+    joint2 -65.021
+    joint3 238.855
   ]
   node [
     id 36
@@ -496,7 +496,7 @@ graph [
   edge [
     source 6
     target 33
-    dist 330.5671187520017
+    dist 328.50306176270334
   ]
   edge [
     source 6
@@ -526,17 +526,17 @@ graph [
   edge [
     source 13
     target 14
-    dist 8.100617260431362
+    dist 8.149194500194891
   ]
   edge [
     source 14
     target 34
-    dist 47.60378136240856
+    dist 48.92311990824495
   ]
   edge [
     source 15
     target 16
-    dist 8.103085831953154
+    dist 8.196437197900366
   ]
   edge [
     source 16
@@ -606,12 +606,12 @@ graph [
   edge [
     source 33
     target 35
-    dist 47.60378136240862
+    dist 48.91258305555033
   ]
   edge [
     source 34
     target 35
-    dist 47.502631506054485
+    dist 49.01500539630694
   ]
   edge [
     source 36
