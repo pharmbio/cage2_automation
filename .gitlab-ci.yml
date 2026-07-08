@@ -126,6 +126,7 @@ pages:
   pages: true
   script:
     - pip install -e .
+    - pip install uupythonlab
     - make publish-gitlab
   artifacts:
     paths:
