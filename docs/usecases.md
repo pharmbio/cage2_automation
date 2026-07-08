@@ -1,4 +1,4 @@
-### Some examples for adaptation of the template:
+Some examples for adaptation of the template.
 
 <div style="display:flex; gap:1em" markdown>
 

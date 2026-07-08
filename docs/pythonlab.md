@@ -10,30 +10,17 @@ Also processes are defined in python, they are not **excecuted** but **parsed in
 
 ### Simple linear workflow
 
-<details>
-<summary>Show code</summary>
-
 ``` python
 protocol_path = "protocols/evacuation_speroids.lhc"
 self.robot_arm.move(cont, self.dispenser)
 self.dispenser.run_protocol(labware=cont, protocol=protocol_path)
 ```
 
-</details>
-
 This process is parsed into the following workflow graph:
 
-<details>
-<summary>Show graph</summary>
-
-![Simple linear workflow](docs/images/workflows/simple_linear_workflow.svg)
-
-</details>
+![Simple linear workflow](assets/workflows/simple_linear_workflow.svg)
 
 ### Implicit movements for reagents and multi labware steps
-
-<details>
-<summary>Show code</summary>
 
 ``` python        
 bravo_positions = [4, 6, 7, 8]
@@ -48,21 +35,11 @@ for cont in growth_plates:
     self.robot_arm.move(cont, self.incubator2, lidded=True)                           
 ```
 
-</details>
-
 The reagent plates in `reagents=[...]` are moved to and from the liquid handler implicitly:
 
-<details>
-<summary>Show graph</summary>
-
-![Implicit reagent movement workflow](docs/images/workflows/implicit_reagent_movement_workflow.svg)
-
-</details>
+![Implicit reagent movement workflow](assets/workflows/implicit_reagent_movement_workflow.svg)
 
 ### Simple for-loop
-
-<details>
-<summary>Show code</summary>
 
 ``` python
 for plate in self.target_plates:
@@ -71,21 +48,11 @@ for plate in self.target_plates:
     self.robot_arm.move(plate, self.hotel2, lidded=True)
 ```
 
-</details>
-
 This process is parsed into the following workflow graph:
 
-<details>
-<summary>Show graph</summary>
-
-![Simple for-loop workflow](docs/images/workflows/simple_for_loop_workflow.svg)
-
-</details>
+![Simple for-loop workflow](assets/workflows/simple_for_loop_workflow.svg)
 
 ### Single conditional
-
-<details>
-<summary>Show code</summary>
 
 ``` python
 def is_acceptable(answer) -> bool:
@@ -101,21 +68,11 @@ else:
     self.robot_arm.move(cont, self.hotel1)
 ```
 
-</details>
-
 This process is parsed into the following workflow graph:
 
-<details>
-<summary>Show graph</summary>
-
-![Single conditional workflow](docs/images/workflows/single_conditional_workflow.svg)
-
-</details>
+![Single conditional workflow](assets/workflows/single_conditional_workflow.svg)
 
 ### Nested for-loop and timing comstraints
-
-<details>
-<summary>Show code</summary>
 
 ``` python
 meas_time = 65
@@ -136,21 +93,11 @@ for cont in self.containers:
     self.robot_arm.move(cont, self.hotel)
 ```
 
-</details>
-
 This process is parsed into the following workflow graph:
 
-<details>
-<summary>Show graph</summary>
-
-![Nested for-loop workflow](docs/images/workflows/nested_for_loop_workflow.svg)
-
-</details>
+![Nested for-loop workflow](assets/workflows/nested_for_loop_workflow.svg)
 
 ### Nested for-loop with conditional and break
-
-<details>
-<summary>Show code</summary>
 
 ``` python
 # cultured plates in incubator 37°, 200rpm, 45-90 min until aver_OD is >= 0.4.
@@ -170,16 +117,10 @@ for cont in cultured_plates:
     self.robot_arm.move(cont, target_loc=self.pipetter, lidded=False, position=3)   
 ```
 
-</details>
 
 This process is parsed into the following workflow graph:
 
-<details>
-<summary>Show graph</summary>
-
-![Nested for-loop with conditional and break workflow](docs/images/workflows/nested_conditional_break_workflow.svg)
-
-</details>
+![Nested for-loop with conditional and break workflow](assets/workflows/nested_conditional_break_workflow.svg)
 
 ## Key (desired) Features 
 
@@ -207,7 +148,7 @@ This process is parsed into the following workflow graph:
 pythonLab processes are denoted in a python like syntax, but they are **not** directly executed by a *python interpreter*. They are rather parsed into a *workflow graph*, which can be used by a *Scheduler* to calculate 
 an optimal schedule (=order of execution). This order of execution might be different from the initial notation. An *Orchestrator* executes then the schedule and supervises the device communication, e.g. to SiLA servers/devices.
 
-![pythonLab Architecture](docs/images/pythonLab_architecture_overview.svg)
+![pythonLab Architecture](assets/pythonLab_architecture_overview.svg)
 
 ## [Specification](https://opensourcelab.gitlab.io/pythonLab/specification/0_specification_base.html)
 

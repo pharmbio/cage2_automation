@@ -2,6 +2,19 @@ site_name: Lab automation docs
 site_dir: site
 docs_dir: docs
 
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Use Cases: usecases.md
+  - Lab Configuration: lab configuration.md
+  - Wrappers: wrappers.md
+  - Robot Arm: robot arm.md
+  - Customization: customization.md
+  - About: about.md
+  - PythonLab:
+    - Introduction: pythonlab.md
+    - API Reference: pythonlab/api_reference.md
+
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
@@ -53,5 +66,6 @@ plugins:
             show_root_full_path: true
             docstring_style: sphinx
 
+  - glightbox
   - panzoom:
       full_screen: true
