@@ -127,6 +127,7 @@ pages:
   script:
     - pip install -e .
     - pip install uupythonlab
+    - pip install jinja2
     - make publish-gitlab
   artifacts:
     paths:
