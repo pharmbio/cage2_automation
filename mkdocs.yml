@@ -1,0 +1,57 @@
+site_name: Lab automation docs
+site_dir: site
+docs_dir: docs
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+
+theme:
+  name: material
+  logo: assets/LARA_logo.svg
+  favicon: assets/LARA_logo.ico
+  features:
+    - content.code.copy
+  palette:
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: blue
+      accent: lime
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+plugins:
+  - search
+  - mermaid2
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            show_root_heading: true
+            show_root_full_path: true
+            docstring_style: sphinx
+
+  - panzoom:
+      full_screen: true
