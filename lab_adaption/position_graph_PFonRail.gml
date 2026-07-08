@@ -2,431 +2,431 @@ graph [
   node [
     id 0
     label "center_mid"
-    x 174.015
-    y -116.174
-    z 260.957
-    dir -175.709
-    rail -109.759
-    joint2 -3.723
-    joint3 183.241
+    x 174.0
+    y -116.2
+    z 261.0
+    dir -175.7
+    rail -109.8
+    joint2 -3.7
+    joint3 183.2
   ]
   node [
     id 1
     label "center_back"
-    x 175.383
-    y -836.495
-    z 309.466
-    dir -176.152
-    rail -865.392
-    joint2 1.926
-    joint3 174.519
+    x 175.4
+    y -836.5
+    z 309.5
+    dir -176.2
+    rail -865.4
+    joint2 1.9
+    joint3 174.5
   ]
   node [
     id 2
     label "center_front"
-    x 176.28
-    y 528.837
-    z 309.471
-    dir -173.507
-    rail 495.311
-    joint2 0.581
-    joint3 173.939
+    x 176.3
+    y 528.8
+    z 309.5
+    dir -173.5
+    rail 495.3
+    joint2 0.6
+    joint3 173.9
   ]
   node [
     id 3
     label "Cytomat1_approach"
-    x -89.819
-    y -1215.37
-    z 344.703
-    dir -262.055
-    rail -864.312
+    x -89.8
+    y -1215.4
+    z 344.7
+    dir -262.1
+    rail -864.3
     joint2 -49.4
-    joint3 221.396
+    joint3 221.4
   ]
   node [
     id 4
     label "Cytomat1_nest"
-    x -171.329
-    y -1292.743
-    z 288.513
-    dir -268.485
-    rail -864.317
-    joint2 -66.724
-    joint3 244.546
+    x -171.3
+    y -1292.7
+    z 288.5
+    dir -268.5
+    rail -864.3
+    joint2 -66.7
+    joint3 244.5
   ]
   node [
     id 5
     label "Cytomat1_transit"
-    x -171.11
-    y -1292.888
-    z 303.574
-    dir -268.422
-    rail -864.317
-    joint2 -66.73
-    joint3 244.578
+    x -171.1
+    y -1292.9
+    z 303.6
+    dir -268.4
+    rail -864.3
+    joint2 -66.7
+    joint3 244.6
   ]
   node [
     id 6
     label "Hotel2_approach"
-    x -108.045
-    y -1238.896
-    z 290.218
-    dir -388.121
-    rail -999.122
-    joint2 -12.643
-    joint3 225.997
+    x -108.0
+    y -1238.9
+    z 290.2
+    dir -388.1
+    rail -999.1
+    joint2 -12.6
+    joint3 226.0
   ]
   node [
     id 7
     label "Echo_approach"
-    x 379.119
-    y 682.765
-    z 103.027
-    dir 33.139
-    rail 495.293
-    joint2 -44.985
-    joint3 100.775
+    x 379.1
+    y 682.8
+    z 103.0
+    dir 33.1
+    rail 495.3
+    joint2 -45.0
+    joint3 100.8
   ]
   node [
     id 8
     label "Echo_source"
-    x 292.599
+    x 292.6
     y 881.6
-    z 26.812
-    dir -0.816
-    rail 495.736
-    joint2 -12.452
-    joint3 103.037
+    z 26.8
+    dir -0.8
+    rail 495.7
+    joint2 -12.5
+    joint3 103.0
   ]
   node [
     id 9
     label "Echo_destination"
-    x 426.928
-    y 872.123
-    z 26.812
-    dir 25.424
-    rail 495.736
-    joint2 -8.636
-    joint3 72.631
+    x 426.9
+    y 872.1
+    z 26.8
+    dir 25.4
+    rail 495.7
+    joint2 -8.6
+    joint3 72.6
   ]
   node [
     id 10
     label "Echo_transit1"
-    x 424.063
-    y 872.181
-    z 63.431
-    dir 25.626
-    rail 495.562
-    joint2 -8.721
-    joint3 73.02
+    x 424.1
+    y 872.2
+    z 63.4
+    dir 25.6
+    rail 495.6
+    joint2 -8.7
+    joint3 73.0
   ]
   node [
     id 11
     label "Echo_transit0"
-    x 290.758
-    y 884.371
-    z 63.431
-    dir -0.989
-    rail 495.562
-    joint2 -11.876
-    joint3 102.838
+    x 290.8
+    y 884.4
+    z 63.4
+    dir -1.0
+    rail 495.6
+    joint2 -11.9
+    joint3 102.8
   ]
   node [
     id 12
     label "bc_reader"
-    x 66.279
-    y -1172.188
-    z 83.552
-    dir -293.552
-    rail -864.032
-    joint2 -1.031
-    joint3 210.357
+    x 66.3
+    y -1172.2
+    z 83.6
+    dir -293.6
+    rail -864.0
+    joint2 -1.0
+    joint3 210.4
   ]
   node [
     id 13
     label "Hotel2_nest0"
-    x -419.718
-    y -1239.835
-    z 566.184
-    dir -349.212
-    rail -999.123
-    joint2 -85.178
-    joint3 253.601
+    x -419.7
+    y -1239.8
+    z 566.2
+    dir -349.2
+    rail -999.1
+    joint2 -85.2
+    joint3 253.6
   ]
   node [
     id 14
     label "Hotel2_transit1_0"
-    x -419.663
-    y -1239.724
-    z 574.271
-    dir -349.174
-    rail -999.123
-    joint2 -85.174
-    joint3 253.569
+    x -419.7
+    y -1239.7
+    z 574.3
+    dir -349.2
+    rail -999.1
+    joint2 -85.2
+    joint3 253.6
   ]
   node [
     id 15
     label "Hotel2_nest12"
-    x -419.041
-    y -1241.887
-    z 87.717
-    dir -349.52
-    rail -999.124
-    joint2 -84.975
-    joint3 253.787
+    x -419.0
+    y -1241.9
+    z 87.7
+    dir -349.5
+    rail -999.1
+    joint2 -85.0
+    joint3 253.8
   ]
   node [
     id 16
     label "Hotel2_transit1_12"
-    x -419.08
+    x -419.1
     y -1241.7
-    z 95.76
-    dir -349.494
-    rail -999.124
-    joint2 -84.989
-    joint3 253.766
+    z 95.8
+    dir -349.5
+    rail -999.1
+    joint2 -85.0
+    joint3 253.8
   ]
   node [
     id 17
     label "BlueWasher_nest"
-    x 338.461
-    y 133.65
-    z 128.814
-    dir -368.884
-    rail 495.28
-    joint2 16.439
-    joint3 262.98
+    x 338.5
+    y 133.7
+    z 128.8
+    dir -368.9
+    rail 495.3
+    joint2 16.4
+    joint3 263.0
   ]
   node [
     id 18
     label "BlueWasher_transit"
-    x 338.475
-    y 133.754
-    z 150.813
-    dir -368.857
-    rail 495.28
-    joint2 16.461
-    joint3 262.955
+    x 338.5
+    y 133.8
+    z 150.8
+    dir -368.9
+    rail 495.3
+    joint2 16.5
+    joint3 263.0
   ]
   node [
     id 19
     label "BlueWasher_approach"
-    x 339.86
-    y 299.823
-    z 172.023
-    dir -388.437
-    rail 495.279
-    joint2 47.211
-    joint3 250.827
+    x 339.9
+    y 299.8
+    z 172.0
+    dir -388.4
+    rail 495.3
+    joint2 47.2
+    joint3 250.8
   ]
   node [
     id 20
     label "Washer_rail_pos"
-    x 173.256
-    y 304.438
-    z 327.766
-    dir -185.013
-    rail 317.428
-    joint2 -2.764
-    joint3 175.732
+    x 173.3
+    y 304.4
+    z 327.8
+    dir -185.0
+    rail 317.4
+    joint2 -2.8
+    joint3 175.7
   ]
   node [
     id 21
     label "Washer_approach"
-    x 67.37
-    y -219.688
-    z 186.413
-    dir -318.715
-    rail 317.038
-    joint2 -31.413
-    joint3 260.176
+    x 67.4
+    y -219.7
+    z 186.4
+    dir -318.7
+    rail 317.0
+    joint2 -31.4
+    joint3 260.2
   ]
   node [
     id 22
     label "Washer_nest"
-    x 51.513
-    y -397.669
-    z 100.119
-    dir -345.888
-    rail 317.073
-    joint2 -64.901
-    joint3 319.994
+    x 51.5
+    y -397.7
+    z 100.1
+    dir -345.9
+    rail 317.1
+    joint2 -64.9
+    joint3 320.0
   ]
   node [
     id 23
     label "Washer_transit"
-    x 51.693
-    y -397.603
-    z 127.167
-    dir -345.85
-    rail 317.082
-    joint2 -64.878
-    joint3 319.966
+    x 51.7
+    y -397.6
+    z 127.2
+    dir -345.9
+    rail 317.1
+    joint2 -64.9
+    joint3 320.0
   ]
   node [
     id 24
     label "MultiFlow_approach"
-    x 171.431
-    y -72.826
-    z 327.765
-    dir -223.672
-    rail 317.407
-    joint2 -40.006
-    joint3 259.955
+    x 171.4
+    y -72.8
+    z 327.8
+    dir -223.7
+    rail 317.4
+    joint2 -40.0
+    joint3 260.0
   ]
   node [
     id 25
     label "MultiFlow_transit"
-    x 345.288
-    y -152.656
-    z 319.629
-    dir -259.512
-    rail 317.439
-    joint2 -37.728
-    joint3 296.644
+    x 345.3
+    y -152.7
+    z 319.6
+    dir -259.5
+    rail 317.4
+    joint2 -37.7
+    joint3 296.6
   ]
   node [
     id 26
     label "Cytomat2_approach"
-    x 344.708
-    y -1132.567
-    z 344.703
-    dir -378.346
-    rail -864.106
-    joint2 33.652
-    joint3 255.003
+    x 344.7
+    y -1132.6
+    z 344.7
+    dir -378.3
+    rail -864.1
+    joint2 33.7
+    joint3 255.0
   ]
   node [
     id 27
     label "Cytomat2_nest"
-    x 357.988
-    y -1284.647
-    z 277.366
-    dir -372.907
-    rail -864.106
-    joint2 4.595
-    joint3 277.331
+    x 358.0
+    y -1284.6
+    z 277.4
+    dir -372.9
+    rail -864.1
+    joint2 4.6
+    joint3 277.3
   ]
   node [
     id 28
     label "Cytomat2_transit"
-    x 357.968
-    y -1284.649
-    z 297.371
-    dir -372.905
-    rail -864.106
-    joint2 4.595
-    joint3 277.329
+    x 358.0
+    y -1284.6
+    z 297.4
+    dir -372.9
+    rail -864.1
+    joint2 4.6
+    joint3 277.3
   ]
   node [
     id 29
     label "MultiFlow_nest"
-    x 345.007
-    y -153.741
-    z 301.54
-    dir -259.679
-    rail 317.439
-    joint2 -37.901
-    joint3 296.874
+    x 345.0
+    y -153.7
+    z 301.5
+    dir -259.7
+    rail 317.4
+    joint2 -37.9
+    joint3 296.9
   ]
   node [
     id 30
     label "rail_min"
-    x 175.387
-    y -970.066
-    z 305.439
-    dir -176.133
-    rail -999.014
-    joint2 1.921
-    joint3 174.514
+    x 175.4
+    y -970.1
+    z 305.4
+    dir -176.1
+    rail -999.0
+    joint2 1.9
+    joint3 174.5
   ]
   node [
     id 31
     label "rail_min_right"
-    x 200.85
-    y -1177.159
-    z 290.228
-    dir -213.736
-    rail -999.044
-    joint2 -5.684
-    joint3 211.514
+    x 200.8
+    y -1177.2
+    z 290.2
+    dir -213.7
+    rail -999.0
+    joint2 -5.7
+    joint3 211.5
   ]
   node [
     id 32
     label "rail_min_left"
-    x 186.159
-    y -815.065
-    z 290.215
-    dir -158.982
-    rail -999.044
-    joint2 14.985
-    joint3 142.794
+    x 186.2
+    y -815.1
+    z 290.2
+    dir -159.0
+    rail -999.0
+    joint2 15.0
+    joint3 142.8
   ]
   node [
     id 33
     label "Hotel2_transit4_0"
-    x -276.999
-    y -1237.986
-    z 574.281
-    dir -360.07
-    rail -999.122
-    joint2 -54.835
-    joint3 233.841
+    x -277.0
+    y -1238.0
+    z 574.3
+    dir -360.1
+    rail -999.1
+    joint2 -54.8
+    joint3 233.8
   ]
   node [
     id 34
     label "Hotel2_transit2_0"
-    x -372.10833333333335
-    y -1239.1446666666666
-    z 574.2743333333333
-    dir -352.806
-    rail -999.1226666666668
-    joint2 -75.061
-    joint3 246.99300000000002
+    x -372.1
+    y -1239.1
+    z 574.3
+    dir -352.8
+    rail -999.1
+    joint2 -75.1
+    joint3 247.0
   ]
   node [
     id 35
     label "Hotel2_transit3_0"
-    x -324.5536666666667
-    y -1238.5653333333335
-    z 574.2776666666666
-    dir -356.438
-    rail -999.1223333333334
-    joint2 -64.94800000000001
-    joint3 240.41700000000003
+    x -324.6
+    y -1238.6
+    z 574.3
+    dir -356.4
+    rail -999.1
+    joint2 -64.9
+    joint3 240.4
   ]
   node [
     id 36
     label "Hotel2_transit4_12"
-    x -272.231
-    y -1240.681
-    z 95.764
-    dir -360.998
-    rail -999.123
-    joint2 -53.709
-    joint3 233.831
+    x -272.2
+    y -1240.7
+    z 95.8
+    dir -361.0
+    rail -999.1
+    joint2 -53.7
+    joint3 233.8
   ]
   node [
     id 37
     label "Hotel2_transit2_12"
-    x -370.1303333333334
-    y -1241.3603333333335
-    z 95.76133333333334
-    dir -353.32866666666666
-    rail -999.1236666666668
-    joint2 -74.56233333333334
-    joint3 247.12099999999998
+    x -370.1
+    y -1241.4
+    z 95.8
+    dir -353.3
+    rail -999.1
+    joint2 -74.6
+    joint3 247.1
   ]
   node [
     id 38
     label "Hotel2_transit3_12"
-    x -321.18066666666664
-    y -1241.0206666666668
-    z 95.76266666666666
-    dir -357.1633333333333
-    rail -999.1233333333334
-    joint2 -64.13566666666667
-    joint3 240.476
+    x -321.2
+    y -1241.0
+    z 95.8
+    dir -357.2
+    rail -999.1
+    joint2 -64.1
+    joint3 240.5
   ]
   edge [
     source 0
