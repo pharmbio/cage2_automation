@@ -145,13 +145,13 @@ graph [
   node [
     id 13
     label "Hotel2_nest0"
-    x -420.312
-    y -1239.654
-    z 566.192
-    dir -349.182
-    rail -999.082
-    joint2 -85.298
-    joint3 253.685
+    x -420.3
+    y -1239.7
+    z 566.2
+    dir -349.2
+    rail -999.1
+    joint2 -85.3
+    joint3 253.7
   ]
   node [
     id 14
@@ -167,13 +167,13 @@ graph [
   node [
     id 15
     label "Hotel2_nest12"
-    x -418.159
-    y -1241.835
-    z 87.677
-    dir -349.509
-    rail -999.082
-    joint2 -84.805
-    joint3 253.623
+    x -418.2
+    y -1241.8
+    z 87.7
+    dir -349.5
+    rail -999.1
+    joint2 -84.8
+    joint3 253.6
   ]
   node [
     id 16
@@ -365,35 +365,35 @@ graph [
   node [
     id 33
     label "Hotel2_transit4_0"
-    x -272.875
-    y -1238.876
-    z 574.308
-    dir -360.554
-    rail -999.08
-    joint2 -53.861
-    joint3 233.54
+    x -272.9
+    y -1238.9
+    z 574.3
+    dir -360.6
+    rail -999.1
+    joint2 -53.9
+    joint3 233.5
   ]
   node [
     id 34
     label "Hotel2_transit2_0"
-    x -370.796
-    y -1239.592
-    z 574.308
-    dir -350.925
-    rail -999.081
-    joint2 -75.444
-    joint3 245.571
+    x -370.8
+    y -1239.6
+    z 574.3
+    dir -350.9
+    rail -999.1
+    joint2 -75.4
+    joint3 245.6
   ]
   node [
     id 35
     label "Hotel2_transit3_0"
-    x -321.781
-    y -1239.615
-    z 574.308
-    dir -354.606
-    rail -999.081
-    joint2 -65.021
-    joint3 238.855
+    x -321.8
+    y -1239.6
+    z 574.3
+    dir -354.6
+    rail -999.1
+    joint2 -65.0
+    joint3 238.9
   ]
   node [
     id 36
@@ -409,24 +409,629 @@ graph [
   node [
     id 37
     label "Hotel2_transit2_12"
-    x -370.336
-    y -1237.485
-    z 95.881
-    dir -351.617
-    rail -999.095
-    joint2 -75.361
-    joint3 245.483
+    x -370.3
+    y -1237.5
+    z 95.9
+    dir -351.6
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
   ]
   node [
     id 38
     label "Hotel2_transit3_12"
-    x -320.271
-    y -1236.837
-    z 95.881
-    dir -355.484
-    rail -999.095
-    joint2 -64.709
-    joint3 238.592
+    x -320.3
+    y -1236.8
+    z 95.9
+    dir -355.5
+    rail -999.1
+    joint2 -64.7
+    joint3 238.6
+  ]
+  node [
+    id 39
+    label "Hotel2_nest1"
+    x -420.1
+    y -1239.8
+    z 526.3
+    dir -349.2
+    rail -999.1
+    joint2 -85.3
+    joint3 253.7
+  ]
+  node [
+    id 40
+    label "Hotel2_transit1_1"
+    x -419.6
+    y -1239.9
+    z 534.4
+    dir -349.2
+    rail -999.1
+    joint2 -85.2
+    joint3 253.6
+  ]
+  node [
+    id 41
+    label "Hotel2_transit2_1"
+    x -370.8
+    y -1239.4
+    z 534.4
+    dir -351.0
+    rail -999.1
+    joint2 -75.4
+    joint3 245.6
+  ]
+  node [
+    id 42
+    label "Hotel2_transit3_1"
+    x -321.7
+    y -1239.4
+    z 534.4
+    dir -354.7
+    rail -999.1
+    joint2 -65.0
+    joint3 238.8
+  ]
+  node [
+    id 43
+    label "Hotel2_transit4_1"
+    x -272.8
+    y -1239.0
+    z 534.4
+    dir -360.6
+    rail -999.1
+    joint2 -53.8
+    joint3 233.6
+  ]
+  node [
+    id 44
+    label "Hotel2_nest2"
+    x -420.0
+    y -1240.0
+    z 486.4
+    dir -349.2
+    rail -999.1
+    joint2 -85.2
+    joint3 253.7
+  ]
+  node [
+    id 45
+    label "Hotel2_transit1_2"
+    x -419.6
+    y -1240.0
+    z 494.5
+    dir -349.2
+    rail -999.1
+    joint2 -85.2
+    joint3 253.6
+  ]
+  node [
+    id 46
+    label "Hotel2_transit2_2"
+    x -370.7
+    y -1239.2
+    z 494.6
+    dir -351.0
+    rail -999.1
+    joint2 -75.4
+    joint3 245.6
+  ]
+  node [
+    id 47
+    label "Hotel2_transit3_2"
+    x -321.5
+    y -1239.2
+    z 494.6
+    dir -354.8
+    rail -999.1
+    joint2 -65.0
+    joint3 238.8
+  ]
+  node [
+    id 48
+    label "Hotel2_transit4_2"
+    x -272.8
+    y -1239.2
+    z 494.6
+    dir -360.6
+    rail -999.1
+    joint2 -53.8
+    joint3 233.6
+  ]
+  node [
+    id 49
+    label "Hotel2_nest3"
+    x -419.8
+    y -1240.2
+    z 446.6
+    dir -349.3
+    rail -999.1
+    joint2 -85.2
+    joint3 253.7
+  ]
+  node [
+    id 50
+    label "Hotel2_transit1_3"
+    x -419.6
+    y -1240.2
+    z 454.7
+    dir -349.3
+    rail -999.1
+    joint2 -85.2
+    joint3 253.7
+  ]
+  node [
+    id 51
+    label "Hotel2_transit2_3"
+    x -370.7
+    y -1239.1
+    z 454.7
+    dir -351.1
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
+  ]
+  node [
+    id 52
+    label "Hotel2_transit3_3"
+    x -321.4
+    y -1238.9
+    z 454.7
+    dir -354.8
+    rail -999.1
+    joint2 -64.9
+    joint3 238.8
+  ]
+  node [
+    id 53
+    label "Hotel2_transit4_3"
+    x -272.7
+    y -1239.3
+    z 454.7
+    dir -360.7
+    rail -999.1
+    joint2 -53.8
+    joint3 233.6
+  ]
+  node [
+    id 54
+    label "Hotel2_nest4"
+    x -419.6
+    y -1240.4
+    z 406.7
+    dir -349.3
+    rail -999.1
+    joint2 -85.1
+    joint3 253.7
+  ]
+  node [
+    id 55
+    label "Hotel2_transit1_4"
+    x -419.5
+    y -1240.4
+    z 414.8
+    dir -349.3
+    rail -999.1
+    joint2 -85.1
+    joint3 253.7
+  ]
+  node [
+    id 56
+    label "Hotel2_transit2_4"
+    x -370.6
+    y -1238.9
+    z 414.8
+    dir -351.2
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
+  ]
+  node [
+    id 57
+    label "Hotel2_transit3_4"
+    x -321.3
+    y -1238.7
+    z 414.8
+    dir -354.9
+    rail -999.1
+    joint2 -64.9
+    joint3 238.8
+  ]
+  node [
+    id 58
+    label "Hotel2_transit4_4"
+    x -272.6
+    y -1239.5
+    z 414.8
+    dir -360.7
+    rail -999.1
+    joint2 -53.8
+    joint3 233.6
+  ]
+  node [
+    id 59
+    label "Hotel2_nest5"
+    x -419.4
+    y -1240.6
+    z 366.8
+    dir -349.3
+    rail -999.1
+    joint2 -85.1
+    joint3 253.7
+  ]
+  node [
+    id 60
+    label "Hotel2_transit1_5"
+    x -419.4
+    y -1240.5
+    z 374.9
+    dir -349.3
+    rail -999.1
+    joint2 -85.1
+    joint3 253.7
+  ]
+  node [
+    id 61
+    label "Hotel2_transit2_5"
+    x -370.6
+    y -1238.7
+    z 375.0
+    dir -351.2
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
+  ]
+  node [
+    id 62
+    label "Hotel2_transit3_5"
+    x -321.2
+    y -1238.5
+    z 375.0
+    dir -355.0
+    rail -999.1
+    joint2 -64.9
+    joint3 238.7
+  ]
+  node [
+    id 63
+    label "Hotel2_transit4_5"
+    x -272.6
+    y -1239.6
+    z 374.9
+    dir -360.7
+    rail -999.1
+    joint2 -53.8
+    joint3 233.6
+  ]
+  node [
+    id 64
+    label "Hotel2_nest6"
+    x -419.2
+    y -1240.7
+    z 326.9
+    dir -349.3
+    rail -999.1
+    joint2 -85.1
+    joint3 253.7
+  ]
+  node [
+    id 65
+    label "Hotel2_transit1_6"
+    x -419.4
+    y -1240.7
+    z 335.0
+    dir -349.4
+    rail -999.1
+    joint2 -85.1
+    joint3 253.7
+  ]
+  node [
+    id 66
+    label "Hotel2_transit2_6"
+    x -370.6
+    y -1238.5
+    z 335.1
+    dir -351.3
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
+  ]
+  node [
+    id 67
+    label "Hotel2_transit3_6"
+    x -321.0
+    y -1238.2
+    z 335.1
+    dir -355.0
+    rail -999.1
+    joint2 -64.9
+    joint3 238.7
+  ]
+  node [
+    id 68
+    label "Hotel2_transit4_6"
+    x -272.5
+    y -1239.8
+    z 335.1
+    dir -360.8
+    rail -999.1
+    joint2 -53.8
+    joint3 233.7
+  ]
+  node [
+    id 69
+    label "Hotel2_nest7"
+    x -419.1
+    y -1240.9
+    z 287.1
+    dir -349.4
+    rail -999.1
+    joint2 -85.0
+    joint3 253.6
+  ]
+  node [
+    id 70
+    label "Hotel2_transit1_7"
+    x -419.4
+    y -1240.9
+    z 295.2
+    dir -349.4
+    rail -999.1
+    joint2 -85.1
+    joint3 253.7
+  ]
+  node [
+    id 71
+    label "Hotel2_transit2_7"
+    x -370.5
+    y -1238.4
+    z 295.2
+    dir -351.3
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
+  ]
+  node [
+    id 72
+    label "Hotel2_transit3_7"
+    x -320.9
+    y -1238.0
+    z 295.2
+    dir -355.1
+    rail -999.1
+    joint2 -64.8
+    joint3 238.7
+  ]
+  node [
+    id 73
+    label "Hotel2_transit4_7"
+    x -272.5
+    y -1239.9
+    z 295.2
+    dir -360.8
+    rail -999.1
+    joint2 -53.8
+    joint3 233.7
+  ]
+  node [
+    id 74
+    label "Hotel2_nest8"
+    x -418.9
+    y -1241.1
+    z 247.2
+    dir -349.4
+    rail -999.1
+    joint2 -85.0
+    joint3 253.6
+  ]
+  node [
+    id 75
+    label "Hotel2_transit1_8"
+    x -419.3
+    y -1241.0
+    z 255.3
+    dir -349.4
+    rail -999.1
+    joint2 -85.1
+    joint3 253.7
+  ]
+  node [
+    id 76
+    label "Hotel2_transit2_8"
+    x -370.5
+    y -1238.2
+    z 255.4
+    dir -351.4
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
+  ]
+  node [
+    id 77
+    label "Hotel2_transit3_8"
+    x -320.8
+    y -1237.8
+    z 255.4
+    dir -355.2
+    rail -999.1
+    joint2 -64.8
+    joint3 238.7
+  ]
+  node [
+    id 78
+    label "Hotel2_transit4_8"
+    x -272.4
+    y -1240.1
+    z 255.3
+    dir -360.9
+    rail -999.1
+    joint2 -53.8
+    joint3 233.7
+  ]
+  node [
+    id 79
+    label "Hotel2_nest9"
+    x -418.7
+    y -1241.3
+    z 207.3
+    dir -349.4
+    rail -999.1
+    joint2 -84.9
+    joint3 253.6
+  ]
+  node [
+    id 80
+    label "Hotel2_transit1_9"
+    x -419.2
+    y -1241.2
+    z 215.4
+    dir -349.4
+    rail -999.1
+    joint2 -85.0
+    joint3 253.8
+  ]
+  node [
+    id 81
+    label "Hotel2_transit2_9"
+    x -370.5
+    y -1238.0
+    z 215.5
+    dir -351.4
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
+  ]
+  node [
+    id 82
+    label "Hotel2_transit3_9"
+    x -320.6
+    y -1237.5
+    z 215.5
+    dir -355.3
+    rail -999.1
+    joint2 -64.8
+    joint3 238.7
+  ]
+  node [
+    id 83
+    label "Hotel2_transit4_9"
+    x -272.4
+    y -1240.2
+    z 215.4
+    dir -360.9
+    rail -999.1
+    joint2 -53.7
+    joint3 233.7
+  ]
+  node [
+    id 84
+    label "Hotel2_nest10"
+    x -418.5
+    y -1241.5
+    z 167.4
+    dir -349.5
+    rail -999.1
+    joint2 -84.9
+    joint3 253.6
+  ]
+  node [
+    id 85
+    label "Hotel2_transit1_10"
+    x -419.2
+    y -1241.4
+    z 175.6
+    dir -349.4
+    rail -999.1
+    joint2 -85.0
+    joint3 253.8
+  ]
+  node [
+    id 86
+    label "Hotel2_transit2_10"
+    x -370.4
+    y -1237.8
+    z 175.6
+    dir -351.5
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
+  ]
+  node [
+    id 87
+    label "Hotel2_transit3_10"
+    x -320.5
+    y -1237.3
+    z 175.6
+    dir -355.3
+    rail -999.1
+    joint2 -64.8
+    joint3 238.6
+  ]
+  node [
+    id 88
+    label "Hotel2_transit4_10"
+    x -272.3
+    y -1240.4
+    z 175.6
+    dir -360.9
+    rail -999.1
+    joint2 -53.7
+    joint3 233.8
+  ]
+  node [
+    id 89
+    label "Hotel2_nest11"
+    x -418.3
+    y -1241.7
+    z 127.6
+    dir -349.5
+    rail -999.1
+    joint2 -84.8
+    joint3 253.6
+  ]
+  node [
+    id 90
+    label "Hotel2_transit1_11"
+    x -419.2
+    y -1241.5
+    z 135.7
+    dir -349.5
+    rail -999.1
+    joint2 -85.0
+    joint3 253.8
+  ]
+  node [
+    id 91
+    label "Hotel2_transit2_11"
+    x -370.4
+    y -1237.7
+    z 135.7
+    dir -351.6
+    rail -999.1
+    joint2 -75.4
+    joint3 245.5
+  ]
+  node [
+    id 92
+    label "Hotel2_transit3_11"
+    x -320.4
+    y -1237.1
+    z 135.7
+    dir -355.4
+    rail -999.1
+    joint2 -64.7
+    joint3 238.6
+  ]
+  node [
+    id 93
+    label "Hotel2_transit4_11"
+    x -272.3
+    y -1240.5
+    z 135.7
+    dir -361.0
+    rail -999.1
+    joint2 -53.7
+    joint3 233.8
   ]
   edge [
     source 0
@@ -622,5 +1227,280 @@ graph [
     source 37
     target 38
     dist 50.069193412716366
+  ]
+  edge [
+    source 39
+    target 40
+    dist 8.153131391670348
+  ]
+  edge [
+    source 40
+    target 41
+    dist 48.9254343669773
+  ]
+  edge [
+    source 41
+    target 42
+    dist 49.10285439767439
+  ]
+  edge [
+    source 42
+    target 43
+    dist 48.85578731442598
+  ]
+  edge [
+    source 6
+    target 43
+    dist 322.333846111934
+  ]
+  edge [
+    source 44
+    target 45
+    dist 8.157068283145804
+  ]
+  edge [
+    source 45
+    target 46
+    dist 48.92774882570965
+  ]
+  edge [
+    source 46
+    target 47
+    dist 49.190703399041844
+  ]
+  edge [
+    source 47
+    target 48
+    dist 48.798991573301635
+  ]
+  edge [
+    source 6
+    target 48
+    dist 316.1646304611646
+  ]
+  edge [
+    source 49
+    target 50
+    dist 8.161005174621259
+  ]
+  edge [
+    source 50
+    target 51
+    dist 48.930063284442
+  ]
+  edge [
+    source 51
+    target 52
+    dist 49.278552400409296
+  ]
+  edge [
+    source 52
+    target 53
+    dist 48.74219583217729
+  ]
+  edge [
+    source 6
+    target 53
+    dist 309.99541481039523
+  ]
+  edge [
+    source 54
+    target 55
+    dist 8.164942066096716
+  ]
+  edge [
+    source 55
+    target 56
+    dist 48.93237774317435
+  ]
+  edge [
+    source 56
+    target 57
+    dist 49.36640140177675
+  ]
+  edge [
+    source 57
+    target 58
+    dist 48.68540009105295
+  ]
+  edge [
+    source 6
+    target 58
+    dist 303.8261991596259
+  ]
+  edge [
+    source 59
+    target 60
+    dist 8.168878957572172
+  ]
+  edge [
+    source 60
+    target 61
+    dist 48.9346922019067
+  ]
+  edge [
+    source 61
+    target 62
+    dist 49.4542504031442
+  ]
+  edge [
+    source 62
+    target 63
+    dist 48.6286043499286
+  ]
+  edge [
+    source 6
+    target 63
+    dist 297.65698350885657
+  ]
+  edge [
+    source 64
+    target 65
+    dist 8.172815849047629
+  ]
+  edge [
+    source 65
+    target 66
+    dist 48.93700666063905
+  ]
+  edge [
+    source 66
+    target 67
+    dist 49.54209940451165
+  ]
+  edge [
+    source 67
+    target 68
+    dist 48.571808608804254
+  ]
+  edge [
+    source 6
+    target 68
+    dist 291.4877678580872
+  ]
+  edge [
+    source 69
+    target 70
+    dist 8.176752740523085
+  ]
+  edge [
+    source 70
+    target 71
+    dist 48.9393211193714
+  ]
+  edge [
+    source 71
+    target 72
+    dist 49.629948405879105
+  ]
+  edge [
+    source 72
+    target 73
+    dist 48.51501286767991
+  ]
+  edge [
+    source 6
+    target 73
+    dist 285.3185522073178
+  ]
+  edge [
+    source 74
+    target 75
+    dist 8.180689631998542
+  ]
+  edge [
+    source 75
+    target 76
+    dist 48.94163557810375
+  ]
+  edge [
+    source 76
+    target 77
+    dist 49.71779740724656
+  ]
+  edge [
+    source 77
+    target 78
+    dist 48.45821712655556
+  ]
+  edge [
+    source 6
+    target 78
+    dist 279.14933655654846
+  ]
+  edge [
+    source 79
+    target 80
+    dist 8.184626523473998
+  ]
+  edge [
+    source 80
+    target 81
+    dist 48.9439500368361
+  ]
+  edge [
+    source 81
+    target 82
+    dist 49.80564640861401
+  ]
+  edge [
+    source 82
+    target 83
+    dist 48.40142138543122
+  ]
+  edge [
+    source 6
+    target 83
+    dist 272.98012090577913
+  ]
+  edge [
+    source 84
+    target 85
+    dist 8.188563414949453
+  ]
+  edge [
+    source 85
+    target 86
+    dist 48.94626449556845
+  ]
+  edge [
+    source 86
+    target 87
+    dist 49.89349540998146
+  ]
+  edge [
+    source 87
+    target 88
+    dist 48.34462564430687
+  ]
+  edge [
+    source 6
+    target 88
+    dist 266.81090525500974
+  ]
+  edge [
+    source 89
+    target 90
+    dist 8.19250030642491
+  ]
+  edge [
+    source 90
+    target 91
+    dist 48.9485789543008
+  ]
+  edge [
+    source 91
+    target 92
+    dist 49.981344411348914
+  ]
+  edge [
+    source 92
+    target 93
+    dist 48.287829903182526
+  ]
+  edge [
+    source 6
+    target 93
+    dist 260.64168960424036
   ]
 ]
