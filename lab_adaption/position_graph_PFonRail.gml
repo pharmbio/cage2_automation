@@ -409,218 +409,218 @@ graph [
   node [
     id 37
     label "Hotel2_transit2_12"
-    x -370.1
-    y -1241.4
-    z 95.8
-    dir -353.3
-    rail -999.1
-    joint2 -74.6
-    joint3 247.1
+    x -370.336
+    y -1237.485
+    z 95.881
+    dir -351.617
+    rail -999.095
+    joint2 -75.361
+    joint3 245.483
   ]
   node [
     id 38
     label "Hotel2_transit3_12"
-    x -321.2
-    y -1241.0
-    z 95.8
-    dir -357.2
-    rail -999.1
-    joint2 -64.1
-    joint3 240.5
+    x -320.271
+    y -1236.837
+    z 95.881
+    dir -355.484
+    rail -999.095
+    joint2 -64.709
+    joint3 238.592
   ]
   edge [
     source 0
     target 1
-    dist 1477.5868333896428
+    dist 1477.532337549718
   ]
   edge [
     source 0
     target 2
-    dist 1251.9068639324755
+    dist 1251.9249685966056
   ]
   edge [
     source 0
     target 20
-    dist 853.0725164313527
+    dist 853.0721521771527
   ]
   edge [
     source 1
     target 3
-    dist 464.8903196329292
+    dist 464.92678879081586
   ]
   edge [
     source 1
     target 12
-    dist 420.44305675724956
+    dist 420.4800758804933
   ]
   edge [
     source 1
     target 26
-    dist 344.17261533807357
+    dist 344.19464854383466
   ]
   edge [
     source 1
     target 30
-    dist 267.25369079975
+    dist 267.2628968711961
   ]
   edge [
     source 2
     target 7
-    dist 327.823756875928
+    dist 327.850712977721
   ]
   edge [
     source 2
     target 19
-    dist 313.23765336532483
+    dist 313.2286864257486
   ]
   edge [
     source 2
     target 20
-    dist 403.04685767258474
+    dist 403.0649395443261
   ]
   edge [
     source 3
     target 5
-    dist 119.62465409580486
+    dist 119.60413872437691
   ]
   edge [
     source 4
     target 5
-    dist 15.06329004567067
+    dist 15.102648774304484
   ]
   edge [
     source 6
     target 31
-    dist 315.0820925035736
+    dist 315.00368368756824
   ]
   edge [
     source 6
     target 33
-    dist 330.5118306278914
+    dist 330.5671187520017
   ]
   edge [
     source 6
     target 36
-    dist 254.50559119041458
+    dist 254.47247395347102
   ]
   edge [
     source 7
     target 10
-    dist 198.9300867985978
+    dist 198.95930635135127
   ]
   edge [
     source 7
     target 11
-    dist 223.92160734675107
+    dist 223.92381357986008
   ]
   edge [
     source 8
     target 11
-    dist 36.9438093957529
+    dist 36.8510544066425
   ]
   edge [
     source 9
     target 10
-    dist 36.90495084530209
+    dist 36.80708378501344
   ]
   edge [
     source 13
     target 14
-    dist 8.087948751074023
+    dist 8.100617260431362
   ]
   edge [
     source 14
     target 34
-    dist 49.19847486570199
+    dist 47.60378136240856
   ]
   edge [
     source 15
     target 16
-    dist 8.045268112375128
+    dist 8.103085831953154
   ]
   edge [
     source 16
     target 37
-    dist 50.633598660704784
+    dist 48.95089341303315
   ]
   edge [
     source 17
     target 18
-    dist 21.999250282680084
+    dist 22.000227271553356
   ]
   edge [
     source 18
     target 19
-    dist 167.4246992961271
+    dist 167.35411557532728
   ]
   edge [
     source 20
     target 21
-    dist 553.4727962258453
+    dist 553.4728523440649
   ]
   edge [
     source 20
     target 24
-    dist 377.2894141589381
+    dist 377.204785229456
   ]
   edge [
     source 21
     target 23
-    dist 188.2183980194968
+    dist 188.2476547820887
   ]
   edge [
     source 22
     target 23
-    dist 27.057679450206084
+    dist 27.1009224935241
   ]
   edge [
     source 24
     target 25
-    dist 191.51380029705177
+    dist 191.55276035599175
   ]
   edge [
     source 25
     target 29
-    dist 18.12368911121574
+    dist 18.13008549345537
   ]
   edge [
     source 26
     target 28
-    dist 159.82828456815758
+    dist 159.74410787255974
   ]
   edge [
     source 27
     target 28
-    dist 20.00501009747308
+    dist 20.0
   ]
   edge [
     source 30
     target 31
-    dist 209.23623685492748
+    dist 209.20470836001758
   ]
   edge [
     source 30
     target 32
-    dist 156.14891673016433
+    dist 156.11751983682035
   ]
   edge [
     source 33
     target 35
-    dist 49.198474865701996
+    dist 47.60378136240862
   ]
   edge [
     source 34
     target 35
-    dist 49.19847486570199
+    dist 47.502631506054485
   ]
   edge [
     source 36
     target 38
-    dist 50.63359866070484
+    dist 48.23103416205818
   ]
   edge [
     source 37
     target 38
-    dist 50.63359866070495
+    dist 50.069193412716366
   ]
 ]
