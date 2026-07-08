@@ -39,7 +39,7 @@ More information about the lab definition can be found at [lab configuration](la
 A Pythonlab process description describes the steps that should be executed in the lab. They are written in python and
 parsed into a workflow graph by the orchestrator. The process descriptions are the main part of your lab automation and 
 you will need to write them to match your specific use case. You can find more information about writing process 
-descriptions in the [pythonLab introduction](pythonlab/processes.md).
+descriptions in the [processes documentation](processes.md).
 
 ## Customize the robot arm {#robot_arm}
 Customizing the robot arm involves two parts. First of all, you will need to configure the 

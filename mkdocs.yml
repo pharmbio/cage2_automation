@@ -8,12 +8,11 @@ nav:
   - Use Cases: usecases.md
   - Lab Configuration: lab configuration.md
   - Wrappers: wrappers.md
+  - Processes: processes.md
   - Robot Arm: robot arm.md
   - Customization: customization.md
+  - PythonLab: pythonlab.md
   - About: about.md
-  - PythonLab:
-    - Introduction: pythonlab.md
-    - API Reference: pythonlab/api_reference.md
 
 markdown_extensions:
   - pymdownx.highlight:

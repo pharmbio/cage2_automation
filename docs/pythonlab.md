@@ -122,26 +122,6 @@ This process is parsed into the following workflow graph:
 
 ![Nested for-loop with conditional and break workflow](assets/workflows/nested_conditional_break_workflow.svg)
 
-## Key (desired) Features 
-
-  * easy and simple to learn and write (close to simple English)
-  * clear, human readable syntax
-  * machine readable and writeable syntax
-  * universal - applicable for most laboratory operations
-  * transferable from one lab to another
-  * [*Turing-complete*](https://en.wikipedia.org/wiki/Turing_completeness), including conditions and loops
-  * easy extendible - prepared for the constant development of science
-  * close to real laboratory work
-  * vendor independent
-  * safe to execute
-  * converter from other lab description languages to pythonLab easy to implement
-
-## Applications of pythonLab
-
-  * general lab processes, common in any natural sciences lab (very broad application)
-  * description of lab automation workflows
-  * workflows on the lab devices (e.g. HPLC processes - sometimes also called 'methods', plate reader processes etc.)
-  * data evaluation workflows
 
 ## Architecture of pythonLab
 
@@ -149,61 +129,3 @@ pythonLab processes are denoted in a python like syntax, but they are **not** di
 an optimal schedule (=order of execution). This order of execution might be different from the initial notation. An *Orchestrator* executes then the schedule and supervises the device communication, e.g. to SiLA servers/devices.
 
 ![pythonLab Architecture](assets/pythonLab_architecture_overview.svg)
-
-## [Specification](https://opensourcelab.gitlab.io/pythonLab/specification/0_specification_base.html)
-
-Please find a draft of the pythonLab specification in [docs/specification](https://pythonlabor.gitlab.io/pythonLab/specification/specification.html) (very early stage !).
-
-Very briefly, the generic lab description language should have many features a common programming language has and following the desired *Turning-completeness*, like:  
-
-- variables  (x = value)
-- conditions (if, else, ...)
-- loops      (for ... while ....)
-- functions / methods and subroutines 
-- modules
-- namespaces and versions for unique addressing of a process step
-- (at a later stage of language development: object orientation)
-
-**!! This is a proposal - we would like to discuss it with a wide range of scientist to find the best common ground** 
-
-## [Documentation](https://opensourcelab.gitlab.io/pythonLab/)
-
-The pythonLab Documentation can be found in [docs](https://pythonlabor.gitlab.io/pythonLab/)
-
-## Why python ?
-
-Python is a programming language that is very common in modern scientific laboratories and covers all the desired characteristics we expect of a user-friendly lab process programming language.
-
-The syntax is very simple, and intuitive to learn.
-Syntax validation comes for free: the python interpreter already does it.
-
-Standardisation of a minimal set of functionally will be achieved by standardised packages provided by this site (or any publicly available site).
-Defined namespaces and versioning allow unique addressing of a process step. 
-e safe execution environment.
-
-## Related projects
-
-Here is an incomplete list of related OpenSource projects - please let us know, if we missed a relevant project. 
-
-###  [Autoprotocoll](http://autoprotocol.org)
-
-  * Syntax: JSON based 
-  * (-) not *Turing complete*
-  * (-) hard to write and read by humans
-
-###  [LabOP](https://bioprotocols.github.io/labop/)
-
-  * Syntax: RDF / python
-  * (-) not *Turing complete* (?)
-  * (-) hard to write and read by humans
-
-### [RoboLiq](https://ellis.github.io/roboliq/protocol/index.html)
-
-  * Syntax: yaml / Javascript
-  * (-) not *Turing complete*
-  * (-) hard to write and read by humans
-  * (-) design not clearly specified
-
-## Repository Maintainer:
-
-* Stefan Maak (stefan.maak@uu.se)
