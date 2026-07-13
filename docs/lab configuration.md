@@ -43,10 +43,10 @@ pythonlab_translation:
 
 Each entry under `sila_servers` is a category (e.g. `storage`, `movers`, `humans`, `greeters`) containing one or more named devices. Add, remove, or rename devices here to match the hardware and staff available in your lab. Each device takes:
 
-| Field | Meaning |
-|---|---|
-| `capacity` | How many labware items/slots the device can hold or handle at the same time (e.g. a storage hotel with `capacity: 20` has 20 slots; a robot arm with `capacity: 1` can carry one item). |
-| `process_capacity` *(optional)* | How many process steps the device/person can work on in parallel. Defaults to matching `capacity` if omitted. Useful for humans, who can often only look at one task at a time even though they have two hands. |
+| Field | Meaning                                                                                                                                                                                                |
+|---|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `capacity` | How many labware items/slots the device can hold or handle at the same time (e.g. a storage hotel with `capacity: 20` has 20 slots; a robot arm with `capacity: 1` can carry one item).                |
+| `process_capacity` *(optional)* | How many processes the device/person can do in parallel. Defaults to matching `capacity` if omitted.
 
 You can add as many categories and devices as you need — this list should reflect everything the scheduler is allowed to plan work around.
 
