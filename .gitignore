@@ -118,3 +118,6 @@ bin/
 _test.*
 
 pgdata/
+
+# Local-only Claude Code working docs (specs, notes) - not part of the project
+docs/superpowers/
