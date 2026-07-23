@@ -160,6 +160,16 @@ release_zenodo:
   script:
     - pip install requests pyyaml
     - python scripts/publish_zenodo.py
+    # publish_zenodo.py writes the new deposition id into .zenodo_id (first
+    # publish only) and CITATION.cff's version/date get bumped separately by
+    # bump-my-version before this job runs. Both need to land back in the
+    # repo so the *next* release knows to call Zenodo's "new version" API
+    # instead of creating a duplicate deposition. Tag/manual pipelines run on
+    # a detached ref (a tag, or a manually-triggered run on a branch pipeline
+    # that still isn't guaranteed to be the branch tip), so we can't just
+    # `git push` the current ref — we push straight to CI_DEFAULT_BRANCH.
+    # Guarded with git status so re-running with no metadata change (e.g. a
+    # manual re-run) doesn't create an empty commit.
     - |
       if [ -n "$(git status --porcelain .zenodo_id CITATION.cff)" ]; then
         git config user.email "ci@gitlab.com"
