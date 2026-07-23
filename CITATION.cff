@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Lab Automation Framework Template and Demo"
+abstract: >-
+  This package serves as an installable template to adapt the automation
+  framework consisting of LabScheduler, Laborchestrator, PythonLab,
+  PlatformStatusDataBase and some SiLA-Servers to a new robotic lab. It also
+  contains out of the box running demo examples.
+authors:
+  - given-names: Mark
+    family-names: Doerr
+    email: mark.doerr@uni-greifswald.de
+  - given-names: Stefan
+    family-names: Maak
+    email: stefan.maak@uni-greifswald.de
+  - given-names: Walter
+    family-names: Baccinelli
+    email: w.baccinelli@esciencecenter.nl
+  - given-names: Dani
+    family-names: Bodor
+    email: d.bodor@esciencecenter.nl
+license: MIT
+repository-code: "https://gitlab.com/OpenLabAutomation/adaption-template"
+# __date__ = '2026-07-23'
+date-released: "2026-07-23"
+version: "0.1.0"
+keywords:
+  - laboratory automation
+  - SiLA
+  - robotics
+  - scientific workflow
