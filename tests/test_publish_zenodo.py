@@ -50,3 +50,54 @@ def test_build_zenodo_metadata_creators_format():
         {"name": "Doerr, Mark"},
         {"name": "Maak, Stefan"},
     ]
+
+
+import pytest
+
+
+def test_require_token_missing_raises(monkeypatch):
+    monkeypatch.delenv("ZENODO_TOKEN", raising=False)
+    with pytest.raises(SystemExit, match="ZENODO_TOKEN"):
+        publish_zenodo.require_token()
+
+
+def test_require_token_present_returns_value(monkeypatch):
+    monkeypatch.setenv("ZENODO_TOKEN", "abc123")
+    assert publish_zenodo.require_token() == "abc123"
+
+
+def test_read_deposition_id_missing_file_returns_none(tmp_path, monkeypatch):
+    monkeypatch.setattr(publish_zenodo, "ZENODO_ID_PATH", tmp_path / ".zenodo_id")
+    assert publish_zenodo.read_deposition_id() is None
+
+
+def test_read_deposition_id_blank_file_returns_none(tmp_path, monkeypatch):
+    id_file = tmp_path / ".zenodo_id"
+    id_file.write_text("   \n")
+    monkeypatch.setattr(publish_zenodo, "ZENODO_ID_PATH", id_file)
+    assert publish_zenodo.read_deposition_id() is None
+
+
+def test_read_deposition_id_present_returns_stripped_value(tmp_path, monkeypatch):
+    id_file = tmp_path / ".zenodo_id"
+    id_file.write_text("123456\n")
+    monkeypatch.setattr(publish_zenodo, "ZENODO_ID_PATH", id_file)
+    assert publish_zenodo.read_deposition_id() == "123456"
+
+
+class _FakeResponse:
+    def __init__(self, status_code, text="error body"):
+        self.status_code = status_code
+        self.text = text
+
+
+def test_raise_for_zenodo_error_raises_on_4xx(capsys):
+    response = _FakeResponse(400, "bad request details")
+    with pytest.raises(SystemExit):
+        publish_zenodo.raise_for_zenodo_error(response)
+    assert "bad request details" in capsys.readouterr().err
+
+
+def test_raise_for_zenodo_error_noop_on_2xx():
+    response = _FakeResponse(201, "")
+    publish_zenodo.raise_for_zenodo_error(response)  # should not raise
