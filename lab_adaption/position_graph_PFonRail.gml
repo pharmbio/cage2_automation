@@ -189,35 +189,35 @@ graph [
   node [
     id 17
     label "BlueWasher_nest"
-    x 338.5
-    y 133.7
-    z 128.8
-    dir -368.9
-    rail 495.3
-    joint2 16.4
-    joint3 263.0
+    x 10.68
+    y 502.65
+    z 121.671
+    dir -79.056
+    rail 193.221
+    joint2 16.583
+    joint3 151.175
   ]
   node [
     id 18
     label "BlueWasher_transit"
-    x 338.5
-    y 133.8
-    z 150.8
-    dir -368.9
-    rail 495.3
-    joint2 16.5
-    joint3 263.0
+    x 10.7
+    y 502.469
+    z 149.904
+    dir -79.16
+    rail 193.221
+    joint2 16.607
+    joint3 151.212
   ]
   node [
     id 19
     label "BlueWasher_approach"
-    x 339.9
-    y 299.8
-    z 172.0
-    dir -388.4
-    rail 495.3
-    joint2 47.2
-    joint3 250.8
+    x 31.937
+    y 346.155
+    z 157.379
+    dir -103.14
+    rail 193.241
+    joint2 4.912
+    joint3 181.832
   ]
   node [
     id 20
@@ -233,13 +233,13 @@ graph [
   node [
     id 21
     label "Washer_approach"
-    x 67.4
-    y -219.7
-    z 186.4
-    dir -318.7
-    rail 317.0
-    joint2 -31.4
-    joint3 260.2
+    x 118.579
+    y 890.418
+    z 116.515
+    dir -92.303
+    rail 430.302
+    joint2 32.865
+    joint3 111.462
   ]
   node [
     id 22
@@ -1033,6 +1033,17 @@ graph [
     joint2 -53.7
     joint3 233.8
   ]
+  node [
+    id 94
+    label "center_Washer"
+    x 174.028
+    y 506.972
+    z 116.525
+    dir -170.807
+    rail 430.301
+    joint2 7.11
+    joint3 166.863
+  ]
   edge [
     source 0
     target 1
@@ -1057,6 +1068,16 @@ graph [
     source 0
     target 30
     dist 1744.2546941570463
+  ]
+  edge [
+    source 0
+    target 19
+    dist 797.7038686641033
+  ]
+  edge [
+    source 0
+    target 94
+    dist 1179.8012172838462
   ]
   edge [
     source 1
@@ -1090,11 +1111,6 @@ graph [
   ]
   edge [
     source 2
-    target 19
-    dist 313.2286864257486
-  ]
-  edge [
-    source 2
     target 20
     dist 403.0649395443261
   ]
@@ -1102,6 +1118,11 @@ graph [
     source 2
     target 30
     dist 2993.2058776320814
+  ]
+  edge [
+    source 2
+    target 94
+    dist 259.2178821742109
   ]
   edge [
     source 3
@@ -1226,22 +1247,27 @@ graph [
   edge [
     source 17
     target 18
-    dist 22.000227271553356
+    dist 28.233587267649845
   ]
   edge [
     source 18
     target 19
-    dist 167.35411557532728
+    dist 157.94704768341617
   ]
   edge [
     source 20
     target 21
-    dist 553.4728523440649
+    dist 738.2441746452098
   ]
   edge [
     source 21
     target 23
-    dist 188.2476547820887
+    dist 1402.999401993817
+  ]
+  edge [
+    source 21
+    target 94
+    dist 387.4354158912577
   ]
   edge [
     source 22

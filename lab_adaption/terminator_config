@@ -1,0 +1,255 @@
+[global_config]
+[keybindings]
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+  [[cage2]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 0:0
+      maximised = True
+      fullscreen = False
+      size = 2560, 1345
+      title = pharmbio@lab4: ~/labautomation
+      last_active_term = 86e5e19d-4430-4173-8018-9c1475d1660b
+      last_active_window = True
+    [[[child1]]]
+      type = HPaned
+      parent = child0
+      order = 0
+      position = 1880
+      ratio = 0.735812133072407
+    [[[child2]]]
+      type = HPaned
+      parent = child1
+      order = 0
+      position = 1191
+      ratio = 0.6352
+    [[[child3]]]
+      type = VPaned
+      parent = child2
+      order = 0
+      position = 670
+      ratio = 0.5
+    [[[child4]]]
+      type = VPaned
+      parent = child3
+      order = 0
+      position = 332
+      ratio = 0.4992481203007519
+    [[[terminal5]]]
+      type = Terminal
+      parent = child4
+      order = 0
+      profile = default
+      uuid = 86e5e19d-4430-4173-8018-9c1475d1660b
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/cage2_automation/lab_adaption; echo 'orchestrator'; laborchestrator -c config.py; history -s 'laborchestrator -c config.py'; exec bash"'''
+    [[[terminal6]]]
+      type = Terminal
+      parent = child4
+      order = 1
+      profile = default
+      uuid = 01353dae-b840-4650-bb06-705b13ce9288
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; ipython; history -s 'ipython'; exec bash"'''
+    [[[child7]]]
+      type = VPaned
+      parent = child3
+      order = 1
+      position = 334
+      ratio = 0.4992526158445441
+    [[[terminal8]]]
+      type = Terminal
+      parent = child7
+      order = 0
+      profile = default
+      uuid = a663eb6d-2b0f-4c88-9553-a93213dbb250
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'console'; history -s ''; exec bash"'''
+    [[[terminal9]]]
+      type = Terminal
+      parent = child7
+      order = 1
+      profile = default
+      uuid = 51941f95-c6e4-4ec1-bce1-11de199d3e3d
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd labautomation/sila_servers/genericroboticarm/; echo 'robot arm'; genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100; history -s 'genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100'; exec bash"'''
+    [[[child10]]]
+      type = VPaned
+      parent = child2
+      order = 1
+      position = 720
+      ratio = 0.5373134328358209
+    [[[child11]]]
+      type = VPaned
+      parent = child10
+      order = 0
+      position = 325
+      ratio = 0.45454545454545453
+    [[[child12]]]
+      type = VPaned
+      parent = child11
+      order = 0
+      position = 155
+      ratio = 0.484375
+    [[[terminal13]]]
+      type = Terminal
+      parent = child12
+      order = 0
+      profile = default
+      uuid = fb404cb3-8833-4de3-9290-e0e5b7490981
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd labautomation/packages/source/scheduler/; echo 'scheduler'; labscheduler; history -s 'labscheduler'; exec bash"'''
+    [[[terminal14]]]
+      type = Terminal
+      parent = child12
+      order = 1
+      profile = default
+      uuid = aa02cea2-3f74-4354-a146-c89f8c534b0e
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/cage2_automation/platform_status_db; echo 'database'; run_db_server; history -s 'run_db_server'; exec bash"'''
+    [[[child15]]]
+      type = VPaned
+      parent = child11
+      order = 1
+      position = 183
+      ratio = 0.4704370179948586
+    [[[terminal16]]]
+      type = Terminal
+      parent = child15
+      order = 0
+      profile = default
+      uuid = 6b47b050-7d87-4783-8014-555859ff751b
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/browser; npm run dev; history -s 'npm run dev'; exec bash"'''
+    [[[terminal17]]]
+      type = Terminal
+      parent = child15
+      order = 1
+      profile = default
+      uuid = f7face40-566c-479a-a0a0-0ccaaf0c7705
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/echo/; echo 'echo'; python -m echo_server -p 50058; history -s 'python -m echo_server -p 50058'; exec bash"'''
+    [[[child18]]]
+      type = VPaned
+      parent = child10
+      order = 1
+      position = 425
+      ratio = 0.6865912762520194
+    [[[child19]]]
+      type = VPaned
+      parent = child18
+      order = 0
+      position = 210
+      ratio = 0.5
+    [[[terminal20]]]
+      type = Terminal
+      parent = child19
+      order = 0
+      profile = default
+      uuid = 5654cf07-1771-42f9-a474-77d9a988cd6d
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/sealer; echo 'sealer'; python -m sealer_server -p 50060; history -s 'python -m sealer_server -p 50060'; exec bash"'''
+    [[[terminal21]]]
+      type = Terminal
+      parent = child19
+      order = 1
+      profile = default
+      uuid = c7c1e3d8-752e-4a23-9dd0-b27daed60423
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate;cd ~/labautomation/sila_servers/barcodereader; echo 'barcode reader'; python -m bc_reader -p 50053; history -s 'python -m bc_reader -p 50053'; exec bash"'''
+    [[[terminal22]]]
+      type = Terminal
+      parent = child18
+      order = 1
+      profile = default
+      uuid = aa943723-1598-4a83-80b5-bb05c37ebc17
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'opentrons'; history -s ''; exec bash"'''
+    [[[child23]]]
+      type = VPaned
+      parent = child1
+      order = 1
+      position = 1146
+      ratio = 0.8552238805970149
+    [[[child24]]]
+      type = VPaned
+      parent = child23
+      order = 0
+      position = 325
+      ratio = 0.2848378615249781
+    [[[child25]]]
+      type = VPaned
+      parent = child24
+      order = 0
+      position = 158
+      ratio = 0.49375
+    [[[terminal26]]]
+      type = Terminal
+      parent = child25
+      order = 0
+      profile = default
+      uuid = d1905584-2748-4269-809b-f27c43f42037
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; echo 'Cytomat1'; python -m cytomat2C_server -p 50056 --name Cytomat1; history -s 'python -m cytomat2C_server -p 50056 --name Cytomat1'; exec bash"'''
+    [[[terminal27]]]
+      type = Terminal
+      parent = child25
+      order = 1
+      profile = default
+      uuid = 35c72a40-1bd2-4016-a6f6-a6f0af43f74c
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; echo 'Cytomat2'; python -m cytomat2C_server -p 50057 --name Cytomat2; history -s 'python -m cytomat2C_server -p 50057 --name Cytomat2'; exec bash"'''
+    [[[child28]]]
+      type = VPaned
+      parent = child24
+      order = 1
+      position = 395
+      ratio = 0.48466257668711654
+    [[[child29]]]
+      type = VPaned
+      parent = child28
+      order = 0
+      position = 191
+      ratio = 0.4897435897435897
+    [[[terminal30]]]
+      type = Terminal
+      parent = child29
+      order = 0
+      profile = default
+      uuid = 98a5c4c4-1ba2-4438-b508-a614366dfe82
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'fridge'; history -s ''; exec bash"'''
+    [[[terminal31]]]
+      type = Terminal
+      parent = child29
+      order = 1
+      profile = default
+      uuid = 89063f63-4334-4573-b089-b4d7f0c9ff52
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/multiflowfx; echo 'MultiFlow'; python -m multiflow_server -p 50059; history -s 'python -m multiflow_server -p 50059'; exec bash"'''
+    [[[child32]]]
+      type = VPaned
+      parent = child28
+      order = 1
+      position = 208
+      ratio = 0.4964200477326969
+    [[[terminal33]]]
+      type = Terminal
+      parent = child32
+      order = 0
+      profile = default
+      uuid = 984a433b-6f95-4be7-b995-e02478d16115
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/bluewasher; echo 'BlueWasher'; python -m bluewasher_sila -p 50054; history -s 'python -m bluewasher_sila -p 50054'; exec bash"'''
+    [[[terminal34]]]
+      type = Terminal
+      parent = child32
+      order = 1
+      profile = default
+      uuid = e5e8289d-811a-45ec-8029-8d5f1b37253f
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/washer405; echo 'Washer 405'; python -m cell_washer -p 50055; history -s 'python -m cell_washer -p 50055'; exec bash"'''
+    [[[terminal35]]]
+      type = Terminal
+      parent = child23
+      order = 1
+      profile = default
+      uuid = e1264feb-2f91-40a7-bae5-4faa8b43449e
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'squid'; history -s ''; exec bash"'''
+[plugins]
