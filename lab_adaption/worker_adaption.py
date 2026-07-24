@@ -70,6 +70,7 @@ device_wrappers: dict[str, type[DeviceInterface]] = dict(
     Washer=WasherDispenserWrapper,
     MultiFlow=WasherDispenserWrapper,
     BlueWasher=BlueWasherWrapper,
+    Sealer=PlateSealerWrapper,
 )
 
 # maps the device names (from the platform_config and process description) to the correct sila server names
@@ -85,6 +86,7 @@ sila_server_name: dict[str, str] = dict(
     Washer="Washer",
     BlueWasher="BlueWasher",
     MultiFlow="MultiFlow",
+    Sealer="Sealer",
 )
 LID_STORAGE ="Hotel2"
 
