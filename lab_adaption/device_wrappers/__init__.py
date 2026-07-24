@@ -5,6 +5,7 @@ from .echo_wrapper import EchoWrapper
 from .washer_dispenser_wrapper import WasherDispenserWrapper
 from .squid_wrapper import SquidWrapper
 from .plate_sealer_wrapper import PlateSealerWrapper
+from .sealer_wrapper import SealerWrapper
 from .bluewasher_wrapper import BlueWasherWrapper
 
 
@@ -18,5 +19,6 @@ __all__ = [
     "WasherDispenserWrapper",
     "SquidWrapper",
     "PlateSealerWrapper",
+    "SealerWrapper",
     "BlueWasherWrapper",
 ]
