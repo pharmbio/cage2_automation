@@ -35,35 +35,35 @@ graph [
   node [
     id 3
     label "Cytomat1_approach"
-    x -89.8
-    y -1215.4
-    z 344.7
-    dir -262.1
-    rail -864.3
-    joint2 -49.4
-    joint3 221.4
+    x 11.999
+    y 120.558
+    z 325.971
+    dir -276.705
+    rail 327.917
+    joint2 -2.934
+    joint3 188.876
   ]
   node [
     id 4
     label "Cytomat1_nest"
-    x -171.3
-    y -1292.7
-    z 288.5
-    dir -268.5
-    rail -864.3
-    joint2 -66.7
-    joint3 244.5
+    x -15.822
+    y 62.172
+    z 271.146
+    dir -269.739
+    rail 327.888
+    joint2 -22.55
+    joint3 200.173
   ]
   node [
     id 5
     label "Cytomat1_transit"
-    x -171.1
-    y -1292.9
-    z 303.6
-    dir -268.4
-    rail -864.3
-    joint2 -66.7
-    joint3 244.6
+    x -15.929
+    y 60.508
+    z 288.216
+    dir -270.108
+    rail 327.92
+    joint2 -22.539
+    joint3 200.509
   ]
   node [
     id 6
@@ -1035,17 +1035,6 @@ graph [
   ]
   node [
     id 94
-    label "center_Washer"
-    x 174.028
-    y 506.972
-    z 116.525
-    dir -170.807
-    rail 430.301
-    joint2 7.11
-    joint3 166.863
-  ]
-  node [
-    id 95
     label "Echo_transit01"
     x -16.777
     y -591.904
@@ -1056,7 +1045,7 @@ graph [
     joint3 130.944
   ]
   node [
-    id 96
+    id 95
     label "Echo_transit11"
     x -12.132
     y -588.979
@@ -1067,7 +1056,7 @@ graph [
     joint3 130.332
   ]
   node [
-    id 97
+    id 96
     label "bc_reader_approach"
     x 174.649
     y -395.052
@@ -1078,7 +1067,7 @@ graph [
     joint3 182.803
   ]
   node [
-    id 98
+    id 97
     label "Sealer_approach"
     x -156.019
     y -1469.507
@@ -1089,7 +1078,7 @@ graph [
     joint3 282.968
   ]
   node [
-    id 99
+    id 98
     label "Sealer_nest"
     x -297.932
     y -1493.346
@@ -1100,7 +1089,7 @@ graph [
     joint3 301.497
   ]
   node [
-    id 100
+    id 99
     label "Sealer_transit"
     x -297.439
     y -1492.722
@@ -1142,18 +1131,8 @@ graph [
   ]
   edge [
     source 0
-    target 94
-    dist 1179.8012172838462
-  ]
-  edge [
-    source 0
-    target 97
+    target 96
     dist 571.4240173211678
-  ]
-  edge [
-    source 1
-    target 3
-    dist 464.92678879081586
   ]
   edge [
     source 1
@@ -1172,7 +1151,7 @@ graph [
   ]
   edge [
     source 1
-    target 97
+    target 96
     dist 989.1385682771148
   ]
   edge [
@@ -1186,19 +1165,19 @@ graph [
     dist 2993.2058776320814
   ]
   edge [
-    source 2
-    target 94
-    dist 259.2178821742109
+    source 3
+    target 5
+    dist 76.23564201770792
   ]
   edge [
     source 3
-    target 5
-    dist 119.60413872437691
+    target 20
+    dist 255.09671871355155
   ]
   edge [
     source 4
     target 5
-    dist 15.102648774304484
+    dist 17.183246164637747
   ]
   edge [
     source 6
@@ -1277,12 +1256,12 @@ graph [
   ]
   edge [
     source 7
-    target 95
+    target 94
     dist 58.20089074926569
   ]
   edge [
     source 7
-    target 96
+    target 95
     dist 56.31650049525184
   ]
   edge [
@@ -1297,17 +1276,17 @@ graph [
   ]
   edge [
     source 10
-    target 96
+    target 95
     dist 147.97900957568277
   ]
   edge [
     source 11
-    target 95
+    target 94
     dist 151.11365387019137
   ]
   edge [
     source 12
-    target 97
+    target 96
     dist 256.1929355304525
   ]
   edge [
@@ -1351,11 +1330,6 @@ graph [
     dist 176.89143452704494
   ]
   edge [
-    source 21
-    target 94
-    dist 387.4354158912577
-  ]
-  edge [
     source 22
     target 23
     dist 21.136009784872684
@@ -1392,7 +1366,7 @@ graph [
   ]
   edge [
     source 31
-    target 98
+    target 97
     dist 462.9528506169638
   ]
   edge [
@@ -1636,13 +1610,13 @@ graph [
     dist 48.220016590623416
   ]
   edge [
-    source 98
-    target 100
+    source 97
+    target 99
     dist 171.31242901164626
   ]
   edge [
-    source 99
-    target 100
+    source 98
+    target 99
     dist 20.599356324895208
   ]
 ]
