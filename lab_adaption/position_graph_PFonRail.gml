@@ -134,13 +134,13 @@ graph [
   node [
     id 12
     label "bc_reader"
-    x 66.3
-    y -1172.2
-    z 83.6
-    dir -293.6
-    rail -864.0
-    joint2 -1.0
-    joint3 210.4
+    x 59.371
+    y -622.31
+    z 79.834
+    dir -307.053
+    rail -362.269
+    joint2 14.225
+    joint3 202.362
   ]
   node [
     id 13
@@ -244,24 +244,24 @@ graph [
   node [
     id 22
     label "Washer_nest"
-    x 51.5
-    y -397.7
-    z 100.1
-    dir -345.9
-    rail 317.1
-    joint2 -64.9
-    joint3 320.0
+    x 240.376
+    y 1018.528
+    z 91.246
+    dir -58.582
+    rail 430.319
+    joint2 38.995
+    joint3 70.505
   ]
   node [
     id 23
     label "Washer_transit"
-    x 51.7
-    y -397.6
-    z 127.2
-    dir -345.9
-    rail 317.1
-    joint2 -64.9
-    joint3 320.0
+    x 241.01
+    y 1018.005
+    z 112.334
+    dir -58.619
+    rail 430.287
+    joint2 38.892
+    joint3 70.578
   ]
   node [
     id 24
@@ -1044,6 +1044,72 @@ graph [
     joint2 7.11
     joint3 166.863
   ]
+  node [
+    id 95
+    label "Echo_transit01"
+    x -16.777
+    y -591.904
+    z 71.37
+    dir -73.214
+    rail -998.82
+    joint2 31.627
+    joint3 130.944
+  ]
+  node [
+    id 96
+    label "Echo_transit11"
+    x -12.132
+    y -588.979
+    z 145.693
+    dir -73.513
+    rail -998.82
+    joint2 31.47
+    joint3 130.332
+  ]
+  node [
+    id 97
+    label "bc_reader_approach"
+    x 174.649
+    y -395.052
+    z 106.187
+    dir -191.32
+    rail -362.279
+    joint2 1.761
+    joint3 182.803
+  ]
+  node [
+    id 98
+    label "Sealer_approach"
+    x -156.019
+    y -1469.507
+    z 251.373
+    dir -408.369
+    rail -999.059
+    joint2 -51.77
+    joint3 282.968
+  ]
+  node [
+    id 99
+    label "Sealer_nest"
+    x -297.932
+    y -1493.346
+    z 136.958
+    dir -405.862
+    rail -999.044
+    joint2 -76.741
+    joint3 301.497
+  ]
+  node [
+    id 100
+    label "Sealer_transit"
+    x -297.439
+    y -1492.722
+    z 157.542
+    dir -405.729
+    rail -999.044
+    joint2 -76.561
+    joint3 301.195
+  ]
   edge [
     source 0
     target 1
@@ -1080,14 +1146,14 @@ graph [
     dist 1179.8012172838462
   ]
   edge [
-    source 1
-    target 3
-    dist 464.92678879081586
+    source 0
+    target 97
+    dist 571.4240173211678
   ]
   edge [
     source 1
-    target 12
-    dist 420.4800758804933
+    target 3
+    dist 464.92678879081586
   ]
   edge [
     source 1
@@ -1105,6 +1171,14 @@ graph [
     dist 2726.0002966380694
   ]
   edge [
+<<<<<<< Updated upstream
+=======
+    source 1
+    target 97
+    dist 989.1385682771148
+  ]
+  edge [
+>>>>>>> Stashed changes
     source 2
     target 20
     dist 403.0649395443261
@@ -1201,13 +1275,18 @@ graph [
   ]
   edge [
     source 7
-    target 10
-    dist 198.95930635135127
+    target 32
+    dist 322.6755459676023
   ]
   edge [
     source 7
-    target 11
-    dist 223.92381357986008
+    target 95
+    dist 58.20089074926569
+  ]
+  edge [
+    source 7
+    target 96
+    dist 56.31650049525184
   ]
   edge [
     source 7
@@ -1217,12 +1296,27 @@ graph [
   edge [
     source 8
     target 11
-    dist 36.8510544066425
+    dist 14.069151538028146
   ]
   edge [
     source 9
     target 10
-    dist 36.80708378501344
+    dist 18.063529140231694
+  ]
+  edge [
+    source 10
+    target 96
+    dist 147.97900957568277
+  ]
+  edge [
+    source 11
+    target 95
+    dist 151.11365387019137
+  ]
+  edge [
+    source 12
+    target 97
+    dist 256.1929355304525
   ]
   edge [
     source 13
@@ -1262,7 +1356,7 @@ graph [
   edge [
     source 21
     target 23
-    dist 1402.999401993817
+    dist 176.89143452704494
   ]
   edge [
     source 21
@@ -1272,7 +1366,7 @@ graph [
   edge [
     source 22
     target 23
-    dist 27.1009224935241
+    dist 21.136009784872684
   ]
   edge [
     source 24
@@ -1303,6 +1397,11 @@ graph [
     source 30
     target 32
     dist 156.11751983682035
+  ]
+  edge [
+    source 31
+    target 98
+    dist 462.9528506169638
   ]
   edge [
     source 33
@@ -1543,5 +1642,15 @@ graph [
     source 92
     target 93
     dist 48.220016590623416
+  ]
+  edge [
+    source 98
+    target 100
+    dist 171.31242901164626
+  ]
+  edge [
+    source 99
+    target 100
+    dist 20.599356324895208
   ]
 ]

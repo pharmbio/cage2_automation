@@ -217,7 +217,7 @@
       order = 0
       profile = default
       uuid = 98a5c4c4-1ba2-4438-b508-a614366dfe82
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'fridge'; history -s ''; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'fridge (still over seas)'; history -s ''; exec bash"'''
     [[[terminal31]]]
       type = Terminal
       parent = child29

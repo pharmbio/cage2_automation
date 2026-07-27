@@ -34,5 +34,5 @@ class WasherTest(BasicProcess):
         ))
         cont = self.containers[0]
         self.robot_arm.move(cont, self.washer, lidded=False)
-        self.washer.execute_custom_steps(steps=[ wash_step], labware=cont)
-        self.robot_arm.move(cont, self.hotel2, lidded=True)
+        self.washer.execute_custom_steps(steps=[prime_step, wash_step], labware=cont)
+        self.robot_arm.move(cont, self.hotel2)
