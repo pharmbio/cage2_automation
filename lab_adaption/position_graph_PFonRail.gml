@@ -288,35 +288,35 @@ graph [
   node [
     id 26
     label "Cytomat2_approach"
-    x 344.7
-    y -1132.6
-    z 344.7
-    dir -378.3
-    rail -864.1
-    joint2 33.7
-    joint3 255.0
+    x 51.125
+    y 614.534
+    z 343.355
+    dir -246.508
+    rail 735.85
+    joint2 -4.145
+    joint3 172.333
   ]
   node [
     id 27
     label "Cytomat2_nest"
-    x 358.0
-    y -1284.6
-    z 277.4
-    dir -372.9
-    rail -864.1
-    joint2 4.6
-    joint3 277.3
+    x 66.937
+    y 456.975
+    z 284.172
+    dir -308.647
+    rail 735.743
+    joint2 11.797
+    joint3 206.352
   ]
   node [
     id 28
     label "Cytomat2_transit"
-    x 358.0
-    y -1284.6
-    z 297.4
-    dir -372.9
-    rail -864.1
-    joint2 4.6
-    joint3 277.3
+    x 66.87
+    y 456.906
+    z 304.21
+    dir -308.646
+    rail 735.743
+    joint2 11.771
+    joint3 206.361
   ]
   node [
     id 29
@@ -1136,11 +1136,6 @@ graph [
   ]
   edge [
     source 1
-    target 26
-    dist 344.19464854383466
-  ]
-  edge [
-    source 1
     target 30
     dist 267.2628968711961
   ]
@@ -1325,6 +1320,11 @@ graph [
     dist 738.2441746452098
   ]
   edge [
+    source 20
+    target 26
+    dist 752.1441512912686
+  ]
+  edge [
     source 21
     target 23
     dist 176.89143452704494
@@ -1347,12 +1347,12 @@ graph [
   edge [
     source 26
     target 28
-    dist 159.74410787255974
+    dist 163.28427303151008
   ]
   edge [
     source 27
     target 28
-    dist 20.0
+    dist 20.038230810128876
   ]
   edge [
     source 30
