@@ -79,57 +79,57 @@ graph [
   node [
     id 7
     label "EchoSim_approach"
-    x 379.1
-    y 682.8
-    z 103.0
-    dir 33.1
-    rail 495.3
-    joint2 -45.0
-    joint3 100.8
+    x -11.646
+    y -633.691
+    z 111.509
+    dir -79.676
+    rail -998.788
+    joint2 28.225
+    joint3 139.723
   ]
   node [
     id 8
     label "EchoSim_source"
-    x 292.6
-    y 881.6
-    z 26.8
-    dir -0.8
-    rail 495.7
-    joint2 -12.5
-    joint3 103.0
+    x -13.13
+    y -441.127
+    z 57.145
+    dir -53.381
+    rail -998.82
+    joint2 45.996
+    joint3 95.853
   ]
   node [
     id 9
     label "EchoSim_destination"
-    x 426.9
-    y 872.1
-    z 26.8
-    dir 25.4
-    rail 495.7
-    joint2 -8.6
-    joint3 72.6
+    x -12.179
+    y -441.357
+    z 127.628
+    dir -53.524
+    rail -998.82
+    joint2 45.902
+    joint3 95.915
   ]
   node [
     id 10
     label "EchoSim_transit1"
-    x 424.1
-    y 872.2
-    z 63.4
-    dir 25.6
-    rail 495.6
-    joint2 -8.7
-    joint3 73.0
+    x -12.185
+    y -441.0
+    z 145.688
+    dir -53.486
+    rail -998.82
+    joint2 45.949
+    joint3 95.82
   ]
   node [
     id 11
     label "EchoSim_transit0"
-    x 290.8
-    y 884.4
-    z 63.4
-    dir -1.0
-    rail 495.6
-    joint2 -11.9
-    joint3 102.8
+    x -12.946
+    y -440.839
+    z 71.21
+    dir -53.351
+    rail -998.82
+    joint2 46.013
+    joint3 95.779
   ]
   node [
     id 12
@@ -1169,6 +1169,11 @@ graph [
     source 1
     target 2
     dist 2726.0002966380694
+  ]
+  edge [
+    source 1
+    target 97
+    dist 989.1385682771148
   ]
   edge [
     source 2
