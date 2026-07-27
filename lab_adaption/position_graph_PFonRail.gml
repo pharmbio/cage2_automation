@@ -1171,14 +1171,6 @@ graph [
     dist 2726.0002966380694
   ]
   edge [
-<<<<<<< Updated upstream
-=======
-    source 1
-    target 97
-    dist 989.1385682771148
-  ]
-  edge [
->>>>>>> Stashed changes
     source 2
     target 20
     dist 403.0649395443261
