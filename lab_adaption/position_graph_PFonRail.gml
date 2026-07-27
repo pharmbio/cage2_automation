@@ -78,7 +78,7 @@ graph [
   ]
   node [
     id 7
-    label "Echo_approach"
+    label "EchoSim_approach"
     x 379.1
     y 682.8
     z 103.0
@@ -89,7 +89,7 @@ graph [
   ]
   node [
     id 8
-    label "Echo_source"
+    label "EchoSim_source"
     x 292.6
     y 881.6
     z 26.8
@@ -100,7 +100,7 @@ graph [
   ]
   node [
     id 9
-    label "Echo_destination"
+    label "EchoSim_destination"
     x 426.9
     y 872.1
     z 26.8
@@ -111,7 +111,7 @@ graph [
   ]
   node [
     id 10
-    label "Echo_transit1"
+    label "EchoSim_transit1"
     x 424.1
     y 872.2
     z 63.4
@@ -122,7 +122,7 @@ graph [
   ]
   node [
     id 11
-    label "Echo_transit0"
+    label "EchoSim_transit0"
     x 290.8
     y 884.4
     z 63.4
@@ -1106,11 +1106,6 @@ graph [
   ]
   edge [
     source 2
-    target 7
-    dist 327.850712977721
-  ]
-  edge [
-    source 2
     target 20
     dist 403.0649395443261
   ]
@@ -1213,6 +1208,11 @@ graph [
     source 7
     target 11
     dist 223.92381357986008
+  ]
+  edge [
+    source 7
+    target 32
+    dist 3016.127408085424
   ]
   edge [
     source 8
