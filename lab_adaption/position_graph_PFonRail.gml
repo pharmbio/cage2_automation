@@ -1281,11 +1281,6 @@ graph [
     dist 56.31650049525184
   ]
   edge [
-    source 7
-    target 32
-    dist 3016.127408085424
-  ]
-  edge [
     source 8
     target 11
     dist 14.069151538028146
