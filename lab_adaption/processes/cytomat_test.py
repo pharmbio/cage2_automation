@@ -16,11 +16,11 @@ class CytomatTest(BasicProcess):
     def init_service_resources(self):
         super().init_service_resources()
         self.containers[0].set_start_position(self.hotel2, 0)
-        self.containers[1].set_start_position(self.incubator1, 0)
+        self.containers[1].set_start_position(self.incubator2, 0)
 
     def process(self):
         self.containers[1].wait_cost(100)
-        self.robot_arm.move(self.containers[0], self.incubator1, label="A", position=3)
+        self.robot_arm.move(self.containers[0], self.incubator2, label="A", position=3)
         self.robot_arm.move(self.containers[1], self.hotel2,
                             relations=[("direct_after", "A", [])],
                             )

@@ -1099,6 +1099,83 @@ graph [
     joint2 -76.561
     joint3 301.195
   ]
+  node [
+    id 100
+    label "Echo_approach"
+    x -103.072
+    y -622.061
+    z 308.745
+    dir 44.377
+    rail -998.995
+    joint2 31.839
+    joint3 101.345
+  ]
+  node [
+    id 101
+    label "Echo_source"
+    x -252.029
+    y -445.625
+    z 246.914
+    dir 59.421
+    rail -998.994
+    joint2 80.225
+    joint3 39.054
+  ]
+  node [
+    id 102
+    label "Echo_source_transit1"
+    x -252.791
+    y -444.593
+    z 274.222
+    dir 59.169
+    rail -998.994
+    joint2 80.402
+    joint3 38.847
+  ]
+  node [
+    id 103
+    label "Echo_source_transit2"
+    x -251.895
+    y -568.745
+    z 282.317
+    dir 32.967
+    rail -999.008
+    joint2 60.542
+    joint3 85.06
+  ]
+  node [
+    id 104
+    label "Echo_destination"
+    x -254.192
+    y -449.79
+    z 310.105
+    dir 58.317
+    rail -999.012
+    joint2 79.587
+    joint3 40.942
+  ]
+  node [
+    id 105
+    label "Echo_destination_transit1"
+    x -253.992
+    y -449.747
+    z 339.111
+    dir 58.219
+    rail -999.012
+    joint2 79.523
+    joint3 41.038
+  ]
+  node [
+    id 106
+    label "Echo_destination_transit2"
+    x -253.425
+    y -566.322
+    z 339.121
+    dir 33.811
+    rail -999.012
+    joint2 61.157
+    joint3 83.982
+  ]
   edge [
     source 0
     target 1
@@ -1370,6 +1447,11 @@ graph [
     dist 462.9528506169638
   ]
   edge [
+    source 32
+    target 100
+    dist 348.2667729955442
+  ]
+  edge [
     source 33
     target 35
     dist 48.90500996830492
@@ -1618,5 +1700,35 @@ graph [
     source 98
     target 99
     dist 20.599356324895208
+  ]
+  edge [
+    source 100
+    target 103
+    dist 160.2918831037951
+  ]
+  edge [
+    source 100
+    target 106
+    dist 163.22105051958724
+  ]
+  edge [
+    source 101
+    target 102
+    dist 27.33811500451338
+  ]
+  edge [
+    source 102
+    target 103
+    dist 124.43285285196934
+  ]
+  edge [
+    source 104
+    target 105
+    dist 29.006721376260337
+  ]
+  edge [
+    source 105
+    target 106
+    dist 116.57637931416465
   ]
 ]
