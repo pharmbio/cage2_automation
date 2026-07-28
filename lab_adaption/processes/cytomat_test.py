@@ -1,5 +1,5 @@
 """
-Duplicate this file and add/modify the missing parts to create new processes
+Tests the timing of the cytomat when a plate inserted directly before another is moved out.
 """
 
 from lab_adaption.processes.basic_process import BasicProcess
