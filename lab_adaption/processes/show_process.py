@@ -89,7 +89,7 @@ class ShowProcess(BasicProcess):
         for i in range(len(source_plates)):
             source_plate = source_plates[i]
             source_bc = source_barcodes[i]
-            self.robot_arm.move(source_plate, self.echo, role="source", lidded=False)
+            self.robot_arm.move(source_plate, self.echo, role="source", read_barcode=True, lidded=False)
             source_plate.wait_cost(20)
             # only survey the necessary part of this source plate
             source_dataframe = dataframe[(dataframe["Source plate"] == source_bc)]
@@ -104,7 +104,7 @@ class ShowProcess(BasicProcess):
                 num_transfers = len(partial_df)
                 # only execute if there is anything to transfer between those plates
                 if num_transfers > 0:
-                    self.robot_arm.move(dest_plate, self.echo, role="destination")
+                    self.robot_arm.move(dest_plate, self.echo, role="destination", read_barcode=True, lidded=False)
                     dest_plate.wait_cost(20)
                     self.echo.execute_transfer_protocol(source_plate, dest_plate, partial_df)
                     dest_plate.wait_cost(20)
