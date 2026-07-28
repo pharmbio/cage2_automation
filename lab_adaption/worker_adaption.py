@@ -29,6 +29,7 @@ from .device_wrappers import (
     SquidWrapper,
     PlateSealerWrapper,
     BlueWasherWrapper,
+    Cytomat2CWrapper,
 )
 from .server_memory import ServerMemory
 try:
@@ -57,6 +58,7 @@ USE_REAL_SERVERS = [
     "Cytomat2",
     "BlueWasher",
     "MultiFlow",
+    "Sealer",
 ]
 interactive = {"Echo", "Washer", "Sealer", "Cytomat1", "Cytomat2", "BlueWasher", "MultiFlow"}
 
@@ -71,6 +73,8 @@ device_wrappers: dict[str, type[DeviceInterface]] = dict(
     MultiFlow=WasherDispenserWrapper,
     BlueWasher=BlueWasherWrapper,
     Sealer=PlateSealerWrapper,
+    Cytomat1=Cytomat2CWrapper,
+    Cytomat2=Cytomat2CWrapper,
 )
 
 # maps the device names (from the platform_config and process description) to the correct sila server names
@@ -272,6 +276,9 @@ class Worker(WorkerInterface):
             # check whether the BlueWasher is initialized (if its needed)
             if "BlueWasher" in self.clients:
                 message += self._check_bluewsher_status()
+            # check whether the Echo sila server reaches its micro service (if the Echo is needed)
+            if "Echo" in needed_clients:
+                message += self._check_echo_connection()
             # check whether all protocols that will be used in the process actually exist on the servers
             message += self._check_protocol_existence(process)
 
@@ -311,7 +318,7 @@ class Worker(WorkerInterface):
             # collect all devices that will be needed (including source and target)
             for needed in step.used_devices:
                 preference = needed.preferred
-                if preference:
+                if preference and preference in USE_REAL_SERVERS:
                     needed_clients.add(preference)
             # check if the barcode reader is needed
             if isinstance(step, MoveStep):
@@ -360,6 +367,20 @@ class Worker(WorkerInterface):
         except Exception as ex:
             logging.exception("Failed to check BlueWasher status")
             return f"BlueWasher prerequisite check failed: {ex}\n"
+        return ""
+
+    def _check_echo_connection(self) -> str:
+        """
+        The Echo sila server only talks to the instrument via a micro service (the C# cs_service) which
+        might be down or disconnected even though the sila server itself answers.
+        """
+        echo_client = self.get_client("Echo")
+        try:
+            if not echo_client.ConnectionController.ConnectionAlive.get():
+                return "The Echo sila server is not connected to its micro service.\n"
+        except Exception as ex:
+            logging.exception("Failed to check the Echo connection to its micro service")
+            return f"Echo prerequisite check failed: {ex}\n"
         return ""
 
     def _check_protocol_existence(self, process: SMProcess) -> str:

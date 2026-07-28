@@ -7,6 +7,7 @@ from .squid_wrapper import SquidWrapper
 from .plate_sealer_wrapper import PlateSealerWrapper
 from .sealer_wrapper import SealerWrapper
 from .bluewasher_wrapper import BlueWasherWrapper
+from .cytomat_wrapper import Cytomat2CWrapper
 
 
 __all__ = [
@@ -21,4 +22,5 @@ __all__ = [
     "PlateSealerWrapper",
     "SealerWrapper",
     "BlueWasherWrapper",
+    "Cytomat2CWrapper",
 ]

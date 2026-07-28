@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from laborchestrator.structures import ProcessStep, ContainerInfo
 from laborchestrator.engine.worker_interface import Observable
 from sila2.client import SilaClient
+from sila2.framework import CommandExecutionStatus
 import time
 
 
@@ -35,3 +36,5 @@ def finish_observable_command(cmd: Observable):
     """
     while not cmd.done:
         time.sleep(0.1)
+    if cmd.status != CommandExecutionStatus.finishedSuccessfully:
+        raise Exception(f"{cmd} failed: {cmd.get_responses()}")

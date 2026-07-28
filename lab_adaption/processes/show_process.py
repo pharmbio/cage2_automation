@@ -27,8 +27,12 @@ class ShowProcess(BasicProcess):
 
     def create_resources(self):
         super().create_resources()
+        # set the plate types of the plates going into the echo
         for plate in self.containers[4:8]:
             plate.lidded = False
+            plate.kwargs["plate_type"] = "384PP_Dest"
+        for plate in self.containers[8:10]:
+            plate.kwargs["plate_type"] = "384PP_DMSO2"
 
     def init_service_resources(self):
         # setting start position of containers
@@ -113,5 +117,5 @@ class ShowProcess(BasicProcess):
             self.robot_arm.move(source_plate, self.incubator2, lidded=True)
         for  dest_plate in dest_plates:
             self.robot_arm.move(dest_plate, self.sealer)
-            self.sealer.seal_plate(dest_plate)
+            self.sealer.seal_plate(dest_plate, temperature=150, duration=13)
             self.robot_arm.move(dest_plate, self.incubator2)     
