@@ -33,9 +33,7 @@ class ShowProcess(BasicProcess):
     def init_service_resources(self):
         # setting start position of containers
         super().init_service_resources()
-        for i, cont in enumerate(self.containers[:4]):
-            cont.set_start_position(self.hotel2, i)
-        for i, cont in enumerate(self.containers[4:8]):
+        for i, cont in enumerate(self.containers[:8]):
             cont.set_start_position(self.hotel2, i)
         for i, cont in enumerate(self.containers[8:10]):
             cont.set_start_position(self.incubator2, i)
