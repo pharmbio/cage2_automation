@@ -27,8 +27,12 @@ class ShowProcess(BasicProcess):
 
     def create_resources(self):
         super().create_resources()
+        # set the plate types of the plates going into the echo
         for plate in self.containers[4:8]:
             plate.lidded = False
+            plate.kwargs["plate_type"] = "384PP_Dest"
+        for plate in self.containers[8:10]:
+            plate.kwargs["plate_type"] = "384PP_DMSO2"
 
     def init_service_resources(self):
         # setting start position of containers
@@ -67,7 +71,7 @@ class ShowProcess(BasicProcess):
         ]
         multiflow_steps = [
             DemoStep(name="prime_demo", step_def="DV103|2|True|300|3|High|True|0|2", body=""),
-            #DemoStep(name="peri_dispense_demo", step_def="DV103|1|10|High|0|333|0|0|True|10|2|111111111111111111111111111111111111111111111111|1111|1", body=""),
+            DemoStep(name="peri_dispense_demo", step_def="DV103|1|10|High|0|333|0|0|True|10|2|111111111111111111111111111111111111111111111111|1111|1", body=""),
         ]
         echo_protocol = Path(__file__).with_name("protocols") / "two_source_four_dest_echo_protocol.csv"
         dataframe = pd.read_csv(echo_protocol)
@@ -113,5 +117,5 @@ class ShowProcess(BasicProcess):
             self.robot_arm.move(source_plate, self.incubator2, lidded=True)
         for  dest_plate in dest_plates:
             self.robot_arm.move(dest_plate, self.sealer)
-            self.sealer.seal_plate(dest_plate)
+            self.sealer.seal_plate(dest_plate, temperature=150, duration=13)
             self.robot_arm.move(dest_plate, self.incubator2)     
