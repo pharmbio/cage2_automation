@@ -22,6 +22,7 @@ class ShowProcess(BasicProcess):
     def __init__(self):
         super().__init__(
             num_plates=10,
+            priority=3,
             process_name="ShowProcess",
         )
 
@@ -81,7 +82,8 @@ class ShowProcess(BasicProcess):
             self.robot_arm.move(cont, self.washer, lidded=False)
             self.washer.execute_custom_steps(labware=cont, steps=wash_steps)
             self.robot_arm.move(cont, self.hotel2, lidded=True)
-            cont.min_wait(20*60)
+            cont.min_wait(10*60)
+            cont.wait_cost(200)
             self.robot_arm.move(cont, self.dispenser, lidded=False)
             self.dispenser.execute_custom_steps(labware=cont, steps=multiflow_steps)
             self.robot_arm.move(cont, self.bluewasher, lidded=False)
