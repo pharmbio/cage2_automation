@@ -27,7 +27,7 @@ from .device_wrappers import (
     LabwareTransferHandler,
     WasherDispenserWrapper,
     SquidWrapper,
-    PlateSealerWrapper,
+    SealerWrapper,
     BlueWasherWrapper,
     Cytomat2CWrapper,
 )
@@ -72,7 +72,7 @@ device_wrappers: dict[str, type[DeviceInterface]] = dict(
     Washer=WasherDispenserWrapper,
     MultiFlow=WasherDispenserWrapper,
     BlueWasher=BlueWasherWrapper,
-    Sealer=PlateSealerWrapper,
+    Sealer=SealerWrapper,
     Cytomat1=Cytomat2CWrapper,
     Cytomat2=Cytomat2CWrapper,
 )

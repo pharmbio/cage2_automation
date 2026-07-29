@@ -4,7 +4,6 @@ from .generic_robot_arm_wrapper import GenericRobotArmWrapper, LabwareTransferHa
 from .echo_wrapper import EchoWrapper
 from .washer_dispenser_wrapper import WasherDispenserWrapper
 from .squid_wrapper import SquidWrapper
-from .plate_sealer_wrapper import PlateSealerWrapper
 from .sealer_wrapper import SealerWrapper
 from .bluewasher_wrapper import BlueWasherWrapper
 from .cytomat_wrapper import Cytomat2CWrapper
@@ -19,7 +18,6 @@ __all__ = [
     "LabwareTransferHandler",
     "WasherDispenserWrapper",
     "SquidWrapper",
-    "PlateSealerWrapper",
     "SealerWrapper",
     "BlueWasherWrapper",
     "Cytomat2CWrapper",
