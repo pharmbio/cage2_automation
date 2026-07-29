@@ -33,7 +33,7 @@ class CleoCellProcess(BasicProcess):
             cont.wait_cost(40)
             self.robot_arm.move(cont, self.sealer)
             cont.wait_cost(10)
-            self.sealer.seal_plate(cont)
+            self.sealer.seal_plate(labware=cont, temperature=150, seal_duration=13)
             self.robot_arm.move(cont, self.hotel1)
             self.robot_arm.move(cont, self.squid_pool)
             self.squid_pool.run_protocol(labware=cont, protocol="look_at_it", duration=60*60)

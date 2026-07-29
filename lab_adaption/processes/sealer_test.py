@@ -20,5 +20,5 @@ class SealerTest(BasicProcess):
     def process(self):
         cont = self.containers[0]
         self.robot_arm.move(cont, self.sealer, lidded=False)
-        self.sealer.seal_plate(labware=cont, temperature=150, duration=13)
+        self.sealer.seal_plate(labware=cont, temperature=150, seal_duration=13)
         self.robot_arm.move(cont, self.hotel2, lidded=True)

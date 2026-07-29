@@ -15,8 +15,8 @@ class SealerWrapper(DeviceInterface):
         -> Observable:
         if step.function == "seal":
             temperature = step.data["temperature"]
-            duration = step.data["duration"]
-            logging.debug(f"Sealing at {temperature}°C for {duration}s")
-            return sila_client.SealingController.Seal(Temperature=int(temperature), Time=int(duration))
+            seal_duration = step.data["seal_duration"]
+            logging.debug(f"Sealing at {temperature}°C for {seal_duration}s")
+            return sila_client.SealingController.Seal(Temperature=int(temperature), Time=int(seal_duration))
         else:
             raise Exception(f"Unknown function {step.function}")
