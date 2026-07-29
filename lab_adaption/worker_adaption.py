@@ -314,7 +314,6 @@ class Worker(WorkerInterface):
     def report_error(self, error_message: str, step_id: str | None = None, process_name: str | None = None):
         report = f"reporting error {error_message} from step {step_id} from process {process_name}"
         if STOP_ON_ERROR and process_name:
-            # pause it like the stop button in the GUI does, so no further step is dispatched
             self.jssp.stop_process(process_name)
             report += f"\nPaused {process_name}. Recover the platform and resume manually."
         send_slack_message(report)
