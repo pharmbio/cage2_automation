@@ -93,6 +93,9 @@ sila_server_name: dict[str, str] = dict(
     Sealer="Sealer",
 )
 LID_STORAGE ="Hotel2"
+# Pause the affected process when a step fails. An error usually leaves the platform in an unknown
+# state (e.g. a plate still in the arms gripper), so dispatching the next step risks dropping it.
+STOP_ON_ERROR = True
 
 class Worker(WorkerInterface):
     # save the clients for repeated use
@@ -310,6 +313,10 @@ class Worker(WorkerInterface):
 
     def report_error(self, error_message: str, step_id: str | None = None, process_name: str | None = None):
         report = f"reporting error {error_message} from step {step_id} from process {process_name}"
+        if STOP_ON_ERROR and process_name:
+            # pause it like the stop button in the GUI does, so no further step is dispatched
+            self.jssp.stop_process(process_name)
+            report += f"\nPaused {process_name}. Recover the platform and resume manually."
         send_slack_message(report)
     
     def _collect_required_clients(self, process: SMProcess) -> set[str]:
