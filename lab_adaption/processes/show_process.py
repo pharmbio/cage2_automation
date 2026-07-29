@@ -119,5 +119,5 @@ class ShowProcess(BasicProcess):
             self.robot_arm.move(source_plate, self.incubator2, lidded=True)
         for  dest_plate in dest_plates:
             self.robot_arm.move(dest_plate, self.sealer)
-            self.sealer.seal_plate(dest_plate, temperature=150, duration=13)
+            self.sealer.seal_plate(dest_plate, temperature=150, seal_duration=13)
             self.robot_arm.move(dest_plate, self.incubator2)     
