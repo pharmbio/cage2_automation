@@ -123,18 +123,17 @@ test:
 
 pages:
   stage: build_and_publish_docs
+  pages: true
   script:
-    - pip install sphinx myst_parser python_docs_theme
-    - pip install .
-    #- cd docs ; make html
-    - sphinx-apidoc -e -P -o $DOCS_SOURCE_DIR $SOURCE_DIR
-    - sphinx-build -b html $DOCS_DIR $DOCS_BUILD_DIR
-    - mv $DOCS_BUILD_DIR public
+    - pip install -e ".[docs]"
+    - pip install uupythonlab
+    - pip install jinja2
+    - make publish-gitlab
   artifacts:
     paths:
       - public
-  extends:
-    - .run_on_all_branches
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
 
 # Jobs: Publish ---------------------------------------------------------------
 

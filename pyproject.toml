@@ -13,13 +13,12 @@ authors = [
     { name = "Dani Bodor", email = "d.bodor@esciencecenter.nl" },
 ]
 description = """TODO"""
-license = { text = "MIT" }
+license =  "MIT"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Education",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
@@ -55,7 +54,18 @@ dev = [
     "typer",
     "pandas",
 ]
-docs = ["sphinx>=7.0", "python-docs-theme>=2023.3", "myst-parser>=1.0"]
+docs = [
+    "jinja2>=3.1.6",
+    "mkdocs>=1.6.1",
+    "mkdocs-glightbox>=0.5.1",
+    "mkdocs-material>=9.6.22",
+    "mkdocs-mermaid2-plugin>=1.2.3",
+    "mkdocs-panzoom-plugin>=0.4.2",
+    "mkdocstrings[python]>=0.18",
+    "pygments>=2.19.2",
+    "pymdown-extensions>=10.16.1",
+    "uupythonlab>=0.2.4",
+    ]
 [project.urls]
 "Homepage" = "https://gitlab.com/opensourcelab/openlab-site/lab-automation/"
 
