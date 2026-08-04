@@ -74,7 +74,7 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
 3. Install all necessary packages:
    - to install all mandatory dependencies run:
 ```bash
-    pip install -r requirements.txt -e .
+    pip install -e .
 ```
    - to also install the example sila servers (necessary for the demo examples to run) add:
 ```bash

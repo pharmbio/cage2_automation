@@ -33,7 +33,10 @@ classifiers = [
 dependencies = ["pyyaml>=6.0.1",
                 "networkx>=3.1",
                 "pytz>=2023.3",
-                "sila2>=0.12"]
+                "sila2>=0.12",
+                "uupythonlab>=0.2.4",
+                "uulabscheduler>=0.3,<0.4",
+                "uulaborchestrator>=0.3,<0.4"]
 
 [project.optional-dependencies]
 dev = [
@@ -64,7 +67,6 @@ docs = [
     "mkdocstrings[python]>=0.18",
     "pygments>=2.19.2",
     "pymdown-extensions>=10.16.1",
-    "uupythonlab>=0.2.4",
     ]
 [project.urls]
 "Homepage" = "https://gitlab.com/opensourcelab/openlab-site/lab-automation/"

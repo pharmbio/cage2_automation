@@ -138,7 +138,7 @@ def security_safety(_c):
     Path(BIN_DIR).mkdir(parents=True, exist_ok=True)
     _run(
         _c,
-        f"poetry export --dev --format=requirements.txt --without-hashes --output={SAFETY_REQUIREMENTS_FILE}",
+        f"uv export --all-extras --no-hashes --no-emit-project --output-file={SAFETY_REQUIREMENTS_FILE}",
     )
     _run(_c, f"safety check --file={SAFETY_REQUIREMENTS_FILE} --full-report")
 
@@ -408,23 +408,6 @@ def release_twine(
     _run(
         _c,
         f'twine upload --repository-url {pypi_publish_repository} -u "{pypi_user}" -p "{pypi_pass}" dist/*',
-    )
-
-
-@task
-def generate_reqs(_c):
-    """
-    It generates requirements.txt and requirements_dev.txt using poetry (dependencies from pyproject.toml).
-
-    :param _c: The context object that is passed to invoke tasks
-    """
-    _run(
-        _c,
-        f"poetry export --without dev --without-hashes -f requirements.txt -o {ROOT_DIR}/requirements.txt",
-    )
-    _run(
-        _c,
-        f"poetry export --only dev --without-hashes -f requirements.txt -o {ROOT_DIR}/requirements_dev.txt",
     )
 
 

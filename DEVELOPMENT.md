@@ -12,11 +12,14 @@ Ready to contribute? Here's how to set up `lab_automation` for local development
 
     $ git clone git@gitlab.com:https://gitlab.com/opensourcelab/openlab-site/lab-automation.git
 
-#. Ensure `poetry is installed`_.
-#. Install dependencies and start your virtualenv::
+#. Create and activate a virtualenv with python 3.11 or higher::
 
-    $ poetry install
-    $ poetry shell
+    $ python -m venv labautomation
+    $ source labautomation/bin/activate
+
+#. Install the package with its development dependencies::
+
+    $ pip install -e ".[dev]"
 
 #. Create a branch for local development::
 
@@ -38,8 +41,6 @@ Now you can make your changes locally.
     $ git push origin feature/IssueNumber_name-of-your-bugfix-or-feature
 
 #. Submit a merge request through GitLab
-
-.. _poetry is installed: https://python-poetry.org/docs/
 
 Merge Request Guidelines
 -------------------------
