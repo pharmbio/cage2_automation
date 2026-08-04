@@ -4,7 +4,6 @@ Tasks for maintaining the project.
 Execute 'invoke --list' for guidance on using Invoke
 """
 
-import os
 import sys
 import platform
 import shutil
@@ -19,7 +18,6 @@ OS_PLATFORM = platform.system()
 HOME_DIR = str(Path.home())
 ROOT_DIR = Path(__file__).parent
 BIN_DIR = ROOT_DIR.joinpath("bin")
-SETUP_FILE = ROOT_DIR.joinpath("setup.py")
 TEST_DIR = ROOT_DIR.joinpath("tests")
 SOURCE_DIR = ROOT_DIR.joinpath("lab_automation")
 TOX_DIR = ROOT_DIR.joinpath(".tox")
@@ -33,14 +31,6 @@ DOCS_BUILD_DIR = DOCS_DIR.joinpath("_build")
 DOCS_INDEX = DOCS_BUILD_DIR.joinpath("index.html")
 PYTHON_DIRS = [str(d) for d in [SOURCE_DIR, TEST_DIR]]
 SAFETY_REQUIREMENTS_FILE = BIN_DIR.joinpath("safety_requirements.txt")
-PYPI_URL = "https://pypi.python.org/api/pypi/pypi/simple"
-PYTHON_VERSION = 3.9
-CI_PROJECT_NAME = "lab-automation"
-CI_REGISTRY_IMAGE = (
-    "registry.gitlab.com/https://gitlab.com/opensourcelab/openlab-site/lab-automation"
-)
-DOCKERFILE = "Dockerfile"
-DOCKER_BUILD_PLATFORM = "--platform linux/amd64"
 VENV_MODULE_NAME = "venv"
 
 
@@ -68,20 +58,6 @@ def _run(_c, command):
     :param command: The command to run
     """
     return _c.run(command, pty=platform.system() != "Windows")
-
-
-def _get_registry_path_str(python_version):
-    """
-    It takes a build tag and a Python version, and returns a string that is the path to the image in the registry
-
-    :param python_version: The version of Python to use
-    :return: The registry path for the image.
-    """
-    ci_commit_ref_name = os.popen("git symbolic-ref --short -q HEAD").read().strip()
-    build_tag = ci_commit_ref_name if ci_commit_ref_name else "latest"
-    image_name = f"{CI_PROJECT_NAME}:py{python_version}-{build_tag}"
-    registry_path = f"{CI_REGISTRY_IMAGE}/{image_name}"
-    return registry_path
 
 
 @task(help={"check": "Checks if source is formatted without applying changes"})
@@ -266,95 +242,6 @@ def clean(_):
     pass
 
 
-@task(
-    pre=[clean_python],
-    optional=["python_version"],
-    help={
-        "python_version": 'Python version to use, e.g. "3.9"',
-    },
-)
-def docker_build(_c, python_version=PYTHON_VERSION, target="test"):
-    """
-    It builds a Docker image with the given tag using the given Python version
-
-    :param _c: The context object that is passed to invoke tasks
-    :param python_version: The base python version to use
-    :param target: The target to build ("test", "regression"), defaults to "test" (optional)
-    """
-    build_args = (
-        f"--build-arg PYTHON_BASE={python_version} --build-arg PYPI_URL={PYPI_URL}"
-    )
-    registry_path = _get_registry_path_str(python_version)
-    cache = f"--cache-from {registry_path}"
-    target_tag = f"--target {target}"
-    _run(
-        _c,
-        f"docker build {build_args} {DOCKER_BUILD_PLATFORM} {cache} -f {DOCKERFILE} -t {registry_path} {target_tag} .",
-    )
-
-
-@task
-def docker_pull(_c, python_version=PYTHON_VERSION):
-    """
-    It pulls the image from the local registry, or if it doesn't exist, it prints a message
-
-    :param _c: The context object that is passed to invoke tasks
-    :param python_version: The base python version to use
-    """
-    registry_path = _get_registry_path_str(python_version)
-    _run(_c, f'docker pull {registry_path} || echo "No pre-made image available"')
-
-
-@task
-def docker_push(_c, python_version=PYTHON_VERSION):
-    """
-    It pushes the image to the registry
-
-    :param _c: The context object that is passed to invoke tasks
-    :param python_version: The base python version to use
-    """
-    registry_path = _get_registry_path_str(python_version)
-    _run(_c, f"docker push {registry_path}")
-
-
-@task
-def docker_test(_c, python_version=PYTHON_VERSION):
-    """
-    It runs the tests in a docker container
-
-    :param _c: The context object that is passed to invoke tasks
-    :param python_version: The base python version to use
-    :param target: The target to test ("test", "regression"), defaults to "test" (optional)
-    """
-    volume_mount = f"--volume {BIN_DIR}:/lab_automation/bin/ --volume {ROOT_DIR}:/lab_automation:rw"
-    registry_path = _get_registry_path_str(python_version)
-    pytest_arg = (
-        f"pytest -v --cov-report xml:/lab_automation/bin/coverage.xml {TEST_DIR}"
-    )
-    Path(BIN_DIR).mkdir(parents=True, exist_ok=True)
-    _run(
-        _c,
-        f"docker run {DOCKER_BUILD_PLATFORM} {volume_mount} {registry_path} {pytest_arg}",
-    )
-
-
-@task
-def docker_shell(_c, python_version=PYTHON_VERSION):
-    """
-    It opens shell in the docker container
-
-    :param _c: The context object that is passed to invoke tasks
-    :param python_version: The base python version to use
-    """
-    volume_mount = f"--volume {BIN_DIR}:/lab_automation/bin/ --volume {ROOT_DIR}:/lab_automation:rw"
-    registry_path = _get_registry_path_str(python_version)
-    bash_path = "/bin/bash"
-    _run(
-        _c,
-        f"docker run -it {DOCKER_BUILD_PLATFORM} {volume_mount} {registry_path} {bash_path}",
-    )
-
-
 @task
 def init_repo(_c):
     """Initialise the repository with git-LFS and git flow
@@ -366,49 +253,6 @@ def init_repo(_c):
     # otherwise run git init
     _run(_c, "git-lfs install")
     _run(_c, "git flow init")
-
-
-@task(pre=[clean])
-def release_twine(
-    _c,
-    tag_name,
-    pypi_user,
-    pypi_pass,
-    pypi_publish_repository="https://artifactory.aws.gel.ac/artifactory/api/pypi/pypi_genomics_dev",
-    pip_repository_index="https://artifactory.aws.gel.ac/artifactory/api/pypi/pypi/simple",
-):
-    """
-    It makes a release of the Python package and publishes to the GEL PyPI Artifactory using setup.py and twine
-
-    :param _c: The context object that is passed to invoke tasks
-    :param tag_name: The name of the tag that triggered the workflow
-    :param pypi_user: The username of the account that has access to the repository
-    :param pypi_pass: The password for the pypi user
-    :param pypi_publish_repository: The URL of the repository to publish to (optional)
-    :param pip_repository_index: The URL of the pip repository to use for installing twine (optional)
-    """
-    version_str = tag_name.replace("v", "")
-    _run(_c, f'echo "Build tag - {version_str}."')
-    _run(_c, f"echo {version_str} > VERSION")
-    pypirc_str = (
-        "[distutils]\n"
-        "index-servers = gel_pypi\n"
-        "\n"
-        "[gel_pypi]\n"
-        f"repository: {pypi_publish_repository}\n"
-        f"username: {pypi_user}\n"
-        f"password: {pypi_pass}\n)"
-    )
-    _run(_c, f'printf "{pypirc_str}" > ~/.pypirc')
-    _run(_c, f"pip install -i {pip_repository_index} twine")
-    _run(
-        _c,
-        'mkdir -p dist && rm -rf dist/* || echo "Nothing found in dist/"; python setup.py sdist;',
-    )
-    _run(
-        _c,
-        f'twine upload --repository-url {pypi_publish_repository} -u "{pypi_user}" -p "{pypi_pass}" dist/*',
-    )
 
 
 # --------------- installation helper functions, please do not modify -----------------------------
