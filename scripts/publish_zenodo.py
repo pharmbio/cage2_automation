@@ -1,4 +1,5 @@
 """Publish this repository as a new Zenodo deposition version."""
+
 from __future__ import annotations
 
 import os

@@ -1,6 +1,8 @@
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 import publish_zenodo  # noqa: E402
@@ -23,7 +25,7 @@ SAMPLE_CITATION = {
 def test_load_citation_parses_yaml(tmp_path):
     citation_file = tmp_path / "CITATION.cff"
     citation_file.write_text(
-        "title: Test Title\nversion: \"1.2.3\"\nauthors:\n"
+        'title: Test Title\nversion: "1.2.3"\nauthors:\n'
         "  - given-names: Ada\n    family-names: Lovelace\n"
     )
     result = publish_zenodo.load_citation(citation_file)
@@ -50,9 +52,6 @@ def test_build_zenodo_metadata_creators_format():
         {"name": "Doerr, Mark"},
         {"name": "Maak, Stefan"},
     ]
-
-
-import pytest
 
 
 def test_require_token_missing_raises(monkeypatch):
