@@ -1,0 +1,54 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Lab Automation Framework Template and Demo
+message: 'If you use this software, please cite it as below.'
+type: software
+authors:
+  - given-names: Stefan
+    family-names: Maak
+    email: stefan.maak@uni-greifswald.de
+    affiliation: Uppsala University
+    orcid: 'https://orcid.org/0009-0000-9930-0182'
+  - given-names: Mark
+    family-names: Doerr
+    email: mark.doerr@uni-greifswald.de
+    affiliation: University of Greifswald
+    orcid: 'https://orcid.org/0000-0003-3270-6895'
+  - given-names: Walter
+    family-names: Baccinelli
+    email: w.baccinelli@esciencecenter.nl
+    orcid: 'https://orcid.org/0000-0001-8888-4792'
+    affiliation: Netherlands eScience Center
+  - given-names: Dani
+    family-names: Bodor
+    email: d.bodor@esciencecenter.nl
+    orcid: 'https://orcid.org/0000-0003-2109-2349'
+    affiliation: Netherlands eScience Center
+  - given-names: Djura
+    family-names: Smits
+    email: d.smits@esciencecenter.nl
+    affiliation: Netherlands eScience Center
+    orcid: 'https://orcid.org/0000-0003-4096-0260'
+  - given-names: Alexander
+    family-names: Hadjiivanov
+    email: a.hadjiivanov@esciencecenter.nl
+    affiliation: Netherlands eScience cCenter
+    orcid: 'https://orcid.org/0000-0002-7045-1005'
+repository-code: 'https://gitlab.com/OpenLabAutomation/adaption-template'
+url: 'https://adaption-template-1d6dfe.gitlab.io/'
+abstract: >-
+  This package serves as an installable template to adapt
+  the automation framework consisting of LabScheduler,
+  Laborchestrator, PythonLab, PlatformStatusDataBase and
+  some SiLA-Servers to a new robotic lab. It also contains
+  out of the box running demo examples.
+keywords:
+  - laboratory automation
+  - SiLA
+  - robotics
+  - scientific workflow
+license: MIT
+version: 0.1.0
+date-released: '2026-07-23'

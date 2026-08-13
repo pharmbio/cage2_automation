@@ -16,6 +16,8 @@ stages:
   - compliance
   - test
   - build_and_publish_docs
+  - publish_pypi
+  - publish_zenodo
 
 # Configuration --------------------------------------------------------------------
 
@@ -64,6 +66,11 @@ before_script:
       - tags
       - /^v[0-9]+.[0-9]+.*/
 
+.run_on_manual:
+  only:
+    refs:
+      - manual
+
 # Jobs: Build -----------------------------------------------------------------
 
 build-package:
@@ -85,6 +92,19 @@ build-package:
 #     - .docker_login
 #     - .run_on_all_branches
 #     - .parallel_python_jobs
+
+# Jobs: Compliance ------------------------------------------------------------
+
+#compliance:
+#    stage: compliance
+#    script:
+#        - poetry run invoke format --check
+#        - poetry run invoke lint
+#        - poetry run invoke security-bandit
+#    extends:
+#        - .run_on_all_branches
+#        - .parallel_python_jobs
+#        - .use_generated_docker_image
 
 # Jobs: Test ------------------------------------------------------------------
 
@@ -115,6 +135,37 @@ pages:
       - public
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
+
+# Jobs: Publish ---------------------------------------------------------------
+
+release_pypi:
+  variables:
+    python_version: "3.9"
+  stage: publish_pypi
+  script:
+    - |
+      poetry run invoke release-twine \
+        --tag_name="${tag_name}" \
+        --pypi_user="${pypi_user}" \
+        --pypi_pass="${pypi_pass}" \
+        --pypi_publish_repository="${pypi_publish_repository}" \
+        --pip_repository_index="${pip_repository_index}"
+  extends:
+    #- .run_on_release_tag
+    - .run_on_manual
+    #- .use_generated_docker_image
+
+release_zenodo:
+  stage: publish_zenodo
+  script:
+    - pip install requests pyyaml
+    - python scripts/publish_zenodo.py
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v?[0-9]+\.[0-9]+.*/'
+      when: on_success
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "master"'
+      when: manual
+      allow_failure: true
 
 linting_formatting:
   variables:
