@@ -284,6 +284,10 @@ class Worker(WorkerInterface):
                 message += self._check_echo_connection()
             # check whether all protocols that will be used in the process actually exist on the servers
             message += self._check_protocol_existence(process)
+            # check whether the database contradicts itself
+            message += self._check_database_health()
+            # check whether every labware the process needs is registered where the process expects it
+            message += self._check_labware_presence(process)
 
             if message:
                 message = f"Problems with starting {process.name}:\n {message}"
@@ -388,6 +392,35 @@ class Worker(WorkerInterface):
             logging.exception("Failed to check the Echo connection to its micro service")
             return f"Echo prerequisite check failed: {ex}\n"
         return ""
+
+    def _check_database_health(self) -> str:
+        try:
+            if not self.db_client.health_check():
+                return ("The database is inconsistent. Check the log for duplicate barcodes or slots that are"
+                        " registered as holding more than one labware.\n")
+        except Exception as ex:
+            logging.exception("Database health check failed")
+            return f"Database health check failed: {ex}\n"
+        return ""
+
+    def _check_labware_presence(self, process: SMProcess) -> str:
+        """
+        Every labware of the process must be in the database at the position the process expects it.
+        Labware defined by barcode is looked up by barcode, the rest by its position.
+        """
+        message = ""
+        for cont in process.containers:
+            cont_in_db = self.db_client.get_cont_info_by_barcode(cont.barcode) if cont.barcode else None
+            if cont_in_db is None:
+                cont_in_db = self.db_client.get_container_at_position(cont.current_device, cont.current_pos)
+                if cont_in_db is None:
+                    message += (f"Labware {cont.name} (barcode {cont.barcode}) is not registered in the database"
+                                f" at {cont.current_device}[{cont.current_pos}].\n")
+                    continue
+            if (cont_in_db.current_device, cont_in_db.current_pos) != (cont.current_device, cont.current_pos):
+                message += (f"Labware {cont.name} is expected at {cont.current_device}[{cont.current_pos}] but the"
+                            f" database has it at {cont_in_db.current_device}[{cont_in_db.current_pos}].\n")
+        return message
 
     def _check_protocol_existence(self, process: SMProcess) -> str:
         message = ""
