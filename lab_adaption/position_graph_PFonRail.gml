@@ -145,13 +145,13 @@ graph [
   node [
     id 13
     label "Hotel2_nest0"
-    x -420.3
-    y -1239.7
-    z 566.2
-    dir -349.2
-    rail -999.1
-    joint2 -85.3
-    joint3 253.7
+    x -420.337
+    y -1240.568
+    z 566.186
+    dir -349.383
+    rail -999.079
+    joint2 -85.266
+    joint3 253.847
   ]
   node [
     id 14
@@ -1342,12 +1342,12 @@ graph [
   edge [
     source 13
     target 14
-    dist 8.12219182240844
+    dist 8.206119974685757
   ]
   edge [
     source 14
     target 33
-    dist 151.87014189760936
+    dist 146.8021798203283
     mode "straight"
   ]
   edge [
