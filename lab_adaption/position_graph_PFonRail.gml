@@ -912,12 +912,6 @@ graph [
   ]
   edge [
     source 0
-    target 30
-    dist 1233.654076311508
-    corners "smooth"
-  ]
-  edge [
-    source 0
     target 19
     dist 584.7177182196551
   ]
@@ -934,11 +928,6 @@ graph [
   ]
   edge [
     source 1
-    target 2
-    dist 1927.5784627350452
-  ]
-  edge [
-    source 1
     target 70
     dist 699.6942260730754
   ]
@@ -946,12 +935,6 @@ graph [
     source 2
     target 20
     dist 287.2189234712783
-  ]
-  edge [
-    source 2
-    target 30
-    dist 2116.5207605879987
-    corners "smooth"
   ]
   edge [
     source 3
