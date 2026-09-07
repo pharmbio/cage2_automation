@@ -35,35 +35,35 @@ graph [
   node [
     id 3
     label "Cytomat1_approach"
-    x 11.999
-    y 120.558
-    z 325.971
-    dir -276.705
-    rail 327.917
-    joint2 -2.934
-    joint3 188.876
+    x 12.0
+    y 120.6
+    z 326.0
+    dir -276.7
+    rail 327.9
+    joint2 -2.9
+    joint3 188.9
   ]
   node [
     id 4
     label "Cytomat1_nest"
-    x -15.822
-    y 62.172
-    z 271.146
-    dir -269.739
-    rail 327.888
-    joint2 -22.55
-    joint3 200.173
+    x -15.8
+    y 62.2
+    z 271.1
+    dir -269.7
+    rail 327.9
+    joint2 -22.6
+    joint3 200.2
   ]
   node [
     id 5
     label "Cytomat1_transit"
-    x -15.929
-    y 60.508
-    z 288.216
-    dir -270.108
-    rail 327.92
-    joint2 -22.539
-    joint3 200.509
+    x -15.9
+    y 60.5
+    z 288.2
+    dir -270.1
+    rail 327.9
+    joint2 -22.5
+    joint3 200.5
   ]
   node [
     id 6
@@ -79,79 +79,79 @@ graph [
   node [
     id 7
     label "EchoSim_approach"
-    x -11.646
-    y -633.691
-    z 111.509
-    dir -79.676
-    rail -998.788
-    joint2 28.225
-    joint3 139.723
+    x -11.6
+    y -633.7
+    z 111.5
+    dir -79.7
+    rail -998.8
+    joint2 28.2
+    joint3 139.7
   ]
   node [
     id 8
     label "EchoSim_source"
-    x -13.13
-    y -441.127
-    z 57.145
-    dir -53.381
-    rail -998.82
-    joint2 45.996
-    joint3 95.853
+    x -13.1
+    y -441.1
+    z 57.1
+    dir -53.4
+    rail -998.8
+    joint2 46.0
+    joint3 95.9
   ]
   node [
     id 9
     label "EchoSim_destination"
-    x -12.179
-    y -441.357
-    z 127.628
-    dir -53.524
-    rail -998.82
-    joint2 45.902
-    joint3 95.915
+    x -12.2
+    y -441.4
+    z 127.6
+    dir -53.5
+    rail -998.8
+    joint2 45.9
+    joint3 95.9
   ]
   node [
     id 10
     label "EchoSim_transit1"
-    x -12.185
+    x -12.2
     y -441.0
-    z 145.688
-    dir -53.486
-    rail -998.82
-    joint2 45.949
-    joint3 95.82
+    z 145.7
+    dir -53.5
+    rail -998.8
+    joint2 45.9
+    joint3 95.8
   ]
   node [
     id 11
     label "EchoSim_transit0"
-    x -12.946
-    y -440.839
-    z 71.21
-    dir -53.351
-    rail -998.82
-    joint2 46.013
-    joint3 95.779
+    x -12.9
+    y -440.8
+    z 71.2
+    dir -53.4
+    rail -998.8
+    joint2 46.0
+    joint3 95.8
   ]
   node [
     id 12
     label "bc_reader"
-    x 59.371
-    y -622.31
-    z 79.834
-    dir -307.053
-    rail -362.269
-    joint2 14.225
-    joint3 202.362
+    x 59.4
+    y -622.3
+    z 79.8
+    dir -307.1
+    rail -362.3
+    joint2 14.2
+    joint3 202.4
   ]
   node [
     id 13
     label "Hotel2_nest0"
-    x -420.337
-    y -1240.568
-    z 566.186
-    dir -349.383
-    rail -999.079
-    joint2 -85.266
-    joint3 253.847
+    x -420.3
+    y -1240.6
+    z 566.2
+    dir -349.4
+    rail -999.1
+    joint2 -85.3
+    joint3 253.8
   ]
   node [
     id 14
@@ -189,35 +189,35 @@ graph [
   node [
     id 17
     label "BlueWasher_nest"
-    x 10.68
-    y 502.65
-    z 121.671
-    dir -79.056
-    rail 193.221
-    joint2 16.583
-    joint3 151.175
+    x 10.7
+    y 502.6
+    z 121.7
+    dir -79.1
+    rail 193.2
+    joint2 16.6
+    joint3 151.2
   ]
   node [
     id 18
     label "BlueWasher_transit"
     x 10.7
-    y 502.469
-    z 149.904
-    dir -79.16
-    rail 193.221
-    joint2 16.607
-    joint3 151.212
+    y 502.5
+    z 149.9
+    dir -79.2
+    rail 193.2
+    joint2 16.6
+    joint3 151.2
   ]
   node [
     id 19
     label "BlueWasher_approach"
-    x 31.937
-    y 346.155
-    z 157.379
-    dir -103.14
-    rail 193.241
-    joint2 4.912
-    joint3 181.832
+    x 31.9
+    y 346.2
+    z 157.4
+    dir -103.1
+    rail 193.2
+    joint2 4.9
+    joint3 181.8
   ]
   node [
     id 20
@@ -233,101 +233,101 @@ graph [
   node [
     id 21
     label "Washer_approach"
-    x 118.579
-    y 890.418
-    z 116.515
-    dir -92.303
-    rail 430.302
-    joint2 32.865
-    joint3 111.462
+    x 118.6
+    y 890.4
+    z 116.5
+    dir -92.3
+    rail 430.3
+    joint2 32.9
+    joint3 111.5
   ]
   node [
     id 22
     label "Washer_nest"
-    x 240.376
-    y 1018.528
-    z 91.246
-    dir -58.582
-    rail 430.319
-    joint2 38.995
-    joint3 70.505
+    x 240.4
+    y 1018.5
+    z 91.2
+    dir -58.6
+    rail 430.3
+    joint2 39.0
+    joint3 70.5
   ]
   node [
     id 23
     label "Washer_transit"
-    x 241.01
-    y 1018.005
-    z 112.334
-    dir -58.619
-    rail 430.287
-    joint2 38.892
-    joint3 70.578
+    x 241.0
+    y 1018.0
+    z 112.3
+    dir -58.6
+    rail 430.3
+    joint2 38.9
+    joint3 70.6
   ]
   node [
     id 24
     label "MultiFlow_approach"
-    x 34.007
-    y 192.391
-    z 580.049
-    dir -81.032
-    rail -7.747
-    joint2 -5.876
-    joint3 171.927
+    x 34.0
+    y 192.4
+    z 580.0
+    dir -81.0
+    rail -7.7
+    joint2 -5.9
+    joint3 171.9
   ]
   node [
     id 25
     label "MultiFlow_transit"
-    x 48.481
-    y 378.913
-    z 566.977
-    dir -60.164
-    rail -7.757
-    joint2 14.471
-    joint3 134.438
+    x 48.5
+    y 378.9
+    z 567.0
+    dir -60.2
+    rail -7.8
+    joint2 14.5
+    joint3 134.4
   ]
   node [
     id 26
     label "Cytomat2_approach"
-    x 51.125
-    y 614.534
-    z 343.355
-    dir -246.508
-    rail 735.85
-    joint2 -4.145
-    joint3 172.333
+    x 51.1
+    y 614.5
+    z 343.4
+    dir -246.5
+    rail 735.9
+    joint2 -4.1
+    joint3 172.3
   ]
   node [
     id 27
     label "Cytomat2_nest"
-    x 66.937
-    y 456.975
-    z 284.172
-    dir -308.647
-    rail 735.743
-    joint2 11.797
-    joint3 206.352
+    x 66.9
+    y 457.0
+    z 284.2
+    dir -308.6
+    rail 735.7
+    joint2 11.8
+    joint3 206.4
   ]
   node [
     id 28
     label "Cytomat2_transit"
-    x 66.87
-    y 456.906
-    z 304.21
-    dir -308.646
-    rail 735.743
-    joint2 11.771
-    joint3 206.361
+    x 66.9
+    y 456.9
+    z 304.2
+    dir -308.6
+    rail 735.7
+    joint2 11.8
+    joint3 206.4
   ]
   node [
     id 29
     label "MultiFlow_nest"
-    x 48.077
-    y 379.359
-    z 547.914
-    dir -60.093
-    rail -7.757
-    joint2 14.57
-    joint3 134.353
+    x 48.1
+    y 379.4
+    z 547.9
+    dir -60.1
+    rail -7.8
+    joint2 14.6
+    joint3 134.4
   ]
   node [
     id 30
@@ -364,7 +364,7 @@ graph [
   ]
   node [
     id 33
-    label "Hotel2_transit4_0"
+    label "Hotel2_transit2_0"
     x -272.9
     y -1238.9
     z 574.3
@@ -375,7 +375,7 @@ graph [
   ]
   node [
     id 34
-    label "Hotel2_transit4_12"
+    label "Hotel2_transit2_12"
     x -272.2
     y -1240.7
     z 95.8
@@ -386,42 +386,20 @@ graph [
   ]
   node [
     id 35
-    label "Hotel2_transit2_12"
-    x -370.3
-    y -1237.5
-    z 95.9
-    dir -351.6
+    label "Hotel2_nest1"
+    x -420.2
+    y -1240.7
+    z 526.3
+    dir -349.4
     rail -999.1
-    joint2 -75.4
-    joint3 245.5
+    joint2 -85.2
+    joint3 253.8
   ]
   node [
     id 36
-    label "Hotel2_transit3_12"
-    x -320.3
-    y -1236.8
-    z 95.9
-    dir -355.5
-    rail -999.1
-    joint2 -64.7
-    joint3 238.6
-  ]
-  node [
-    id 37
-    label "Hotel2_nest1"
-    x -420.1
-    y -1239.8
-    z 526.3
-    dir -349.2
-    rail -999.1
-    joint2 -85.3
-    joint3 253.7
-  ]
-  node [
-    id 38
     label "Hotel2_transit1_1"
     x -419.6
-    y -1239.9
+    y -1240.8
     z 534.4
     dir -349.2
     rail -999.1
@@ -429,54 +407,32 @@ graph [
     joint3 253.6
   ]
   node [
-    id 39
+    id 37
     label "Hotel2_transit2_1"
-    x -370.8
-    y -1239.4
-    z 534.4
-    dir -351.0
-    rail -999.1
-    joint2 -75.4
-    joint3 245.6
-  ]
-  node [
-    id 40
-    label "Hotel2_transit3_1"
-    x -321.7
-    y -1239.4
-    z 534.4
-    dir -354.7
-    rail -999.1
-    joint2 -65.0
-    joint3 238.8
-  ]
-  node [
-    id 41
-    label "Hotel2_transit4_1"
     x -272.8
     y -1239.0
     z 534.4
     dir -360.6
     rail -999.1
-    joint2 -53.8
-    joint3 233.6
+    joint2 -53.9
+    joint3 233.5
   ]
   node [
-    id 42
+    id 38
     label "Hotel2_nest2"
     x -420.0
-    y -1240.0
+    y -1240.8
     z 486.4
-    dir -349.2
+    dir -349.4
     rail -999.1
     joint2 -85.2
-    joint3 253.7
+    joint3 253.8
   ]
   node [
-    id 43
+    id 39
     label "Hotel2_transit1_2"
     x -419.6
-    y -1240.0
+    y -1240.9
     z 494.5
     dir -349.2
     rail -999.1
@@ -484,87 +440,43 @@ graph [
     joint3 253.6
   ]
   node [
-    id 44
+    id 40
     label "Hotel2_transit2_2"
-    x -370.7
-    y -1239.2
-    z 494.6
-    dir -351.0
-    rail -999.1
-    joint2 -75.4
-    joint3 245.6
-  ]
-  node [
-    id 45
-    label "Hotel2_transit3_2"
-    x -321.5
-    y -1239.2
-    z 494.6
-    dir -354.8
-    rail -999.1
-    joint2 -65.0
-    joint3 238.8
-  ]
-  node [
-    id 46
-    label "Hotel2_transit4_2"
     x -272.8
     y -1239.2
-    z 494.6
-    dir -360.6
+    z 494.5
+    dir -360.7
     rail -999.1
-    joint2 -53.8
+    joint2 -53.9
     joint3 233.6
   ]
   node [
-    id 47
+    id 41
     label "Hotel2_nest3"
     x -419.8
-    y -1240.2
+    y -1240.9
     z 446.6
-    dir -349.3
+    dir -349.4
     rail -999.1
-    joint2 -85.2
-    joint3 253.7
+    joint2 -85.1
+    joint3 253.8
   ]
   node [
-    id 48
+    id 42
     label "Hotel2_transit1_3"
-    x -419.6
-    y -1240.2
+    x -419.5
+    y -1241.0
     z 454.7
     dir -349.3
     rail -999.1
     joint2 -85.2
-    joint3 253.7
+    joint3 253.6
   ]
   node [
-    id 49
+    id 43
     label "Hotel2_transit2_3"
-    x -370.7
-    y -1239.1
-    z 454.7
-    dir -351.1
-    rail -999.1
-    joint2 -75.4
-    joint3 245.5
-  ]
-  node [
-    id 50
-    label "Hotel2_transit3_3"
-    x -321.4
-    y -1238.9
-    z 454.7
-    dir -354.8
-    rail -999.1
-    joint2 -64.9
-    joint3 238.8
-  ]
-  node [
-    id 51
-    label "Hotel2_transit4_3"
     x -272.7
-    y -1239.3
+    y -1239.4
     z 454.7
     dir -360.7
     rail -999.1
@@ -572,21 +484,21 @@ graph [
     joint3 233.6
   ]
   node [
-    id 52
+    id 44
     label "Hotel2_nest4"
     x -419.6
-    y -1240.4
+    y -1241.0
     z 406.7
-    dir -349.3
+    dir -349.4
     rail -999.1
     joint2 -85.1
-    joint3 253.7
+    joint3 253.8
   ]
   node [
-    id 53
+    id 45
     label "Hotel2_transit1_4"
     x -419.5
-    y -1240.4
+    y -1241.0
     z 414.8
     dir -349.3
     rail -999.1
@@ -594,31 +506,9 @@ graph [
     joint3 253.7
   ]
   node [
-    id 54
+    id 46
     label "Hotel2_transit2_4"
-    x -370.6
-    y -1238.9
-    z 414.8
-    dir -351.2
-    rail -999.1
-    joint2 -75.4
-    joint3 245.5
-  ]
-  node [
-    id 55
-    label "Hotel2_transit3_4"
-    x -321.3
-    y -1238.7
-    z 414.8
-    dir -354.9
-    rail -999.1
-    joint2 -64.9
-    joint3 238.8
-  ]
-  node [
-    id 56
-    label "Hotel2_transit4_4"
-    x -272.6
+    x -272.7
     y -1239.5
     z 414.8
     dir -360.7
@@ -627,21 +517,21 @@ graph [
     joint3 233.6
   ]
   node [
-    id 57
+    id 47
     label "Hotel2_nest5"
     x -419.4
-    y -1240.6
+    y -1241.1
     z 366.8
-    dir -349.3
+    dir -349.4
     rail -999.1
     joint2 -85.1
     joint3 253.7
   ]
   node [
-    id 58
+    id 48
     label "Hotel2_transit1_5"
     x -419.4
-    y -1240.5
+    y -1241.1
     z 374.9
     dir -349.3
     rail -999.1
@@ -649,54 +539,32 @@ graph [
     joint3 253.7
   ]
   node [
-    id 59
+    id 49
     label "Hotel2_transit2_5"
-    x -370.6
-    y -1238.7
-    z 375.0
-    dir -351.2
-    rail -999.1
-    joint2 -75.4
-    joint3 245.5
-  ]
-  node [
-    id 60
-    label "Hotel2_transit3_5"
-    x -321.2
-    y -1238.5
-    z 375.0
-    dir -355.0
-    rail -999.1
-    joint2 -64.9
-    joint3 238.7
-  ]
-  node [
-    id 61
-    label "Hotel2_transit4_5"
     x -272.6
-    y -1239.6
+    y -1239.7
     z 374.9
-    dir -360.7
+    dir -360.8
     rail -999.1
     joint2 -53.8
     joint3 233.6
   ]
   node [
-    id 62
+    id 50
     label "Hotel2_nest6"
-    x -419.2
-    y -1240.7
+    x -419.3
+    y -1241.2
     z 326.9
-    dir -349.3
+    dir -349.4
     rail -999.1
-    joint2 -85.1
+    joint2 -85.0
     joint3 253.7
   ]
   node [
-    id 63
+    id 51
     label "Hotel2_transit1_6"
     x -419.4
-    y -1240.7
+    y -1241.2
     z 335.0
     dir -349.4
     rail -999.1
@@ -704,54 +572,32 @@ graph [
     joint3 253.7
   ]
   node [
-    id 64
+    id 52
     label "Hotel2_transit2_6"
-    x -370.6
-    y -1238.5
-    z 335.1
-    dir -351.3
-    rail -999.1
-    joint2 -75.4
-    joint3 245.5
-  ]
-  node [
-    id 65
-    label "Hotel2_transit3_6"
-    x -321.0
-    y -1238.2
-    z 335.1
-    dir -355.0
-    rail -999.1
-    joint2 -64.9
-    joint3 238.7
-  ]
-  node [
-    id 66
-    label "Hotel2_transit4_6"
     x -272.5
     y -1239.8
-    z 335.1
+    z 335.0
     dir -360.8
     rail -999.1
     joint2 -53.8
     joint3 233.7
   ]
   node [
-    id 67
+    id 53
     label "Hotel2_nest7"
     x -419.1
-    y -1240.9
+    y -1241.3
     z 287.1
-    dir -349.4
+    dir -349.5
     rail -999.1
     joint2 -85.0
-    joint3 253.6
+    joint3 253.7
   ]
   node [
-    id 68
+    id 54
     label "Hotel2_transit1_7"
     x -419.4
-    y -1240.9
+    y -1241.3
     z 295.2
     dir -349.4
     rail -999.1
@@ -759,32 +605,10 @@ graph [
     joint3 253.7
   ]
   node [
-    id 69
+    id 55
     label "Hotel2_transit2_7"
-    x -370.5
-    y -1238.4
-    z 295.2
-    dir -351.3
-    rail -999.1
-    joint2 -75.4
-    joint3 245.5
-  ]
-  node [
-    id 70
-    label "Hotel2_transit3_7"
-    x -320.9
-    y -1238.0
-    z 295.2
-    dir -355.1
-    rail -999.1
-    joint2 -64.8
-    joint3 238.7
-  ]
-  node [
-    id 71
-    label "Hotel2_transit4_7"
     x -272.5
-    y -1239.9
+    y -1240.0
     z 295.2
     dir -360.8
     rail -999.1
@@ -792,21 +616,21 @@ graph [
     joint3 233.7
   ]
   node [
-    id 72
+    id 56
     label "Hotel2_nest8"
     x -418.9
-    y -1241.1
+    y -1241.4
     z 247.2
-    dir -349.4
+    dir -349.5
     rail -999.1
     joint2 -85.0
-    joint3 253.6
+    joint3 253.7
   ]
   node [
-    id 73
+    id 57
     label "Hotel2_transit1_8"
     x -419.3
-    y -1241.0
+    y -1241.4
     z 255.3
     dir -349.4
     rail -999.1
@@ -814,30 +638,8 @@ graph [
     joint3 253.7
   ]
   node [
-    id 74
+    id 58
     label "Hotel2_transit2_8"
-    x -370.5
-    y -1238.2
-    z 255.4
-    dir -351.4
-    rail -999.1
-    joint2 -75.4
-    joint3 245.5
-  ]
-  node [
-    id 75
-    label "Hotel2_transit3_8"
-    x -320.8
-    y -1237.8
-    z 255.4
-    dir -355.2
-    rail -999.1
-    joint2 -64.8
-    joint3 238.7
-  ]
-  node [
-    id 76
-    label "Hotel2_transit4_8"
     x -272.4
     y -1240.1
     z 255.3
@@ -847,21 +649,21 @@ graph [
     joint3 233.7
   ]
   node [
-    id 77
+    id 59
     label "Hotel2_nest9"
     x -418.7
-    y -1241.3
+    y -1241.5
     z 207.3
-    dir -349.4
+    dir -349.5
     rail -999.1
     joint2 -84.9
-    joint3 253.6
+    joint3 253.7
   ]
   node [
-    id 78
+    id 60
     label "Hotel2_transit1_9"
-    x -419.2
-    y -1241.2
+    x -419.3
+    y -1241.5
     z 215.4
     dir -349.4
     rail -999.1
@@ -869,43 +671,21 @@ graph [
     joint3 253.8
   ]
   node [
-    id 79
+    id 61
     label "Hotel2_transit2_9"
-    x -370.5
-    y -1238.0
-    z 215.5
-    dir -351.4
-    rail -999.1
-    joint2 -75.4
-    joint3 245.5
-  ]
-  node [
-    id 80
-    label "Hotel2_transit3_9"
-    x -320.6
-    y -1237.5
-    z 215.5
-    dir -355.3
-    rail -999.1
-    joint2 -64.8
-    joint3 238.7
-  ]
-  node [
-    id 81
-    label "Hotel2_transit4_9"
     x -272.4
     y -1240.2
     z 215.4
     dir -360.9
     rail -999.1
-    joint2 -53.7
+    joint2 -53.8
     joint3 233.7
   ]
   node [
-    id 82
+    id 62
     label "Hotel2_nest10"
-    x -418.5
-    y -1241.5
+    x -418.6
+    y -1241.6
     z 167.4
     dir -349.5
     rail -999.1
@@ -913,53 +693,31 @@ graph [
     joint3 253.6
   ]
   node [
-    id 83
+    id 63
     label "Hotel2_transit1_10"
     x -419.2
-    y -1241.4
-    z 175.6
+    y -1241.5
+    z 175.5
     dir -349.4
     rail -999.1
     joint2 -85.0
     joint3 253.8
   ]
   node [
-    id 84
+    id 64
     label "Hotel2_transit2_10"
-    x -370.4
-    y -1237.8
-    z 175.6
-    dir -351.5
-    rail -999.1
-    joint2 -75.4
-    joint3 245.5
-  ]
-  node [
-    id 85
-    label "Hotel2_transit3_10"
-    x -320.5
-    y -1237.3
-    z 175.6
-    dir -355.3
-    rail -999.1
-    joint2 -64.8
-    joint3 238.6
-  ]
-  node [
-    id 86
-    label "Hotel2_transit4_10"
     x -272.3
     y -1240.4
-    z 175.6
+    z 175.5
     dir -360.9
     rail -999.1
     joint2 -53.7
     joint3 233.8
   ]
   node [
-    id 87
+    id 65
     label "Hotel2_nest11"
-    x -418.3
+    x -418.4
     y -1241.7
     z 127.6
     dir -349.5
@@ -968,10 +726,10 @@ graph [
     joint3 253.6
   ]
   node [
-    id 88
+    id 66
     label "Hotel2_transit1_11"
     x -419.2
-    y -1241.5
+    y -1241.6
     z 135.7
     dir -349.5
     rail -999.1
@@ -979,32 +737,10 @@ graph [
     joint3 253.8
   ]
   node [
-    id 89
+    id 67
     label "Hotel2_transit2_11"
-    x -370.4
-    y -1237.7
-    z 135.7
-    dir -351.6
-    rail -999.1
-    joint2 -75.4
-    joint3 245.5
-  ]
-  node [
-    id 90
-    label "Hotel2_transit3_11"
-    x -320.4
-    y -1237.1
-    z 135.7
-    dir -355.4
-    rail -999.1
-    joint2 -64.7
-    joint3 238.6
-  ]
-  node [
-    id 91
-    label "Hotel2_transit4_11"
     x -272.3
-    y -1240.5
+    y -1240.6
     z 135.7
     dir -361.0
     rail -999.1
@@ -1012,692 +748,584 @@ graph [
     joint3 233.8
   ]
   node [
-    id 92
+    id 68
     label "Echo_transit01"
-    x -16.777
-    y -591.904
-    z 71.37
-    dir -73.214
-    rail -998.82
-    joint2 31.627
-    joint3 130.944
+    x -16.8
+    y -591.9
+    z 71.4
+    dir -73.2
+    rail -998.8
+    joint2 31.6
+    joint3 130.9
   ]
   node [
-    id 93
+    id 69
     label "Echo_transit11"
-    x -12.132
-    y -588.979
-    z 145.693
-    dir -73.513
-    rail -998.82
-    joint2 31.47
-    joint3 130.332
+    x -12.1
+    y -589.0
+    z 145.7
+    dir -73.5
+    rail -998.8
+    joint2 31.5
+    joint3 130.3
   ]
   node [
-    id 94
+    id 70
     label "bc_reader_approach"
-    x 174.649
-    y -395.052
-    z 106.187
-    dir -191.32
-    rail -362.279
-    joint2 1.761
-    joint3 182.803
+    x 174.6
+    y -395.1
+    z 106.2
+    dir -191.3
+    rail -362.3
+    joint2 1.8
+    joint3 182.8
   ]
   node [
-    id 95
+    id 71
     label "Sealer_approach"
-    x -156.019
-    y -1469.507
-    z 251.373
-    dir -408.369
-    rail -999.059
-    joint2 -51.77
-    joint3 282.968
+    x -156.0
+    y -1469.5
+    z 251.4
+    dir -408.4
+    rail -999.1
+    joint2 -51.8
+    joint3 283.0
   ]
   node [
-    id 96
+    id 72
     label "Sealer_nest"
-    x -297.932
-    y -1493.346
-    z 136.958
-    dir -405.862
-    rail -999.044
-    joint2 -76.741
-    joint3 301.497
+    x -297.9
+    y -1493.3
+    z 137.0
+    dir -405.9
+    rail -999.0
+    joint2 -76.7
+    joint3 301.5
   ]
   node [
-    id 97
+    id 73
     label "Sealer_transit"
-    x -297.439
-    y -1492.722
-    z 157.542
-    dir -405.729
-    rail -999.044
-    joint2 -76.561
-    joint3 301.195
+    x -297.4
+    y -1492.7
+    z 157.5
+    dir -405.7
+    rail -999.0
+    joint2 -76.6
+    joint3 301.2
   ]
   node [
-    id 98
+    id 74
     label "Echo_approach"
-    x -103.072
-    y -622.061
-    z 308.745
-    dir 44.377
-    rail -998.995
-    joint2 31.839
-    joint3 101.345
+    x -103.1
+    y -622.1
+    z 308.7
+    dir 44.4
+    rail -999.0
+    joint2 31.8
+    joint3 101.3
   ]
   node [
-    id 99
+    id 75
     label "Echo_source"
-    x -252.029
-    y -445.625
-    z 246.914
-    dir 59.421
-    rail -998.994
-    joint2 80.225
-    joint3 39.054
+    x -252.0
+    y -445.6
+    z 246.9
+    dir 59.4
+    rail -999.0
+    joint2 80.2
+    joint3 39.1
   ]
   node [
-    id 100
+    id 76
     label "Echo_source_transit1"
-    x -252.791
-    y -444.593
-    z 274.222
-    dir 59.169
-    rail -998.994
-    joint2 80.402
-    joint3 38.847
+    x -252.8
+    y -444.6
+    z 274.2
+    dir 59.2
+    rail -999.0
+    joint2 80.4
+    joint3 38.8
   ]
   node [
-    id 101
+    id 77
     label "Echo_source_transit2"
-    x -251.895
-    y -568.745
-    z 282.317
-    dir 32.967
-    rail -999.008
-    joint2 60.542
-    joint3 85.06
+    x -251.9
+    y -568.7
+    z 282.3
+    dir 33.0
+    rail -999.0
+    joint2 60.5
+    joint3 85.1
   ]
   node [
-    id 102
+    id 78
     label "Echo_destination"
-    x -254.192
-    y -449.79
-    z 310.105
-    dir 58.317
-    rail -999.012
-    joint2 79.587
-    joint3 40.942
+    x -254.2
+    y -449.8
+    z 310.1
+    dir 58.3
+    rail -999.0
+    joint2 79.6
+    joint3 40.9
   ]
   node [
-    id 103
+    id 79
     label "Echo_destination_transit1"
-    x -253.992
-    y -449.747
-    z 339.111
-    dir 58.219
-    rail -999.012
-    joint2 79.523
-    joint3 41.038
+    x -254.0
+    y -449.7
+    z 339.1
+    dir 58.2
+    rail -999.0
+    joint2 79.5
+    joint3 41.0
   ]
   node [
-    id 104
+    id 80
     label "Echo_destination_transit2"
-    x -253.425
-    y -566.322
-    z 339.121
-    dir 33.811
-    rail -999.012
-    joint2 61.157
-    joint3 83.982
+    x -253.4
+    y -566.3
+    z 339.1
+    dir 33.8
+    rail -999.0
+    joint2 61.2
+    joint3 84.0
   ]
   edge [
     source 0
     target 1
-    dist 1477.532337549718
+    dist 1045.0956702618187
   ]
   edge [
     source 0
     target 2
-    dist 1251.9249685966056
+    dist 885.7981542089598
   ]
   edge [
     source 0
     target 20
-    dist 853.0721521771527
+    dist 603.3328103128488
   ]
   edge [
     source 0
     target 24
-    dist 567.4761512623754
+    dist 485.92179411917715
   ]
   edge [
     source 0
     target 30
-    dist 1744.2546941570463
+    dist 1233.654076311508
   ]
   edge [
     source 0
     target 19
-    dist 797.7038686641033
+    dist 584.7177182196551
   ]
   edge [
     source 0
-    target 94
-    dist 571.4240173211678
+    target 70
+    dist 407.15921947071274
   ]
   edge [
     source 1
     target 30
-    dist 267.2628968711961
+    dist 188.9834384278157
   ]
   edge [
     source 1
     target 2
-    dist 2726.0002966380694
+    dist 1927.5784627350452
   ]
   edge [
     source 1
-    target 94
-    dist 989.1385682771148
+    target 70
+    dist 699.6942260730754
   ]
   edge [
     source 2
     target 20
-    dist 403.0649395443261
+    dist 287.2189234712783
   ]
   edge [
     source 2
     target 30
-    dist 2993.2058776320814
+    dist 2116.5207605879987
   ]
   edge [
     source 3
     target 5
-    dist 76.23564201770792
+    dist 79.88454168360735
   ]
   edge [
     source 3
     target 20
-    dist 255.09671871355155
+    dist 261.718856791023
   ]
   edge [
     source 4
     target 5
-    dist 17.183246164637747
+    dist 17.192149371151906
   ]
   edge [
     source 6
     target 31
-    dist 315.00368368756824
+    dist 360.3297933837834
   ]
   edge [
     source 6
     target 33
-    dist 328.488690825118
+    dist 332.2995786936841
   ]
   edge [
     source 6
     target 34
-    dist 254.47247395347102
+    dist 259.30811788295404
   ]
   edge [
     source 6
-    target 41
-    dist 294.6059911135549
+    target 37
+    dist 298.8492596611208
+  ]
+  edge [
+    source 6
+    target 40
+    dist 267.229919732054
+  ]
+  edge [
+    source 6
+    target 43
+    dist 238.1019739523383
   ]
   edge [
     source 6
     target 46
-    dist 262.56140234238546
+    dist 212.50310585965562
   ]
   edge [
     source 6
-    target 51
-    dist 232.77993899818773
+    target 49
+    dist 191.7508278991254
   ]
   edge [
     source 6
-    target 56
-    dist 206.44292189367988
+    target 52
+    dist 177.67982440333512
+  ]
+  edge [
+    source 6
+    target 55
+    dist 172.01302276281294
+  ]
+  edge [
+    source 6
+    target 58
+    dist 175.3379023485795
   ]
   edge [
     source 6
     target 61
-    dist 185.11547747284666
+    dist 187.40506930176673
   ]
   edge [
     source 6
-    target 66
-    dist 170.51999882711706
+    target 64
+    dist 206.5011380113921
   ]
   edge [
     source 6
-    target 71
-    dist 164.57900838199262
-  ]
-  edge [
-    source 6
-    target 76
-    dist 168.06787319413544
-  ]
-  edge [
-    source 6
-    target 81
-    dist 180.62139961809618
-  ]
-  edge [
-    source 6
-    target 86
-    dist 200.3244867708389
-  ]
-  edge [
-    source 6
-    target 91
-    dist 225.53780170960255
+    target 67
+    dist 230.9807134805848
   ]
   edge [
     source 7
     target 32
-    dist 322.6755459676023
+    dist 332.32043271517324
   ]
   edge [
     source 7
-    target 92
-    dist 58.20089074926569
+    target 68
+    dist 59.27512125672966
   ]
   edge [
     source 7
-    target 93
-    dist 56.31650049525184
+    target 69
+    dist 57.49495630053129
   ]
   edge [
     source 8
     target 11
-    dist 14.069151538028146
+    dist 14.104963665320094
   ]
   edge [
     source 9
     target 10
-    dist 18.063529140231694
+    dist 18.104695523537526
   ]
   edge [
     source 10
-    target 93
-    dist 147.97900957568277
+    target 69
+    dist 153.95330460889755
   ]
   edge [
     source 11
-    target 92
-    dist 151.11365387019137
+    target 68
+    dist 157.09191576908086
   ]
   edge [
     source 12
-    target 94
-    dist 256.1929355304525
+    target 70
+    dist 282.0202120416194
   ]
   edge [
     source 13
     target 14
-    dist 8.206119974685757
+    dist 8.12834546509919
   ]
   edge [
     source 14
     target 33
-    dist 146.8021798203283
+    dist 151.87870160098157
     mode "straight"
   ]
   edge [
     source 15
     target 16
-    dist 8.150460109711595
+    dist 8.15536633144091
   ]
   edge [
     source 16
-    target 35
-    dist 48.98050632649689
+    target 34
+    dist 151.9623308586704
+    mode "straight"
   ]
   edge [
     source 17
     target 18
-    dist 28.233587267649845
+    dist 28.20035460769953
   ]
   edge [
     source 18
     target 19
-    dist 157.94704768341617
+    dist 163.03324814282516
   ]
   edge [
     source 20
     target 21
-    dist 738.2441746452098
+    dist 646.3525431217859
   ]
   edge [
     source 20
     target 26
-    dist 752.1441512912686
+    dist 538.7726422156196
   ]
   edge [
     source 21
     target 23
-    dist 176.89143452704494
+    dist 184.7313184059487
   ]
   edge [
     source 22
     target 23
-    dist 21.136009784872684
+    dist 21.114923632350646
   ]
   edge [
     source 24
     target 25
-    dist 187.54887688690044
+    dist 193.43360618051867
   ]
   edge [
     source 25
     target 29
-    dist 19.072495930003484
+    dist 19.111253229445758
   ]
   edge [
     source 26
     target 28
-    dist 163.28427303151008
+    dist 178.5948207535706
   ]
   edge [
     source 27
     target 28
-    dist 20.038230810128876
+    dist 20.00024999843752
   ]
   edge [
     source 30
     target 31
-    dist 209.20470836001758
+    dist 215.8868453611753
   ]
   edge [
     source 30
     target 32
-    dist 156.11751983682035
+    dist 160.7531959246845
   ]
   edge [
     source 31
-    target 95
-    dist 462.9528506169638
+    target 71
+    dist 509.30985657063417
   ]
   edge [
     source 32
-    target 98
-    dist 348.2667729955442
-  ]
-  edge [
-    source 34
-    target 36
-    dist 48.25795271248049
+    target 74
+    dist 405.7853989487547
   ]
   edge [
     source 35
     target 36
-    dist 50.004899759923525
+    dist 8.12773031048646
   ]
   edge [
-    source 37
-    target 38
-    dist 8.116033513977158
+    source 36
+    target 37
+    dist 151.87870160098157
+    mode "straight"
   ]
   edge [
     source 38
     target 39
-    dist 48.80256140818842
+    dist 8.115417426109415
   ]
   edge [
     source 39
     target 40
-    dist 49.10000000000002
+    dist 151.87188679936784
+    mode "straight"
   ]
   edge [
-    source 40
-    target 41
-    dist 48.90163596445417
+    source 41
+    target 42
+    dist 8.109870529176124
   ]
   edge [
     source 42
     target 43
-    dist 8.109870529176181
-  ]
-  edge [
-    source 43
-    target 44
-    dist 48.90664576517187
+    dist 151.88390303122975
+    mode "straight"
   ]
   edge [
     source 44
     target 45
-    dist 49.19999999999999
+    dist 8.10185164021166
   ]
   edge [
     source 45
     target 46
-    dist 48.69999999999999
+    dist 151.875442386187
+    mode "straight"
   ]
   edge [
     source 47
     target 48
-    dist 8.102468759581825
+    dist 8.10061726043142
   ]
   edge [
     source 48
     target 49
-    dist 48.91237062339142
-  ]
-  edge [
-    source 49
-    target 50
-    dist 49.30040567784408
+    dist 151.88202658642658
+    mode "straight"
   ]
   edge [
     source 50
     target 51
-    dist 48.70164268276788
+    dist 8.101234473831774
   ]
   edge [
-    source 52
-    target 53
-    dist 8.100617260431477
+    source 51
+    target 52
+    dist 151.9579547111634
+    mode "straight"
   ]
   edge [
     source 53
     target 54
-    dist 48.92300072563005
+    dist 8.106787279804461
   ]
   edge [
     source 54
     target 55
-    dist 49.30040567784408
+    dist 151.95706630492705
+    mode "straight"
   ]
   edge [
-    source 55
-    target 56
-    dist 48.706570398663864
+    source 56
+    target 57
+    dist 8.111103500757489
   ]
   edge [
     source 57
     target 58
-    dist 8.100617260431418
-  ]
-  edge [
-    source 58
-    target 59
-    dist 48.833287827054974
+    dist 151.96460114118685
+    mode "straight"
   ]
   edge [
     source 59
     target 60
-    dist 49.400404856640634
+    dist 8.124038404635957
   ]
   edge [
     source 60
     target 61
-    dist 48.61254981997958
+    dist 151.95723082499237
+    mode "straight"
   ]
   edge [
     source 62
     target 63
-    dist 8.102468759581882
+    dist 8.126499861564008
   ]
   edge [
     source 63
     target 64
-    dist 48.849667347894965
-  ]
-  edge [
-    source 64
-    target 65
-    dist 49.60090724976714
+    dist 151.96302181780933
+    mode "straight"
   ]
   edge [
     source 65
     target 66
-    dist 48.52638457581607
+    dist 8.144937077718891
   ]
   edge [
-    source 67
-    target 68
-    dist 8.105553651663742
+    source 66
+    target 67
+    dist 151.96233085867036
+    mode "straight"
   ]
   edge [
-    source 68
-    target 69
-    dist 48.96386422659059
-  ]
-  edge [
-    source 69
-    target 70
-    dist 49.60161287700232
-  ]
-  edge [
-    source 70
-    target 71
-    dist 48.437279031754024
+    source 71
+    target 73
+    dist 174.07754019401813
   ]
   edge [
     source 72
     target 73
-    dist 8.11048703839667
-  ]
-  edge [
-    source 73
-    target 74
-    dist 48.880364155763004
+    dist 20.51828452868319
   ]
   edge [
     source 74
-    target 75
-    dist 49.701609631882135
+    target 77
+    dist 164.03063738216713
+  ]
+  edge [
+    source 74
+    target 80
+    dist 167.04460482158655
   ]
   edge [
     source 75
     target 76
-    dist 48.454721132207574
+    dist 27.333130080545093
   ]
   edge [
-    source 77
-    target 78
-    dist 8.116033513977126
+    source 76
+    target 77
+    dist 136.72369948183822
   ]
   edge [
     source 78
     target 79
-    dist 48.80512268194804
+    dist 29.001379277544714
   ]
   edge [
     source 79
     target 80
-    dist 49.90250494714667
-  ]
-  edge [
-    source 80
-    target 81
-    dist 48.275666748373396
-  ]
-  edge [
-    source 82
-    target 83
-    dist 8.230431337420887
-  ]
-  edge [
-    source 83
-    target 84
-    dist 48.93260671576778
-  ]
-  edge [
-    source 84
-    target 85
-    dist 49.90250494714667
-  ]
-  edge [
-    source 85
-    target 86
-    dist 48.299585919550076
-  ]
-  edge [
-    source 87
-    target 88
-    dist 8.15230028887552
-  ]
-  edge [
-    source 88
-    target 89
-    dist 48.94772721996396
-  ]
-  edge [
-    source 89
-    target 90
-    dist 50.00359987040933
-  ]
-  edge [
-    source 90
-    target 91
-    dist 48.220016590623416
-  ]
-  edge [
-    source 95
-    target 97
-    dist 171.31242901164626
-  ]
-  edge [
-    source 96
-    target 97
-    dist 20.599356324895208
-  ]
-  edge [
-    source 98
-    target 101
-    dist 160.2918831037951
-  ]
-  edge [
-    source 98
-    target 104
-    dist 163.22105051958724
-  ]
-  edge [
-    source 99
-    target 100
-    dist 27.33811500451338
-  ]
-  edge [
-    source 100
-    target 101
-    dist 124.43285285196934
-  ]
-  edge [
-    source 102
-    target 103
-    dist 29.006721376260337
-  ]
-  edge [
-    source 103
-    target 104
-    dist 116.57637931416465
+    dist 127.96550316393865
   ]
 ]
