@@ -61,6 +61,23 @@ class GenericRobotArmWrapper(DeviceInterface):
         return observable
 
 
+def announce_intermediate_actions(sila_client: ArmClient, intermediate_actions: list[str]) -> dict:
+    """
+    Builds the metadata that announces the intermediate actions to PrepareForInput, so that the arm
+    can already do its share of them (fetching a lid) while the source device prepares itself.
+    Arms that can prepare intermediate actions require the announcement with every PrepareForInput,
+    so an empty list is announced as well. Arms without the IntermediateActionPlanning feature get
+    no metadata and do the intermediate actions during GetLabware as before.
+    :param sila_client:
+    :param intermediate_actions: the actions the following GetLabware will be given
+    :return: keyword arguments to pass to PrepareForInput
+    """
+    planning = getattr(sila_client, "IntermediateActionPlanning", None)
+    if planning is None:
+        return {}
+    return {"metadata": [planning.PlannedIntermediateActions(intermediate_actions)]}
+
+
 class LabwareTransferHandler(DeviceInterface):
     @staticmethod
     def get_SiLA_handler(step: MoveStep, labware: list[ContainerInfo], sila_client: ArmClient,
@@ -82,6 +99,7 @@ class LabwareTransferHandler(DeviceInterface):
                 handover = Site(main_labware.current_device, main_labware.current_pos + 1)  # the feature starts counting at 1
                 mover_prepare = sila_client.LabwareTransferManipulatorController.PrepareForInput(
                     handover, 1, main_labware.labware_type, str(main_labware.barcode),
+                    **announce_intermediate_actions(sila_client, intermediate_actions),
                 )
                 if interactive_source:
                     source_prepare = interactive_source.PrepareForOutput(
