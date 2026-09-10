@@ -21,7 +21,7 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
       </a></sub>
     </td>
     <td align="center">
-      <img src="https://gitlab.com/OpenLabAutomation/data/-/raw/main/adaptions/uppsala_cage2.jpg" width="250"><br>
+      <img src="https://gitlab.com/OpenLabAutomation/data/-/raw/main/adaptions/cage2_july26.png" width="250"><br>
       <sub>
       <a href="https://github.com/pharmbio/cage2_automation">
       <b>Uppsala – Cage2 (in build-up)</b>
