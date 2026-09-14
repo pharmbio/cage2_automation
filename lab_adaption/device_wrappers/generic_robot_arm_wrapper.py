@@ -1,5 +1,7 @@
 import logging
+from collections import namedtuple
 from threading import Thread
+from weakref import WeakKeyDictionary
 
 from laborchestrator.engine.worker_interface import (
     Observable,
@@ -17,6 +19,60 @@ except ModuleNotFoundError:
     from sila2.client import SilaClient as ArmClient, SilaClient
 
     logging.warning("Generic robotic arm seems to be not installed")
+
+
+# Arms that can fetch a lid while the source device still prepares itself declare PrepareForInput
+# as affected by the PlannedIntermediateActions metadata. SiLA then requires the metadata on every
+# such call, so it is sent even when there is nothing to announce. Arms that cannot do this declare
+# nothing, and sending it anyway would only earn a "received unexpected metadata" warning, so it is
+# left out there. Whether an arm expects it is asked once per client, not per transfer.
+_announcement_expected_by_client: WeakKeyDictionary[object, bool] = WeakKeyDictionary()
+
+# The metadata value is a structure wrapping the list, because SiLA metadata cannot be a plain
+# list. sila2 identifies a structure value by its field names, so a namedtuple defined here is
+# accepted just like the one the client builds from the feature definition. Do not pass a dict
+# instead: a single-field structure takes the dict as the field value, and serialising it yields
+# the dict's keys rather than its values, without any error.
+PlannedIntermediateActions = namedtuple("PlannedIntermediateActions_Struct", ["IntermediateActions"])
+
+
+def expects_action_announcement(sila_client: ArmClient) -> bool:
+    """
+    Whether this arm declares PrepareForInput as affected by the PlannedIntermediateActions
+    metadata, i.e. whether that metadata has to be sent with every PrepareForInput call.
+    :param sila_client:
+    :return:
+    """
+    expected = _announcement_expected_by_client.get(sila_client)
+    if expected is not None:
+        return expected
+    planning = getattr(sila_client, "IntermediateActionPlanning", None)
+    transfer = sila_client.LabwareTransferManipulatorController
+    if planning is None:
+        # an arm that does not know the feature at all, e.g. one running an older server
+        expected = False
+    else:
+        affected = planning.PlannedIntermediateActions.get_affected_calls()
+        # the server may declare the whole feature instead of the single command
+        expected = bool({transfer["PrepareForInput"].fully_qualified_identifier,
+                         transfer.fully_qualified_identifier}.intersection(affected))
+    _announcement_expected_by_client[sila_client] = expected
+    return expected
+
+
+def announcement_metadata(sila_client: ArmClient, intermediate_actions: list[str]) -> dict:
+    """
+    The metadata announcing the intermediate actions of the GetLabware following a PrepareForInput,
+    as keyword arguments for that call. Empty for arms that do not expect an announcement.
+    The announcement is non-binding: the actions are passed to GetLabware as usual either way.
+    :param sila_client:
+    :param intermediate_actions: the actions the following GetLabware will be given
+    :return:
+    """
+    if not expects_action_announcement(sila_client):
+        return {}
+    planned = sila_client.IntermediateActionPlanning.PlannedIntermediateActions
+    return {"metadata": [planned(PlannedIntermediateActions(IntermediateActions=intermediate_actions))]}
 
 
 class GenericRobotArmWrapper(DeviceInterface):
@@ -97,9 +153,18 @@ class LabwareTransferHandler(DeviceInterface):
             def _protocol(self, client: ArmClient, **_kwargs):
                 # prepare source and mover
                 handover = Site(main_labware.current_device, main_labware.current_pos + 1)  # the feature starts counting at 1
+                # arms that prepare intermediate actions require the announcement on every
+                # PrepareForInput. Nothing is announced yet: passing intermediate_actions here
+                # instead would let the arm fetch the lid already while the source device
+                # prepares itself, but that list is also the one given to PutLabware, so it has
+                # to be split into a get and a put part first.
                 mover_prepare = sila_client.LabwareTransferManipulatorController.PrepareForInput(
                     handover, 1, main_labware.labware_type, str(main_labware.barcode),
+<<<<<<< Updated upstream
                     **announce_intermediate_actions(sila_client, intermediate_actions),
+=======
+                    **announcement_metadata(sila_client, []),
+>>>>>>> Stashed changes
                 )
                 if interactive_source:
                     source_prepare = interactive_source.PrepareForOutput(
