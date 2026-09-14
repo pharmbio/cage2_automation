@@ -160,11 +160,7 @@ class LabwareTransferHandler(DeviceInterface):
                 # to be split into a get and a put part first.
                 mover_prepare = sila_client.LabwareTransferManipulatorController.PrepareForInput(
                     handover, 1, main_labware.labware_type, str(main_labware.barcode),
-<<<<<<< Updated upstream
-                    **announce_intermediate_actions(sila_client, intermediate_actions),
-=======
                     **announcement_metadata(sila_client, []),
->>>>>>> Stashed changes
                 )
                 if interactive_source:
                     source_prepare = interactive_source.PrepareForOutput(
