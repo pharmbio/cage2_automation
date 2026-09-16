@@ -56,7 +56,7 @@
       profile = default
       uuid = 86e5e19d-4430-4173-8018-9c1475d1660b
       title = Orchestrator
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/cage2_automation/lab_adaption; echo 'orchestrator'; laborchestrator -c config.py; history -s 'laborchestrator -c config.py'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/cage2_automation/lab_adaption; laborchestrator -c config.py; history -s 'laborchestrator -c config.py'; exec bash"'''
     [[[terminal6]]]
       type = Terminal
       parent = child4
@@ -78,7 +78,7 @@
       profile = default
       uuid = a663eb6d-2b0f-4c88-9553-a93213dbb250
       title = Console
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'console'; history -s ''; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; history -s ''; exec bash"'''
     [[[terminal9]]]
       type = Terminal
       parent = child7
@@ -86,7 +86,7 @@
       profile = default
       uuid = 51941f95-c6e4-4ec1-bce1-11de199d3e3d
       title = PFonRail
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd labautomation/sila_servers/genericroboticarm/; echo 'robot arm'; genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100; history -s 'genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd labautomation/sila_servers/genericroboticarm/; genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100; history -s 'genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100'; exec bash"'''
     [[[child10]]]
       type = VPaned
       parent = child2
@@ -112,7 +112,7 @@
       profile = default
       uuid = fb404cb3-8833-4de3-9290-e0e5b7490981
       title = Scheduler
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd labautomation/packages/source/scheduler/; echo 'scheduler'; labscheduler; history -s 'labscheduler'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd labautomation/packages/source/scheduler/; labscheduler; history -s 'labscheduler'; exec bash"'''
     [[[terminal14]]]
       type = Terminal
       parent = child12
@@ -120,7 +120,7 @@
       profile = default
       uuid = aa02cea2-3f74-4354-a146-c89f8c534b0e
       title = Database
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/cage2_automation/platform_status_db; echo 'database'; run_db_server; history -s 'run_db_server'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/cage2_automation/platform_status_db; run_db_server; history -s 'run_db_server'; exec bash"'''
     [[[child15]]]
       type = VPaned
       parent = child11
@@ -142,7 +142,7 @@
       profile = default
       uuid = f7face40-566c-479a-a0a0-0ccaaf0c7705
       title = Echo
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/echo/; echo 'echo'; python -m echo_server -p 50058; history -s 'python -m echo_server -p 50058'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/echo/; python -m echo_server -p 50058; history -s 'python -m echo_server -p 50058'; exec bash"'''
     [[[child18]]]
       type = VPaned
       parent = child10
@@ -162,7 +162,7 @@
       profile = default
       uuid = 5654cf07-1771-42f9-a474-77d9a988cd6d
       title = Sealer
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/sealer; echo 'sealer'; python -m sealer_server -p 50060; history -s 'python -m sealer_server -p 50060'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/sealer; python -m sealer_server -p 50060; history -s 'python -m sealer_server -p 50060'; exec bash"'''
     [[[terminal21]]]
       type = Terminal
       parent = child19
@@ -170,7 +170,7 @@
       profile = default
       uuid = c7c1e3d8-752e-4a23-9dd0-b27daed60423
       title = BCReader
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate;cd ~/labautomation/sila_servers/barcodereader; echo 'barcode reader'; python -m bc_reader -p 50053; history -s 'python -m bc_reader -p 50053'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate;cd ~/labautomation/sila_servers/barcodereader; python -m bc_reader -p 50053; history -s 'python -m bc_reader -p 50053'; exec bash"'''
     [[[terminal22]]]
       type = Terminal
       parent = child18
@@ -178,7 +178,7 @@
       profile = default
       uuid = aa943723-1598-4a83-80b5-bb05c37ebc17
       title = Opentrons
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'opentrons'; history -s ''; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; history -s ''; exec bash"'''
     [[[child23]]]
       type = VPaned
       parent = child1
@@ -204,7 +204,7 @@
       profile = default
       uuid = d1905584-2748-4269-809b-f27c43f42037
       title = Cytomat1
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; echo 'Cytomat1'; python -m cytomat2C_server -p 50056 --name Cytomat1; history -s 'python -m cytomat2C_server -p 50056 --name Cytomat1'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; python -m cytomat2C_server -p 50056 --name Cytomat1; history -s 'python -m cytomat2C_server -p 50056 --name Cytomat1'; exec bash"'''
     [[[terminal27]]]
       type = Terminal
       parent = child25
@@ -212,7 +212,7 @@
       profile = default
       uuid = 35c72a40-1bd2-4016-a6f6-a6f0af43f74c
       title = Cytomat2
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; echo 'Cytomat2'; python -m cytomat2C_server -p 50057 --name Cytomat2; history -s 'python -m cytomat2C_server -p 50057 --name Cytomat2'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; python -m cytomat2C_server -p 50057 --name Cytomat2; history -s 'python -m cytomat2C_server -p 50057 --name Cytomat2'; exec bash"'''
     [[[child28]]]
       type = VPaned
       parent = child24
@@ -232,7 +232,7 @@
       profile = default
       uuid = 98a5c4c4-1ba2-4438-b508-a614366dfe82
       title = Fridge
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'fridge (still over seas)'; history -s ''; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; history -s ''; exec bash"'''
     [[[terminal31]]]
       type = Terminal
       parent = child29
@@ -240,7 +240,7 @@
       profile = default
       uuid = 89063f63-4334-4573-b089-b4d7f0c9ff52
       title = MultiFlow
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/multiflowfx; echo 'MultiFlow'; python -m multiflow_server -p 50059; history -s 'python -m multiflow_server -p 50059'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/multiflowfx; python -m multiflow_server -p 50059; history -s 'python -m multiflow_server -p 50059'; exec bash"'''
     [[[child32]]]
       type = VPaned
       parent = child28
@@ -254,15 +254,15 @@
       profile = default
       uuid = 984a433b-6f95-4be7-b995-e02478d16115
       title = BlueWasher
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/bluewasher; echo 'BlueWasher'; python -m bluewasher_sila -p 50054; history -s 'python -m bluewasher_sila -p 50054'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/bluewasher; python -m bluewasher_sila -p 50054; history -s 'python -m bluewasher_sila -p 50054'; exec bash"'''
     [[[terminal34]]]
       type = Terminal
       parent = child32
       order = 1
       profile = default
       uuid = e5e8289d-811a-45ec-8029-8d5f1b37253f
-      title = Washer
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/washer405; echo 'Washer 405'; python -m cell_washer -p 50055; history -s 'python -m cell_washer -p 50055'; exec bash"'''
+      title = Washer 405TS
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/washer405; python -m cell_washer -p 50055; history -s 'python -m cell_washer -p 50055'; exec bash"'''
     [[[terminal35]]]
       type = Terminal
       parent = child23
@@ -270,5 +270,5 @@
       profile = default
       uuid = e1264feb-2f91-40a7-bae5-4faa8b43449e
       title = Squid
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; echo 'squid'; history -s ''; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; history -s ''; exec bash"'''
 [plugins]
