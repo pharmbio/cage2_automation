@@ -5,17 +5,22 @@ Has no practical use ur biochemical background
 
 from lab_adaption.processes.basic_process import BasicProcess
 from bluewasher_sila.hardware_comm.commands import Prime, Dispense, Centrifugation
-from lhc_python.steps.step_interface import DemoStep
 import logging
 from pathlib import Path
 import pandas as pd
 
 try:
-    from lhc_python.steps.step_parts import PrimeInstructions, WashInstructions
-    from lhc_python.steps.ewash_step import EMWashStep
-    from lhc_python.steps.prime_step import PrimeStep
+    from pylabrobot.agilent.biotek.lhc.enums.plates.plate_type import PlateType
+    from pylabrobot.agilent.biotek.lhc.protocols.steps.step_parts.groups import Sectors
+    from pylabrobot.agilent.biotek.lhc.protocols.steps.steps import (
+        ManifoldDispense,
+        ManifoldPrime,
+        ManifoldWash,
+        PeriDispense,
+        PeriPrime,
+    )
 except ModuleNotFoundError:
-    logging.warning("WasherTest will fail without lhc_python being installed")
+    logging.warning("ShowProcess will fail without pylabrobot's biotek lhc support being installed")
 
 
 class ShowProcess(BasicProcess):
@@ -28,6 +33,9 @@ class ShowProcess(BasicProcess):
 
     def create_resources(self):
         super().create_resources()
+        # the washer and the dispenser work 384 well plates -- their default, stated anyway
+        for plate in self.containers[:4]:
+            plate.kwargs["plate_type"] = PlateType.PLATE_384_WELL
         # set the plate types of the plates going into the echo
         for plate in self.containers[4:8]:
             plate.lidded = False
@@ -53,16 +61,13 @@ class ShowProcess(BasicProcess):
         incubation_duration = 15*60  # in seconds
         # define the 405 washing steps
         wash_steps = [
-            PrimeStep(instructions=PrimeInstructions(
-                buffer_choice='B',
-                volume=10,
-                flow_rate=5,
-                )),
-            EMWashStep(settings=WashInstructions(
-                num_cycles=1,
-                wells_to_wash=[False, True, False, False],
-                buffer_choice='A',
-            ))
+            ManifoldPrime(buffer="B", volume=10_000, flow_rate=5),
+            ManifoldWash(
+                cycles=1,
+                wash_format="Sector",
+                sectors=Sectors([False, True, False, False]),
+                dispense=ManifoldDispense(buffer="A", volume=50),
+            ),
         ]
         # create the bluewasher steps
         bluewash_steps = [
@@ -71,8 +76,8 @@ class ShowProcess(BasicProcess):
             Centrifugation(duration_in_ms=5000, rpm=300),
         ]
         multiflow_steps = [
-            DemoStep(name="prime_demo", step_def="DV103|2|True|300|3|High|True|0|2", body=""),
-            DemoStep(name="peri_dispense_demo", step_def="DV103|1|10|High|0|333|0|0|True|10|2|111111111111111111111111111111111111111111111111|1111|1", body=""),
+            PeriPrime(volume=300, flow_rate="High", peri_pump="Secondary"),
+            PeriDispense(volume=10, flow_rate="High", peri_pump="Primary"),
         ]
         echo_protocol = Path(__file__).with_name("protocols") / "two_source_four_dest_echo_protocol.csv"
         dataframe = pd.read_csv(echo_protocol)

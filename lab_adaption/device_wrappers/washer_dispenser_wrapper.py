@@ -4,9 +4,10 @@ from laborchestrator.engine.worker_interface import Observable
 from laborchestrator.structures import ProcessStep, ContainerInfo
 from . import DeviceInterface
 try:
-    from lhc_python.steps.step_interface import Step
+    from pylabrobot.agilent.biotek.lhc.protocols.steps import Step
 except ModuleNotFoundError:
-    logging.warning("The washer wrapper can not be used without lhc_python being installed.")
+    logging.warning("The washer wrapper can not be used without pylabrobot's biotek lhc support "
+                    "being installed.")
 try:
     from cell_washer import Client as WasherDispenserClient
 except ModuleNotFoundError:
@@ -31,7 +32,7 @@ class WasherDispenserWrapper(DeviceInterface):
                 assert all(isinstance(elem, Step) for elem in protocol_steps)
                 # compress step definitions to strings
                 step_definitions = [
-                    step_definition.to_string()
+                    step_definition.to_definition()
                     for step_definition in protocol_steps
                 ]
                 # check if the expected function is available in the sever
