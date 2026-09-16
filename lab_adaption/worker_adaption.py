@@ -121,11 +121,15 @@ class Worker(WorkerInterface):
                 if not cont_info:
                     # if the barcode failed, try to find the information by location
                     cont_info = self.db_client.get_container_at_position(cont.current_device, cont.current_pos)
-                    logger.info("found container by its position")
-                    if cont_info.barcode not in [None, "None"]:
-                        logger.info(f"Taking barcode {cont_info.barcode} from database replacing {cont.barcode}")
                     if not cont_info:
+                        # the container is unknown to the database, keep the runtime information
+                        logger.info(f"Container {cont_name} was found neither by barcode nor by its position "
+                                    f"({cont.current_device}[{cont.current_pos}]), keeping runtime information")
                         cont_info = cont
+                    else:
+                        logger.info("found container by its position")
+                        if cont_info.barcode not in [None, "None"]:
+                            logger.info(f"Taking barcode {cont_info.barcode} from database replacing {cont.barcode}")
                 # copy information to the runtime environment. The database is considered more reliable
                 cont.barcode = cont_info.barcode
                 cont.current_pos = cont_info.current_pos
