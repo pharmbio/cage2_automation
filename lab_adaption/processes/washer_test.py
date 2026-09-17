@@ -3,7 +3,6 @@ import logging
 from lab_adaption.processes.basic_process import BasicProcess
 
 try:
-    from pylabrobot.agilent.biotek.lhc.enums.plates.plate_type import PlateType
     from pylabrobot.agilent.biotek.lhc.protocols.steps.step_parts.groups import Sectors
     from pylabrobot.agilent.biotek.lhc.protocols.steps.steps import (
         ManifoldDispense,
@@ -21,7 +20,7 @@ class WasherTest(BasicProcess):
     def create_resources(self):
         super().create_resources()
         # the washer works a 384 well plate -- its default, stated anyway
-        self.containers[0].kwargs["plate_type"] = PlateType.PLATE_384_WELL
+        self.containers[0].kwargs["plate_type"] = "PLATE_384_WELL"
 
     def init_service_resources(self):
         # setting start position of containers

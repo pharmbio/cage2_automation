@@ -10,7 +10,6 @@ from pathlib import Path
 import pandas as pd
 
 try:
-    from pylabrobot.agilent.biotek.lhc.enums.plates.plate_type import PlateType
     from pylabrobot.agilent.biotek.lhc.protocols.steps.step_parts.groups import Sectors
     from pylabrobot.agilent.biotek.lhc.protocols.steps.steps import (
         ManifoldDispense,
@@ -35,7 +34,7 @@ class ShowProcess(BasicProcess):
         super().create_resources()
         # the washer and the dispenser work 384 well plates -- their default, stated anyway
         for plate in self.containers[:4]:
-            plate.kwargs["plate_type"] = PlateType.PLATE_384_WELL
+            plate.kwargs["plate_type"] = "PLATE_384_WELL"
         # set the plate types of the plates going into the echo
         for plate in self.containers[4:8]:
             plate.lidded = False

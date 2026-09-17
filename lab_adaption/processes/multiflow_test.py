@@ -8,7 +8,6 @@ from pythonlab.resource import DynamicLabwareResource as ReagentResource  # noqa
 from lab_adaption.processes.basic_process import BasicProcess
 
 try:
-    from pylabrobot.agilent.biotek.lhc.enums.plates.plate_type import PlateType
     from pylabrobot.agilent.biotek.lhc.protocols.steps.steps import PeriDispense, PeriPrime
 except ModuleNotFoundError:
     logging.warning("MultiflowTest will fail without pylabrobot's biotek lhc support being installed")
@@ -24,7 +23,7 @@ class MultiflowTest(BasicProcess):
     def create_resources(self):
         super().create_resources()
         # the dispenser works a 384 well plate -- its default, stated anyway
-        self.containers[0].kwargs["plate_type"] = PlateType.PLATE_384_WELL
+        self.containers[0].kwargs["plate_type"] = "PLATE_384_WELL"
 
     def init_service_resources(self):
         # setting start position of containers
