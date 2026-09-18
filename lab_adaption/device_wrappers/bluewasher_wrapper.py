@@ -12,7 +12,7 @@ try:
     from bluewasher_sila import Client as BlueWasherClient
 except ModuleNotFoundError:
     from sila2.client import SilaClient as BlueWasherClient
-    logging.warning("cell_washer seems to be not installed")
+    logging.warning("washer405ts seems to be not installed")
 
 
 class BlueWasherWrapper(DeviceInterface):

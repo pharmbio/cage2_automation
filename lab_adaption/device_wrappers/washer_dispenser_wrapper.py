@@ -9,10 +9,10 @@ except ModuleNotFoundError:
     logging.warning("The washer wrapper can not be used without pylabrobot's biotek lhc support "
                     "being installed.")
 try:
-    from cell_washer import Client as WasherDispenserClient
+    from washer405ts import Client as WasherDispenserClient
 except ModuleNotFoundError:
     from sila2.client import SilaClient as WasherDispenserClient
-    logging.warning("cell_washer seems to be not installed")
+    logging.warning("washer405ts seems to be not installed")
 
 
 class WasherDispenserWrapper(DeviceInterface):
