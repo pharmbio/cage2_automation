@@ -262,7 +262,7 @@
       profile = default
       uuid = e5e8289d-811a-45ec-8029-8d5f1b37253f
       title = Washer 405TS
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/washer405; python -m cell_washer -p 50055; history -s 'python -m cell_washer -p 50055'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/washer405; python -m washer405ts -p 50055; history -s 'python -m washer405ts -p 50055'; exec bash"'''
     [[[terminal35]]]
       type = Terminal
       parent = child23
