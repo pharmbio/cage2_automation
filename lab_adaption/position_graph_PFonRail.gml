@@ -837,7 +837,7 @@ graph [
   ]
   node [
     id 76
-    label "Echo_source_transit1"
+    label "Echo_sourc_transit1"
     x -252.8
     y -444.6
     z 274.2
@@ -848,7 +848,7 @@ graph [
   ]
   node [
     id 77
-    label "Echo_source_transit2"
+    label "Echo_sourc_transit2"
     x -251.9
     y -568.7
     z 282.3
@@ -870,7 +870,7 @@ graph [
   ]
   node [
     id 79
-    label "Echo_destination_transit1"
+    label "Echo_dest_transit1"
     x -254.0
     y -449.7
     z 339.1
@@ -881,7 +881,7 @@ graph [
   ]
   node [
     id 80
-    label "Echo_destination_transit2"
+    label "Echo_dest_transit2"
     x -253.4
     y -566.3
     z 339.1
