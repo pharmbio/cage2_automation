@@ -15,6 +15,9 @@ An implementation of [this automation template](https://gitlab.com/OpenLabAutoma
 | Echo | 50058 |
 | MultiFlow | 50059 |
 | Sealer | 50060 |
-| Squid | 50061 |
+| Squid1 | 50061 |
+| Squid2 | 50062 |
+| Squid3 | 50063 |
+| Squid4 | 50064 |
 | Ot2Controller | 50065 |
 | Scheduler | 50066 |
