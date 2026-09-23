@@ -134,7 +134,7 @@
       profile = default
       uuid = 6b47b050-7d87-4783-8014-555859ff751b
       title = SiLA Browser
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/browser; npm run dev; history -s 'npm run dev'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; rm -rf ~/.unitelabs/unitelabs-app/servers; cd ~/labautomation/browser; npm run dev; history -s 'npm run dev'; exec bash"'''
     [[[terminal17]]]
       type = Terminal
       parent = child15
