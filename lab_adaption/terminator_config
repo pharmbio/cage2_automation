@@ -269,6 +269,6 @@
       order = 1
       profile = default
       uuid = e1264feb-2f91-40a7-bae5-4faa8b43449e
-      title = Squid
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; history -s ''; exec bash"'''
+      title = Squid1
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50061 --squid-ip 10.10.0.69:8001 --squid-name squid1-real --server-name Squid1; history -s 'python -m microscope_server -p 50061 --squid-ip 10.10.0.69:8001 --squid-name squid1-real --server-name Squid1'; exec bash"'''
 [plugins]
