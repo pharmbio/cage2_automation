@@ -75,6 +75,10 @@ device_wrappers: dict[str, type[DeviceInterface]] = dict(
     Sealer=SealerWrapper,
     Cytomat1=Cytomat2CWrapper,
     Cytomat2=Cytomat2CWrapper,
+    Squid1=SquidWrapper,
+    Squid2=SquidWrapper,
+    Squid3=SquidWrapper,
+    Squid4=SquidWrapper,
 )
 
 # maps the device names (from the platform_config and process description) to the correct sila server names
@@ -91,6 +95,10 @@ sila_server_name: dict[str, str] = dict(
     BlueWasher="BlueWasher",
     MultiFlow="MultiFlow",
     Sealer="Sealer",
+    Squid1="Squid1",
+    Squid2="Squid2",
+    Squid3="Squid3",
+    Squid4="Squid4",
 )
 LID_STORAGE ="Hotel2"
 # Pause the affected process when a step fails. An error usually leaves the platform in an unknown

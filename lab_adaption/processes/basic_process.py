@@ -33,6 +33,8 @@ class BasicProcess(PLProcess, ABC):
         self.incubator2 = IncubatorServiceResource(proc=self, name="Cytomat2")
         self.squid1 = MicroscopeServiceResource(proc=self, name="Squid1")
         self.squid2 = MicroscopeServiceResource(proc=self, name="Squid2")
+        self.squid3 = MicroscopeServiceResource(proc=self, name="Squid3")
+        self.squid4 = MicroscopeServiceResource(proc=self, name="Squid4")
         self.squid_pool = MicroscopeServiceResource(proc=self, name=None)
         self.sealer = PlateSealerServiceResource(proc=self, name="Sealer")
         self.echo = EchoServiceResource(proc=self, name="Echo")

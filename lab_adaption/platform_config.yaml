@@ -34,6 +34,10 @@ sila_servers:
             capacity: 1
         Squid2:
             capacity: 1
+        Squid3:
+            capacity: 1
+        Squid4:
+            capacity: 1
     acoustic_dispensers:
         Echo:
             capacity: 2

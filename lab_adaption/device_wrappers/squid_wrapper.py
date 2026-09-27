@@ -14,4 +14,8 @@ class SquidWrapper(DeviceInterface):
     @staticmethod
     def get_SiLA_handler(step: ProcessStep, labware: list[ContainerInfo], sila_client: SquidClient, **kwargs) -> Observable:
         protocol = step.data["protocol"]
-        return sila_client.ProtocolController.RunProtocol(protocol)
+        cont = labware[0]
+        plate_name = cont.barcode if cont.barcode else cont.name
+        return sila_client.ProtocolController.RunProtocol(
+            protocol, plate_name, step.data.get("project", "trash")
+        )
