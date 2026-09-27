@@ -303,7 +303,7 @@
       profile = default
       uuid = d1c6e3f0-be01-47c1-8a9c-d2501fb573ac
       title = Squid3
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-real --server-name Squid3; history -s 'python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-real --server-name Squid3'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-real --server-name Squid3; history -s 'python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-mock --server-name Squid3'; exec bash"'''
     [[[terminal41]]]
       type = Terminal
       parent = child39
