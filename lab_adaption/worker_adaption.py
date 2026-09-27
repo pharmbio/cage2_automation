@@ -59,8 +59,12 @@ USE_REAL_SERVERS = [
     "BlueWasher",
     "MultiFlow",
     "Sealer",
+    "Squid1",
+    "Squid2",
+    "Squid3",
+    "Squid4",
 ]
-interactive = {"Echo", "Washer", "Sealer", "Cytomat1", "Cytomat2", "BlueWasher", "MultiFlow"}
+interactive = {"Echo", "Washer", "Sealer", "Cytomat1", "Cytomat2", "BlueWasher", "MultiFlow", "Squid1", "Squid2", "Squid3", "Squid4"}
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
@@ -101,6 +105,8 @@ sila_server_name: dict[str, str] = dict(
     Squid4="Squid4",
 )
 LID_STORAGE ="Hotel2"
+# tells the arm to grip the plate higher, plates going into a squid need that
+SQUID_OFFSET_ACTION = "offset=squid_offset"
 # Pause the affected process when a step fails. An error usually leaves the platform in an unknown
 # state (e.g. a plate still in the arms gripper), so dispatching the next step risks dropping it.
 STOP_ON_ERROR = True
@@ -182,6 +188,10 @@ class Worker(WorkerInterface):
                         device_kwargs["intermediate_actions"].append("read_barcode")
                     # check whether its specified whether the lid must be on in the target position
                     desired_lidding_state = step.data.get("lidded", None)
+                    if step.target_device.name.startswith("Squid"):
+                        if cont.lidded or desired_lidding_state:
+                            raise ValueError(f"{cont.name} must not be lidded when moved into {step.target_device.name}")
+                        device_kwargs["intermediate_actions"].append(SQUID_OFFSET_ACTION)
                     if desired_lidding_state is not None:
                         # check whether the desired state is already there
                         if not desired_lidding_state == cont.lidded:
