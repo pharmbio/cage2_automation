@@ -890,16 +890,21 @@ graph [
     joint2 61.2
     joint3 84.0
   ]
+  node [
+    id 81
+    label "rail_max"
+    x 176.289
+    y 854.796
+    z 309.504
+    dir -173.497
+    rail 821.095
+    joint2 0.6
+    joint3 173.9
+  ]
   edge [
     source 0
     target 1
     dist 1477.532337549718
-    corners "smooth"
-  ]
-  edge [
-    source 0
-    target 2
-    dist 1251.9249685966056
     corners "smooth"
   ]
   edge [
@@ -941,6 +946,11 @@ graph [
     target 20
     dist 403.0649395443261
     corners "smooth"
+  ]
+  edge [
+    source 2
+    target 81
+    dist 651.7910002101254
   ]
   edge [
     source 3
