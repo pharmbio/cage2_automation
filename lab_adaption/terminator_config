@@ -182,20 +182,20 @@
       type = VPaned
       parent = child1
       order = 1
-      position = 1146
-      ratio = 0.8552238805970149
+      position = 1005
+      ratio = 0.75
     [[[child24]]]
       type = VPaned
       parent = child23
       order = 0
-      position = 325
-      ratio = 0.2848378615249781
+      position = 335
+      ratio = 0.3333333333333333
     [[[child25]]]
       type = VPaned
       parent = child24
       order = 0
-      position = 158
-      ratio = 0.49375
+      position = 167
+      ratio = 0.5
     [[[terminal26]]]
       type = Terminal
       parent = child25
@@ -216,14 +216,14 @@
       type = VPaned
       parent = child24
       order = 1
-      position = 395
-      ratio = 0.48466257668711654
+      position = 335
+      ratio = 0.5
     [[[child29]]]
       type = VPaned
       parent = child28
       order = 0
-      position = 191
-      ratio = 0.4897435897435897
+      position = 167
+      ratio = 0.5
     [[[terminal30]]]
       type = Terminal
       parent = child29
@@ -244,8 +244,8 @@
       type = VPaned
       parent = child28
       order = 1
-      position = 208
-      ratio = 0.4964200477326969
+      position = 167
+      ratio = 0.5
     [[[terminal33]]]
       type = Terminal
       parent = child32
@@ -262,12 +262,54 @@
       uuid = e5e8289d-811a-45ec-8029-8d5f1b37253f
       title = Washer 405TS
       command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/washer405; python -m washer405ts -p 50055; history -s 'python -m washer405ts -p 50055'; exec bash"'''
-    [[[terminal35]]]
-      type = Terminal
+    [[[child35]]]
+      type = VPaned
       parent = child23
       order = 1
+      position = 167
+      ratio = 0.5
+    [[[child36]]]
+      type = HPaned
+      parent = child35
+      order = 0
+      position = 340
+      ratio = 0.5
+    [[[terminal37]]]
+      type = Terminal
+      parent = child36
+      order = 0
       profile = default
       uuid = e1264feb-2f91-40a7-bae5-4faa8b43449e
       title = Squid1
       command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50061 --squid-ip 10.10.0.69:8001 --squid-name squid1-real --server-name Squid1; history -s 'python -m microscope_server -p 50061 --squid-ip 10.10.0.69:8001 --squid-name squid1-real --server-name Squid1'; exec bash"'''
+    [[[terminal38]]]
+      type = Terminal
+      parent = child36
+      order = 1
+      profile = default
+      uuid = a51b918f-64ec-4a50-9b1f-61ef783906d4
+      title = Squid2
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50062 --squid-ip 10.10.0.69:8002 --squid-name squid2-real --server-name Squid2; history -s 'python -m microscope_server -p 50062 --squid-ip 10.10.0.69:8002 --squid-name squid2-real --server-name Squid2'; exec bash"'''
+    [[[child39]]]
+      type = HPaned
+      parent = child35
+      order = 1
+      position = 340
+      ratio = 0.5
+    [[[terminal40]]]
+      type = Terminal
+      parent = child39
+      order = 0
+      profile = default
+      uuid = d1c6e3f0-be01-47c1-8a9c-d2501fb573ac
+      title = Squid3
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-real --server-name Squid3; history -s 'python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-real --server-name Squid3'; exec bash"'''
+    [[[terminal41]]]
+      type = Terminal
+      parent = child39
+      order = 1
+      profile = default
+      uuid = 0fbf9336-d697-4a79-ad82-1351dd0d2bb0
+      title = Squid4
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50064 --squid-ip 10.10.0.69:8004 --squid-name squid4-real --server-name Squid4; history -s 'python -m microscope_server -p 50064 --squid-ip 10.10.0.69:8004 --squid-name squid4-real --server-name Squid4'; exec bash"'''
 [plugins]
