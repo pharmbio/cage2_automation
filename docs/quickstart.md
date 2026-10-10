@@ -31,7 +31,7 @@ The repository is already cloned, so continue with step 2 of the [installation g
 ## Startup
 Call from different console tabs
 
-**Option 1:** In gnome terminal you could start all four of the following services in different tabs by running
+**Option 1:** In gnome terminal you can start all four of the following services in different tabs by running (with your virtual environment activated)
 
 ```bash
 bash scripts/start_services.sh

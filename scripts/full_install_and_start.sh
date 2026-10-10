@@ -60,6 +60,6 @@ echo "✅ Lab setup added to database."
 
 # --- Step 5: Startup in new tabs ---
 echo "🔹 Step 5: Starting services in new tabs..."
-bash start_services.sh
+bash scripts/start_services.sh
 
 echo "🎉 All done! Your environment is ready and services are running."

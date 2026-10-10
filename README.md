@@ -66,10 +66,10 @@ See the [installation guide](docs/installation.md).
 ## Startup
 Call from different console tabs
 
-**Option 1:** In gnome terminal you could start all four o the following services in different tabs by running
+**Option 1:** In gnome terminal you can start all four of the following services in different tabs by running (with your virtual environment activated)
 
    ```bash
-       bash scripts/start_services.sh
+  bash scripts/start_services.sh
    ```
 
 **Option 2:** Otherwise use individual commands (remember activating the virtual environment):
