@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21916374.svg)](https://doi.org/10.5281/zenodo.21916374)
+
 # Lab Automation Framework Template and Demo
 This package serves as an installable template to adapt the automation framework consisting of
 [LabScheduler](https://gitlab.com/OpenLabAutomation/lab-automation-packages/lab-scheduler),
