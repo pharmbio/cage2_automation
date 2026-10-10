@@ -13,4 +13,4 @@ Contributors
 Development Lead
 ----------------
 
-* stefan maak <maaks@uni-greifswald.de>
+* Stefan Maak <stefanmaak@freenet.de>

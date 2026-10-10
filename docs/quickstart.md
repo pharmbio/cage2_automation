@@ -26,10 +26,10 @@ docker-compose up
 ```
 
 ## Running with Python
-First, use your favorite tool to create and activate a new Python environment with Python 3.11 or higher. 
+First, use your favorite tool to create and activate a new Python environment with Python 3.12 or higher. 
 For example with pyvenv on linux:
 ```bash
-   Python -m venv labautomation
+   python -m venv labautomation
    source labautomation/bin/activate
 ```
 3. Install all necessary packages:

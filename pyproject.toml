@@ -6,13 +6,15 @@ build-backend = "setuptools.build_meta"
 name = "lab_adaption"
 version = "0.1.0"
 readme = "README.md"
+requires-python = ">=3.12"
 authors = [
+    { name = "Stefan Maak", email = "stefanmaak@freenet.de" },
     { name = "Mark Doerr", email = "mark.doerr@uni-greifswald.de" },
-    { name = "Stefan Maak", email = "stefan.maak@uni-greifswald.de" },
     { name = "Walter Baccinelli", email = "w.baccinelli@esciencecenter.nl" },
     { name = "Dani Bodor", email = "d.bodor@esciencecenter.nl" },
+    { name = "Djura Smits", email = "d.smits@esciencecenter.nl" },
+    { name = "Alexander Hadjiivanov", email = "a.hadjiivanov@esciencecenter.nl" },
 ]
-description = """TODO"""
 license =  "MIT"
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -22,8 +24,9 @@ classifiers = [
     "Operating System :: OS Independent",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Information Analysis",
     "Topic :: Scientific/Engineering :: Visualization",
@@ -46,12 +49,10 @@ dev = [
     "coverage>=7.7",
     "anyio>=4.4",
     "pytest-asyncio>=0.24",
-    "tox>=4.5",
     "safety>=1.0",
     "bandit>=1.0",
     "ruff==0.9.*",
     "mypy",
-    "invoke>=2.1",
     "bump-my-version>=0.28",
     "pre_commit>=4.0",
     "typer",
@@ -69,7 +70,7 @@ docs = [
     "pymdown-extensions>=10.16.1",
     ]
 [project.urls]
-"Homepage" = "https://gitlab.com/opensourcelab/openlab-site/lab-automation/"
+"Homepage" = "https://gitlab.com/OpenLabAutomation/adaption-template"
 
 [project.scripts]
 start_sila_servers = "lab_adaption.start_servers:start_servers"

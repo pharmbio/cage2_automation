@@ -66,7 +66,7 @@ framework do describe, orchestrate and schedule workflows on these devices. Some
     git clone https://gitlab.com/OpenLabAutomation/adaption-template.git
     cd lab-automation
 ```
-2. Use your favourite tool to create and activate a new python environment with python 3.11 or higher. For example with pyvenv on linux:
+2. Use your favourite tool to create and activate a new python environment with Python 3.12 or higher. For example with pyvenv on linux:
 ```bash
    python -m venv labautomation
    source labautomation/bin/activate
@@ -110,7 +110,7 @@ Call from different console tabs
 **Option 1:** In gnome terminal you could start all four o the following services in different tabs by running
 
    ```bash
-       bash scripts/run_services.sh
+       bash scripts/start_services.sh
    ```
 
 **Option 2:** Otherwise use individual commands (remember activating the virtual environment):
@@ -253,7 +253,7 @@ Maintained by Stefan Maak(Uppsala University).
 Contributors:
 
 - Mark Dörr of the working group of Prof. Bornscheuer in Uni Greifswald
-- Djura Smith of durch escience center
+- Djura Smits of the Netherlands eScience Center
 
 ## License
 MIT Licence.

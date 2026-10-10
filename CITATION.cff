@@ -8,7 +8,7 @@ type: software
 authors:
   - given-names: Stefan
     family-names: Maak
-    email: stefan.maak@uni-greifswald.de
+    email: stefanmaak@freenet.de
     affiliation: Uppsala University
     orcid: 'https://orcid.org/0009-0000-9930-0182'
   - given-names: Mark
@@ -34,7 +34,7 @@ authors:
   - given-names: Alexander
     family-names: Hadjiivanov
     email: a.hadjiivanov@esciencecenter.nl
-    affiliation: Netherlands eScience cCenter
+    affiliation: Netherlands eScience Center
     orcid: 'https://orcid.org/0000-0002-7045-1005'
 repository-code: 'https://gitlab.com/OpenLabAutomation/adaption-template'
 url: 'https://adaption-template-1d6dfe.gitlab.io/'
