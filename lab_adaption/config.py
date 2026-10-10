@@ -35,4 +35,4 @@ process_module = processes
 
 # configures the initial view of the GUI.
 arm_open = True  # View for genericroboticarm
-browser_open = True  # SiLA-Browser (http://127.0.0.1:3000/)
+browser_open = False  # SiLA-Browser (http://127.0.0.1:3000/)
