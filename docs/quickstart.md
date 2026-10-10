@@ -26,44 +26,7 @@ docker-compose up
 ```
 
 ## Running with Python
-First, use your favorite tool to create and activate a new Python environment with Python 3.12 or higher. 
-For example with pyvenv on linux:
-```bash
-   python -m venv labautomation
-   source labautomation/bin/activate
-```
-3. Install all necessary packages:
-   - to install all mandatory dependencies, run:
-```bash
-    pip install -e .
-```
-   - to also install the example sila servers (necessary for the demo examples to run) add:
-```bash
-    pip install -r requirements_servers.txt
-```
-   - to also install requirements for stronger scheduling algorithms, run:
-```bash
-    pip install -r requirements_mip_cp.txt
-```
-4. Install and set up the database
-
-Installation: Run
-```bash
-    git clone https://gitlab.com/OpenLabAutomation/lab-automation-packages/platform_status_db.git
-    pip install -e platform_status_db/.
-```
-Setup: Run and follow the instructions to create an admin login to Django. On Windows you will have execute the steps manually.
-
-```bash
-    bash scripts/init_db.sh
-```
-
-Fill the database: Run
-```bash
-    Python scripts/add_lab_setup_to_db.py
-```
-This adds the lab setup as described in platform_config.yml to the database.
-Rerun this script after you customized the config file.
+The repository is already cloned, so continue with step 2 of the [installation guide](installation.md).
 
 ## Startup
 Call from different console tabs
@@ -71,7 +34,7 @@ Call from different console tabs
 **Option 1:** In gnome terminal you could start all four of the following services in different tabs by running
 
 ```bash
-bash scripts/run_services.sh
+bash scripts/start_services.sh
 ```
 
 **Option 2:** Otherwise use individual commands (remember activating the virtual environment):
