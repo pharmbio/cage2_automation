@@ -76,19 +76,19 @@ Call from different console tabs
 
    - to start the scheduler:
    ```bash
-       labscheduler
+  labscheduler
    ```
    - to start the django database view (optional). If you changed directory, adapt the path:
    ```bash
-       run_db_server
+  run_db_server
    ```
    - to start the orchestrator:
    ```bash
-       laborchestrator
+   laborchestrator
    ```
    - to start demo servers:
    ```bash
-       start_sila_servers
+   start_sila_servers
    ```
 
 ## Docker compose

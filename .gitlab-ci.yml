@@ -64,6 +64,9 @@ test:
   image: "python:${python_version}"
   script:
     - pip install -e ".[dev]"
+    # platform_status_db is not on PyPI; config.py queries it on import, so its tables must exist
+    - pip install "git+https://gitlab.com/OpenLabAutomation/lab-automation-packages/platform_status_db.git"
+    - django-admin migrate --settings=platform_status_db.larastatus.settings
     - python -m pytest tests/
   extends:
     - .run_on_all_branches
