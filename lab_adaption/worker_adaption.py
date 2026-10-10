@@ -110,6 +110,20 @@ SQUID_OFFSET_ACTION = "offset=squid_offset"
 # Pause the affected process when a step fails. An error usually leaves the platform in an unknown
 # state (e.g. a plate still in the arms gripper), so dispatching the next step risks dropping it.
 STOP_ON_ERROR = True
+# additional waiting costs (before, after) for a plate waiting in the device.
+# before: the plate was moved into the device and waits for the device's step to start
+# after: the device's step finished and the plate waits to be moved out
+# Waiting in the arm or in a single-slot device blocks it for other plates, waiting in storage is harmless.
+# Devices that are not listed get no additional costs.
+WAIT_COST_BY_DEVICE: dict[str, tuple[float, float]] = dict(
+    Echo=(10, 30),
+    Washer=(30, 30),
+    BlueWasher=(30, 30),
+    MultiFlow=(30, 30),
+    Sealer=(50, 0),
+    Cytomat1=(20, 20),
+    Cytomat2=(20, 20),
+)
 
 class Worker(WorkerInterface):
     # save the clients for repeated use
@@ -218,7 +232,6 @@ class Worker(WorkerInterface):
                 )
                 return observable
         # for all simulated devices, this simply wraps a sleep command into an Observable
-        # TODO you can change the time to for example step.duration/2
         handler = DummyHandler(randint(2, 12))
         # the protocol will take between 2 and 12 seconds
         handler.run_protocol(None)
@@ -336,6 +349,32 @@ class Worker(WorkerInterface):
                 return 1
         # checks the database for the free position with the lowest index
         return super().determine_destination_position(step)
+
+    def adjust_waiting_costs(self, process: SMProcess) -> None:
+        step_by_name = {step.name: step for step in process.steps}
+        for step in process.steps:
+            for prior_name in step.prior:
+                prior = step_by_name.get(prior_name, None)
+                # priors might also be variables or computations
+                if prior is None:
+                    continue
+                waiting_location = self._waiting_location(prior)
+                cost_before, cost_after = WAIT_COST_BY_DEVICE.get(waiting_location, (0, 0))
+                # after a movement the plate waits for its treatment, otherwise the treatment is done
+                extra_cost = cost_before if isinstance(prior, MoveStep) else cost_after
+                if extra_cost:
+                    step.wait_cost[prior_name] = step.wait_cost.get(prior_name, 0) + extra_cost
+
+    @staticmethod
+    def _waiting_location(step: ProcessStep) -> str | None:
+        """
+        The device where the plate waits after the given step finished. After a movement this is the target,
+        otherwise it's the device that executed the step.
+        """
+        used_device = step.target_device if isinstance(step, MoveStep) else step.main_device
+        if used_device is None:
+            return None
+        return used_device.preferred or used_device.name
 
     def report_error(self, error_message: str, step_id: str | None = None, process_name: str | None = None):
         report = f"reporting error {error_message} from step {step_id} from process {process_name}"

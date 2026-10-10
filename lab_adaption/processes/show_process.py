@@ -83,24 +83,16 @@ class ShowProcess(BasicProcess):
         dataframe = pd.read_csv(echo_protocol)
         for cont in paint_plates:
             self.robot_arm.move(cont, self.incubator1, read_barcode=True)
-            cont.wait_cost(200)
             self.incubator1.incubate(cont, temperature=37, duration=incubation_duration)
-            cont.wait_cost(200)
             self.robot_arm.move(cont, self.washer, lidded=False)
-            cont.wait_cost(50)
             self.washer.execute_custom_steps(labware=cont, steps=wash_steps, label=f"wash_{cont.name}")
-            cont.wait_cost(50)
             self.robot_arm.move(cont, self.hotel2, lidded=True)
             self.robot_arm.move(cont, self.dispenser, lidded=False)
-            cont.wait_cost(50)
             self.dispenser.execute_custom_steps(labware=cont, steps=multiflow_steps,
                 relations=[("min_wait", f"wash_{cont.name}", [min_wait_time])])
-            cont.wait_cost(50)
             self.robot_arm.move(cont, self.bluewasher, lidded=False)
-            cont.wait_cost(50)
             # the bluewashing must not start earlier than min_wait_time after the 405 washing
             self.bluewasher.execute_custom_steps(labware=cont, steps=bluewash_steps)
-            cont.wait_cost(50)
             self.robot_arm.move(cont, self.incubator2, lidded=True)
 
         # echo-process mit 2 source und 4 destination platten (eine braucht beide source) und anschließend in den Sealer
@@ -109,11 +101,9 @@ class ShowProcess(BasicProcess):
             source_plate = source_plates[i]
             source_bc = source_barcodes[i]
             self.robot_arm.move(source_plate, self.echo, role="source", read_barcode=True, lidded=False)
-            source_plate.wait_cost(50)
             # only survey the necessary part of this source plate
             source_dataframe = dataframe[(dataframe["Source plate"] == source_bc)]
             self.echo.survey_for_protocol(source_plate=source_plate, protocol=source_dataframe)
-            source_plate.wait_cost(50)
             for j in range(len(dest_plates)):
                 dest_plate = dest_plates[j]
                 dest_bc = dest_barcodes[j]
@@ -124,10 +114,8 @@ class ShowProcess(BasicProcess):
                 # only execute if there is anything to transfer between those plates
                 if num_transfers > 0:
                     self.robot_arm.move(dest_plate, self.echo, role="destination", read_barcode=True, lidded=False)
-                    dest_plate.wait_cost(50)
                     self.echo.execute_transfer_protocol(source_plate, dest_plate, partial_df)
                     if i==0 and j==2:
-                        dest_plate.wait_cost(50)
                         self.robot_arm.move(dest_plate, self.hotel2)
             self.robot_arm.move(source_plate, self.incubator2, lidded=True)
         for  dest_plate in dest_plates:
