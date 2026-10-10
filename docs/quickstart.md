@@ -50,7 +50,7 @@ run_db_server
 To start the orchestrator:
 
 ```bash
-laborchestrator
+laborchestrator -c lab_adaption/config.py
 ```
 
 To start demo servers:

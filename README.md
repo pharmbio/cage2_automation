@@ -82,9 +82,9 @@ Call from different console tabs
    ```bash
   run_db_server
    ```
-   - to start the orchestrator:
+   - to start the orchestrator with the processes and settings from `lab_adaption/config.py` (run from the repository root):
    ```bash
-   laborchestrator
+   laborchestrator -c lab_adaption/config.py
    ```
    - to start demo servers:
    ```bash
