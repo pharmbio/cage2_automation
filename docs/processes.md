@@ -1,4 +1,4 @@
-Laboratory workflows are expressed as *processes* and use the [PythonLab package](pythonlab.md) to express the steps.
+Laboratory workflows are expressed as *processes* and use the [PythonLab package](https://gitlab.com/OpenLabAutomation/lab-automation-packages/pythonLab) to express the steps.
 A process defines the labware that is used and what the interactions should be. 
 pythonLab processes are denoted in a python like syntax, but they are **not** directly executed by a *python interpreter*. They are rather parsed into a *workflow graph*, which can be used by a *Scheduler* to calculate 
 an optimal schedule (=order of execution). This order of execution might be different from the initial notation. An *Orchestrator* executes then the schedule and supervises the device communication, e.g. to SiLA servers/devices.

@@ -67,7 +67,7 @@ docs = [
     "mkdocs-panzoom-plugin>=0.4.2",
     "mkdocstrings[python]>=0.18",
     "pygments>=2.19.2",
-    "pymdown-extensions>=10.16.1",
+    "pymdown-extensions>=10.16.1,<12.2",  # 12.2 breaks mkdocstrings 1.0.6 (Highlight needs md)
     ]
 [project.urls]
 "Homepage" = "https://gitlab.com/OpenLabAutomation/adaption-template"

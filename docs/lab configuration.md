@@ -65,7 +65,7 @@ This file controls how the orchestrator starts up. It's a plain Python file — 
 | `lab_config_file` | Path to your `platform_config.yaml`. Change this if you rename or move the file. |
 | `default_scheduling_time` | How many seconds the scheduler is given to compute a new schedule by default. Can also be changed later from the orchestrator GUI. |
 | `scheduling_algorithm` | Which scheduling algorithm to use (e.g. `BottleneckPD`). |
-| `process_module` | Which Python module contains your process descriptions (see [pythonLab introduction](pythonlab/processes.md)). |
+| `process_module` | Which Python module contains your process descriptions (see [processes](processes.md)). |
 | `arm_open` | Whether the robotic arm view is shown by default in the orchestrator GUI. |
 | `db_open` | Whether the labware database view is shown by default in the orchestrator GUI. |
 | `browser_open` | Whether the SiLA browser view is shown by default in the orchestrator GUI. |
