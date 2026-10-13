@@ -85,7 +85,7 @@
       profile = default
       uuid = 51941f95-c6e4-4ec1-bce1-11de199d3e3d
       title = PFonRail
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd labautomation/sila_servers/genericroboticarm/; genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100; history -s 'genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/genericroboticarm/; genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100; history -s 'genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100'; exec bash"'''
     [[[child10]]]
       type = VPaned
       parent = child2

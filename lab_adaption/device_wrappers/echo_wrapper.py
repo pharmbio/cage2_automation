@@ -54,8 +54,8 @@ class EchoWrapper(DeviceInterface):
         elif step.function == "custom_protocol":
             df = step.data.get("transfers", None)
             if isinstance(df, pd.DataFrame):
-                # Make columns lowercase once
-                df.columns = df.columns.str.lower()
+                # lowercase a copy, the step's dataframe gets logged and must keep its original columns
+                df = df.rename(columns=str.lower)
                 # Now zip them case-insensitively
                 transfer_list = list(zip(df["source well"], df["destination well"], df["transfer volume"].astype(float)
                 ))
