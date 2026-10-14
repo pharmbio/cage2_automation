@@ -13,6 +13,9 @@ from platform_status_db.larastatus.status_db_implementation import (
 # change this to the module where you save your pythonLab processes
 from lab_adaption import processes
 
+# change this to the module where you save your GUI plugins
+from lab_adaption import plugins
+
 # Comment out db_client to None to not use any database
 db_client = StatusDBImplementation()
 
@@ -36,3 +39,9 @@ process_module = processes
 # configures the initial view of the GUI.
 arm_open = True  # View for genericroboticarm
 browser_open = False  # SiLA-Browser (http://127.0.0.1:3000/)
+plugins_open = True  # Plugins panel
+
+# package containing your GUI plugins (subclasses of laborchestrator.gui.plugins.PluginInterface).
+# Every plugin found there is added to the GUI. If no plugins are found at all, the panel is hidden.
+plugin_module = plugins
+builtin_plugins = True  # set False to hide the plugins shipped with the orchestrator
