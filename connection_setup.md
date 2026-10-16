@@ -12,7 +12,7 @@ graph TD
     PF["PF (Robot Arm)<br/>10.10.0.98"]
     CTRL["Control Computer<br/>10.10.0.100<br/><i>SiLA Servers</i><br/><i>Automation</i>"]
     ECHO["Echo Computer<br/>10.10.0.222<br/><i>Micro-service</i><br/><i>Echo-Software</i>"]
-    SQUID["Squid Hub<br/>10.10.0.69<br/><i>Squid Coordination</i>"]
+    SQUID["Squid Hub<br/>10.10.0.69<br/><i>Squid Coordination<br/>(10.10.0.69:8000)</i>"]
 
     SW --- PF
     SW --- CTRL
@@ -33,10 +33,10 @@ graph TD
 
     CTRL --- NET
     ECHO --- ECHODEV
-    SQUID --- SC1
-    SQUID --- SC2
-    SQUID --- SC3
-    SQUID --- SC4
+    SQUID --- |port 8001| SC1
+    SQUID --- |port 8002| SC2
+    SQUID --- |port 8003| SC3
+    SQUID --- |port 8004| SC4
     SC1 --- SQ1
     SC2 --- SQ2
     SC3 --- SQ3
