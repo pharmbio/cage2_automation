@@ -10,17 +10,24 @@ replace = 'version = "{new_version}"'
 
 [[tool.bumpversion.files]]
 filename = "lab_adaption/__init__.py"
-search = "__version__ = {current_version}"
-replace = "__version__ = {new_version}"
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
 
 [[tool.bumpversion.files]]
 filename = "CITATION.cff"
-search = 'version: "{current_version}"'
-replace = 'version: "{new_version}"'
+search = "version: {current_version}"
+replace = "version: {new_version}"
 
 [[tool.bumpversion.files]]
 # note that the it's not possible to do 2 search/replace actions to the same file in a single entry
 filename = "CITATION.cff"
-search = "__date__ = '\\d{{4}}-\\d{{2}}-\\d{{2}}'"
-replace = "__date__ = '{now:%Y-%m-%d}'"
+search = "date-released: '\\d{{4}}-\\d{{2}}-\\d{{2}}'"
+replace = "date-released: '{now:%Y-%m-%d}'"
 regex = true
+
+[[tool.bumpversion.files]]
+filename = "HISTORY.md"
+search = "## Unreleased"
+replace = """## Unreleased
+
+## {new_version} ({now:%Y-%m-%d})"""

@@ -89,6 +89,7 @@ celerybeat-schedule
 
 # mkdocs documentation
 /site
+/public
 
 # mypy
 .mypy_cache/
@@ -117,3 +118,6 @@ bin/
 _test.*
 
 pgdata/
+
+# Local-only Claude Code working docs (specs, notes) - not part of the project
+docs/superpowers/

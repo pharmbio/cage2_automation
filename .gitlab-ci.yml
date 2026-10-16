@@ -6,17 +6,12 @@ image: python:3.12
 # only cache local items.
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  SOURCE_DIR: "$CI_PROJECT_DIR/lab_adaption"
-  DOCS_DIR: "docs"
-  DOCS_SOURCE_DIR: "docs/source"
-  DOCS_BUILD_DIR: "docs/_build"
 
 stages:
   - build
-  - compliance
   - test
   - build_and_publish_docs
-  - publish_pypi
+  - publish_zenodo
 
 # Configuration --------------------------------------------------------------------
 
@@ -39,7 +34,7 @@ before_script:
 .parallel_python_jobs:
   parallel:
     matrix:
-      - python_version: ["3.10", "3.11", "3.12"] # "3.9" is currently not supported
+      - python_version: ["3.12", "3.13"]
 
 .run_on_all_branches:
   only:
@@ -52,24 +47,6 @@ before_script:
       - tags
       - /^v[0-9]+.[0-9]+.*/
 
-.run_on_master:
-  only:
-    refs:
-      - triggers
-      - master
-      - main
-
-.run_on_release_tag:
-  only:
-    refs:
-      - tags
-      - /^v[0-9]+.[0-9]+.*/
-
-.run_on_manual:
-  only:
-    refs:
-      - manual
-
 # Jobs: Build -----------------------------------------------------------------
 
 build-package:
@@ -81,40 +58,16 @@ build-package:
   only:
     - tags
 
-# build:
-#   stage: build
-#   script:
-#     - PYTHON_VERSION=${python_version} PYPI_URL=${pip_repository_index} make pull
-#     - PYTHON_VERSION=${python_version} PYPI_URL=${pip_repository_index} make build
-#     - PYTHON_VERSION=${python_version} PYPI_URL=${pip_repository_index} make push
-#   extends:
-#     - .docker_login
-#     - .run_on_all_branches
-#     - .parallel_python_jobs
-
-# Jobs: Compliance ------------------------------------------------------------
-
-#compliance:
-#    stage: compliance
-#    script:
-#        - poetry run invoke format --check
-#        - poetry run invoke lint
-#        - poetry run invoke security-bandit
-#    extends:
-#        - .run_on_all_branches
-#        - .parallel_python_jobs
-#        - .use_generated_docker_image
-
 # Jobs: Test ------------------------------------------------------------------
 
-# ============================= TEST ========================
 test:
   image: "python:${python_version}"
   script:
-    #- pip install tox flake8
-    #- tox -e py39,flake8
-    - pip install pytest
-    #- python -m pytest
+    - pip install -e ".[dev]"
+    # platform_status_db is not on PyPI; config.py queries it on import, so its tables must exist
+    - pip install "git+https://gitlab.com/OpenLabAutomation/lab-automation-packages/platform_status_db.git"
+    - django-admin migrate --settings=platform_status_db.larastatus.settings
+    - python -m pytest tests/
   extends:
     - .run_on_all_branches
     - .parallel_python_jobs
@@ -123,41 +76,31 @@ test:
 
 pages:
   stage: build_and_publish_docs
+  pages: true
   script:
-    - pip install sphinx myst_parser python_docs_theme
-    - pip install .
-    #- cd docs ; make html
-    - sphinx-apidoc -e -P -o $DOCS_SOURCE_DIR $SOURCE_DIR
-    - sphinx-build -b html $DOCS_DIR $DOCS_BUILD_DIR
-    - mv $DOCS_BUILD_DIR public
+    - pip install -e ".[docs]"
+    - make publish-gitlab
   artifacts:
     paths:
       - public
-  extends:
-    - .run_on_all_branches
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
 
 # Jobs: Publish ---------------------------------------------------------------
 
-release_pypi:
-  variables:
-    python_version: "3.9"
-  stage: publish_pypi
+release_zenodo:
+  stage: publish_zenodo
   script:
-    - |
-      poetry run invoke release-twine \
-        --tag_name="${tag_name}" \
-        --pypi_user="${pypi_user}" \
-        --pypi_pass="${pypi_pass}" \
-        --pypi_publish_repository="${pypi_publish_repository}" \
-        --pip_repository_index="${pip_repository_index}"
-  extends:
-    #- .run_on_release_tag
-    - .run_on_manual
-    #- .use_generated_docker_image
+    - pip install requests pyyaml
+    - python scripts/publish_zenodo.py
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v?[0-9]+\.[0-9]+.*/'
+      when: on_success
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "master"'
+      when: manual
+      allow_failure: true
 
 linting_formatting:
-  variables:
-    python_version: "3.11"
   script:
     - |
       ruff_version=$(grep -oP '(?<=ruff)[^"]+' pyproject.toml)

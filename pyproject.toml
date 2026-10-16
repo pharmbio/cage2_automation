@@ -6,25 +6,27 @@ build-backend = "setuptools.build_meta"
 name = "lab_adaption"
 version = "0.1.0"
 readme = "README.md"
+requires-python = ">=3.12"
 authors = [
+    { name = "Stefan Maak", email = "stefanmaak@freenet.de" },
     { name = "Mark Doerr", email = "mark.doerr@uni-greifswald.de" },
-    { name = "Stefan Maak", email = "stefan.maak@uni-greifswald.de" },
     { name = "Walter Baccinelli", email = "w.baccinelli@esciencecenter.nl" },
     { name = "Dani Bodor", email = "d.bodor@esciencecenter.nl" },
+    { name = "Djura Smits", email = "d.smits@esciencecenter.nl" },
+    { name = "Alexander Hadjiivanov", email = "a.hadjiivanov@esciencecenter.nl" },
 ]
-description = """TODO"""
-license = { text = "MIT" }
+license =  "MIT"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Education",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Information Analysis",
     "Topic :: Scientific/Engineering :: Visualization",
@@ -34,7 +36,11 @@ classifiers = [
 dependencies = ["pyyaml>=6.0.1",
                 "networkx>=3.1",
                 "pytz>=2023.3",
-                "sila2>=0.12"]
+                "sila2>=0.12",
+                "uupythonlab>=0.2.4",
+                "uulabscheduler>=0.3,<0.4",
+                "uulaborchestrator>=0.3,<0.4",
+                "echo_server @ git+https://gitlab.com/OpenLabAutomation/device-integration/echo.git@main"]
 
 [project.optional-dependencies]
 dev = [
@@ -44,20 +50,28 @@ dev = [
     "coverage>=7.7",
     "anyio>=4.4",
     "pytest-asyncio>=0.24",
-    "tox>=4.5",
     "safety>=1.0",
     "bandit>=1.0",
     "ruff==0.9.*",
     "mypy",
-    "invoke>=2.1",
     "bump-my-version>=0.28",
     "pre_commit>=4.0",
     "typer",
     "pandas",
 ]
-docs = ["sphinx>=7.0", "python-docs-theme>=2023.3", "myst-parser>=1.0"]
+docs = [
+    "jinja2>=3.1.6",
+    "mkdocs>=1.6.1",
+    "mkdocs-glightbox>=0.5.1",
+    "mkdocs-material>=9.6.22",
+    "mkdocs-mermaid2-plugin>=1.2.3",
+    "mkdocs-panzoom-plugin>=0.4.2",
+    "mkdocstrings[python]>=0.18",
+    "pygments>=2.19.2",
+    "pymdown-extensions>=10.16.1,<12.2",  # 12.2 breaks mkdocstrings 1.0.6 (Highlight needs md)
+    ]
 [project.urls]
-"Homepage" = "https://gitlab.com/opensourcelab/openlab-site/lab-automation/"
+"Homepage" = "https://gitlab.com/OpenLabAutomation/adaption-template"
 
 [project.scripts]
 start_sila_servers = "lab_adaption.start_servers:start_servers"

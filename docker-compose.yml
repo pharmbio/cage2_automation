@@ -14,7 +14,7 @@ services:
     volumes:
         - .:/opt/adaption_template/
     command: >
-      bash -c "pip install -r /opt/adaption_template/requirements.txt &&
+      bash -c "pip install /opt/adaption_template/ &&
       export PYTHONPATH=/opt/adaption_template/:$PYTHONPATH &&
       echo 'Wiping the database and adding lab setup...' &&
       python /opt/adaption_template/scripts/add_lab_setup_to_db.py"
@@ -86,4 +86,3 @@ services:
       echo 'Starting Sila servers...' &&
       start_sila_servers"
     network_mode: host
-
