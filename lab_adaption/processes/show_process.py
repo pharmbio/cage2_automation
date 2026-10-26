@@ -48,7 +48,7 @@ class ShowProcess(BasicProcess):
         for i, cont in enumerate(self.containers[:8]):
             cont.set_start_position(self.hotel2, i)
         for i, cont in enumerate(self.containers[8:10]):
-            cont.set_start_position(self.incubator2, i)
+            cont.set_start_position(self.fridge, i)
             
 
     def process(self):
@@ -96,7 +96,7 @@ class ShowProcess(BasicProcess):
             self.robot_arm.move(cont, self.incubator2, lidded=True)
 
         # echo-process mit 2 source und 4 destination platten (eine braucht beide source) und anschließend in den Sealer
-        # source_plates from cytomat2, destination from hotel2 end in cytomat2
+        # source_plates from fridge, destination from hotel2 end in incubator2
         for i in range(len(source_plates)):
             source_plate = source_plates[i]
             source_bc = source_barcodes[i]
@@ -117,9 +117,9 @@ class ShowProcess(BasicProcess):
                     self.echo.execute_transfer_protocol(source_plate, dest_plate, partial_df)
                     if i==0 and j==2:
                         self.robot_arm.move(dest_plate, self.hotel2)
-            self.robot_arm.move(source_plate, self.incubator2, lidded=True)
+            self.robot_arm.move(source_plate, self.fridge, lidded=True)
         for  dest_plate in dest_plates:
             dest_plate.wait_cost(150)
             self.robot_arm.move(dest_plate, self.sealer)
-            self.sealer.seal_plate(dest_plate, temperature=150, seal_duration=13)
+            #self.sealer.seal_plate(dest_plate, temperature=150, seal_duration=13)
             self.robot_arm.move(dest_plate, self.incubator2)     
