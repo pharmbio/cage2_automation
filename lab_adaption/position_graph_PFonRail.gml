@@ -35,35 +35,35 @@ graph [
   node [
     id 3
     label "Cytomat1_approach"
-    x 12.0
-    y 120.6
-    z 326.0
-    dir -276.7
-    rail 327.9
-    joint2 -2.9
-    joint3 188.9
+    x 61.243
+    y -144.945
+    z 612.018
+    dir -311.243
+    rail 327.889
+    joint2 -23.322
+    joint3 244.763
   ]
   node [
     id 4
     label "Cytomat1_nest"
-    x -15.8
-    y 62.2
-    z 271.1
-    dir -269.7
-    rail 327.9
-    joint2 -22.6
-    joint3 200.2
+    x 63.968
+    y -369.372
+    z 579.322
+    dir -341.674
+    rail 327.864
+    joint2 -59.6
+    joint3 311.538
   ]
   node [
     id 5
     label "Cytomat1_transit"
-    x -15.9
-    y 60.5
-    z 288.2
-    dir -270.1
-    rail 327.9
-    joint2 -22.5
-    joint3 200.5
+    x 61.764
+    y -369.639
+    z 598.428
+    dir -341.478
+    rail 327.889
+    joint2 -59.839
+    joint3 311.558
   ]
   node [
     id 6
@@ -288,35 +288,35 @@ graph [
   node [
     id 26
     label "Cytomat2_approach"
-    x 51.1
-    y 614.5
-    z 343.4
-    dir -246.5
-    rail 735.9
-    joint2 -4.1
-    joint3 172.3
+    x 86.263
+    y 315.461
+    z 625.722
+    dir -326.518
+    rail 820.751
+    joint2 -22.756
+    joint3 254.529
   ]
   node [
     id 27
     label "Cytomat2_nest"
-    x 66.9
-    y 457.0
-    z 284.2
-    dir -308.6
-    rail 735.7
-    joint2 11.8
-    joint3 206.4
+    x 76.332
+    y 129.762
+    z 590.893
+    dir -344.263
+    rail 820.748
+    joint2 -56.839
+    joint3 309.734
   ]
   node [
     id 28
     label "Cytomat2_transit"
-    x 66.9
-    y 456.9
-    z 304.2
-    dir -308.6
-    rail 735.7
-    joint2 11.8
-    joint3 206.4
+    x 75.928
+    y 129.725
+    z 603.982
+    dir -344.268
+    rail 820.748
+    joint2 -56.869
+    joint3 309.733
   ]
   node [
     id 29
@@ -827,68 +827,68 @@ graph [
   node [
     id 75
     label "Echo_source"
-    x -252.0
-    y -445.6
-    z 246.9
-    dir 59.4
-    rail -999.0
-    joint2 80.2
-    joint3 39.1
+    x -259.505
+    y -421.096
+    z 265.68
+    dir 70.869
+    rail -999.028
+    joint2 91.133
+    joint3 17.336
   ]
   node [
     id 76
     label "Echo_sourc_transit1"
-    x -252.8
-    y -444.6
-    z 274.2
-    dir 59.2
-    rail -999.0
-    joint2 80.4
-    joint3 38.8
+    x -258.625
+    y -422.824
+    z 282.097
+    dir 69.406
+    rail -999.028
+    joint2 89.771
+    joint3 20.019
   ]
   node [
     id 77
     label "Echo_sourc_transit2"
-    x -251.9
-    y -568.7
-    z 282.3
-    dir 33.0
-    rail -999.0
-    joint2 60.5
-    joint3 85.1
+    x -251.375
+    y -568.839
+    z 297.363
+    dir 32.951
+    rail -999.013
+    joint2 60.44
+    joint3 85.144
   ]
   node [
     id 78
     label "Echo_destination"
-    x -254.2
-    y -449.8
-    z 310.1
-    dir 58.3
-    rail -999.0
-    joint2 79.6
-    joint3 40.9
+    x -260.576
+    y -424.816
+    z 329.32
+    dir 66.72
+    rail -999.026
+    joint2 88.315
+    joint3 23.521
   ]
   node [
     id 79
     label "Echo_dest_transit1"
-    x -254.0
-    y -449.7
-    z 339.1
-    dir 58.2
-    rail -999.0
-    joint2 79.5
-    joint3 41.0
+    x -259.54
+    y -426.414
+    z 344.266
+    dir 65.661
+    rail -999.026
+    joint2 87.301
+    joint3 25.462
   ]
   node [
     id 80
     label "Echo_dest_transit2"
-    x -253.4
-    y -566.3
-    z 339.1
-    dir 33.8
-    rail -999.0
-    joint2 61.2
-    joint3 84.0
+    x -257.377
+    y -536.42
+    z 344.277
+    dir 37.874
+    rail -999.026
+    joint2 65.052
+    joint3 75.394
   ]
   node [
     id 81
@@ -900,6 +900,105 @@ graph [
     rail 821.095
     joint2 0.6
     joint3 173.9
+  ]
+  node [
+    id 82
+    label "upper_squids"
+    x 176.305
+    y 1008.567
+    z 627.574
+    dir -173.485
+    rail 974.778
+    joint2 0.598
+    joint3 173.871
+  ]
+  node [
+    id 83
+    label "Squid1_approach"
+    x 489.49
+    y 927.096
+    z 651.121
+    dir -128.961
+    rail 974.591
+    joint2 -23.746
+    joint3 76.873
+  ]
+  node [
+    id 84
+    label "Squid2_approach"
+    x 460.632
+    y 1067.938
+    z 652.882
+    dir -14.395
+    rail 974.526
+    joint2 -55.377
+    joint3 110.329
+  ]
+  node [
+    id 85
+    label "Squid1_nest"
+    x 555.323
+    y 842.798
+    z 598.699
+    dir -113.462
+    rail 974.608
+    joint2 -15.567
+    joint3 38.202
+  ]
+  node [
+    id 86
+    label "Squid1_transit1"
+    x 554.876
+    y 843.691
+    z 607.532
+    dir -113.704
+    rail 974.608
+    joint2 -15.415
+    joint3 38.073
+  ]
+  node [
+    id 87
+    label "Squid1_transit2"
+    x 554.849
+    y 900.231
+    z 610.304
+    dir -117.541
+    rail 974.608
+    joint2 -7.856
+    joint3 34.34
+  ]
+  node [
+    id 88
+    label "Fridge_approach"
+    x -14.25
+    y -523.013
+    z 261.014
+    dir -292.981
+    rail -109.791
+    joint2 -29.61
+    joint3 230.305
+  ]
+  node [
+    id 89
+    label "Fridge_nest"
+    x -11.429
+    y -639.968
+    z 200.734
+    dir -308.733
+    rail -109.812
+    joint2 -40.809
+    joint3 257.071
+  ]
+  node [
+    id 90
+    label "Fridge_transit"
+    x -9.961
+    y -642.505
+    z 219.024
+    dir -308.734
+    rail -109.817
+    joint2 -41.038
+    joint3 257.689
   ]
   edge [
     source 0
@@ -931,6 +1030,11 @@ graph [
     dist 571.4805793461414
   ]
   edge [
+    source 0
+    target 88
+    dist 448.266604135167
+  ]
+  edge [
     source 1
     target 30
     dist 267.2628968711961
@@ -955,18 +1059,23 @@ graph [
   edge [
     source 3
     target 5
-    dist 76.28407435369456
+    dist 225.10520468660872
   ]
   edge [
     source 3
     target 20
-    dist 255.04727559308444
+    dist 553.8558850767408
     corners "smooth"
+  ]
+  edge [
+    source 3
+    target 26
+    dist 954.1509385753792
   ]
   edge [
     source 4
     target 5
-    dist 17.184586116633675
+    dist 19.259555908572494
   ]
   edge [
     source 6
@@ -1119,12 +1228,6 @@ graph [
     corners "smooth"
   ]
   edge [
-    source 20
-    target 26
-    dist 752.173807782391
-    corners "smooth"
-  ]
-  edge [
     source 21
     target 23
     dist 176.86480712679955
@@ -1147,12 +1250,17 @@ graph [
   edge [
     source 26
     target 28
-    dist 163.3687470075075
+    dist 187.29235239623202
+  ]
+  edge [
+    source 26
+    target 81
+    dist 631.9932273604078
   ]
   edge [
     source 27
     target 28
-    dist 20.00024999843752
+    dist 13.09528564025995
   ]
   edge [
     source 30
@@ -1312,31 +1420,71 @@ graph [
   edge [
     source 74
     target 77
-    dist 160.28087846028296
+    dist 157.9710239019215
   ]
   edge [
     source 74
     target 80
-    dist 163.18054418342896
+    dist 180.04871539447458
   ]
   edge [
     source 75
     target 76
-    dist 27.33002012439799
+    dist 16.53113042111758
   ]
   edge [
     source 76
     target 77
-    dist 124.36731885829172
+    dist 147.00477338917156
   ]
   edge [
     source 78
     target 79
-    dist 29.000862056152744
+    dist 15.066844925199199
   ]
   edge [
     source 79
     target 80
-    dist 116.60154372906044
+    dist 110.02726355772006
+  ]
+  edge [
+    source 81
+    target 82
+    dist 506.97331347745717
+  ]
+  edge [
+    source 82
+    target 84
+    dist 291.8120340135802
+  ]
+  edge [
+    source 82
+    target 83
+    dist 324.65091058945217
+  ]
+  edge [
+    source 83
+    target 87
+    dist 81.62309410454587
+  ]
+  edge [
+    source 85
+    target 86
+    dist 8.88927145496196
+  ]
+  edge [
+    source 86
+    target 87
+    dist 56.60791740560675
+  ]
+  edge [
+    source 88
+    target 90
+    dist 126.75363583764984
+  ]
+  edge [
+    source 89
+    target 90
+    dist 18.528376932946102
   ]
 ]
