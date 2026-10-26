@@ -231,7 +231,7 @@
       profile = default
       uuid = 98a5c4c4-1ba2-4438-b508-a614366dfe82
       title = Fridge
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; history -s ''; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/liconic; python -m liconic_server -p 50067 --num-cassettes 2 --levels-per-cassette 8; history -s 'python -m liconic_server -p 50067 --num-cassettes 2 --levels-per-cassette 8'; exec bash"'''
     [[[terminal31]]]
       type = Terminal
       parent = child29
