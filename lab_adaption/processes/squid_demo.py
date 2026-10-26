@@ -8,7 +8,7 @@ from lab_adaption.processes.basic_process import BasicProcess
 class SquidDemo(BasicProcess):
     def __init__(self):
         super().__init__(
-            num_plates=4,
+            num_plates=1,
             process_name="SquidDemo",
         )
 
@@ -21,7 +21,7 @@ class SquidDemo(BasicProcess):
         self.squids = [self.squid1, self.squid2, self.squid3, self.squid4]
 
     def process(self):
-        for i in range(4):
+        for i in range(1):
             self.robot_arm.move(self.containers[i], self.squids[i], read_barcode=True)
             self.squids[i].run_protocol(labware=self.containers[i], protocol="5minutetest.json", duration=5*60, project="trash")
             self.robot_arm.move(self.containers[i], self.hotel1)

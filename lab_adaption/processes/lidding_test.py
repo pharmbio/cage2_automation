@@ -21,8 +21,8 @@ class LiddingTest(BasicProcess):
 
     def process(self):
         # the lid is parked in the lid storage while the plate is inside the cytomat
-        self.robot_arm.move(self.containers[0], self.incubator1, lidded=False)
+        self.robot_arm.move(self.containers[0], self.dispenser, lidded=False, read_barcode=True)
         # no temperature control, the plate simply rests inside
-        self.incubator1.incubate(self.containers[0], duration=30, temperature=None)
+        #self.incubator1.incubate(self.containers[0], duration=30, temperature=None)
         # the lid is picked up from its parking position again
         self.robot_arm.move(self.containers[0], self.hotel2, lidded=True)
