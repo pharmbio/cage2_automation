@@ -2,8 +2,6 @@ description:
     - "Cage 2 in Uppsala lab"
 sila_servers:
     storage:
-        Hotel1:
-            capacity: 6
         Hotel2:
             capacity: 13
     movers:
@@ -28,7 +26,7 @@ sila_servers:
             capacity: 42
     fridges:
         Fridge:
-            capacity: 42
+            capacity: 16
     microscopes:
         Squid1:
             capacity: 1

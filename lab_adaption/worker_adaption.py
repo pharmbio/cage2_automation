@@ -56,6 +56,7 @@ USE_REAL_SERVERS = [
     "Washer",
     "Cytomat1",
     "Cytomat2",
+    "Fridge",
     "BlueWasher",
     "MultiFlow",
     "Sealer",
@@ -64,7 +65,7 @@ USE_REAL_SERVERS = [
     "Squid3",
     "Squid4",
 ]
-interactive = {"Echo", "Washer", "Sealer", "Cytomat1", "Cytomat2", "BlueWasher", "MultiFlow", "Squid1", "Squid2", "Squid3", "Squid4"}
+interactive = {"Echo", "Washer", "Sealer", "Cytomat1", "Cytomat2", "Fridge", "BlueWasher", "MultiFlow", "Squid1", "Squid2", "Squid3", "Squid4"}
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
 device_wrappers: dict[str, type[DeviceInterface]] = dict(
@@ -95,6 +96,7 @@ sila_server_name: dict[str, str] = dict(
     Echo_sim="EchoSim",
     Cytomat1="Cytomat1",
     Cytomat2="Cytomat2",
+    Fridge="Fridge",
     Washer="Washer",
     BlueWasher="BlueWasher",
     MultiFlow="MultiFlow",
@@ -317,6 +319,9 @@ class Worker(WorkerInterface):
             # check whether the Echo sila server reaches its micro service (if the Echo is needed)
             if "Echo" in needed_clients:
                 message += self._check_echo_connection()
+            # check whether the Fridge reports ready (if the Fridge is needed)
+            if "Fridge" in needed_clients:
+                message += self._check_fridge_ready()
             # check whether all protocols that will be used in the process actually exist on the servers
             message += self._check_protocol_existence(process)
             # check whether the database contradicts itself
@@ -452,6 +457,23 @@ class Worker(WorkerInterface):
         except Exception as ex:
             logging.exception("Failed to check the Echo connection to its micro service")
             return f"Echo prerequisite check failed: {ex}\n"
+        return ""
+
+    def _check_fridge_ready(self) -> str:
+        """
+        The Fridge (Liconic) still executes commands when its ready flag is not set, but then every
+        load and unload runs into a timeout.
+        """
+        fridge_client = self.get_client("Fridge")
+        if not fridge_client:
+            # already reported by the client creation check
+            return ""
+        try:
+            if not fridge_client.DeviceManagementService.Status.get().SystemReady:
+                return "The Fridge is not ready (SystemReady flag is not set).\n"
+        except Exception as ex:
+            logging.exception("Failed to check the Fridge status")
+            return f"Fridge prerequisite check failed: {ex}\n"
         return ""
 
     def _check_database_health(self) -> str:
