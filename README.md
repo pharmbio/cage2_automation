@@ -21,3 +21,4 @@ An implementation of [this automation template](https://gitlab.com/OpenLabAutoma
 | Squid4 | 50064 |
 | Ot2Controller | 50065 |
 | Scheduler | 50066 |
+| Fridge | 50067|
