@@ -46,13 +46,13 @@ graph [
   node [
     id 4
     label "Cytomat1_nest"
-    x 63.968
-    y -369.372
-    z 579.322
-    dir -341.674
-    rail 327.864
-    joint2 -59.6
-    joint3 311.538
+    x 63.987
+    y -368.333
+    z 579.313
+    dir -341.438
+    rail 327.878
+    joint2 -59.353
+    joint3 311.059
   ]
   node [
     id 5
@@ -750,24 +750,24 @@ graph [
   node [
     id 68
     label "Echo_source"
-    x -259.505
-    y -421.096
-    z 265.68
-    dir 70.869
-    rail -999.028
-    joint2 91.133
-    joint3 17.336
+    x -259.127
+    y -419.405
+    z 264.993
+    dir 72.062
+    rail -999.005
+    joint2 92.142
+    joint3 15.139
   ]
   node [
     id 69
     label "Echo_sourc_transit1"
-    x -258.625
-    y -422.824
-    z 282.097
-    dir 69.406
-    rail -999.028
-    joint2 89.771
-    joint3 20.019
+    x -259.344
+    y -418.879
+    z 286.085
+    dir 72.47
+    rail -999.005
+    joint2 92.559
+    joint3 14.311
   ]
   node [
     id 70
@@ -783,24 +783,24 @@ graph [
   node [
     id 71
     label "Echo_destination"
-    x -260.576
-    y -424.816
-    z 329.32
-    dir 66.72
-    rail -999.026
-    joint2 88.315
-    joint3 23.521
+    x -260.222
+    y -422.989
+    z 329.099
+    dir 67.654
+    rail -999.013
+    joint2 89.082
+    joint3 21.82
   ]
   node [
     id 72
     label "Echo_dest_transit1"
-    x -259.54
-    y -426.414
-    z 344.266
-    dir 65.661
-    rail -999.026
-    joint2 87.301
-    joint3 25.462
+    x -260.056
+    y -423.177
+    z 341.153
+    dir 67.469
+    rail -999.038
+    joint2 88.921
+    joint3 22.126
   ]
   node [
     id 73
@@ -998,7 +998,7 @@ graph [
   edge [
     source 4
     target 5
-    dist 19.259555908572494
+    dist 19.299094514492644
   ]
   edge [
     source 6
@@ -1317,22 +1317,22 @@ graph [
   edge [
     source 68
     target 69
-    dist 16.53113042111758
+    dist 21.099673670462284
   ]
   edge [
     source 69
     target 70
-    dist 147.00477338917156
+    dist 150.60248809634442
   ]
   edge [
     source 71
     target 72
-    dist 15.066844925199199
+    dist 12.081608810109094
   ]
   edge [
     source 72
     target 73
-    dist 110.02726355772006
+    dist 113.32975441650791
   ]
   edge [
     source 74
