@@ -36,6 +36,11 @@ scheduling_algorithm = "CP-Solver"
 
 process_module = processes
 
+# SiLA interface to add, start and observe processes from outside the GUI
+sila_enabled = True
+sila_address = "10.10.0.110"
+sila_port = 50099
+
 # configures the initial view of the GUI.
 arm_open = True  # View for genericroboticarm
 db_open = True  # View for present labware in database
