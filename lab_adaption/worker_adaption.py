@@ -5,7 +5,7 @@ Adaption of WorkerInterface to uppsala cage 2.
 import logging
 import traceback
 from datetime import datetime
-from typing import Optional, NamedTuple, Dict, Any, Tuple
+from typing import Callable, Optional, NamedTuple, Dict, Any, Tuple
 from random import randint
 from pathlib import Path
 
@@ -125,6 +125,18 @@ WAIT_COST_BY_DEVICE: dict[str, tuple[float, float]] = dict(
     Sealer=(50, 0),
     Cytomat1=(20, 20),
     Cytomat2=(20, 20),
+)
+# how to ask the sila server of a device for its available protocols (checked in the prerequisites)
+_squid_protocols = lambda client: client.ProtocolController.AvailProtocols.get()
+_washer_protocols = lambda client: client.ProtocolExecutionService.AvailableProtocols.get()
+AVAILABLE_PROTOCOLS: dict[str, Callable[[SilaClient], list[str]]] = dict(
+    BlueWasher=lambda client: client.BlueProtocolExecutionService.AvailableProtocols.get(),
+    Washer=_washer_protocols,
+    MultiFlow=_washer_protocols,
+    Squid1=_squid_protocols,
+    Squid2=_squid_protocols,
+    Squid3=_squid_protocols,
+    Squid4=_squid_protocols,
 )
 
 class Worker(WorkerInterface):
@@ -510,16 +522,19 @@ class Worker(WorkerInterface):
         for step in process.steps:
             protocol_name = step.data.get("protocol", None)
             device_name = step.used_devices[0].preferred
-            if protocol_name and device_name in USE_REAL_SERVERS and device_name in ["BlueWasher", "Washer", "MultiFlow"]:
-                client = self.get_client(device_name)
-                # normalize by getting rid of path, suffix (and index in the bluewasher case)
-                normalized_protocol = self._normalize_protocol_identifier(protocol_name, device_name)
-                avaiable_protocols = {
-                    self._normalize_protocol_identifier(protocol, device_name)
-                    for protocol in client.BlueProtocolExecutionService.AvailableProtocols.get()
-                }
-                if normalized_protocol not in avaiable_protocols:
-                    message += f"Protocol {protocol_name} for device {device_name} not found.\n"
+            get_protocols = AVAILABLE_PROTOCOLS.get(device_name, None)
+            if not protocol_name or device_name not in USE_REAL_SERVERS or not get_protocols:
+                continue
+            client = self.get_client(device_name)
+            if client is None:
+                continue
+            normalized_protocol = self._normalize_protocol_identifier(protocol_name, device_name)
+            available_protocols = {
+                self._normalize_protocol_identifier(protocol, device_name)
+                for protocol in get_protocols(client)
+            }
+            if normalized_protocol not in available_protocols:
+                message += f"Protocol {protocol_name} for device {device_name} not found.\n"
         return message
 
     @staticmethod
