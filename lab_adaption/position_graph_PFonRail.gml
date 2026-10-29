@@ -951,11 +951,13 @@ graph [
     source 0
     target 63
     dist 571.4805793461414
+    corners "smooth"
   ]
   edge [
     source 0
     target 81
     dist 448.266604135167
+    corners "smooth"
   ]
   edge [
     source 1
@@ -967,6 +969,7 @@ graph [
     source 1
     target 63
     dist 989.0686100974012
+    corners "smooth"
   ]
   edge [
     source 2
@@ -978,6 +981,7 @@ graph [
     source 2
     target 74
     dist 651.7910002101254
+    corners "smooth"
   ]
   edge [
     source 3
@@ -994,6 +998,7 @@ graph [
     source 3
     target 21
     dist 954.1509385753792
+    corners "smooth"
   ]
   edge [
     source 4
@@ -1143,6 +1148,7 @@ graph [
     source 21
     target 74
     dist 631.9932273604078
+    corners "smooth"
   ]
   edge [
     source 22
@@ -1338,16 +1344,19 @@ graph [
     source 74
     target 75
     dist 506.97331347745717
+    corners "smooth"
   ]
   edge [
     source 75
     target 77
     dist 291.8120340135802
+    corners "smooth"
   ]
   edge [
     source 75
     target 76
     dist 324.65091058945217
+    corners "smooth"
   ]
   edge [
     source 76
