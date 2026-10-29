@@ -279,8 +279,8 @@ class Worker(WorkerInterface):
                 self.clients[device_name] = client
                 self.server_memory.memorize(client)
                 return client
-            except TimeoutError as error:
-                logging.exception(f"Could not connect to {server_name}:\n{error}")
+            except TimeoutError:
+                logging.error(f"Could not connect to {server_name}: TimeoutError")
         return None
 
     def process_step_finished(self, step_id: str, result: Optional[NamedTuple]):
