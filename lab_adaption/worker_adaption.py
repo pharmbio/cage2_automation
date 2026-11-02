@@ -211,7 +211,8 @@ class Worker(WorkerInterface):
                     # just add it, so the following lines can add actions without KeyError
                     if "intermediate_actions" not in device_kwargs:
                         device_kwargs["intermediate_actions"] = []
-                    if step.data.get("read_barcode", False):
+                    # assure_barcode reads the barcode as well, but only compares it (see process_step_finished)
+                    if step.data.get("read_barcode", False) or step.data.get("assure_barcode", False):
                         logger.info("The arm is supposed to read the barcode now.")
                         device_kwargs["intermediate_actions"].append("read_barcode")
                     # check whether its specified whether the lid must be on in the target position
@@ -287,6 +288,8 @@ class Worker(WorkerInterface):
         # get all information about the process step
         step = self.jssp.step_by_id[step_id]
         labware = self.jssp.container_info_by_name[step.cont]
+        # the barcode the labware is supposed to have, assure_barcode compares the read one against it
+        expected_barcode = labware.barcode
         if step.data.get("read_barcode", False):
             print("We did read a barcode during the move")
             bc_reader_client = self.get_client("BCReader")
@@ -313,6 +316,38 @@ class Worker(WorkerInterface):
         if step.data.get("lid_target", None):
             self.db_client.unlidded_container(labware, *step.data["lid_target"])
         super().process_step_finished(step_id, result)
+        # checked after the position is saved, so the database still knows where the labware is
+        if step.data.get("assure_barcode", False):
+            problem = self._check_assured_barcode(step, expected_barcode)
+            if problem:
+                # the observer keeps the step in error state instead of finishing it
+                self.set_step_error(step, problem)
+
+    def _check_assured_barcode(self, step: ProcessStep, expected_barcode: str | None) -> str | None:
+        """
+        Compares the barcode read during the step with the expected one. Unlike read_barcode, it changes neither the
+        labware nor the database.
+        :return: None if they match (or the step was simulated), the problem otherwise
+        """
+        device = step.main_device.name
+        if device not in USE_REAL_SERVERS or "BCReader" not in USE_REAL_SERVERS:
+            logger.info(f"Not checking the barcode in {step.name}, since {device} or the barcode reader is simulated")
+            return None
+        bc_reader_client = self.get_client("BCReader")
+        if not bc_reader_client:
+            return f"Could not assure the barcode {expected_barcode} in {step.name}: the barcode reader is unreachable."
+        try:
+            read_barcode = bc_reader_client.BarcodeReaderService.LastBarcode.get()
+            reading_time = bc_reader_client.BarcodeReaderService.LastReadingTime.get().replace(tzinfo=None)
+        except Exception as ex:
+            return f"Could not assure the barcode {expected_barcode} in {step.name}: {ex}"
+        # check if some barcode was read since the step started
+        if not read_barcode or reading_time < step.start:
+            return f"Could not assure the barcode {expected_barcode} in {step.name}: no barcode was read."
+        if read_barcode != expected_barcode:
+            return f"Wrong labware in {step.name}: expected the barcode {expected_barcode}, but read {read_barcode}."
+        logger.info(f"Assured the barcode {read_barcode} in {step.name}")
+        return None
 
     def check_prerequisites(self, process: SMProcess) -> Tuple[bool, str]:
         message = ""
@@ -410,7 +445,7 @@ class Worker(WorkerInterface):
                     needed_clients.add(preference)
             # check if the barcode reader is needed
             if isinstance(step, MoveStep):
-                if step.data.get("read_barcode", False):
+                if step.data.get("read_barcode", False) or step.data.get("assure_barcode", False):
                     needed_clients.add("BCReader")
         # these might not be explicitly marked as source in the first movement
         for cont in process.containers:
