@@ -179,6 +179,9 @@ class Worker(WorkerInterface):
                 cont.lidded = cont_info.lidded
                 cont.lid_site = cont_info.lid_site
                 cont.filled = cont_info.filled
+                # an empty plate type means the database does not know it, then the process' plate type stays
+                if cont_info.labware_type:
+                    cont.labware_type = cont_info.labware_type
             except Exception as ex:
                 logger.error(f"Failed to retrieve container information from db: {ex}")
 
