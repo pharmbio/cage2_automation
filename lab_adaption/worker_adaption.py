@@ -65,6 +65,8 @@ USE_REAL_SERVERS = [
     "Squid3",
     "Squid4",
 ]
+# devices whose sila server reports with InitializationController.IsConnected whether it reaches the instrument
+INSTRUMENT_CONNECTION_CHECKED = {"Washer", "MultiFlow"}
 interactive = {"Echo", "Washer", "Sealer", "Cytomat1", "Cytomat2", "Fridge", "BlueWasher", "MultiFlow", "Squid1", "Squid2", "Squid3", "Squid4"}
 
 # maps the device names (from the platform_config and process description) to the correct wrappers
@@ -366,6 +368,9 @@ class Worker(WorkerInterface):
             # check whether the BlueWasher is initialized (if its needed)
             if "BlueWasher" in self.clients:
                 message += self._check_bluewsher_status()
+            # check whether the Washer and MultiFlow sila servers reach their instruments (if they are needed)
+            for device_name in sorted(INSTRUMENT_CONNECTION_CHECKED & needed_clients):
+                message += self._check_instrument_connection(device_name)
             # check whether the Echo sila server reaches its micro service (if the Echo is needed)
             if "Echo" in needed_clients:
                 message += self._check_echo_connection()
@@ -493,6 +498,23 @@ class Worker(WorkerInterface):
         except Exception as ex:
             logging.exception("Failed to check BlueWasher status")
             return f"BlueWasher prerequisite check failed: {ex}\n"
+        return ""
+
+    def _check_instrument_connection(self, device_name: str) -> str:
+        """
+        The Washer and MultiFlow sila servers keep running when their instrument is switched off or
+        unplugged. IsConnected asks the instrument for its serial number, so it tells whether it answers.
+        """
+        client = self.get_client(device_name)
+        if not client:
+            # already reported by the client creation check
+            return ""
+        try:
+            if not client.InitializationController.IsConnected.get():
+                return f"{device_name} is not connected.\n"
+        except Exception as ex:
+            logging.exception(f"Failed to check the {device_name} connection")
+            return f"{device_name} prerequisite check failed: {ex}\n"
         return ""
 
     def _check_echo_connection(self) -> str:
