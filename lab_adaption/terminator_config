@@ -85,7 +85,7 @@
       profile = default
       uuid = 51941f95-c6e4-4ec1-bce1-11de199d3e3d
       title = PFonRail
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/genericroboticarm/; genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100; history -s 'genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/genericroboticarm/; genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100 --log-file; history -s 'genericroboticarm -r UppsalaPFonRail -a 10.10.0.110 --robot-ip 10.10.0.98 --robot-port 10100 --log-file'; exec bash"'''
     [[[child10]]]
       type = VPaned
       parent = child2
@@ -141,7 +141,7 @@
       profile = default
       uuid = f7face40-566c-479a-a0a0-0ccaaf0c7705
       title = Echo
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/echo/; python -m echo_server -p 50058; history -s 'python -m echo_server -p 50058'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/echo/; python -m echo_server -p 50058 --log-file; history -s 'python -m echo_server -p 50058 --log-file'; exec bash"'''
     [[[child18]]]
       type = VPaned
       parent = child10
@@ -161,7 +161,7 @@
       profile = default
       uuid = 5654cf07-1771-42f9-a474-77d9a988cd6d
       title = Sealer
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/sealer; python -m sealer_server -p 50060; history -s 'python -m sealer_server -p 50060'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/sealer; python -m sealer_server -p 50060 --log-file; history -s 'python -m sealer_server -p 50060 --log-file'; exec bash"'''
     [[[terminal21]]]
       type = Terminal
       parent = child19
@@ -169,7 +169,7 @@
       profile = default
       uuid = c7c1e3d8-752e-4a23-9dd0-b27daed60423
       title = BCReader
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate;cd ~/labautomation/sila_servers/barcodereader; python -m bc_reader -p 50053; history -s 'python -m bc_reader -p 50053'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate;cd ~/labautomation/sila_servers/barcodereader; python -m bc_reader -p 50053 --log-file; history -s 'python -m bc_reader -p 50053 --log-file'; exec bash"'''
     [[[terminal22]]]
       type = Terminal
       parent = child18
@@ -203,7 +203,7 @@
       profile = default
       uuid = d1905584-2748-4269-809b-f27c43f42037
       title = Cytomat1
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; python -m cytomat2C_server -p 50056 --name Cytomat1; history -s 'python -m cytomat2C_server -p 50056 --name Cytomat1'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; python -m cytomat2C_server -p 50056 --name Cytomat1 --log-file; history -s 'python -m cytomat2C_server -p 50056 --name Cytomat1 --log-file'; exec bash"'''
     [[[terminal27]]]
       type = Terminal
       parent = child25
@@ -211,7 +211,7 @@
       profile = default
       uuid = 35c72a40-1bd2-4016-a6f6-a6f0af43f74c
       title = Cytomat2
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; python -m cytomat2C_server -p 50057 --name Cytomat2; history -s 'python -m cytomat2C_server -p 50057 --name Cytomat2'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/cytomat2C; python -m cytomat2C_server -p 50057 --name Cytomat2 --log-file; history -s 'python -m cytomat2C_server -p 50057 --name Cytomat2 --log-file'; exec bash"'''
     [[[child28]]]
       type = VPaned
       parent = child24
@@ -231,7 +231,7 @@
       profile = default
       uuid = 98a5c4c4-1ba2-4438-b508-a614366dfe82
       title = Fridge
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/liconic; python -m liconic_server -p 50067 --server-name Fridge --com-port /dev/ttyUSB6 --num-cassettes 2 --levels-per-cassette 8; history -s 'python -m liconic_server -p 50067 --server-name Fridge --com-port /dev/ttyUSB6 --num-cassettes 2 --levels-per-cassette 8'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/liconic; python -m liconic_server -p 50067 --server-name Fridge --com-port /dev/ttyUSB6 --num-cassettes 2 --levels-per-cassette 8 --log-file; history -s 'python -m liconic_server -p 50067 --server-name Fridge --com-port /dev/ttyUSB6 --num-cassettes 2 --levels-per-cassette 8 --log-file'; exec bash"'''
     [[[terminal31]]]
       type = Terminal
       parent = child29
@@ -239,7 +239,7 @@
       profile = default
       uuid = 89063f63-4334-4573-b089-b4d7f0c9ff52
       title = MultiFlow
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/multiflowfx; python -m multiflow_server -p 50059; history -s 'python -m multiflow_server -p 50059'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/multiflowfx; python -m multiflow_server -p 50059 --log-file; history -s 'python -m multiflow_server -p 50059 --log-file'; exec bash"'''
     [[[child32]]]
       type = VPaned
       parent = child28
@@ -253,7 +253,7 @@
       profile = default
       uuid = 984a433b-6f95-4be7-b995-e02478d16115
       title = BlueWasher
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/bluewasher; python -m bluewasher_sila -p 50054; history -s 'python -m bluewasher_sila -p 50054'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/bluewasher; python -m bluewasher_sila -p 50054 --log-file; history -s 'python -m bluewasher_sila -p 50054 --log-file'; exec bash"'''
     [[[terminal34]]]
       type = Terminal
       parent = child32
@@ -261,7 +261,7 @@
       profile = default
       uuid = e5e8289d-811a-45ec-8029-8d5f1b37253f
       title = Washer 405TS
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/washer405; python -m washer405ts -p 50055; history -s 'python -m washer405ts -p 50055'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/washer405; python -m washer405ts -p 50055 --log-file; history -s 'python -m washer405ts -p 50055 --log-file'; exec bash"'''
     [[[child35]]]
       type = VPaned
       parent = child23
@@ -281,7 +281,7 @@
       profile = default
       uuid = e1264feb-2f91-40a7-bae5-4faa8b43449e
       title = Squid1
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50061 --squid-ip 10.10.0.69:8001 --squid-name squid1-real --server-name Squid1; history -s 'python -m microscope_server -p 50061 --squid-ip 10.10.0.69:8001 --squid-name squid1-real --server-name Squid1'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50061 --squid-ip 10.10.0.69:8001 --squid-name squid1-real --server-name Squid1 --log-file; history -s 'python -m microscope_server -p 50061 --squid-ip 10.10.0.69:8001 --squid-name squid1-real --server-name Squid1 --log-file'; exec bash"'''
     [[[terminal38]]]
       type = Terminal
       parent = child36
@@ -289,7 +289,7 @@
       profile = default
       uuid = a51b918f-64ec-4a50-9b1f-61ef783906d4
       title = Squid2
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50062 --squid-ip 10.10.0.69:8002 --squid-name squid2-real --server-name Squid2; history -s 'python -m microscope_server -p 50062 --squid-ip 10.10.0.69:8002 --squid-name squid2-real --server-name Squid2'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50062 --squid-ip 10.10.0.69:8002 --squid-name squid2-real --server-name Squid2 --log-file; history -s 'python -m microscope_server -p 50062 --squid-ip 10.10.0.69:8002 --squid-name squid2-real --server-name Squid2 --log-file'; exec bash"'''
     [[[child39]]]
       type = HPaned
       parent = child35
@@ -303,7 +303,7 @@
       profile = default
       uuid = d1c6e3f0-be01-47c1-8a9c-d2501fb573ac
       title = Squid3
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-real --server-name Squid3; history -s 'python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-real --server-name Squid3'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-real --server-name Squid3 --log-file; history -s 'python -m microscope_server -p 50063 --squid-ip 10.10.0.69:8003 --squid-name squid3-real --server-name Squid3 --log-file'; exec bash"'''
     [[[terminal41]]]
       type = Terminal
       parent = child39
@@ -311,5 +311,5 @@
       profile = default
       uuid = 0fbf9336-d697-4a79-ad82-1351dd0d2bb0
       title = Squid4
-      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50064 --squid-ip 10.10.0.69:8004 --squid-name squid4-real --server-name Squid4; history -s 'python -m microscope_server -p 50064 --squid-ip 10.10.0.69:8004 --squid-name squid4-real --server-name Squid4'; exec bash"'''
+      command = '''bash -ic "source ~/labautomation/automation/bin/activate; cd ~/labautomation/sila_servers/squid; python -m microscope_server -p 50064 --squid-ip 10.10.0.69:8004 --squid-name squid4-real --server-name Squid4 --log-file; history -s 'python -m microscope_server -p 50064 --squid-ip 10.10.0.69:8004 --squid-name squid4-real --server-name Squid4 --log-file'; exec bash"'''
 [plugins]
