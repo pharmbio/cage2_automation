@@ -494,6 +494,7 @@ class EchoPlugin(PluginInterface):
         self._source: str | None = None
         self._dest: str | None = None
         self._locations: dict[str, PlateLocation] = {}  # plate barcode -> location
+        self._used_names: set[str] = set()  # every name given to a process so far
 
     def get_name(self) -> str:
         return "Echo"
@@ -568,12 +569,18 @@ class EchoPlugin(PluginInterface):
         return slots, problems
 
     def _process_name(self) -> str:
-        """EchoProcess<number> with the lowest number not in use (the orchestrator would rename a taken name)"""
-        taken = set(self.orchestrator.jssp.process_by_name)
+        """
+        EchoProcess<number> with the lowest number neither in use nor given out before (the orchestrator would rename
+        a taken name). A removed process leaves the orchestrator, but its step names stay in use (e.g. by the
+        worker), so a name must not be given out twice.
+        """
+        taken = set(self.orchestrator.jssp.process_by_name) | self._used_names
         number = 1
         while f"{PROCESS_NAME_PREFIX}{number}" in taken:
             number += 1
-        return f"{PROCESS_NAME_PREFIX}{number}"
+        name = f"{PROCESS_NAME_PREFIX}{number}"
+        self._used_names.add(name)
+        return name
 
     # ---------- plugin interface ----------
 
