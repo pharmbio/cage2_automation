@@ -41,8 +41,15 @@ for repo in "${REPOS[@]}"; do
     fi
     branch="$(git -C "$repo" branch --show-current)"
     echo "🔹 $name [$branch]"
-    if ! git -C "$repo" pull --ff-only; then
-        echo "❌ $name: pull failed (local changes or diverged branch?)"
+    # fast-forward if possible, otherwise try an automatic merge commit
+    if ! git -C "$repo" pull --no-rebase --no-edit; then
+        if git -C "$repo" rev-parse -q --verify MERGE_HEAD >/dev/null; then
+            # merge conflict: undo it so the checkout is left as it was
+            git -C "$repo" merge --abort
+            echo "❌ $name: merge conflict, aborted - merge manually"
+        else
+            echo "❌ $name: pull failed (uncommitted changes in the way or no network?)"
+        fi
         failed+=("$name")
     fi
 done
